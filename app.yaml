@@ -1,0 +1,26 @@
+application: wikihouse-cc
+version: 1
+runtime: python
+api_version: 1
+
+builtins:
+- datastore_admin: on
+
+handlers:
+- url: /favicon.ico
+  static_files: static/build/gfx/favicon.ico
+  upload: static/build/gfx/favicon.ico
+  expiration: 7d
+
+- url: /robots.txt
+  static_files: static/build/robots.txt
+  upload: static/build/robots.txt
+  expiration: 7d
+
+- url: /static
+  static_dir: static
+  expiration: 7d
+
+- url: .*
+  script: main.py
+

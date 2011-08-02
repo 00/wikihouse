@@ -4,6 +4,7 @@
 """ Provides `main()` application entrypoint.
 """
 
+import os
 import patch
 patch.sys_path()
 
@@ -16,6 +17,7 @@ from template import Renderer
 from urls import mapping
 
 config = {
+    'dev': os.environ['SERVER_SOFTWARE'].startswith('Dev'),
     'cookie_secret': cookie_secret,
     'assetgen_manifest': get_manifest(),
     'static_files_path': 'static',

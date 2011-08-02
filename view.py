@@ -18,12 +18,47 @@ class Index(RequestHandler):
     
 
 
+class Standard(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('standard.tmpl')
+        
+    
+    
+
+
+class Download(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('download.tmpl')
+        
+    
+    
+
+
+
+class Library(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('library.tmpl')
+        
+    
+    
+
+
+
 class NotFound(RequestHandler):
     """
     """
     
     def get(self, world):
-        return self.render('index.tmpl')
+        return self.render('errors/404.tmpl')
         
     
     

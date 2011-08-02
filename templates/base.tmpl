@@ -80,6 +80,14 @@
           </div>
         </div>
         ${self.content()}
+        <div class="row">
+          <div class="social-links">
+            <span class="st_twitter_hcount" displayText="Tweet"></span>
+            <span class="st_facebook_hcount" displayText="Facebook"></span>
+            <span class="st_fblike_hcount"></span>
+            <span class="st_plusone_hcount"></span>
+          </div>
+        </div>
       </div>
     </div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
@@ -91,6 +99,16 @@
         var src = host + "javascripts/feedback-v2.js";
         var tag = '%3Cscript src="' + src + '" type="text/javascript"%3E%3C/script%3E';
         document.write(unescape(tag));
+      })();
+    </script>
+    <script type="text/javascript">
+      (function () {
+        var switchTo5x = true;
+      </script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js">
+    </script>
+    <script type="text/javascript">
+        stLight.options({'publisher': '386e0e7b-fee7-485d-af13-172a5107f9fb'});
       })();
     </script>
     <script type="text/javascript" src="${get_static_url('js/wikihouse.js')}">

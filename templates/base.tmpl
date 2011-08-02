@@ -88,7 +88,7 @@
                   %>
                   % for item in nav_items:
                     <li class="${request.path == item['value'] and 'selected' or ''}">
-                      <a href="${item['value']}" title="item['label']">
+                      <a href="${item['value']}" title="${item['label']}">
                         ${item['label']}</a>
                     </li>
                   % endfor

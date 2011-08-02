@@ -25,6 +25,10 @@ generate:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/gfx/*
     type: binary
 
+- css/reset.css:
+    source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/reset.css
+    type: binary
+
 - css/simplegrid/*:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/SimpleGrid/css/*
     type: binary

@@ -59,6 +59,7 @@ env:
 
 
 profile.dev:
+  output.hashed: false
   css.compressed: false
   js.compressed: false
 

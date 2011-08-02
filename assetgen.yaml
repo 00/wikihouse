@@ -54,6 +54,9 @@ output.directory: static/build
 output.hashed: true
 output.manifest: assets.json
 
+css.embed.path.root: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/gfx
+css.embed.url.base: /static/gfx
+
 env:
   NODE_PATH.prefix: static/build/js
 

@@ -52,31 +52,49 @@
           <div class="slot-0-1">
             [ WIKI HOUSE LOGO ]
           </div>
-          <div class="slot-2-5">
-            <ul class="main-nav">
-              <%
-                nav_items = [{
-                        'value': '/',
-                        'label': u'Home'
-                    }, {
-                        'value': '/standard',
-                        'label': u'The Standard'
-                    }, {
-                        'value': '/download',
-                        'label': u'Download Plugin'
-                    }, {
-                        'value': '/library',
-                        'label': u'Browse Library'
-                    }
-                ]
-              %>
-              % for item in nav_items:
-                <li>
-                  <a href="${item['value']}" title="item['label']">
-                    ${item['label']}</a>
-                </li>
-              % endfor
+          <div class="slot-2-3-4-5">
+            <ul class="top-nav">
+              <li class="external">
+                <a href="http://wikihouse.tumblr.com/" title="Goto the Wiki House Tumblog">
+                  News</a>
+              </li>
+              <li>
+                <a href="/contact" title="Contact Us">
+                  Contact</a>
+              </li>
+              <li>
+                <a href="/support" title="Get Involved">
+                  Get Involved</a>
+              </li>
             </ul>
+            <div class="row">
+              <div class="slot-2-3-4-5">
+                <ul class="main-nav">
+                  <%
+                    nav_items = [{
+                            'value': '/',
+                            'label': u'Home'
+                        }, {
+                            'value': '/standard',
+                            'label': u'The Standard'
+                        }, {
+                            'value': '/download',
+                            'label': u'Download Plugin'
+                        }, {
+                            'value': '/library',
+                            'label': u'Browse Library'
+                        }
+                    ]
+                  %>
+                  % for item in nav_items:
+                    <li class="${request.path == item['value'] and 'selected' or ''}">
+                      <a href="${item['value']}" title="item['label']">
+                        ${item['label']}</a>
+                    </li>
+                  % endfor
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
         ${self.content()}

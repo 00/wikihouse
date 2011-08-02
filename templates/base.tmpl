@@ -84,6 +84,15 @@
     </div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
     </script>
+    <script type="text/javascript" charset="utf-8">
+      (function () {
+        var protocol = document.location.protocol == "https:" ? 'https' : 'http';
+        var host = protocol + "://s3.amazonaws.com/getsatisfaction.com/";
+        var src = host + "javascripts/feedback-v2.js";
+        var tag = '%3Cscript src="' + src + '" type="text/javascript"%3E%3C/script%3E';
+        document.write(unescape(tag));
+      })();
+    </script>
     <script type="text/javascript" src="${get_static_url('js/wikihouse.js')}">
     </script>
   </body>

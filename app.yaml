@@ -18,7 +18,7 @@ handlers:
   expiration: 7d
 
 - url: /static
-  static_dir: static
+  static_dir: static/build
   expiration: 7d
 
 - url: .*

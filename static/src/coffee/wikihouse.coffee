@@ -1,0 +1,7 @@
+# ...
+$(document).ready ->
+  
+  foo = 'bar'
+  
+  
+

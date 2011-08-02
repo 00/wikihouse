@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+""" Provides `main()` application entrypoint.
+"""
+
+import patch
+patch.sys_path()
+
+from google.appengine.ext.webapp.util import run_wsgi_app
+from weblayer import Bootstrapper, WSGIApplication
+
+from asset import get_manifest, ManifestedStaticURLGenerator
+from secret import cookie as cookie_secret
+from template import Renderer
+from urls import mapping
+
+config = {
+    'cookie_secret': cookie_secret,
+    'assetgen_manifest': get_manifest(),
+    'static_files_path': 'static',
+    'template_directories': ['templates']
+}
+
+def main():
+    bootstrapper = Bootstrapper(settings=config, url_mapping=mapping)
+    run_wsgi_app(
+        WSGIApplication(
+            *bootstrapper(
+                StaticURLGenerator=ManifestedStaticURLGenerator,
+                TemplateRenderer=Renderer
+            )
+        )
+    )
+    
+

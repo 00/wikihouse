@@ -5,7 +5,7 @@ generate:
           // Public Domain (-) 2011 The Ampify Authors.
           // See the Ampify UNLICENSE file for details.
           (function ($) {
-      - static/src/coffee/wikihouse/*.coffee
+      - static/src/coffee/*.coffee
       - raw: |
           })(jQuery);
     uglify:
@@ -31,7 +31,7 @@ generate:
       - raw: |
           /* Public Domain (-) 2011 The Ampify Authors.
            * See the Ampify UNLICENSE file for details. */
-      - static/src/sass/wikihouse/*.sass
+      - static/src/sass/*.sass
     
 
 
@@ -47,8 +47,8 @@ prereqs:
 
 
 output.directory: static/build
-output.hashed: false # true when we run this from the backend
-output.manifest: static/build/assets.json
+output.hashed: true
+output.manifest: assets.json
 
 env:
   NODE_PATH.prefix: static/build/js

@@ -1,0 +1,7 @@
+*.pyc
+.DS_Store
+.Python
+.sass-cache/
+assets.json
+static/build
+third_party/

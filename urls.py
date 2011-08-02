@@ -7,19 +7,25 @@
 from view import *
 
 mapping = [(
-        r'/', 
+        r'/',
         Index
     ), (
-        r'/standard', 
+        r'/standard',
         Standard
     ), (
-        r'/download', 
+        r'/download',
         Download
     ), (
-        r'/library', 
+        r'/support',
+        Support
+    ), (
+        r'/contact',
+        Contact
+    ), (
+        r'/library',
         Library
     ), (
-        r'/(.*)', 
+        r'/(.*)',
         NotFound
     )
 ]

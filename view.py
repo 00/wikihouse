@@ -40,6 +40,27 @@ class Download(RequestHandler):
     
 
 
+class Support(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('support.tmpl')
+        
+    
+    
+
+
+class Contact(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('contact.tmpl')
+        
+    
+    
+
 
 class Library(RequestHandler):
     """

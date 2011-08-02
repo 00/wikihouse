@@ -1,23 +1,87 @@
-<%def name="sub_title()"></%def>
-<%def name="sub_headers()"></%def>
-
 <!DOCTYPE HTML>
 <html>
+  <%def name="sub_title()"></%def>
+  <%def name="sub_headers()"></%def>
+  <%def name="main_content()"></%def>
+  <%def name="actions()"></%def>
+  <%def name="content()">
+    <div class="row">
+      <div class="slot-0-1-2-3">
+        ${self.main_content()}
+      </div>
+      <div class="slot-4-5">
+        ${self.actions()}
+      </div>
+    </div>
+  </%def>
   <head>
     <title>
-      Wiki House :: ${self.sub_title()}
+      Wiki House / ${self.sub_title()}
     </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9"> 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta name="description" content="Wiki House is the open source community construction standard defined by Architecture 00:/ for building collaboratively designed modular houses." >
     <meta name="keywords" content="wikihouse, wiki, house, design, build, open, open source, community, standard, constrction, building, architecture, housing, CNC, CNC milling, wooden frame." >
     <link rel="shortcut icon" href="/favicon.ico">
-    <link type="text/css" rel="stylesheet" href="${get_static_url('css/wikihouse.css')}" />
+    <link rel="stylesheet" href="${get_static_url('css/simplegrid/base.css')}" type="text/css" media="all">
+    <!--[if lt IE 9 ]>
+      <link rel="stylesheet" type="text/css"
+          href="${get_static_url('css/simplegrid/720_grid.css')}"
+      />
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 720px)"
+        href="${get_static_url('css/simplegrid/720_grid.css')}"
+    />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 986px)"
+        href="${get_static_url('css/simplegrid/986_grid.css')}" 
+    />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width: 1236px)"
+        href="${get_static_url('css/simplegrid/1236_grid.css')}" 
+    />
+    <link rel="stylesheet" type="text/css" 
+        href="${get_static_url('css/wikihouse.css')}"
+    />
+    <%def name="sub_headers()"></%def>
     <base href="${request.host_url}" />
   </head>
   <body>
-    
-    ${next.body()}
-    
+    <div class="wrapper">
+      <div class="grid">
+        <div class="row">
+          <div class="slot-0-1">
+            [ WIKI HOUSE LOGO ]
+          </div>
+          <div class="slot-2-5">
+            <ul class="main-nav">
+              <%
+                nav_items = [{
+                        'value': '/',
+                        'label': u'Home'
+                    }, {
+                        'value': '/standard',
+                        'label': u'The Standard'
+                    }, {
+                        'value': '/download',
+                        'label': u'Download Plugin'
+                    }, {
+                        'value': '/library',
+                        'label': u'Browse Library'
+                    }
+                ]
+              %>
+              % for item in nav_items:
+                <li>
+                  <a href="${item['value']}" title="item['label']">
+                    ${item['label']}</a>
+                </li>
+              % endfor
+            </ul>
+          </div>
+        </div>
+        ${self.content()}
+      </div>
+    </div>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
     </script>
     <script type="text/javascript" src="${get_static_url('js/wikihouse.js')}">

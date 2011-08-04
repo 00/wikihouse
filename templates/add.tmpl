@@ -10,26 +10,41 @@
     ${xsrf_input}
     <div class="field">
       <label for="title">Title</label>
-      <input type="text" name="title" />
+      <input type="text" name="title" id="design-title"/>
     </div>
     <div class="field">
       <label for="description">Description</label>
-      <textarea name="description"></textarea>
+      <textarea name="description" id="design-description"></textarea>
     </div>
     <div class="field">
       <label for="series">Series</label>
-      <select name="series" multiple="true">
+      <select name="series" multiple="true" id="design-series">
         % for item in series:
           <option value="${item.key().name()}">${item.label}</option>
         % endfor
       </select>
     </div>
     <div class="hidden file-inputs">
-      <input type="file" name="model" class="model-input" />
-      <input type="file" name="model_preview" class="model-preview-input" />
-      <input type="file" name="model_preview_reverse" class="model-preview-reverse-input" />
-      <input type="file" name="sheets" class="sheets-input" />
-      <input type="file" name="sheets_preview" class="sheets-preview-input" />
+      <div class="field">
+        <label for="model">Model</label>
+        <input type="file" name="model" id="design-model" />
+      </div>
+      <div class="field">
+        <label for="model_preview">Model preview image</label>
+        <input type="file" name="model_preview" id="model-preview" />
+      </div>
+      <div class="field">
+        <label for="model_preview_reverse">Reverse model preview image</label>
+        <input type="file" name="model_preview_reverse" class="model-preview-reverse-input" />
+      </div>
+      <div class="field">
+        <label for="sheets">Cutting sheets</label>
+        <input type="file" name="sheets" class="sheets-input" />
+      </div>
+      <div class="field">
+        <label for="sheets_preview">Cutting sheets preview image</label>
+        <input type="file" name="sheets_preview" class="sheets-preview-input" />
+      </div>
     </div>
     <input type="submit" name="submit" value="Submit" />
   </form>

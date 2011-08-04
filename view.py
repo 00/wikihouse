@@ -4,7 +4,33 @@
 """ ``RequestHandler``s.
 """
 
+import cgi
+
+from google.appengine.ext import blobstore, db
+
 from weblayer import RequestHandler
+
+class BlobStoreUploadHandler(RequestHandler):
+    """ Base class for handlers that accept multiple named file uploads.
+    """
+    
+    def __init__(self, *args, **kwargs):
+        super(BlobStoreUploadHandler, self).__init__(*args, **kwargs)
+        self._uploads = None
+        
+    
+    def get_uploads(self):
+        if self._uploads is None:
+            self._uploads = {}
+            for key, value in self.request.params.items():
+                if isinstance(value, cgi.FieldStorage):
+                    if 'blob-key' in value.type_options:
+                        value = blobstore.parse_blob_info(value)
+                        self._uploads[key] = value
+        return self._uploads
+        
+    
+    
 
 
 class Index(RequestHandler):

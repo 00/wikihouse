@@ -163,12 +163,12 @@ class Series(RequestHandler):
     """
     
     def get(self, name):
-        context = model.Series.get_by_key_name(name)
-        designs = context.designs
+        target = model.Series.get_by_key_name(name)
+        designs = target.designs
         series = model.Series.get_all()
         return self.render(
             'series.tmpl', 
-            context=context, 
+            target=target, 
             series=series, 
             designs=designs
         )
@@ -182,11 +182,11 @@ class Design(RequestHandler):
     """
     
     def get(self, id):
-        context = model.Design.get_by_id(int(id))
+        target = model.Design.get_by_id(int(id))
         series = model.Series.get_all()
         return self.render(
             'design.tmpl', 
-            context=context, 
+            target=target, 
             series=series 
         )
         

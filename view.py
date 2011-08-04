@@ -198,7 +198,7 @@ class NotFound(RequestHandler):
     """
     """
     
-    def get(self, world):
+    def get(self):
         return self.render('errors/404.tmpl')
         
     

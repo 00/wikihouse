@@ -12,19 +12,19 @@ mapping = [(
         r'/',
         Index
     ), (
-        r'/standard',
+        r'/standard\/?',
         Standard
     ), (
-        r'/download',
+        r'/download\/?',
         Download
     ), (
-        r'/support',
+        r'/support\/?',
         Support
     ), (
-        r'/contact',
+        r'/contact\/?',
         Contact
     ), (
-        r'/library',
+        r'/library\/?',
         Library
     ), (
         r'/bootstrap\/?',

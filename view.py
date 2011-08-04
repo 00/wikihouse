@@ -156,7 +156,11 @@ class AddDesign(BlobStoreUploadHandler):
         attrs['series'] = [db.Key.from_path('Series', item) for item in series]
         
         country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
-        attrs['country'] = pytz.country_names[country_code.lower()]
+        try:
+            country = pytz.country_names[country_code.lower()]
+        except KeyError:
+            country = country_code
+        attrs['country'] = country
         
         attrs.update(uploads)
         design = model.Design(**attrs)

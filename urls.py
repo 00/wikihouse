@@ -33,6 +33,12 @@ mapping = [(
         r'/library/add_design/success\/?',
         AddDesignSuccess
     ), (
+        r'/library/series/(\w+)\/?',
+        Series
+    ), (
+        r'/library/design/([0-9]+)\/?',
+        Design
+    ), (
         r'/bootstrap\/?',
         Bootstrap
     ), (

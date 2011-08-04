@@ -1,6 +1,6 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Browse Library</%def>
+<%def name="sub_title()">${target.title}</%def>
 
 <%def name="content()">
   <ul class="series-nav">
@@ -11,12 +11,10 @@
       </li>
     % endfor
   </ul>
-  <ul class="designs">
-    % for item in designs:
-      <li>
-        <a href="/library/design/${item.key().id()}">
-          ${item.title}</a>
-      </li>
-    % endfor
-  </ul>
+  <div>
+    <h1>${target.title}</h1>
+    <p>
+      ${target.description}
+    </p>
+  </div>
 </%def>

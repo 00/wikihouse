@@ -1,11 +1,11 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Browse Library</%def>
+<%def name="sub_title()">${target.label}</%def>
 
 <%def name="content()">
   <ul class="series-nav">
     % for item in series:
-      <li>
+      <li class="${item == target and 'selected' or ''}">
         <a href="/library/series/${item.key().name()}">
           ${item.label}</a>
       </li>

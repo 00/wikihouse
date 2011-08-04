@@ -98,7 +98,9 @@ class Library(RequestHandler):
     """
     
     def get(self):
-        return self.render('library.tmpl')
+        series = model.Series.get_all()
+        designs = model.Design.all().order('-m')
+        return self.render('library.tmpl', series=series, designs=designs)
         
     
     
@@ -151,6 +153,42 @@ class AddDesignSuccess(BlobStoreUploadHandler):
     
     def get(self):
         return {'status': 'ok'}
+        
+    
+    
+
+
+class Series(RequestHandler):
+    """
+    """
+    
+    def get(self, name):
+        context = model.Series.get_by_key_name(name)
+        designs = context.designs
+        series = model.Series.get_all()
+        return self.render(
+            'series.tmpl', 
+            context=context, 
+            series=series, 
+            designs=designs
+        )
+        
+    
+    
+
+
+class Design(RequestHandler):
+    """
+    """
+    
+    def get(self, id):
+        context = model.Design.get_by_id(int(id))
+        series = model.Series.get_all()
+        return self.render(
+            'design.tmpl', 
+            context=context, 
+            series=series 
+        )
         
     
     

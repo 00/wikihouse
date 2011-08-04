@@ -59,13 +59,24 @@
                   News</a>
               </li>
               <li>
-                <a href="/contact" title="Contact Us">
-                  Contact</a>
-              </li>
-              <li>
                 <a href="/support" title="Get Involved">
                   Get Involved</a>
               </li>
+              <li>
+                <a href="/contact" title="Contact Us">
+                  Contact</a>
+              </li>
+              % if users.get_current_user() is None:
+                <li>
+                  <a href="${users.create_login_url(request.path)}" title="Login">
+                    Login</a>
+                </li>
+              % else:
+                <li>
+                  <a href="${users.create_logout_url(request.path)}" title="Logout">
+                    Logout</a>
+                </li>
+              % endif
             </ul>
             <div class="row">
               <div class="slot-2-3-4-5">

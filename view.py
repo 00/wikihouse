@@ -11,9 +11,18 @@ from pytz.gae import pytz
 
 from google.appengine.ext import blobstore, db
 
-from weblayer import RequestHandler
+from weblayer import RequestHandler as BaseRequestHandler
 
+import auth
 import model
+
+class RequestHandler(BaseRequestHandler):
+    """
+    """
+    
+    
+    
+
 
 class BlobStoreUploadHandler(RequestHandler):
     """ Base class for handlers that accept multiple named file uploads.
@@ -112,6 +121,7 @@ class AddDesign(BlobStoreUploadHandler):
     
     __all__ = ['get', 'post']
     
+    @auth.required
     def post(self):
         
         attrs = {}
@@ -138,6 +148,7 @@ class AddDesign(BlobStoreUploadHandler):
         
     
     
+    @auth.required
     def get(self):
         series = model.Series.get_all()
         upload_url = blobstore.create_upload_url(self.request.path)
@@ -151,6 +162,7 @@ class AddDesignSuccess(BlobStoreUploadHandler):
     """
     """
     
+    @auth.required
     def get(self):
         return {'status': 'ok'}
         

@@ -5,7 +5,7 @@
 <%def name="design_listing(item, show_series=False)">
   <li>
     % if item.model_preview:
-      <div class="preview">
+      <div class="thumbnail">
         <img src="/blob/${item.model_preview.key()}" />
       </div>
     % endif

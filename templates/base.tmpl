@@ -108,26 +108,22 @@
         </div>
       </div>
     </div>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
     </script>
-    <script type="text/javascript" charset="utf-8">
+    <script type="text/javascript" src="//s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js">
+    </script>
+    <script type="text/javascript">
       (function () {
-        var protocol = document.location.protocol == "https:" ? 'https' : 'http';
-        var host = protocol + "://s3.amazonaws.com/getsatisfaction.com/";
-        var src = host + "javascripts/feedback-v2.js";
+        var switchTo5x = true;
+        var using_ssl = document.location.protocol == 'https:';
+        var stub = using_ssl ? 'https://ws' : 'http://w';
+        var src = stub + '.sharethis.com/button/buttons.js';
         var tag = '%3Cscript src="' + src + '" type="text/javascript"%3E%3C/script%3E';
         document.write(unescape(tag));
       })();
     </script>
     <script type="text/javascript">
-      (function () {
-        var switchTo5x = true;
-      </script>
-    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js">
-    </script>
-    <script type="text/javascript">
-        stLight.options({'publisher': '386e0e7b-fee7-485d-af13-172a5107f9fb'});
-      })();
+      stLight.options({'publisher': '386e0e7b-fee7-485d-af13-172a5107f9fb'});
     </script>
     <script type="text/javascript" src="${get_static_url('js/wikihouse.js')}">
     </script>

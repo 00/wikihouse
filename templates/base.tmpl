@@ -98,9 +98,17 @@
                     ]
                   %>
                   % for item in nav_items:
-                    <li class="${request.path == item['value'] and 'selected' or ''}">
-                      <a href="${item['value']}" title="${item['label']}">
-                        ${item['label']}</a>
+                    <%
+                      value = item['value']
+                      label = item['label']
+                      if value == '/':
+                          selected = request.path == '/'
+                      else:
+                          selected = request.path.startswith(value)
+                      
+                    %>
+                    <li class="${selected and 'selected' or ''}">
+                      <a href="${value}" title="${label}">${label}</a>
                     </li>
                   % endfor
                 </ul>

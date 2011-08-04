@@ -1,21 +1,26 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Browse Library</%def>
+<%def name="sub_title()">${target is None and 'Browse Library' or target.label}</%def>
 
-<%def name="content()">
-  <ul class="series-nav">
-    % for item in series:
-      <li>
-        <a href="/library/series/${item.key().name()}">
-          ${item.label}</a>
-      </li>
-    % endfor
-  </ul>
+<%def name="main_content()">
+  <h4>Designs</h4>
   <ul class="designs">
     % for item in designs:
       <li>
         <a href="/library/design/${item.key().id()}">
           ${item.title}</a>
+      </li>
+    % endfor
+  </ul>
+</%def>
+
+<%def name="actions()">
+  <h4>Series</h4>
+  <ul class="series-nav">
+    % for item in series:
+      <li class="${target and target.key() == item.key() and 'selected' or ''}">
+        <a href="/library/series/${item.key().name()}">
+          ${item.label}</a>
       </li>
     % endfor
   </ul>

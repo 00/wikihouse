@@ -1,21 +1,59 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Browse Library</%def>
+<%def name="sub_title()">${target is None and 'Browse Library' or target.label}</%def>
 
-<%def name="content()">
-  <ul class="series-nav">
-    % for item in series:
-      <li>
-        <a href="/library/series/${item.key().name()}">
-          ${item.label}</a>
-      </li>
+<%def name="design_listing(item, show_series=False)">
+  <li>
+    % if item.model_preview:
+      <div class="thumbnail">
+        <img src="/blob/${item.model_preview.key()}" />
+      </div>
+    % endif
+    <div class="title">
+      ${item.key().id()} 
+      <a href="/library/design/${item.key().id()}">
+        ${item.title}</a>
+    </div>
+    % if show_series:
+      <div class="series">
+        <%
+          i = 0
+          l = len(item.series)
+        %>
+        % for s in item.series:
+          <% i = i + 1 %>
+          <a href="/library/series/${s.name()}">
+            ${s.name().upper()}</a>${i < l and ', ' or ''}
+        % endfor
+      </div>
+    % endif
+    <div class="user">
+      by 
+      <a href="/library/user/${item.user.user_id()}">
+        ${item.user.nickname()}</a>
+    </div>
+  </li>
+</%def>
+
+<%def name="main_content()">
+  <h4>Designs</h4>
+  <ul class="designs">
+    <% 
+      show_series = target is None
+    %>
+    % for item in designs:
+      ${self.design_listing(item, show_series=show_series)}
     % endfor
   </ul>
-  <ul class="designs">
-    % for item in designs:
-      <li>
-        <a href="/library/design/${item.key().id()}">
-          ${item.title}</a>
+</%def>
+
+<%def name="actions()">
+  <h4>Series</h4>
+  <ul class="series-nav">
+    % for item in series:
+      <li class="${target and target.key() == item.key() and 'selected' or ''}">
+        <a href="/library/series/${item.key().name()}">
+          ${item.label}</a>
       </li>
     % endfor
   </ul>

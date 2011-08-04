@@ -27,17 +27,17 @@ mapping = [(
         r'/library\/?',
         Library
     ), (
+        r'/library/series/(\w+)\/?',
+        Library
+    ), (
+        r'/library/design/([0-9]+)\/?',
+        Design
+    ), (
         r'/library/add_design\/?',
         AddDesign
     ), (
         r'/library/add_design/success\/?',
         AddDesignSuccess
-    ), (
-        r'/library/series/(\w+)\/?',
-        Series
-    ), (
-        r'/library/design/([0-9]+)\/?',
-        Design
     ), (
         r'/bootstrap\/?',
         Bootstrap

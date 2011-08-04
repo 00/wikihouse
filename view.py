@@ -11,9 +11,18 @@ from pytz.gae import pytz
 
 from google.appengine.ext import blobstore, db
 
-from weblayer import RequestHandler
+from weblayer import RequestHandler as BaseRequestHandler
 
+import auth
 import model
+
+class RequestHandler(BaseRequestHandler):
+    """
+    """
+    
+    
+    
+
 
 class BlobStoreUploadHandler(RequestHandler):
     """ Base class for handlers that accept multiple named file uploads.
@@ -97,10 +106,30 @@ class Library(RequestHandler):
     """
     """
     
-    def get(self):
+    def get(self, name=None):
+        
+        # Get all `Series` so we can populate the category navigation and
+        # the target `Series` if one has been selected.
         series = model.Series.get_all()
-        designs = model.Design.all().order('-m')
-        return self.render('library.tmpl', series=series, designs=designs)
+        if name is None:
+            target = None
+        else:
+            target = model.Series.get_by_key_name(name)
+        
+        # Get either the most recent 9 `Design`s or the `Design`s in the
+        # target `Series`.
+        if target is None:
+            designs = model.Design.all().order('-m').fetch(9)
+        else:
+            designs = target.designs
+        
+        # Render the template.
+        return self.render(
+            'library.tmpl', 
+            series=series, 
+            target=target, 
+            designs=designs
+        )
         
     
     
@@ -112,6 +141,7 @@ class AddDesign(BlobStoreUploadHandler):
     
     __all__ = ['get', 'post']
     
+    @auth.required
     def post(self):
         
         attrs = {}
@@ -138,6 +168,7 @@ class AddDesign(BlobStoreUploadHandler):
         
     
     
+    @auth.required
     def get(self):
         series = model.Series.get_all()
         upload_url = blobstore.create_upload_url(self.request.path)
@@ -151,27 +182,9 @@ class AddDesignSuccess(BlobStoreUploadHandler):
     """
     """
     
+    @auth.required
     def get(self):
         return {'status': 'ok'}
-        
-    
-    
-
-
-class Series(RequestHandler):
-    """
-    """
-    
-    def get(self, name):
-        target = model.Series.get_by_key_name(name)
-        designs = target.designs
-        series = model.Series.get_all()
-        return self.render(
-            'series.tmpl', 
-            target=target, 
-            series=series, 
-            designs=designs
-        )
         
     
     

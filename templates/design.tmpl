@@ -1,20 +1,54 @@
-<%inherit file="base.tmpl"/>
+<%inherit file="library.tmpl"/>
 
 <%def name="sub_title()">${target.title}</%def>
 
-<%def name="content()">
-  <ul class="series-nav">
-    % for item in series:
-      <li>
-        <a href="/library/series/${item.key().name()}">
-          ${item.label}</a>
-      </li>
+<%def name="main_content()">
+  <h4>
+    ${target.key().id()} 
+    <a href="/library/design/${target.key().id()}">
+      ${target.title}</a>
+  </h4>
+  % if target.model_preview:
+    <div class="preview">
+      <img src="/blob/${target.model_preview.key()}" />
+    </div>
+  % endif
+  % if target.model_preview_reverse:
+    <div class="preview">
+      <img src="/blob/${target.model_preview_reverse.key()}" />
+    </div>
+  % endif
+  % if target.sheets_preview:
+    <div class="preview">
+      <img src="/blob/${target.sheets_preview.key()}" />
+    </div>
+  % endif
+  <div class="series">
+    <%
+      i = 0
+      l = len(target.series)
+    %>
+    % for s in target.series:
+      <% i = i + 1 %>
+      <a href="/library/series/${s.name()}">
+        ${s.name().upper()}</a>${i < l and ', ' or ''}
     % endfor
-  </ul>
-  <div>
-    <h1>${target.title}</h1>
-    <p>
-      ${target.description}
-    </p>
   </div>
+  <div class="user">
+    by 
+    <a href="/library/user/${target.user.user_id()}">
+      ${target.user.nickname()}</a>
+  </div>
+  % if target.model:
+    <div class="download model">
+      <a href="/blob/${target.model.key()}" title="Download SketchUp Model"/>
+        Download SketchUp Model</a>
+    </div>
+  % endif
+  % if target.sheets:
+    <div class="download sheets">
+      <a href="/blob/${target.sheets.key()}" title="Download CNC Cutting Sheets"/>
+        Download CNC Cutting Sheets</a>
+    </div>
+  % endif
 </%def>

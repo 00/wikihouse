@@ -2,14 +2,47 @@
 
 <%def name="sub_title()">${target is None and 'Browse Library' or target.label}</%def>
 
+<%def name="design_listing(item, show_series=False)">
+  <li>
+    % if item.model_preview:
+      <div class="preview">
+        <img src="/blob/${item.model_preview.key()}" />
+      </div>
+    % endif
+    <div class="title">
+      ${item.key().id()} 
+      <a href="/library/design/${item.key().id()}">
+        ${item.title}</a>
+    </div>
+    % if show_series:
+      <div class="series">
+        <%
+          i = 0
+          l = len(item.series)
+        %>
+        % for s in item.series:
+          <% i = i + 1 %>
+          <a href="/library/series/${s.name()}">
+            ${s.name().upper()}</a>${i < l and ', ' or ''}
+        % endfor
+      </div>
+    % endif
+    <div class="user">
+      by 
+      <a href="/library/user/${item.user.user_id()}">
+        ${item.user.nickname()}</a>
+    </div>
+  </li>
+</%def>
+
 <%def name="main_content()">
   <h4>Designs</h4>
   <ul class="designs">
+    <% 
+      show_series = target is None
+    %>
     % for item in designs:
-      <li>
-        <a href="/library/design/${item.key().id()}">
-          ${item.title}</a>
-      </li>
+      ${self.design_listing(item, show_series=show_series)}
     % endfor
   </ul>
 </%def>

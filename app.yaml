@@ -21,6 +21,10 @@ handlers:
   static_dir: static/build
   expiration: 7d
 
+- url: /bootstrap
+  script: main.py
+  login: required
+
 - url: .*
   script: main.py
 

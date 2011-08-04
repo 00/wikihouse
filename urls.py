@@ -4,7 +4,9 @@
 """ Provides ``mapping`` of url paths to request handlers.
 """
 
+from bootstrap import Bootstrap
 from view import *
+
 
 mapping = [(
         r'/',
@@ -25,7 +27,10 @@ mapping = [(
         r'/library',
         Library
     ), (
-        r'/(.*)',
+        r'/bootstrap\/?',
+        Bootstrap
+    ), (
+        r'/.*',
         NotFound
     )
 ]

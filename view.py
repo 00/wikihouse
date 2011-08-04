@@ -5,10 +5,15 @@
 """
 
 import cgi
+import logging
+
+from pytz.gae import pytz
 
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler
+
+import model
 
 class BlobStoreUploadHandler(RequestHandler):
     """ Base class for handlers that accept multiple named file uploads.
@@ -98,6 +103,57 @@ class Library(RequestHandler):
     
     
 
+
+class AddDesign(BlobStoreUploadHandler):
+    """
+    """
+    
+    __all__ = ['get', 'post']
+    
+    def post(self):
+        
+        attrs = {}
+        
+        params = self.request.params
+        uploads = self.get_uploads()
+        
+        attrs['title'] = params.get('title')
+        attrs['description'] = params.get('description')
+        
+        series = params.getall('series')
+        attrs['series'] = [db.Key.from_path('Series', item) for item in series]
+        
+        country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
+        attrs['country'] = pytz.country_names[country_code.lower()]
+        
+        attrs.update(uploads)
+        design = model.Design(**attrs)
+        design.save()
+        
+        response = self.redirect('/library/design/%s' % design.key().id())
+        response.body = ''
+        return response
+        
+    
+    
+    def get(self):
+        series = model.Series.get_all()
+        upload_url = blobstore.create_upload_url(self.request.path)
+        return self.render('add.tmpl', upload_url=upload_url, series=series)
+        
+    
+    
+
+
+class AddDesignSuccess(BlobStoreUploadHandler):
+    """
+    """
+    
+    def get(self):
+        return {'status': 'ok'}
+        
+    
+    
 
 
 class NotFound(RequestHandler):

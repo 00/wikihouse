@@ -1,0 +1,36 @@
+<%inherit file="base.tmpl"/>
+
+<%def name="sub_title()">Test Add Form</%def>
+
+<%def name="content()">
+  <form id="submit-design-form" 
+      action="${upload_url}"
+      method="POST"
+      enctype="multipart/form-data">
+    ${xsrf_input}
+    <div class="field">
+      <label for="title">Title</label>
+      <input type="text" name="title" />
+    </div>
+    <div class="field">
+      <label for="description">Description</label>
+      <textarea name="description"></textarea>
+    </div>
+    <div class="field">
+      <label for="series">Series</label>
+      <select name="series" multiple="true">
+        % for item in series:
+          <option value="${item.key().name()}">${item.label}</option>
+        % endfor
+      </select>
+    </div>
+    <div class="hidden file-inputs">
+      <input type="file" name="model" class="model-input" />
+      <input type="file" name="model_preview" class="model-preview-input" />
+      <input type="file" name="model_preview_reverse" class="model-preview-reverse-input" />
+      <input type="file" name="sheets" class="sheets-input" />
+      <input type="file" name="sheets_preview" class="sheets-preview-input" />
+    </div>
+    <input type="submit" name="submit" value="Submit" />
+  </form>
+</%def>

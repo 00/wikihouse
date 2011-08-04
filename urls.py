@@ -27,6 +27,12 @@ mapping = [(
         r'/library\/?',
         Library
     ), (
+        r'/library/add_design\/?',
+        AddDesign
+    ), (
+        r'/library/add_design/success\/?',
+        AddDesignSuccess
+    ), (
         r'/bootstrap\/?',
         Bootstrap
     ), (

@@ -12,7 +12,7 @@
     <div class="title">
       ${item.key().id()} 
       <a href="/library/design/${item.key().id()}">
-        ${item.title}</a>
+        ${escape(item.title)}</a>
     </div>
     % if show_series:
       <div class="series">
@@ -30,7 +30,7 @@
     <div class="user">
       by 
       <a href="/library/user/${item.user.user_id()}">
-        ${item.user.nickname()}</a>
+        ${escape(item.user.nickname())}</a>
     </div>
   </li>
 </%def>

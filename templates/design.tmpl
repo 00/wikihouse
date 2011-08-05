@@ -8,47 +8,81 @@
     <a href="/library/design/${target.key().id()}">
       ${escape(target.title)}</a>
   </h4>
-  % if target.model_preview:
-    <div class="preview">
-      <img src="/blob/${target.model_preview.key()}" />
+  <%
+    is_admin = users.is_current_user_admin()
+    is_user = users.get_current_user().user_id() == target.user.user_id()
+  %>
+  % if target.status == u'approved' or is_admin or is_user:
+    % if target.model_preview:
+      <div class="preview">
+        <img src="/blob/${target.model_preview.key()}" />
+      </div>
+    % endif
+    % if target.model_preview_reverse:
+      <div class="preview">
+        <img src="/blob/${target.model_preview_reverse.key()}" />
+      </div>
+    % endif
+    % if target.sheets_preview:
+      <div class="preview">
+        <img src="/blob/${target.sheets_preview.key()}" />
+      </div>
+    % endif
+    <div class="series">
+      <%
+        i = 0
+        l = len(target.series)
+      %>
+      % for s in target.series:
+        <% i = i + 1 %>
+        <a href="/library/series/${s.name()}">
+          ${s.name().upper()}</a>${i < l and ', ' or ''}
+      % endfor
     </div>
-  % endif
-  % if target.model_preview_reverse:
-    <div class="preview">
-      <img src="/blob/${target.model_preview_reverse.key()}" />
+    <div class="user">
+      by 
+      <a href="/library/user/${target.user.user_id()}">
+        ${escape(target.user.nickname())}</a>
     </div>
-  % endif
-  % if target.sheets_preview:
-    <div class="preview">
-      <img src="/blob/${target.sheets_preview.key()}" />
+    % if is_admin or is_user:
+      <div class="status pending">
+        Status: 
+        % if target.status == u'pending':
+          pending moderation.
+        % elif target.status == u'rejected':
+          rejected.
+        % else:
+          approved.
+        % endif
+      </div>
+      % if is_admin and target.status == u'pending':
+        <form class="moderation-form" action="/moderate" method="post">
+          ${xsrf_input}
+          <input type="hidden" name="id" value="${target.key().id()}" />
+          <input type="submit" name="action" value="Approve" />
+          <input type="submit" name="action" value="Reject" />
+        </form>
+      % endif
+    % endif
+    % if target.model:
+      <div class="download model">
+        <a href="/blob/${target.model.key()}" title="Download SketchUp Model"/>
+          Download SketchUp Model</a>
+      </div>
+    % endif
+    % if target.sheets:
+      <div class="download sheets">
+        <a href="/blob/${target.sheets.key()}" title="Download CNC Cutting Sheets"/>
+          Download CNC Cutting Sheets</a>
+      </div>
+    % endif
+  % elif target.status == u'pending':
+    <div class="status pending">
+      This design is pending moderation.
     </div>
-  % endif
-  <div class="series">
-    <%
-      i = 0
-      l = len(target.series)
-    %>
-    % for s in target.series:
-      <% i = i + 1 %>
-      <a href="/library/series/${s.name()}">
-        ${s.name().upper()}</a>${i < l and ', ' or ''}
-    % endfor
-  </div>
-  <div class="user">
-    by 
-    <a href="/library/user/${target.user.user_id()}">
-      ${escape(target.user.nickname())}</a>
-  </div>
-  % if target.model:
-    <div class="download model">
-      <a href="/blob/${target.model.key()}" title="Download SketchUp Model"/>
-        Download SketchUp Model</a>
-    </div>
-  % endif
-  % if target.sheets:
-    <div class="download sheets">
-      <a href="/blob/${target.sheets.key()}" title="Download CNC Cutting Sheets"/>
-        Download CNC Cutting Sheets</a>
+  % elif target.status == u'rejected':
+    <div class="status pending">
+      This design was rejected.
     </div>
   % endif
 </%def>

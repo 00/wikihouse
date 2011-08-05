@@ -42,6 +42,9 @@ mapping = [(
         r'/library/add_design/error\/?',
         AddDesignError
     ), (
+        r'/moderate\/?',
+        Moderate
+    ), (
         r'/bootstrap\/?',
         Bootstrap
     ), (

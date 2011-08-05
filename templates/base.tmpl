@@ -70,6 +70,12 @@
                     Login</a>
                 </li>
               % else:
+                % if users.is_current_user_admin():
+                  <li>
+                    <a href="/moderate" title="Moderate">
+                      Moderate</a>
+                  </li>
+                % endif
                 <li>
                   <a href="${users.create_logout_url(request.path)}" title="Logout">
                     Logout</a>

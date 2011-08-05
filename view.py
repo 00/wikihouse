@@ -9,7 +9,7 @@ import logging
 
 from pytz.gae import pytz
 
-from google.appengine.api import mail
+from google.appengine.api import mail, users
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler

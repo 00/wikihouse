@@ -12,14 +12,14 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from weblayer import Bootstrapper, WSGIApplication
 
 from asset import get_manifest, ManifestedStaticURLGenerator
-from secret import cookie as cookie_secret
+from secret import emails, cookie as cookie_secret
 from template import Renderer
 from urls import mapping
 
 config = {
     'dev': os.environ['SERVER_SOFTWARE'].startswith('Dev'),
     'cookie_secret': cookie_secret,
-    'moderation_notification_email_addresses': ['thruflo@gmail.com'],
+    'moderation_notification_email_addresses': emails,
     'assetgen_manifest': get_manifest(),
     'static_files_path': 'static',
     'template_directories': ['templates']

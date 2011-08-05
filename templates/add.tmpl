@@ -11,10 +11,12 @@
     <div class="field">
       <label for="title">Title</label>
       <input type="text" name="title" id="design-title"/>
+      <div class="error"></div>
     </div>
     <div class="field">
       <label for="description">Description</label>
       <textarea name="description" id="design-description"></textarea>
+      <div class="error"></div>
     </div>
     <div class="field">
       <label for="series">Series</label>
@@ -23,6 +25,7 @@
           <option value="${item.key().name()}">${item.label}</option>
         % endfor
       </select>
+      <div class="error"></div>
     </div>
     <div class="hidden file-inputs">
       <div class="field">

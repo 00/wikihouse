@@ -27,7 +27,8 @@ class Series(db.Model):
     
     @property
     def designs(self):
-        return Design.gql("WHERE series = :1", self.key())
+        query = Design.all().filter("status =", u'approved')
+        return query.filter("series =", self.key())
         
     
     

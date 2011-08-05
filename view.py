@@ -9,21 +9,14 @@ import logging
 
 from pytz.gae import pytz
 
+from google.appengine.api import mail, users
 from google.appengine.ext import blobstore, db
 
-from weblayer import RequestHandler as BaseRequestHandler
+from weblayer import RequestHandler
 from weblayer.utils import unicode_urlencode
 
 import auth
 import model
-
-class RequestHandler(BaseRequestHandler):
-    """
-    """
-    
-    
-    
-
 
 class BlobStoreUploadHandler(RequestHandler):
     """ Base class for handlers that accept multiple named file uploads.
@@ -120,7 +113,8 @@ class Library(RequestHandler):
         # Get either the most recent 9 `Design`s or the `Design`s in the
         # target `Series`.
         if target is None:
-            designs = model.Design.all().order('-m').fetch(9)
+            query = model.Design.all().filter("status =", u'approved')
+            designs = query.order('-m').fetch(9)
         else:
             designs = target.designs
         
@@ -141,6 +135,26 @@ class AddDesign(BlobStoreUploadHandler):
     """
     
     __all__ = ['get', 'post']
+    
+    def notify(self, design):
+        """ Notify the moderators.
+        """
+        
+        url = self.request.host_url
+        user = users.get_current_user()
+        
+        sender = user.email()
+        subject = u'New design submitted to WikiHouse.'
+        body = u'Please moderate the submission:\n\n%s/moderate\n' % url
+        message = mail.EmailMessage(sender=sender, subject=subject, body=body)
+        
+        recipients = self.settings['moderation_notification_email_addresses']
+        for item in recipients:
+            message.to = item
+            message.send()
+            
+        
+    
     
     @auth.required
     def post(self):
@@ -181,6 +195,8 @@ class AddDesign(BlobStoreUploadHandler):
             response = self.redirect('/library/add_design/error?%s' % data)
         else:
             response = self.redirect('/library/add_design/success/%s' % design.key().id())
+            self.notify(design)
+        
         response.body = ''
         return response
         
@@ -214,6 +230,33 @@ class AddDesignError(RequestHandler):
     def get(self):
         return 'error: %s' % self.request.params.get('error')
         
+    
+    
+
+
+class Moderate(RequestHandler):
+    
+    __all__ = ['get', 'post']
+    
+    @auth.admin
+    def post(self):
+        params = self.request.params
+        action = params.get('action')
+        design = model.Design.get_by_id(int(params.get('id')))
+        if action == 'Approve':
+            design.status = u'approved'
+        elif action == 'Reject':
+            design.status = u'rejected'
+        design.put()
+        return self.get()
+        
+    
+    
+    @auth.admin
+    def get(self):
+        query = model.Design.all().filter("status =", u'pending')
+        designs = query.order('-m').fetch(99)
+        return self.render('moderate.tmpl', designs=designs)
     
     
 

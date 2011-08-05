@@ -1,0 +1,12 @@
+<%inherit file="library.tmpl"/>
+
+<%def name="sub_title()">Moderate</%def>
+
+<%def name="content()">
+  <h4>Moderate</h4>
+  <ul class="designs">
+    % for item in designs:
+      ${self.design_listing(item, show_series=True)}
+    % endfor
+  </ul>
+</%def>

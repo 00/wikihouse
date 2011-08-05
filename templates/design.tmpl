@@ -9,8 +9,9 @@
       ${escape(target.title)}</a>
   </h4>
   <%
+    user = users.get_current_user()
+    is_user = user and bool(user.user_id() == target.user.user_id())
     is_admin = users.is_current_user_admin()
-    is_user = users.get_current_user().user_id() == target.user.user_id()
   %>
   % if target.status == u'approved' or is_admin or is_user:
     % if target.model_preview:

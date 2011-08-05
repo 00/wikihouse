@@ -1,10 +1,14 @@
+window.wikihouse ?= {}
+
 $(document).ready ->
   
+  progress = $ '#design-form-progress-indicator'
+  form = $ '#submit-design-form'
+  
   # Validate the submit design form.
-  target = $('#submit-design-form')
-  target.bind 'submit', (event) ->
+  form.bind 'submit', (event) ->
       
-      data = $.parseQuery target.serialize()
+      data = $.parseQuery form.serialize()
       valid = true
       
       # Title is required.
@@ -36,6 +40,29 @@ $(document).ready ->
         event.stopImmediatePropagation()
         return false
       
+    
+  
+  
+  # Call `wikihouse.show_progress()` to trigger the in-progress state.
+  wikihouse.show_progress = ->
+    # Clear any validation error message.
+    error = form.find('.error').first()
+    error.text ''
+    # Show the progress indicator.
+    progress.height form.height()
+    form.hide()
+    progress.show()
+    
+  
+  
+  # Call `wikihouse.show_error(error_string)` to show validation errors.
+  wikihouse.show_error = (error_string) ->
+    # Hide the progress indicator.
+    progress.hide()
+    form.show()
+    # Display the error message.
+    error = form.find('.error').first()
+    error.text error_string
     
   
   

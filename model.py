@@ -42,8 +42,8 @@ class Design(db.Model):
     m = db.DateTimeProperty(auto_now=True)              # modified
     
     
-    title = db.StringProperty()
-    description = db.TextProperty(default='')
+    title = db.StringProperty(required=True)
+    description = db.TextProperty(required=True)
     series = db.ListProperty(db.Key)
     
     user = db.UserProperty(auto_current_user_add=True)

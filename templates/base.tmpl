@@ -5,13 +5,11 @@
   <%def name="main_content()"></%def>
   <%def name="actions()"></%def>
   <%def name="content()">
-    <div class="row">
-      <div class="slot-0-1-2-3">
-        ${self.main_content()}
-      </div>
-      <div class="slot-4-5">
-        ${self.actions()}
-      </div>
+    <div class="slot-0-1-2-3">
+      ${self.main_content()}
+    </div>
+    <div class="slot-4-5">
+      ${self.actions()}
     </div>
   </%def>
   <head>
@@ -116,7 +114,9 @@
             </div>
           </div>
         </div>
-        ${self.content()}
+        <div class="row">
+          ${self.content()}
+        </div>
         <div class="row">
           <div class="social-links">
             <span class="st_twitter_hcount" displayText="Tweet"></span>

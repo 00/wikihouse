@@ -6,7 +6,7 @@
   <h4>
     ${target.key().id()} 
     <a href="/library/design/${target.key().id()}">
-      ${target.title}</a>
+      ${escape(target.title)}</a>
   </h4>
   % if target.model_preview:
     <div class="preview">
@@ -37,7 +37,7 @@
   <div class="user">
     by 
     <a href="/library/user/${target.user.user_id()}">
-      ${target.user.nickname()}</a>
+      ${escape(target.user.nickname())}</a>
   </div>
   % if target.model:
     <div class="download model">

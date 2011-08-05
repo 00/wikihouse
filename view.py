@@ -12,6 +12,7 @@ from pytz.gae import pytz
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
+from weblayer.utils import unicode_urlencode
 
 import auth
 import model
@@ -145,6 +146,7 @@ class AddDesign(BlobStoreUploadHandler):
     def post(self):
         
         attrs = {}
+        error = u''
         
         params = self.request.params
         uploads = self.get_uploads()
@@ -153,7 +155,12 @@ class AddDesign(BlobStoreUploadHandler):
         attrs['description'] = params.get('description')
         
         series = params.getall('series')
-        attrs['series'] = [db.Key.from_path('Series', item) for item in series]
+        keys = [db.Key.from_path('Series', item) for item in series]
+        instances = model.Series.get(keys)
+        if None in instances:
+            i = instances.index(None)
+            error = u'Series `%s` does not exist.' % series[i]
+        attrs['series'] = keys
         
         country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
         try:
@@ -163,10 +170,17 @@ class AddDesign(BlobStoreUploadHandler):
         attrs['country'] = country
         
         attrs.update(uploads)
-        design = model.Design(**attrs)
-        design.save()
+        try:
+            design = model.Design(**attrs)
+            design.put()
+        except db.Error, err:
+            error = unicode(err)
         
-        response = self.redirect('/library/design/%s' % design.key().id())
+        if error:
+            data = unicode_urlencode({'error': error})
+            response = self.redirect('/library/add_design/error?%s' % data)
+        else:
+            response = self.redirect('/library/add_design/success/%s' % design.key().id())
         response.body = ''
         return response
         
@@ -181,14 +195,24 @@ class AddDesign(BlobStoreUploadHandler):
     
     
 
+class AddDesignSuccess(RequestHandler):
+    """
+    """
+    
+    @auth.required
+    def get(self, id):
+        return 'success: /library/design/%s' % id
+        
+    
+    
 
-class AddDesignSuccess(BlobStoreUploadHandler):
+class AddDesignError(RequestHandler):
     """
     """
     
     @auth.required
     def get(self):
-        return {'status': 'ok'}
+        return 'error: %s' % self.request.params.get('error')
         
     
     

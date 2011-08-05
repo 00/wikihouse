@@ -19,6 +19,7 @@ from urls import mapping
 config = {
     'dev': os.environ['SERVER_SOFTWARE'].startswith('Dev'),
     'cookie_secret': cookie_secret,
+    'moderation_notification_email_addresses': ['thruflo@gmail.com'],
     'assetgen_manifest': get_manifest(),
     'static_files_path': 'static',
     'template_directories': ['templates']

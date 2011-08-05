@@ -9,6 +9,7 @@ import logging
 
 from pytz.gae import pytz
 
+from google.appengine.api import mail
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
@@ -141,6 +142,26 @@ class AddDesign(BlobStoreUploadHandler):
     """
     
     __all__ = ['get', 'post']
+    
+    def notify(self, design):
+        """ Notify the moderators.
+        """
+        
+        url = self.request.host_url
+        user = users.get_current_user()
+        
+        sender = user.email()
+        subject = u'New design submitted to WikiHouse.'
+        body = u'Please moderate the submission:\n\n%s/moderate\n' % url
+        message = mail.EmailMessage(sender=sender, subject=subject, body=body)
+        
+        recipients = self.settings['moderation_notification_email_addresses']
+        for item in recipients:
+            message.to = item
+            message.send()
+            
+        
+    
     
     @auth.required
     def post(self):

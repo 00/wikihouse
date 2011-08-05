@@ -36,8 +36,11 @@ mapping = [(
         r'/library/add_design\/?',
         AddDesign
     ), (
-        r'/library/add_design/success\/?',
+        r'/library/add_design/success/([0-9]+)\/?',
         AddDesignSuccess
+    ), (
+        r'/library/add_design/error\/?',
+        AddDesignError
     ), (
         r'/bootstrap\/?',
         Bootstrap

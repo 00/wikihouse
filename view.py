@@ -12,19 +12,11 @@ from pytz.gae import pytz
 from google.appengine.api import mail, users
 from google.appengine.ext import blobstore, db
 
-from weblayer import RequestHandler as BaseRequestHandler
+from weblayer import RequestHandler
 from weblayer.utils import unicode_urlencode
 
 import auth
 import model
-
-class RequestHandler(BaseRequestHandler):
-    """
-    """
-    
-    
-    
-
 
 class BlobStoreUploadHandler(RequestHandler):
     """ Base class for handlers that accept multiple named file uploads.

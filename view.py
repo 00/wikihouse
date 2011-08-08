@@ -146,11 +146,15 @@ class AddDesign(BlobStoreUploadHandler):
         sender = user.email()
         subject = u'New design submitted to WikiHouse.'
         body = u'Please moderate the submission:\n\n%s/moderate\n' % url
-        message = mail.EmailMessage(sender=sender, subject=subject, body=body)
         
         recipients = self.settings['moderation_notification_email_addresses']
         for item in recipients:
-            message.to = item
+            message = mail.EmailMessage(
+                to=item,
+                sender=sender, 
+                subject=subject, 
+                body=body
+            )
             message.send()
             
         

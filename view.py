@@ -180,6 +180,10 @@ class AddDesign(BlobStoreUploadHandler):
             error = u'Series `%s` does not exist.' % series[i]
         attrs['series'] = keys
         
+        attrs['verification'] = params.get('verification')
+        attrs['notes'] = params.get('notes')
+        attrs['sketchup_version'] = params.get('sketchup_version')
+        
         country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
         try:
             country = pytz.country_names[country_code.lower()]

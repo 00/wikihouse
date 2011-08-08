@@ -29,6 +29,29 @@
       </select>
       <div class="error"></div>
     </div>
+    <div class="field">
+      <label for="verification">Verification status</label>
+      <select name="verification" id="design-verification">
+        <option value="unverified" selected="selected">
+          Not structurally checked
+        </option>
+        <option value="verified">
+          Structurally checked
+        </option>
+        <option value="built">
+          Structurally checked, tested &amp; built
+        </option>
+      </select>
+      <div class="error"></div>
+    </div>
+    <div class="field">
+      <label for="description">Verification notes</label>
+      <textarea name="notes" id="design-notes"></textarea>
+      <div class="error"></div>
+    </div>
+    <div class="hidden field">
+      <input type="hidden" name="sketchup_version" id="design-sketchup-version"/>
+    </div>
     <div class="hidden file-inputs">
       <div class="field">
         <label for="model">Model</label>

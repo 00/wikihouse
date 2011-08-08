@@ -58,6 +58,16 @@ class Design(db.Model):
         ],
         default=u'pending'
     )
+    verification = db.StringProperty(
+        choices=[
+            u'unverified', 
+            u'verified', 
+            u'built'
+        ],
+        default=u'unverified'
+    )
+    notes = db.TextProperty()
+    sketchup_version = db.StringProperty()
     
     model = blobstore.BlobReferenceProperty()
     model_preview = blobstore.BlobReferenceProperty()

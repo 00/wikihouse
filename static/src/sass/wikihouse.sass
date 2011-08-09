@@ -66,3 +66,13 @@ li.selected
   background-image: embed("ajax-loader.gif")
   background-position: center center
   background-repeat: no-repeat
+
+
+// n.b.: this show / hides the series block but needs to take into account
+// media query width and whether to be block or inline block
+.series-nav li .panel
+  display: none
+
+.series-nav li.selected .panel
+  display: block
+

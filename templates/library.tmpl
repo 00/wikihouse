@@ -50,10 +50,34 @@
 <%def name="actions()">
   <h4>Series</h4>
   <ul class="series-nav">
+    <!--
+      
+      It may be we need to duplicate the series blocks here and show hide
+      a seperate block when the layout is less than 768 / whatever triggers
+      an inline block menu.
+      
+      For now, we're show/hiding a panel within the navigation `<li />`sm which
+      is fine for a vertical accordion style menu.
+      
+      
+    -->
     % for item in series:
       <li class="${target and target.key() == item.key() and 'selected' or ''}">
-        <a href="/library/series/${item.key().name()}">
-          ${item.label}</a>
+        <div class="bar">
+          <a href="/library/series/${item.key().name()}">
+            ${item.title}</a>
+        </div>
+        <div class="panel">
+          <div class="series-image">
+            <img src="${get_static_url('gfx/series/%s.png' % item.key().name())}" />
+          </div>
+          <div class="description">
+            ${item.description}
+          </div>
+          <div class="more-info-link">
+            <a href="/how-it-works#series">More information</a>
+          </div>
+        </div>
       </li>
     % endfor
   </ul>

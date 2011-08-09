@@ -7,35 +7,35 @@
 #   e.g.: `gfx/series/a.png`, so save them in the corresponding `./gfx/series`
 #   folder inside `wikihouse-resources`.
 - value: houses
-  label: Houses
+  title: Houses
   description: XXX ...
 - value: a
-  label: A Series
+  title: A Series
   description: XXX ...
 - value: b
-  label: B Series
+  title: B Series
   description: XXX ...
 - value: c
-  label: C Series
+  title: C Series
   description: XXX ...
 - value: ac
-  label: AC Series
+  title: AC Series
   description: XXX ...
 - value: bb
-  label: BB Series
+  title: BB Series
   description: XXX ...
 - value: bc
-  label: BC Series
+  title: BC Series
   description: XXX ...
 - value: cc
-  label: CC Series
+  title: CC Series
   description: XXX ...
 - value: cac
-  label: CAC Series
+  title: CAC Series
   description: XXX ...
 - value: cbc
-  label: CBC Series
+  title: CBC Series
   description: XXX ...
 - value: other
-  label: Other
+  title: Other
   description: XXX ...

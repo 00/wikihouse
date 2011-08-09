@@ -15,9 +15,8 @@ class Series(db.Model):
     m = db.DateTimeProperty(auto_now=True)              # modified
     
     order = db.IntegerProperty()
-    label = db.StringProperty()
+    title = db.StringProperty()
     description = db.TextProperty(default='')
-    #specification = blobstore.BlobReferenceProperty()
     
     @classmethod
     def get_all(cls):

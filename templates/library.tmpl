@@ -1,6 +1,6 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">${target is None and 'Browse Library' or target.label}</%def>
+<%def name="sub_title()">${target is None and 'Browse Library' or target.title}</%def>
 
 <%def name="design_listing(item, show_series=False)">
   <li>

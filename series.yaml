@@ -1,0 +1,41 @@
+# Edit the configuration below (writen in `YAML <http://yaml.org/>`_) and then
+# call `/bootstrap` to overwrite the `Series`.  By convention:
+# 
+# * series are displayed (e.g.: in the library category nav) in the order they
+#   are listed below
+# * images for the series are looked up using `gfx/series/${value}.png`, 
+#   e.g.: `gfx/series/a.png`, so save them in the corresponding `./gfx/series`
+#   folder inside `wikihouse-resources`.
+- value: houses
+  label: Houses
+  description: XXX ...
+- value: a
+  label: A Series
+  description: XXX ...
+- value: b
+  label: B Series
+  description: XXX ...
+- value: c
+  label: C Series
+  description: XXX ...
+- value: ac
+  label: AC Series
+  description: XXX ...
+- value: bb
+  label: BB Series
+  description: XXX ...
+- value: bc
+  label: BC Series
+  description: XXX ...
+- value: cc
+  label: CC Series
+  description: XXX ...
+- value: cac
+  label: CAC Series
+  description: XXX ...
+- value: cbc
+  label: CBC Series
+  description: XXX ...
+- value: other
+  label: Other
+  description: XXX ...

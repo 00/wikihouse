@@ -5,65 +5,45 @@
 """
 
 import logging
+import yaml
 
 from weblayer import RequestHandler
 
 import model
 
-series = [{
-        'value': 'houses',
-        'label': u'Houses'
-    }, {
-        'value': 'a',
-        'label': u'A Series'
-    }, {
-        'value': 'b',
-        'label': u'B Series'
-    }, {
-        'value': 'c',
-        'label': u'C Series'
-    }, {
-        'value': 'ac',
-        'label': u'AC Series'
-    }, {
-        'value': 'bb',
-        'label': u'BB Series'
-    }, {
-        'value': 'bc',
-        'label': u'BC Series'
-    }, {
-        'value': 'cc',
-        'label': u'CC Series'
-    }, {
-        'value': 'cac',
-        'label': u'CAC Series'
-    }, {
-        'value': 'cbc',
-        'label': u'CBC Series'
-    }, {
-        'value': 'other',
-        'label': u'Other'
-    }
-]
-
 class Bootstrap(RequestHandler):
-    """ Setup `model.Series` instances.
+    """ Delete all existing `model.Series` instances and create new instances
+      corresponding to the configuration in `series.yaml`.
     """
     
     def get(self):
+        
+        # Delete existing (presumes there won't ever be more than 300).
+        existing = model.Series.all().fetch(300)
+        number_removed = len(existing)
+        model.db.delete(existing)
+        
+        # Create new.
+        sock = open('series.yaml', 'r')
+        series = yaml.load(sock)
+        sock.close()
         to_add = []
         i = 0
         for item in series:
-            existing = model.Series.all().filter("value =", item['value']).get()
-            if existing is None:
-                key_name = item.pop('value')
-                instance = model.Series(key_name=key_name, order=i, **item)
-                to_add.append(instance)
+            kwargs = item.copy()
+            key_name = kwargs.pop('value')
+            instance = model.Series(key_name=key_name, order=i, **kwargs)
+            to_add.append(instance)
             i = i + 1
+        number_added = len(to_add)
         model.db.put(to_add)
-        return 'Created %s Series instances.' % len(to_add)
         
-    
+        # Return how many we created and deleted.
+        return 'Deleted %s and created %s `model.Series` instances.' % (
+            number_removed,
+            number_added
+        )
+        
     
     
 

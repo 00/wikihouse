@@ -323,7 +323,8 @@ class Design(RequestHandler):
         return self.render(
             'design.tmpl', 
             target=target, 
-            series=series 
+            series=series,
+            dev=self.settings['dev']
         )
         
     

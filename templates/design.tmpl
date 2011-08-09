@@ -101,4 +101,20 @@
       This design was rejected.
     </div>
   % endif
+  <div class="comments row">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'wikihouse';
+      var disqus_identifier = 'Design ${target.key().id()}';
+      var disqus_url = '${request.path_url}';
+      var disqus_developer = ${dev and '1' or '0'};
+    </script>
+    <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
+    </script>
+    <noscript>
+      Please enable JavaScript to view the 
+      <a href="http://wikihouse.disqus.com/?ref_noscript">comments powered by Disqus</a>.
+    </noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
 </%def>

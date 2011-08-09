@@ -3,9 +3,11 @@
 <%def name="sub_title()">Test Add Form</%def>
 
 <%def name="content()">
-  <div id="design-form-progress-indicator"></div>
+  <div id="design-form-progress-indicator">
+    <div class="message"></div>
+  </div>
   <form id="submit-design-form" 
-      action="${upload_url}"
+      action="${request.path}"
       method="POST"
       enctype="multipart/form-data">
     ${xsrf_input}
@@ -55,23 +57,23 @@
     <div class="hidden file-inputs">
       <div class="field">
         <label for="model">Model</label>
-        <input type="file" name="model" id="design-model" />
+        <textarea name="model" id="design-model"></textarea>
       </div>
       <div class="field">
         <label for="model_preview">Model preview image</label>
-        <input type="file" name="model_preview" id="model-preview" />
+        <textarea name="model_preview" id="design-model-preview"></textarea>
       </div>
       <div class="field">
         <label for="model_preview_reverse">Reverse model preview image</label>
-        <input type="file" name="model_preview_reverse" class="model-preview-reverse-input" />
+        <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
       </div>
       <div class="field">
         <label for="sheets">Cutting sheets</label>
-        <input type="file" name="sheets" class="sheets-input" />
+        <textarea name="sheets" id="design-sheets"></textarea>
       </div>
       <div class="field">
         <label for="sheets_preview">Cutting sheets preview image</label>
-        <input type="file" name="sheets_preview" class="sheets-preview-input" />
+        <textarea name="sheets_preview" class="design-sheets-preview"></textarea>
       </div>
     </div>
     <input type="submit" name="submit" value="Submit" />

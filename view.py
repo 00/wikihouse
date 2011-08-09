@@ -320,11 +320,12 @@ class Design(RequestHandler):
     def get(self, id):
         target = model.Design.get_by_id(int(id))
         series = model.Series.get_all()
+        developer = self.settings['dev'] or 'appspot.com' in self.request.host
         return self.render(
             'design.tmpl', 
             target=target, 
             series=series,
-            dev=self.settings['dev']
+            disqus_developer=developer
         )
         
     

@@ -4,6 +4,9 @@ a
   &:hover
     text-decoration: underline
 
+.row, .clear
+  clear: both
+
 .main-nav li
   display: inline-block
   margin-right: 1em
@@ -12,12 +15,6 @@ a
   display: inline-block
   margin-right: 1em
   font-size: 85%
-
-
-.series-nav li
-  display: inline-block
-  margin-right: 1em
-
 
 .designs li
   padding: 1em
@@ -70,9 +67,28 @@ li.selected
 
 // n.b.: this show / hides the series block but needs to take into account
 // media query width and whether to be block or inline block
+
+.series-nav li
+  display: inline-block
+  margin-right: 1em
+
 .series-nav li .panel
   display: none
 
-.series-nav li.selected .panel
-  display: block
+@media screen and (min-width: 720px)
+  .series-block
+    display: none
+  
+  .series-nav li
+    display: block
+    margin: 0.5em 0em
+  
+  .series-nav li.selected .panel
+    display: block
+  
+
+@media screen and (max-width: 767px)
+  #fdbk_tab
+    display: none
+  
 

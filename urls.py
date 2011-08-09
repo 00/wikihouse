@@ -12,14 +12,20 @@ mapping = [(
         r'/',
         Index
     ), (
-        r'/standard\/?',
-        Standard
+        r'/about\/?',
+        About
+    ), (
+        r'/guide\/?',
+        Guide
     ), (
         r'/download\/?',
         Download
     ), (
-        r'/support\/?',
-        Support
+        r'/donate\/?',
+        Donate
+    ), (
+        r'/collaborate\/?',
+        Collaborate
     ), (
         r'/contact\/?',
         Contact
@@ -47,6 +53,9 @@ mapping = [(
     ), (
         r'/bootstrap\/?',
         Bootstrap
+    ), (
+        r'/blob64/([^/]+)?',
+        Base64Blob
     ), (
         r'/.*',
         NotFound

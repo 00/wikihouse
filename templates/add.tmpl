@@ -3,9 +3,11 @@
 <%def name="sub_title()">Test Add Form</%def>
 
 <%def name="content()">
-  <div id="design-form-progress-indicator"></div>
+  <div id="design-form-progress-indicator">
+    <div class="message"></div>
+  </div>
   <form id="submit-design-form" 
-      action="${upload_url}"
+      action="${request.path}"
       method="POST"
       enctype="multipart/form-data">
     ${xsrf_input}
@@ -24,31 +26,54 @@
       <label for="series">Series</label>
       <select name="series" multiple="true" id="design-series">
         % for item in series:
-          <option value="${item.key().name()}">${item.label}</option>
+          <option value="${item.key().name()}">${item.title}</option>
         % endfor
       </select>
       <div class="error"></div>
     </div>
+    <div class="field">
+      <label for="verification">Verification status</label>
+      <select name="verification" id="design-verification">
+        <option value="unverified" selected="selected">
+          Not structurally checked
+        </option>
+        <option value="verified">
+          Structurally checked
+        </option>
+        <option value="built">
+          Structurally checked, tested &amp; built
+        </option>
+      </select>
+      <div class="error"></div>
+    </div>
+    <div class="field">
+      <label for="description">Verification notes</label>
+      <textarea name="notes" id="design-notes"></textarea>
+      <div class="error"></div>
+    </div>
+    <div class="hidden field">
+      <input type="hidden" name="sketchup_version" id="design-sketchup-version"/>
+    </div>
     <div class="hidden file-inputs">
       <div class="field">
         <label for="model">Model</label>
-        <input type="file" name="model" id="design-model" />
+        <textarea name="model" id="design-model"></textarea>
       </div>
       <div class="field">
         <label for="model_preview">Model preview image</label>
-        <input type="file" name="model_preview" id="model-preview" />
+        <textarea name="model_preview" id="design-model-preview"></textarea>
       </div>
       <div class="field">
         <label for="model_preview_reverse">Reverse model preview image</label>
-        <input type="file" name="model_preview_reverse" class="model-preview-reverse-input" />
+        <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
       </div>
       <div class="field">
         <label for="sheets">Cutting sheets</label>
-        <input type="file" name="sheets" class="sheets-input" />
+        <textarea name="sheets" id="design-sheets"></textarea>
       </div>
       <div class="field">
         <label for="sheets_preview">Cutting sheets preview image</label>
-        <input type="file" name="sheets_preview" class="sheets-preview-input" />
+        <textarea name="sheets_preview" class="design-sheets-preview"></textarea>
       </div>
     </div>
     <input type="submit" name="submit" value="Submit" />

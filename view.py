@@ -4,42 +4,23 @@
 """ ``RequestHandler``s.
 """
 
+from __future__ import with_statement
+
+import base64
 import cgi
 import logging
+import urllib
 
 from pytz.gae import pytz
 
-from google.appengine.api import mail, users
+from google.appengine.api import files, mail, users
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler
-from weblayer.utils import unicode_urlencode
+from weblayer.utils import encode_to_utf8, unicode_urlencode
 
 import auth
 import model
-
-class BlobStoreUploadHandler(RequestHandler):
-    """ Base class for handlers that accept multiple named file uploads.
-    """
-    
-    def __init__(self, *args, **kwargs):
-        super(BlobStoreUploadHandler, self).__init__(*args, **kwargs)
-        self._uploads = None
-        
-    
-    def get_uploads(self):
-        if self._uploads is None:
-            self._uploads = {}
-            for key, value in self.request.params.items():
-                if isinstance(value, cgi.FieldStorage):
-                    if 'blob-key' in value.type_options:
-                        value = blobstore.parse_blob_info(value)
-                        self._uploads[key] = value
-        return self._uploads
-        
-    
-    
-
 
 class Index(RequestHandler):
     """
@@ -52,16 +33,25 @@ class Index(RequestHandler):
     
 
 
-class Standard(RequestHandler):
+class About(RequestHandler):
     """
     """
     
     def get(self):
-        return self.render('standard.tmpl')
+        return self.render('about.tmpl')
         
     
     
 
+class Guide(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('guide.tmpl')
+        
+    
+    
 
 class Download(RequestHandler):
     """
@@ -74,16 +64,25 @@ class Download(RequestHandler):
     
 
 
-class Support(RequestHandler):
+class Donate(RequestHandler):
     """
     """
     
     def get(self):
-        return self.render('support.tmpl')
+        return self.render('donate.tmpl')
         
     
     
 
+class Collaborate(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('collaborate.tmpl')
+        
+    
+    
 
 class Contact(RequestHandler):
     """
@@ -130,11 +129,55 @@ class Library(RequestHandler):
     
 
 
-class AddDesign(BlobStoreUploadHandler):
+class AddDesign(RequestHandler):
     """
     """
     
     __all__ = ['get', 'post']
+    
+    _uploads = None
+    _upload_files = {
+        'model': 'application/vnd.sketchup.skp',
+        'model_preview': 'image/jpeg',
+        'model_preview_reverse': 'image/jpeg',
+        'sheets': 'application/octet-stream', # XXX tbc
+        'sheets_preview': 'image/jpeg'
+    }
+    
+    def _write_file(self, mime_type, data):
+        """ Write `data` to the blob store and return a blob key.
+        """
+        
+        # Create the file
+        file_name = files.blobstore.create(mime_type=mime_type)
+        
+        # Open the file and write to it
+        with files.open(file_name, 'a') as f:
+            f.write(data)
+        
+        # Finalize the file. Do this before attempting to read it.
+        files.finalize(file_name)
+        
+        # Get the file's blob key
+        return files.blobstore.get_blob_key(file_name)
+        
+    
+    def _get_uploads(self):
+        """ Lazy decode and store file uploads.
+        """
+        
+        if self._uploads is None:
+            self._uploads = {}
+            params = self.request.params
+            for key, value in params.iteritems():
+                if value and key in self._upload_files:
+                    mime_type = self._upload_files.get(key)
+                    data = base64.urlsafe_b64decode(encode_to_utf8(value))
+                    blob_key = self._write_file(mime_type, data)
+                    self._uploads[key] = blob_key
+        return self._uploads
+        
+    
     
     def notify(self, design):
         """ Notify the moderators.
@@ -146,11 +189,15 @@ class AddDesign(BlobStoreUploadHandler):
         sender = user.email()
         subject = u'New design submitted to WikiHouse.'
         body = u'Please moderate the submission:\n\n%s/moderate\n' % url
-        message = mail.EmailMessage(sender=sender, subject=subject, body=body)
         
         recipients = self.settings['moderation_notification_email_addresses']
         for item in recipients:
-            message.to = item
+            message = mail.EmailMessage(
+                to=item,
+                sender=sender, 
+                subject=subject, 
+                body=body
+            )
             message.send()
             
         
@@ -163,7 +210,7 @@ class AddDesign(BlobStoreUploadHandler):
         error = u''
         
         params = self.request.params
-        uploads = self.get_uploads()
+        uploads = self._get_uploads()
         
         attrs['title'] = params.get('title')
         attrs['description'] = params.get('description')
@@ -175,6 +222,10 @@ class AddDesign(BlobStoreUploadHandler):
             i = instances.index(None)
             error = u'Series `%s` does not exist.' % series[i]
         attrs['series'] = keys
+        
+        attrs['verification'] = params.get('verification')
+        attrs['notes'] = params.get('notes')
+        attrs['sketchup_version'] = params.get('sketchup_version')
         
         country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
         try:
@@ -217,7 +268,8 @@ class AddDesignSuccess(RequestHandler):
     
     @auth.required
     def get(self, id):
-        return 'success: /library/design/%s' % id
+        path = '/library/design/%s' % id
+        return {'success': path}
         
     
     
@@ -228,7 +280,8 @@ class AddDesignError(RequestHandler):
     
     @auth.required
     def get(self):
-        return 'error: %s' % self.request.params.get('error')
+        message = self.request.params.get('error')
+        return {'error': message}
         
     
     
@@ -268,11 +321,37 @@ class Design(RequestHandler):
     def get(self, id):
         target = model.Design.get_by_id(int(id))
         series = model.Series.get_all()
+        developer = self.settings['dev'] or 'appspot.com' in self.request.host
         return self.render(
             'design.tmpl', 
             target=target, 
-            series=series 
+            series=series,
+            disqus_developer=developer
         )
+        
+    
+    
+
+
+class Base64Blob(RequestHandler):
+    """
+    """
+    
+    def get(self, key):
+        response = self.response
+        key = str(urllib.unquote(key))
+        blob_info = blobstore.BlobInfo.get(key)
+        response.headers['Content-Type'] = blob_info.content_type
+        blob_reader = blob_info.open()
+        while True:
+            chunk = blob_reader.read(512)
+            if chunk:
+                value = base64.urlsafe_b64encode(chunk)
+                response.body_file.write(value)
+            else:
+                break
+        blob_reader.close()
+        return response
         
     
     

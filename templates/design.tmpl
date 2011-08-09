@@ -45,9 +45,24 @@
       <a href="/library/user/${target.user.user_id()}">
         ${escape(target.user.nickname())}</a>
     </div>
+    <div class="verification">
+      Verification: 
+      % if target.verification == u'unverified':
+        not structurally checked.
+      % elif target.status == u'verified':
+        structurally checked.
+      % elif target.status == u'built':
+        structurally checked, tested &amp; built.
+      % endif
+    </div>
     % if is_admin or is_user:
-      <div class="status pending">
-        Status: 
+      % if target.notes:
+        <div class="notes">
+          Notes: ${target.notes}
+        </div>
+      % endif
+      <div class="status">
+        Moderation status: 
         % if target.status == u'pending':
           pending moderation.
         % elif target.status == u'rejected':
@@ -67,13 +82,22 @@
     % endif
     % if target.model:
       <div class="download model">
-        <a href="/blob/${target.model.key()}" title="Download SketchUp Model"/>
+        <a href="/blob/${target.model.key()}" title="Download SketchUp Model">
           Download SketchUp Model</a>
+      </div>
+      <!--
+        
+        This link is just to show...
+        
+        
+      -->
+      <div class="hidden download base64 model">
+        <a href="/blob64/${target.model.key()}">Download Base64 Encoded</a>
       </div>
     % endif
     % if target.sheets:
       <div class="download sheets">
-        <a href="/blob/${target.sheets.key()}" title="Download CNC Cutting Sheets"/>
+        <a href="/blob/${target.sheets.key()}" title="Download CNC Cutting Sheets">
           Download CNC Cutting Sheets</a>
       </div>
     % endif
@@ -86,4 +110,20 @@
       This design was rejected.
     </div>
   % endif
+  <div class="comments row">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+      var disqus_shortname = 'wikihouse';
+      var disqus_identifier = 'Design ${target.key().id()}';
+      var disqus_url = '${request.path_url}';
+      var disqus_developer = ${disqus_developer and '1' or '0'};
+    </script>
+    <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
+    </script>
+    <noscript>
+      Please enable JavaScript to view the 
+      <a href="http://wikihouse.disqus.com/?ref_noscript">comments powered by Disqus</a>.
+    </noscript>
+    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
 </%def>

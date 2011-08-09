@@ -46,7 +46,7 @@ class ManifestedStaticURLGenerator(object):
         """ Get a fully expanded url for the given static resource ``path``.
         """
         
-        file_path = self._manifest[path]
+        file_path = self._manifest.get(path, path)
         return u'%s%s%s' % (
             self._host_url, 
             self._static_url_prefix, 

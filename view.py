@@ -32,16 +32,25 @@ class Index(RequestHandler):
     
 
 
-class Standard(RequestHandler):
+class About(RequestHandler):
     """
     """
     
     def get(self):
-        return self.render('standard.tmpl')
+        return self.render('about.tmpl')
         
     
     
 
+class Guide(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('guide.tmpl')
+        
+    
+    
 
 class Download(RequestHandler):
     """
@@ -64,7 +73,6 @@ class Donate(RequestHandler):
     
     
 
-
 class Collaborate(RequestHandler):
     """
     """
@@ -74,7 +82,6 @@ class Collaborate(RequestHandler):
         
     
     
-
 
 class Contact(RequestHandler):
     """

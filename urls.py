@@ -12,8 +12,11 @@ mapping = [(
         r'/',
         Index
     ), (
-        r'/standard\/?',
-        Standard
+        r'/about\/?',
+        About
+    ), (
+        r'/guide\/?',
+        Guide
     ), (
         r'/download\/?',
         Download

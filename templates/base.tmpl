@@ -35,69 +35,123 @@
         href="${get_static_url('css/simplegrid/986_grid.css')}" 
     />
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 1236px)"
-        href="${get_static_url('css/simplegrid/1236_grid.css')}" 
+        href="${get_static_url('css/simplegrid/986_grid.css')}" 
     />
     <link rel="stylesheet" type="text/css" 
         href="${get_static_url('css/wikihouse.css')}"
     />
     <%def name="sub_headers()"></%def>
     <base href="${request.host_url}" />
+    <script type="text/javascript" src="http://use.typekit.com/boe7lhx.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body>
     <div class="wrapper">
-      <div class="grid">
+      <div class="grid no-padding border-sides">
         <div class="row">
-          <div class="slot-0-1 wh-logo">
-            [ WIKI HOUSE LOGO ]
-          </div>
-          <div class="slot-2-3-4-5 main-nav">
-            <ul class="top-nav">
-              <li class="external">
-                <a href="http://wikihouse.tumblr.com/" title="Goto the WikiHouse Tumblog">
-                  News</a>
-              </li>
-              <li>
-                <a href="/support" title="Get Involved">
-                  Get Involved</a>
-              </li>
-              <li>
-                <a href="/contact" title="Contact Us">
-                  Contact</a>
-              </li>
-              % if users.get_current_user() is None:
-                <li>
-                  <a href="${users.create_login_url(request.path)}" title="Login">
-                    Login</a>
-                </li>
-              % else:
-                % if users.is_current_user_admin():
-                  <li>
-                    <a href="/moderate" title="Moderate">
-                      Moderate</a>
+            <div class="slot-0-1-2-3-4-5 border-bottom border-right">
+               <ul class="top-nav">
+                  <li class="left no-border">
+                    <a href="" title="">
+                      English / Korean</a>
                   </li>
-                % endif
-                <li>
-                  <a href="${users.create_logout_url(request.path)}" title="Logout">
-                    Logout</a>
-                </li>
-              % endif
-            </ul>
+                  % if users.get_current_user() is None:
+                    <a href="${users.create_login_url(request.path)}" title="Login">
+                      <li class="right border-left unselected">
+                      Login
+                      </li>
+                    </a>
+                  % else:
+                    % if users.is_current_user_admin():
+                      <a href="/moderate" title="Moderate">
+                        <li class="right border-left unselected">
+                          Moderate
+                        </li>
+                      </a>
+                    % endif
+                    <a href="${users.create_logout_url(request.path)}" title="Logout">
+                        <li class="right border-left unselected">
+                            Logout
+                        </li>
+                    </a>
+                  % endif
+                  <%
+                    secondary_nav_items = [{
+                            'value': '/contact',
+                            'label': u'Contact'
+                        }, {
+                            'value': '/support',
+                            'label': u'Get Involved'
+                        }
+                    ]
+                  %>
+                  % for item in secondary_nav_items:
+                    <%
+                      value = item['value']
+                      label = item['label']
+                      selected = request.path.startswith(value)
+                    %>
+                    <a href="${value}" title="${label}">
+                        <li class="${selected and ' selected' or ' unselected'} right border-left">
+                        ${label}
+                        </li>
+                    </a>
+                  % endfor
+                  <a href="http://wikihouse.tumblr.com/" target="blank" title="Goto the WikiHouse Tumblog">
+                      <li class="external right border-left unselected">
+                          News
+                      </li>
+                  </a>
+                </ul>
+            </div>
+        </div>
+        <div class="row padding-sides">
+          <div class="slot-0">
+            <a class="wh-logo-img" target="blank" href="http://www.wikihouse.cc">[ WIKI HOUSE LOGO ]</a>
+          </div>
+        </div>
+        <div class="row padding-sides">
+          <div class="slot-0-1">
+            <div id="wh-logo-text">
+              <div>
+                <a class="wh-logo-text" target="blank" href="http://www.wikihouse.cc">[ WIKI HOUSE LOGO TEXT ]</a>
+              </div>
+              <div>
+                <a class="wh-logo-cc" target="blank" href="http://creativecommons.org/licenses/by-sa/2.5/">[ WIKI HOUSE LOGO CC ]</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="slot-0-1-2-3-4-5">
             <div class="row">
-              <div class="slot-2-3-4-5">
+              <div class="slot-0-1-2-3-4-5 border-bottom padding-top">
                 <ul class="main-nav">
                   <%
                     nav_items = [{
                             'value': '/',
-                            'label': u'Home'
+                            'label': u'About',
+                            'slot': u'slot-0'
                         }, {
                             'value': '/standard',
-                            'label': u'The Standard'
+                            'label': u'How it Works',
+                            'slot': u'slot-1'
                         }, {
                             'value': '/library',
-                            'label': u'Browse Library'
+                            'label': u'Browse the Library',
+                            'slot': u'slot-2'
                         }, {
                             'value': '/download',
-                            'label': u'Download Plugin'
+                            'label': u'Download the Plugin',
+                            'slot': u'slot-3'
+                        }, {
+                            'value': '/guide',
+                            'label': u'Guide for Designers',
+                            'slot': u'slot-4'
+                        }, {
+                            'value': '/community',
+                            'label': u'Community',
+                            'slot': u'slot-5'
                         }
                     ]
                   %>
@@ -105,31 +159,37 @@
                     <%
                       value = item['value']
                       label = item['label']
+                      slot = item['slot']
                       if value == '/':
                           selected = request.path == '/'
                       else:
                           selected = request.path.startswith(value)
                       
                     %>
-                    <li class="${selected and 'selected' or ''}">
-                      <a href="${value}" title="${label}">${label}</a>
-                    </li>
+                    <a href="${value}" title="${label}">
+                        <li class="${slot}${selected and ' selected' or ' unselected'} padding-top-bottom">
+                        ${label}
+                        </li>
+                    </a>
                   % endfor
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row padding-all">
           ${self.content()}
         </div>
-        <div class="row">
-          <div class="social-links">
-            <span class="st_twitter_hcount" displayText="Tweet"></span>
-            <span class="st_facebook_hcount" displayText="Facebook"></span>
-            <span class="st_fblike_hcount"></span>
-            <span class="st_plusone_hcount"></span>
-          </div>
+        <div class="row padding-all border-top">
+            <div class="slot-0-1-2">
+                Powered by:
+            </div>
+            <div class="slot-3-4-5 social-links right">
+                <span class="st_twitter_hcount" displayText="Tweet"></span>
+                <span class="st_facebook_hcount" displayText="Facebook"></span>
+                <span class="st_fblike_hcount"></span>
+                <span class="st_plusone_hcount"></span>
+            </div>
         </div>
       </div>
     </div>

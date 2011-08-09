@@ -1,63 +1,179 @@
+//Variables
+
+$border: 1px solid #ddd
+$padding-01: 0.5em
+$padding-02: 1em
+$padding-03: 2em
+$margin-01: 0.5em
+$margin-02: 1em
+$margin-03: 2em       
+
+
+//General Elements & Classes
+
+
+body
+  font-family: helvetica, "report", sans-serif
+  font-size: 0.8em
+
 a
   text-decoration: none
+  color: #000
   
   &:hover
-    text-decoration: underline
+    text-decoration: none
+    color: #000
+  
+  &:visited
+    text-decoration: none
+    color: #000
 
+li.selected
+  background-color: #DBD9C9
+  
+a:hover li.unselected
+  background-color: #eee  
+     
+//Primary Elements    
+    
+.wrapper
+  padding: 0 3em 1em 3em
+
+  
+//Layout-related Classes 
+ 
+.right
+  float: right
+  
+.left
+  float: left
+  
+.error
+  color: red
+    
+.no-border
+  border: 0 !important  
+
+.no-padding
+  padding: 0 !important  
+  
+.border-sides
+  border:
+    left: $border
+    right: $border 
+  
+.border-left
+  border-left: $border  
+  
+.border-right
+  border-right: $border      
+  
+.border-bottom
+  border-bottom: $border  
+
+.border-top
+  border-top: $border    
+ 
+.padding-all
+  padding:
+    top: $padding-02
+    bottom: $padding-02 
+    left: $padding-03
+    right: $padding-03 
+       
+.padding-sides  
+  padding:
+    left: $padding-03
+    right: $padding-03 
+
+.padding-top-bottom
+  padding:
+    top: $padding-01
+    bottom: $padding-01   
+    
+.padding-top
+  padding:
+    top: $padding-02
+    
+.padding-bottom  
+  padding:
+    bottom: $padding-01  
+
+        
+//Logo-related Elements
+  
+#wh-logo-text
+  width: 231px
+  
+.wh-logo-img
+  display: block
+  background: transparent embed("wikihouse_logo_img.png") no-repeat 0 0
+  height: 106px
+  width: 195px
+  margin-top: 10px
+  padding: 0
+  text-indent: -9999px
+  
+.wh-logo-text
+  display: block
+  background: transparent embed("wikihouse_logo_txt.png") no-repeat 0 0
+  height: 42px
+  width: 195px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+  
+a.wh-logo-cc
+  display: block
+  background: transparent embed("wikihouse_logo_cc.png") no-repeat 0 0
+  height: 41px
+  width: 36px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: right    
+  
+    
+//Nav-related Elements & Classes 
+  
+.main-nav
+  text-align: center
+  font-size: 85%
+       
 .main-nav li
   display: inline-block
-  margin-right: 1em
 
 .top-nav li
   display: inline-block
-  margin-right: 1em
   font-size: 85%
-
+  padding: $padding-01 $padding-02
 
 .series-nav li
   display: inline-block
-  margin-right: 1em
+  margin-right: $margin-02
 
 
+//Other Elements & Classes    
+  
 .designs li
-  padding: 1em
-  margin: 1em
+  padding: $padding-02
+  margin: $margin-02
   border: 1px dashed #ccc
-
 
 form .field
-  padding: 0.5em
-  margin: 0.5em
+  padding: $padding-01
+  margin: $margin-01
   border: 1px dashed #ccc
-
 
 .thumbnail img
   width: 80px
 
-
 .preview img
   width: 320px
-
-
-li.selected
-  border: 1px solid #ccc
-
-
-.wh-logo
-  display: block
-  background: transparent embed("wikihouse_logo.png") no-repeat 0 0
-  width: 100px
-  height: 100px
   
 .call-to-action
   margin-top: 20px
-  
-.main-nav
-  float: right
-  text-align: right
-
-.error
-  color: red
 
 #design-form-progress-indicator
   display: none

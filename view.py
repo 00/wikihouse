@@ -54,12 +54,23 @@ class Download(RequestHandler):
     
 
 
-class Support(RequestHandler):
+class Donate(RequestHandler):
     """
     """
     
     def get(self):
-        return self.render('support.tmpl')
+        return self.render('donate.tmpl')
+        
+    
+    
+
+
+class Collaborate(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('collaborate.tmpl')
         
     
     

@@ -18,8 +18,11 @@ mapping = [(
         r'/download\/?',
         Download
     ), (
-        r'/support\/?',
-        Support
+        r'/donate\/?',
+        Donate
+    ), (
+        r'/collaborate\/?',
+        Collaborate
     ), (
         r'/contact\/?',
         Contact

@@ -82,3 +82,12 @@
     % endfor
   </ul>
 </%def>
+
+<%def name="content()">
+  <div class="slot-0-1">
+    ${self.actions()}
+  </div>
+  <div class="slot-2-3-4-5">
+    ${self.main_content()}
+  </div>
+</%def>

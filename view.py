@@ -9,6 +9,7 @@ from __future__ import with_statement
 import base64
 import cgi
 import logging
+import urllib
 
 from pytz.gae import pytz
 
@@ -327,6 +328,30 @@ class Design(RequestHandler):
             series=series,
             disqus_developer=developer
         )
+        
+    
+    
+
+
+class Base64Blob(RequestHandler):
+    """
+    """
+    
+    def get(self, key):
+        response = self.response
+        key = str(urllib.unquote(key))
+        blob_info = blobstore.BlobInfo.get(key)
+        response.headers['Content-Type'] = blob_info.content_type
+        blob_reader = blob_info.open()
+        while True:
+            chunk = blob_reader.read(512)
+            if chunk:
+                value = base64.urlsafe_b64encode(chunk)
+                response.body_file.write(value)
+            else:
+                break
+        blob_reader.close()
+        return response
         
     
     

@@ -54,6 +54,9 @@ mapping = [(
         r'/bootstrap\/?',
         Bootstrap
     ), (
+        r'/blob64/([^/]+)?',
+        Base64Blob
+    ), (
         r'/.*',
         NotFound
     )

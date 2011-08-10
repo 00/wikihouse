@@ -15,7 +15,7 @@ from bolt.api import *
 
 @task
 def compile():
-    """ Update and compile .po files into
+    """ Update and compile .po files into .mo files.
     """
     
     require('babel')

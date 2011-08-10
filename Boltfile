@@ -48,7 +48,8 @@ def build():
     
     ps_id = re.compile(r'^\S+\s+([0-9]+)', re.M)
     ps_ids = ps_id.findall(getoutput('ps -aux | grep [a]ssetgen'))
-    local('kill %s' % ' '.join(ps_ids))
+    if len(ps_ids):
+        local('kill %s' % ' '.join(ps_ids))
     
     with cd(here):
         local('assetgen assetgen.yaml --force')

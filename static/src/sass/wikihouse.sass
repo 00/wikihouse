@@ -33,6 +33,21 @@ li.selected
   
 a:hover li.unselected
   background-color: #eee  
+  
+.small
+  font-size: 85%
+  
+.strong
+  font-weight: bold
+  
+a.link
+  color: #bbb
+  
+  &:hover
+  color: #000
+  
+  &:visited
+  color: #bbb
      
 //Primary Elements    
     
@@ -56,6 +71,9 @@ a:hover li.unselected
 
 .no-padding
   padding: 0 !important  
+  
+.no-margin
+  margin: 0 !important    
   
 .border-sides
   border:
@@ -86,6 +104,11 @@ a:hover li.unselected
     left: $padding-03
     right: $padding-03 
 
+.padding-sides-small 
+  padding:
+    left: $padding-02
+    right: $padding-02 
+    
 .padding-top-bottom
   padding:
     top: $padding-01
@@ -95,10 +118,30 @@ a:hover li.unselected
   padding:
     top: $padding-02
     
+.padding-top-small
+  padding:
+    top: $padding-01    
+    
 .padding-bottom  
   padding:
     bottom: $padding-01  
-        
+
+.padding-left  
+  padding:
+    left: $padding-03
+
+.padding-left-mid  
+  padding:
+    left: $padding-02    
+                
+.padding-left-small  
+  padding:
+    left: $padding-01
+    
+.padding-right  
+  padding:
+    right: $padding-03
+    
 .row, .clear
   clear: both
 
@@ -110,7 +153,7 @@ a:hover li.unselected
   
 .wh-logo-img
   display: block
-  background: transparent embed("wikihouse_logo_img.png") no-repeat 0 0
+  background: transparent embed("logo.wh.img.png") no-repeat 0 0
   height: 106px
   width: 195px
   margin-top: 10px
@@ -119,7 +162,7 @@ a:hover li.unselected
   
 .wh-logo-text
   display: block
-  background: transparent embed("wikihouse_logo_txt.png") no-repeat 0 0
+  background: transparent embed("logo.wh.txt.png") no-repeat 0 0
   height: 42px
   width: 195px
   margin: 0
@@ -129,7 +172,7 @@ a:hover li.unselected
   
 a.wh-logo-cc
   display: block
-  background: transparent embed("wikihouse_logo_cc.png") no-repeat 0 0
+  background: transparent embed("logo.wh.cc.png") no-repeat 0 0
   height: 41px
   width: 36px
   margin: 0
@@ -213,4 +256,143 @@ form .field
   #fdbk_tab
     display: none
   
+    
+//Footer Elements
+  
+#credits
+  width: 231px
+  position: relative
+  top: 1em
+  color: #bbb
+      
+a.logo-00
+  display: block
+  background: transparent embed("logo.00.png") no-repeat 0 0
+  height: 36px
+  width: 67px
+  margin: 0
+  margin-left: 7px
+  padding: 0
+  text-indent: -9999px
+  float: left
+  
+  &:hover
+    background-position: 0 -36px 
+  
+a.logo-esp
+  display: block
+  background: transparent embed("logo.esp.png") no-repeat 0 0
+  height: 36px
+  width: 44px
+  margin: 0
+  margin-left: 7px
+  padding: 0
+  text-indent: -9999px
+  float: left
+  
+  &:hover
+    background-position: 0 -36px 
+  
+a.logo-gw
+  display: block
+  background: transparent embed("logo.gw.png") no-repeat 0 0
+  height: 48px
+  width: 110px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: right
+  
+  &:hover
+    background-position: 0 -48px 
+  
+.st_fblike_hcount
+  width: 90px !important
+  position: relative
+  top: -6px !important
+  
+.st_plusone_hcount
+  width: 70px !important
+  position: relative
+  top: 1px !important
+  
+a.slide-01
+  display: block
+  background: transparent embed("slide.01.png") no-repeat 0 0
+  width: 100%
+  height: 440px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+    
+a.slide-02
+  display: block
+  background: transparent embed("slide.02.png") no-repeat 0 0
+  width: 100%
+  height: 440px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+    
+a.slide-03
+  display: block
+  background: transparent embed("slide.03.png") no-repeat 0 0
+  height: 440px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
 
+  
+//Share Buttons  
+  
+a.google-logo
+  display: block
+  background: transparent embed("logo.share.gp.png") no-repeat 0 0
+  width: 25px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+  
+  &:hover
+    background-position: 0 -20px 
+
+a.twitter-logo
+  display: block
+  background: transparent embed("logo.share.tw.png") no-repeat 0 0
+  width: 19px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+  
+  &:hover
+    background-position: 0 -20px
+    
+a.fb-logo
+  display: block
+  background: transparent embed("logo.share.fb.png") no-repeat 0 0
+  width: 19px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+  
+  &:hover
+    background-position: 0 -20px 
+    
+a.email-logo
+  display: block
+  background: transparent embed("logo.share.em.png") no-repeat 0 0
+  width: 25px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+  
+  &:hover
+    background-position: 0 -20px 

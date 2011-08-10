@@ -5,10 +5,10 @@
   <%def name="main_content()"></%def>
   <%def name="actions()"></%def>
   <%def name="content()">
-    <div class="slot-0-1-2-3">
+    <div>
       ${self.main_content()}
     </div>
-    <div class="slot-4-5">
+    <div>
       ${self.actions()}
     </div>
   </%def>
@@ -81,7 +81,7 @@
                             'label': u'Contact'
                         }, {
                             'value': '/donate',
-                            'label': u'Get Involved'
+                            'label': u'Donate'
                         }
                     ]
                   %>
@@ -105,13 +105,13 @@
                 </ul>
             </div>
         </div>
-        <div class="row padding-sides">
-          <div class="slot-0">
+        <div class="row">
+          <div class="slot-0-1-2-3-4-5 padding-sides">
             <a class="wh-logo-img" target="blank" href="http://www.wikihouse.cc">[ WIKI HOUSE LOGO ]</a>
           </div>
         </div>
-        <div class="row padding-sides">
-          <div class="slot-0-1">
+        <div class="row">
+          <div class="slot-0-1-2-3-4-5 padding-sides">
             <div id="wh-logo-text">
               <div>
                 <a class="wh-logo-text" target="blank" href="http://www.wikihouse.cc">[ WIKI HOUSE LOGO TEXT ]</a>
@@ -123,75 +123,94 @@
           </div>
         </div>
         <div class="row">
-          <div class="slot-0-1-2-3-4-5">
-            <div class="row">
-              <div class="slot-0-1-2-3-4-5 border-bottom padding-top">
-                <ul class="main-nav">
-                  <%
-                    nav_items = [{
-                            'value': '/',
-                            'label': u'About',
-                            'slot': u'slot-0'
-                        }, {
-                            'value': '/about',
-                            'label': u'How it Works',
-                            'slot': u'slot-1'
-                        }, {
-                            'value': '/library',
-                            'label': u'Browse the Library',
-                            'slot': u'slot-2'
-                        }, {
-                            'value': '/download',
-                            'label': u'Download the Plugin',
-                            'slot': u'slot-3'
-                        }, {
-                            'value': '/guide',
-                            'label': u'Guide for Designers',
-                            'slot': u'slot-4'
-                        }, {
-                            'value': '/community',
-                            'label': u'Community',
-                            'slot': u'slot-5'
-                        }
-                    ]
-                  %>
-                  % for item in nav_items:
-                    <%
-                      value = item['value']
-                      label = item['label']
-                      slot = item['slot']
-                      if value == '/':
-                          selected = request.path == '/'
-                      else:
-                          selected = request.path.startswith(value)
+          <div class="slot-0-1-2-3-4-5 border-bottom padding-top">
+            <ul class="main-nav">
+              <%
+                nav_items = [{
+                        'value': '/',
+                        'label': u'About',
+                        'slot': u'slot-0'
+                    }, {
+                        'value': '/about',
+                        'label': u'How it Works',
+                        'slot': u'slot-1'
+                    }, {
+                        'value': '/library',
+                        'label': u'Browse the Warehouse',
+                        'slot': u'slot-2'
+                    }, {
+                        'value': '/download',
+                        'label': u'Download the Plugin',
+                        'slot': u'slot-3'
+                    }, {
+                        'value': '/guide',
+                        'label': u'Guide for Designers',
+                        'slot': u'slot-4'
+                    }, {
+                        'value': '/collaborate',
+                        'label': u'Community',
+                        'slot': u'slot-5'
+                    }
+                ]
+              %>
+              % for item in nav_items:
+                <%
+                  value = item['value']
+                  label = item['label']
+                  slot = item['slot']
+                  if value == '/':
+                      selected = request.path == '/'
+                  else:
+                      selected = request.path.startswith(value)
                       
-                    %>
-                    <a href="${value}" title="${label}">
-                        <li class="${slot}${selected and ' selected' or ' unselected'} padding-top-bottom">
-                        ${label}
-                        </li>
-                    </a>
-                  % endfor
-                </ul>
-              </div>
-            </div>
+                %>
+                <a href="${value}" title="${label}">
+                    <li class="${slot}${selected and ' selected' or ' unselected'} padding-top-bottom">
+                    ${label}
+                    </li>
+                </a>
+              % endfor
+            </ul>
           </div>
         </div>
         <div class="row padding-all">
           ${self.content()}
         </div>
-        <div class="row padding-all border-top">
-            <div class="slot-0-1-2">
-                Powered by:
+        <div class="row border-top padding-top-bottom padding-sides-small">
+          <div class="slot-6">
+            <div class="left">
+              <a class="link" target="blank" href="/terms" alt="Terms and Conditions"><span class="small strong">Terms of Use...</span></a>
+            </div>  
+          </div>
+          <div class=slot-7-8-9">
+            <div class="social-links right">
+              <!--<span class="st_fblike_hcount right"></span>-->
+              <span class="st_email_custom right padding-left-small"><a class="email-logo">Email</a></span>
+              <span class="st_plusone_custom right padding-left-small"><a class="google-logo">Google Plus One</a></span>
+              <span class="st_twitter_custom right padding-left-small"><a class="twitter-logo">Tweet</a></span>
+              <span class="st_facebook_custom right padding-left-small"><a class="fb-logo">Facebook</a></span>
             </div>
-            <div class="slot-3-4-5 social-links right">
-                <span class="st_twitter_hcount" displayText="Tweet"></span>
-                <span class="st_facebook_hcount" displayText="Facebook"></span>
-                <span class="st_fblike_hcount"></span>
-                <span class="st_plusone_hcount"></span>
-            </div>
+          </div>
         </div>
-      </div>
+        <div class="row border-top">
+          <div id="credits" class="padding-left-mid">  
+            <div class="left">
+              <span class="small">Powered by:</span>
+            </div>
+            <div class="left">
+              <a class="logo-00" target="blank" href="http://www.architecture00.net" alt="00:/">[ 00:/ ]</a>
+            </div>
+            <div class="left">
+              <a class="logo-esp" target="blank" href="http://www.espians.com" alt="Espians">[ ESPIANS ]</a>
+            </div>
+            </div>
+            <div class="right">
+              <div class="border-left padding-sides padding-top-small right">
+              <a class="logo-gw" target="blank" href="http://gb.or.kr/?mid=main_eng" alt="Gwangju Design Biennale 2011">[Gwangju Design Biennale 2011]</a>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
     </script>

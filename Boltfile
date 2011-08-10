@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+""" `Bolt <http://pypi.python.org/pypi/bolt>`_ script to automate deployment.
+"""
+
+import re
+from pkg_resources import require
+from commands import getoutput
+
+from os.path import dirname
+here = dirname(__file__)
+
+from bolt.api import *
+
+@task
+def compile():
+    """ Update and compile .po files into
+    """
+    
+    require('babel')
+    
+    with cd(here):
+        local('pybabel compile --domain=wikihouse --directory static/i18n --use-fuzzy')
+        
+    
+
+
+@task
+def extract():
+    """ Extract message files.
+    """
+    
+    require('babel')
+    require('mako')
+    
+    with cd(here):
+        local('pybabel extract -F babel.cfg -o static/i18n/messages.pot .')
+    
+
+
+@task
+def build():
+    """ Kill any running assetgen processes and build the production static files.
+    """
+    
+    require('assetgen')
+    
+    ps_id = re.compile(r'^\S+\s+([0-9]+)', re.M)
+    ps_ids = ps_id.findall(getoutput('ps -aux | grep [a]ssetgen'))
+    local('kill %s' % ' '.join(ps_ids))
+    
+    with cd(here):
+        local('assetgen assetgen.yaml --force')
+        
+    
+
+
+@task
+def update():
+    """ Update appengine.
+    """
+    
+    with cd(here):
+        run('python2.5 `which appcfg.py` update .' % appcfg_path)
+        
+    
+    
+
+
+@task
+def deploy():
+    """ Build and deploy.
+    """
+    
+    build()
+    update()
+    
+

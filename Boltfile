@@ -63,7 +63,7 @@ def update():
     """
     
     with cd(here):
-        run('python2.5 `which appcfg.py` update .' % appcfg_path)
+        run('python2.5 `which appcfg.py` update .')
         
     
     

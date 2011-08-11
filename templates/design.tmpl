@@ -3,12 +3,13 @@
 <%def name="sub_title()">${target.title}</%def>
 
 <%def name="main_content()">
+  <div id="design">
   <h4>
-    ${target.key().id()} 
-    <a href="/library/design/${target.key().id()}">
-      ${escape(target.title)}</a>
+    ${target.key().id()}
+    <a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a>
   </h4>
   <%
+    from urllib import quote
     user = users.get_current_user()
     is_user = user and bool(user.user_id() == target.user.user_id())
     is_admin = users.is_current_user_admin()
@@ -82,8 +83,8 @@
     % endif
     % if target.model:
       <div class="download model">
-        <a href="/blob/${target.model.key()}" title="Download SketchUp Model">
-          Download SketchUp Model</a>
+        <a href="/blob/${target.model.key()}/${quote(target.title)}.skp" title="Download SketchUp Model"
+           id="design-download" rel="${target.component and '1' or '0'}">Download SketchUp Model</a>
       </div>
       <!--
         
@@ -92,7 +93,9 @@
         
       -->
       <div class="hidden download base64 model">
-        <a href="/blob64/${target.model.key()}">Download Base64 Encoded</a>
+        <a href="/blob64/${target.model.key()}"
+           id="design-download-base64">Download Base64 Encoded</a>
+        <textarea id="design-download-data"></textarea>
       </div>
     % endif
     % if target.sheets:
@@ -117,6 +120,7 @@
       var disqus_identifier = 'Design ${target.key().id()}';
       var disqus_url = '${request.path_url}';
       var disqus_developer = ${disqus_developer and '1' or '0'};
+      var WIKIHOUSE_DOWNLOAD_PAGE = true;
     </script>
     <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
     </script>
@@ -125,5 +129,6 @@
       <a href="http://wikihouse.disqus.com/?ref_noscript">comments powered by Disqus</a>.
     </noscript>
     <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+  </div>
   </div>
 </%def>

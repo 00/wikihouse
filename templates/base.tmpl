@@ -55,19 +55,20 @@
           <div class="slot-2-3-4-5 main-nav">
             <ul class="top-nav">
               <li class="external">
-                <a href="http://wikihouse.tumblr.com/" title="Goto the WikiHouse Tumblog">
+                <a href="http://wikihouse.tumblr.com/"
+                    title="${_(u'Goto the WikiHouse Tumblog')}">
                   ${_(u'News')}</a>
               </li>
               <li>
-                <a href="/collaborate" title="Collaborate on the WikiHouse project">
+                <a href="/collaborate" title="${_(u'Collaborate on the WikiHouse project')}">
                   ${_(u'Collaborate')}</a>
               </li>
               <li>
-                <a href="/donate" title="Make a donation">
+                <a href="/donate" title="${_(u'Make a donation')}">
                   ${_(u'Donate')}</a>
               </li>
               <li>
-                <a href="/contact" title="Contact Us">
+                <a href="/contact" title="${_(u'Contact Us')}">
                   ${_(u'Contact')}</a>
               </li>
               % if users.get_current_user() is None:

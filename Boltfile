@@ -32,10 +32,35 @@ def extract():
     """
     
     require('babel')
-    require('mako')
     
     with cd(here):
         local('pybabel extract -F babel.cfg -o static/i18n/messages.pot .')
+        local('pybabel update --domain=wikihouse --input-file=static/i18n/messages.pot --output-dir=static/i18n')
+    
+    
+
+
+@task
+def autotranslate():
+    """
+    """
+    
+    require('po_translate')
+    
+    source_lang = 'en'
+    dest_langs = ['ko']
+    
+    with cd(here):
+        for item in dest_langs:
+            local(
+                'python po_translate.py static/i18n/%s/LC_MESSAGES/wikihouse.po static/i18n/%s/LC_MESSAGES/wikihouse.po %s %s' % (
+                    source_lang,
+                    item,
+                    source_lang,
+                    item
+                )
+            )
+        
     
 
 
@@ -45,15 +70,34 @@ def build():
     """
     
     require('assetgen')
+    require('babel')
     
+    # Kill any assetgen processes.
     ps_id = re.compile(r'^\S+\s+([0-9]+)', re.M)
     ps_ids = ps_id.findall(getoutput('ps -aux | grep [a]ssetgen'))
     if len(ps_ids):
         local('kill %s' % ' '.join(ps_ids))
     
+    # Run assetgen.
     with cd(here):
         local('assetgen assetgen.yaml --force')
         
+    
+    # Update `message_strings.json` data.
+    import babel.messages.extract
+    import json 
+    
+    sock = open('assets.json')
+    data = json.loads(sock.read())
+    sock.close()
+    
+    file_path = 'static/build/%s' % data.get('js/wikihouse.js')
+    items = babel.messages.extract.extract_from_file('javascript', file_path)
+    messages = [item[1] for item in items]
+    
+    sock = open('static/i18n/message_strings.json', 'w')
+    sock.write(json.dumps(messages))
+    sock.close()
     
 
 
@@ -70,11 +114,15 @@ def update():
 
 
 @task
-def deploy():
+def deploy(translate=False):
     """ Build and deploy.
     """
     
     build()
+    extract()
+    if translate:
+        autotranslate()
+    compile()
     update()
     
 

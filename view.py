@@ -216,8 +216,10 @@ class AddDesign(RequestHandler):
         
         # Open the file and write to it
         with files.open(file_name, 'a') as f:
-            f.write(data)
-        
+            while data:
+                f.write(data[:921600])
+                data = data[921600:]
+
         # Finalize the file. Do this before attempting to read it.
         files.finalize(file_name)
         
@@ -406,11 +408,11 @@ class Base64Blob(RequestHandler):
         key = str(urllib.unquote(key))
         blob_info = blobstore.BlobInfo.get(key)
         response.headers['Content-Type'] = blob_info.content_type
-        blob_reader = blob_info.open()
-        while True:
-            chunk = blob_reader.read(512)
+        blob_reader = blob_info.open(buffer_size=921600)
+        while 1:
+            chunk = blob_reader.read(921600)
             if chunk:
-                value = base64.urlsafe_b64encode(chunk)
+                value = base64.b64encode(chunk)
                 response.body_file.write(value)
             else:
                 break

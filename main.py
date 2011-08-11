@@ -47,6 +47,10 @@ config = {
 }
 
 def main():
+    """ Bootstrap and run the `weblayer` based WSGI application.
+    """
+    
+    # Run the application.
     bootstrapper = Bootstrapper(settings=config, url_mapping=mapping)
     run_wsgi_app(
         WSGIApplication(

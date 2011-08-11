@@ -1,15 +1,15 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Test Add Form</%def>
+<%def name="sub_title()">Share Your Model!</%def>
 
 <%def name="content()">
-  <div id="design-form-progress-indicator">
+  <div id="progress-indicator">
     <div class="message"></div>
   </div>
   <form id="submit-design-form" 
       action="${request.path}"
       method="POST"
-      enctype="multipart/form-data">
+      enctype="application/x-www-form-urlencoded">
     ${xsrf_input}
     <div class="error"></div>
     <div class="field">
@@ -30,6 +30,10 @@
         % endfor
       </select>
       <div class="error"></div>
+    </div>
+    <div class="field">
+      <input type="checkbox" name="component" value="1" />
+      <label for="component">Component</label>
     </div>
     <div class="field">
       <label for="verification">Verification status</label>
@@ -73,9 +77,12 @@
       </div>
       <div class="field">
         <label for="sheets_preview">Cutting sheets preview image</label>
-        <textarea name="sheets_preview" class="design-sheets-preview"></textarea>
+        <textarea name="sheets_preview" id="design-sheets-preview"></textarea>
       </div>
     </div>
     <input type="submit" name="submit" value="Submit" />
   </form>
+  <script>
+    var WIKIHOUSE_UPLOAD_PAGE = true;
+  </script>
 </%def>

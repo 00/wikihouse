@@ -42,6 +42,7 @@ class Design(db.Model):
     m = db.DateTimeProperty(auto_now=True)              # modified
     
     
+    component = db.BooleanProperty(required=True, default=False)
     title = db.StringProperty(required=True)
     description = db.TextProperty(required=True)
     series = db.ListProperty(db.Key)

@@ -15,7 +15,7 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
     """
     """
     
-    def get(self, resource):
+    def get(self, resource, filename=''):
         resource = str(urllib.unquote(resource))
         blob_info = blobstore.BlobInfo.get(resource)
         self.send_blob(blob_info)
@@ -24,11 +24,10 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
     
 
 
-mapping = [(
-        '/blob/([^/]+)?', 
-        ServeHandler
-    )
-]
+mapping = [
+    ('/blob/([^/]+)?/([^/]+)?', ServeHandler),
+    ('/blob/([^/]+)?', ServeHandler),
+    ]
 
 def main():
     """

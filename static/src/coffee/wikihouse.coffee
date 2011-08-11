@@ -1,117 +1,164 @@
+# Public Domain (-) 2011 The WikiHouse Authors.
+# See the WikiHouse UNLICENSE file for details.
+
 window.wikihouse ?= {}
 
-$(document).ready ->
-  
-  progress = $ '#design-form-progress-indicator'
-  message = $ '.message', progress
-  form = $ '#submit-design-form'
-  
-  # Validate the submit design form, show processing state and call sketchup.
-  form.bind 'submit', (event) ->
-      
-      data = $.parseQuery form.serialize()
+window.wikihouse.init = (id) ->
+
+  # Exit early if it's not the same SketchUp WebDialog.
+  if id is not SKETCHUP_SESSION_ID
+    return
+
+  # Setup the controls and methods for the upload page.
+  if WIKIHOUSE_UPLOAD_PAGE?
+
+    $progress = $ '#progress-indicator'
+    $message = $ '.message', $progress
+    $form = $ '#submit-design-form'
+
+    # Validate the submit design form, show processing state and call sketchup.
+    $form.bind 'submit', (event) ->
+
+      data = $.parseQuery $form.serialize()
       valid = true
-      
+
       # Title is required.
-      error = $('#design-title').closest('.field').find('.error')
+      $error = $('#design-title').closest('.field').find('.error')
       if not data.title
-        error.text 'You must provide a title'
+        $error.text 'You must provide a title'
         valid = false
       else
-        error.text ''
-      
+        $error.text ''
+
       # Description is required.
-      error = $('#design-description').closest('.field').find('.error')
+      $error = $('#design-description').closest('.field').find('.error')
       if not data.description
-        error.text 'You must provide a description.'
+        $error.text 'You must provide a description.'
         valid = false
       else
-        error.text ''
-      
+        $error.text ''
+
       # Must select at least one series.
-      error = $('#design-series').closest('.field').find('.error')
+      $error = $('#design-series').closest('.field').find('.error')
       if not data.series or data.series.length is 0
-        error.text 'You must select at least one series.'
+        $error.text 'You must select at least one series.'
         valid = false
       else
-        error.text ''
-      
-      # If valid, show processing state and call sketchup.
+        $error.text ''
+
+      # If valid, show processing state and call SketchUp.
       if valid
-        wikihouse.show_progress('Processing SketchUp files ...')
-        wikihouse.call_sketchup()
-      
+        wikihouse.showProgress 'Processing SketchUp files ...'
+        window.location = 'skp:process'
+
       # Either way, make sure we squish the event.
       event.stopImmediatePropagation()
       return false
-      
-    
-  
-  
-  # XXX Tav, I'm presuming you'll override this and call `wikihouse_do_upload()`
-  # when you've finished updating the `file` inputs.
-  wikihouse.call_sketchup = ->
-    # Fake the input values for now.
-    $('#design-model').val 'SSBhbSBhIG1vZGVsLg=='
-    $('#design-model-preview').val '_9j_4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP_sABFEdWNreQABAAQAAAAAAAD_4QMraHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu-7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI_PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjAtYzA2MCA2MS4xMzQ3NzcsIDIwMTAvMDIvMTItMTc6MzI6MDAgICAgICAgICI-IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI-IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzUgTWFjaW50b3NoIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjVBRDhDNjY3QjlDNDExRTA5Q0UzODdEMTc1MTQ5MDVEIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjVBRDhDNjY4QjlDNDExRTA5Q0UzODdEMTc1MTQ5MDVEIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6NUFEOEM2NjVCOUM0MTFFMDlDRTM4N0QxNzUxNDkwNUQiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6NUFEOEM2NjZCOUM0MTFFMDlDRTM4N0QxNzUxNDkwNUQiLz4gPC9yZGY6RGVzY3JpcHRpb24-IDwvcmRmOlJERj4gPC94OnhtcG1ldGE-IDw_eHBhY2tldCBlbmQ9InIiPz7_7gAOQWRvYmUAZMAAAAAB_9sAhAAbGhopHSlBJiZBQi8vL0JHPz4-P0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHAR0pKTQmND8oKD9HPzU_R0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0dHR0f_wAARCAAKAAoDASIAAhEBAxEB_8QASwABAQAAAAAAAAAAAAAAAAAAAAUBAQAAAAAAAAAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAARAQAAAAAAAAAAAAAAAAAAAAD_2gAMAwEAAhEDEQA_AJgAP__Z'
-    # Fake an delayed call to `do_upload()`.
-    setTimeout ->
-        wikihouse.do_upload()
-      , 1500
-    
-    
-  
-  
-  # Show upload state and post the form by ajax, redirect on success / show error.
-  wikihouse.do_upload = ->
-    # Show upload state.
-    wikihouse.show_progress('Uploading ...')
-    # Post form by ajax.
-    url = form.attr 'action'
-    data = form.serialize()
-    $.ajax
-      type: 'POST'
-      url: url
-      data: data
-      dataType: 'json'
-      success: (data) ->
-        if data.success?
-          # Redirect on success.
-          window.location.replace data.success
-        else 
+
+    # Show upload state and post the form by ajax, redirect on success / show error.
+    wikihouse.upload = ->
+      # Show upload state.
+      wikihouse.showProgress 'Uploading ...'
+      # Post form by ajax.
+      url = $form.attr 'action'
+      data = $form.serialize()
+      $.ajax
+        type: 'POST'
+        url: url
+        data: data
+        dataType: 'json'
+        success: (data) ->
+          if data.success?
+            # Redirect on success.
+            window.location = 'skp:uploaded@success'
+            setTimeout ->
+              window.location.replace data.success,
+              1500
+          else
+            # Show error.
+            window.location = 'skp:uploaded@error'
+            wikihouse.showError data.error
+        error: ->
           # Show error.
-          wikihouse.show_error data.error
-      
-      error: ->
-        # Show error.
-        wikihouse.show_error 'Upload failed.  Please try again.'
-      
-    
-  
-  
-  # Call `wikihouse.show_progress(msg)` to trigger the in-progress state.
-  wikihouse.show_progress = (msg) ->
-    # Clear any validation error message.
-    error = form.find('.error').first()
-    error.text ''
-    # Show the progress indicator.
-    progress.height form.height()
-    form.hide()
-    message.text msg
-    progress.show()
-    
-  
-  
-  # Call `wikihouse.show_error(error_string)` to show validation errors.
-  wikihouse.show_error = (error_string) ->
-    # Hide the progress indicator.
-    progress.hide()
-    form.show()
-    # Display the error message.
-    error = form.find('.error').first()
-    error.text error_string
-    
-  
-  
+          window.location = 'skp:uploaded@error'
+          wikihouse.showError 'Upload failed. Please try again.'
 
+    # Call `wikihouse.showProgress(msg)` to trigger the in-progress state.
+    wikihouse.showProgress = (msg) ->
+      # Clear any validation error message.
+      $form.find('.error').text ''
+      # Show the progress indicator.
+      $progress.height $form.height()
+      $form.hide()
+      $message.text msg
+      $progress.show()
 
+    # Call `wikihouse.showError(errmsg)` to show validation errors.
+    wikihouse.showError = (errmsg) ->
+      # Hide the progress indicator.
+      $progress.hide()
+      $form.show()
+      # Display the error message.
+      $error = $form.find('.error').first()
+      $error.text errmsg
+
+    # Inform SketchUp to preload input variables.
+    window.location = 'skp:load'
+
+  # Setup the controls and methods for a download page.
+  if WIKIHOUSE_DOWNLOAD_PAGE?
+
+    $progress = $ '#progress-indicator'
+    $message = $ '.message', $progress
+
+    $download = $ '#design-download'
+    if !$download.get(0)
+      return
+
+    # Get the design's title and download urls.
+    designTitle = $('#design-title').text()
+    designURL = $download.attr 'href'
+    designBase64 = $('#design-download-base64').attr 'href'
+    isComponent = $download.attr 'rel'
+
+    # Strip the filename from the URL.
+    designURL = designURL.split "/"
+    designURL = designURL.slice(0, designURL.legnth-1)
+    designURL = designURL.join "/"
+
+    wikihouse.download = (id, url) ->
+      # Grab the model data over ajax.
+      $.ajax
+        type: 'GET'
+        url: url
+        dataType: 'text'
+        success: (data) ->
+          # Set the data into the hidden textarea.
+          $('#design-download-data').text(data)
+          # Inform SketchUp of the available data.
+          window.location = "skp:save@#{id}"
+        error: ->
+          # Inform SketchUp of the failed download.
+          window.location = "skp:error@#{id}"
+
+    # Call SketchUp when the download link is clicked.
+    $download.click ->
+      window.location = "skp:download@#{isComponent},#{designBase64},#{designURL},#{designTitle}"
+      return false
+
+$(document).ready ->
+
+  if WIKIHOUSE_UPLOAD_PAGE? or WIKIHOUSE_DOWNLOAD_PAGE?
+
+    # Attempt to generate a unique session id to distinguish potential SketchUp
+    # WebDialogs.
+    id = "#{(new Date).getTime()}:#{Math.random()}"
+    window.SKETCHUP_SESSION_ID = id
+
+    # Create an iframe.
+    iframe = document.createElement 'iframe'
+    iframe.src = "skp:init@#{id}"
+    iframe.style.display = 'none'
+
+    # Append the iframe and thus try and call SketchUp.
+    document.body.appendChild iframe

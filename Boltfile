@@ -38,7 +38,8 @@ def extract():
         local('pybabel extract -F babel.cfg -o static/i18n/messages.pot .')
         for item in settings.get('supported_languages'):
             path = join_path(here, 'static', 'i18n', item, 'LC_MESSAGES', 'wikihouse.po')
-            local('pybabel init --domain=wikihouse --input-file=static/i18n/messages.pot --output-dir=static/i18n --locale=%s' % item)
+            if not exists(path):
+                local('pybabel init --domain=wikihouse --input-file=static/i18n/messages.pot --output-dir=static/i18n --locale=%s' % item)
         local('pybabel update --domain=wikihouse --input-file=static/i18n/messages.pot --output-dir=static/i18n')
     
     # Update `message_strings.json` data.

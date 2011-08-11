@@ -13,6 +13,8 @@ __all__ = [
     'ManifestedStaticURLGenerator'
 ]
 
+from itertools import cycle
+
 from zope.component import adapts
 from zope.interface import implements
 
@@ -33,22 +35,31 @@ class ManifestedStaticURLGenerator(object):
     implements(IStaticURLGenerator)
     
     def __init__(self, request, settings):
-        self._host_url = settings.get('static_host_url', request.host_url)
+        self._dev = settings.get('dev', False)
+        self._host = settings.get('static_host', request.host)
         self._static_url_prefix = settings['static_url_prefix']
         self._manifest = settings['assetgen_manifest']
+        self._subdomains = cycle(
+            settings.get('static_subdomains', '12345')
+        )
         
     
     
     def get_url(self, path):
         """ Get a fully expanded url for the given static resource ``path``.
+          
+          If we're in production then appends a subdomain to the beginning
+          of the host, to avoid too many connections to the same url.
         """
         
         file_path = self._manifest.get(path, path)
-        return u'%s%s%s' % (
-            self._host_url, 
-            self._static_url_prefix, 
-            file_path
-        )
+        
+        if self._dev:
+            host = self._host
+        else:
+            host = '%s.%s' % (self._subdomains.next(), self._host)
+        
+        return u'//%s%s%s' % (host, self._static_url_prefix, file_path)
         
     
     

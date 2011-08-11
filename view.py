@@ -73,12 +73,16 @@ class RequestHandler(BaseRequestHandler):
         supported = self.settings.get('supported_languages')
         target = self.settings.get('default_language')
         for item in self._get_accepted_languages():
+            # Convert `en-us` to `en`.
+            item = item.split('-')[0]
             if item in supported:
                 target = item
                 break
-        logging.info(localedir)
-        logging.info([target])
-        translation = gettext.translation('wikihouse', localedir=localedir, languages=[target])
+        translation = gettext.translation(
+            'wikihouse', 
+            localedir=localedir, 
+            languages=[target]
+        )
         self._ = translation.ugettext
         
     

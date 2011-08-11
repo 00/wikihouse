@@ -19,8 +19,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7; IE=EmulateIE9" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="WikiHouse is the open community construction set by Architecture 00:/.  Design, download and print CNC milled plywood houses and components." />
-    <meta name="keywords" content="wikihouse, wiki, house, design, build, open, open source, community, standard, constrction, building, architecture, housing, CNC, CNC milling, wooden frame, plywood, 00:/." />
+    <meta name="description" content="${_(u'Open community construction set by Architecture 00:/.  Design, download and print CNC milled houses and components.')}" />
+    <meta name="keywords" content="wikihouse, ${_(u'wiki')}, ${_(u'house')}, ${_(u'design')}, ${_(u'build')}, ${_(u'open')}, ${_(u'open source')}, ${_(u'community')}, ${_(u'standard')}, ${_(u'construction')}, ${_(u'building')}, ${_(u'architecture')}, ${_(u'housing')}, CNC, CNC milling, ${_(u'wooden')}, ${_(u'plywood')}, 00:/, zero zero, espians." />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="${get_static_url('css/reset.css')}" />
     <!--[if lt IE 9 ]>
@@ -60,31 +60,31 @@
               </li>
               <li>
                 <a href="/collaborate" title="Collaborate on the WikiHouse project">
-                  Collaborate</a>
+                  ${_(u'Collaborate')}</a>
               </li>
               <li>
                 <a href="/donate" title="Make a donation">
-                  Donate</a>
+                  ${_(u'Donate')}</a>
               </li>
               <li>
                 <a href="/contact" title="Contact Us">
-                  Contact</a>
+                  ${_(u'Contact')}</a>
               </li>
               % if users.get_current_user() is None:
                 <li>
-                  <a href="${users.create_login_url(request.path)}" title="Login">
-                    Login</a>
+                  <a href="${users.create_login_url(request.path)}">
+                    ${_(u'Login')}</a>
                 </li>
               % else:
                 % if users.is_current_user_admin():
                   <li>
-                    <a href="/moderate" title="Moderate">
-                      Moderate</a>
+                    <a href="/moderate">
+                      ${_(u'Moderate')}</a>
                   </li>
                 % endif
                 <li>
-                  <a href="${users.create_logout_url(request.path)}" title="Logout">
-                    Logout</a>
+                  <a href="${users.create_logout_url(request.path)}">
+                    ${_(u'Logout')}</a>
                 </li>
               % endif
             </ul>
@@ -94,19 +94,19 @@
                   <%
                     nav_items = [{
                             'value': '/',
-                            'label': u'Home'
+                            'label': _(u'Home')
                         }, {
                             'value': '/about',
-                            'label': u'How it Works'
+                            'label': _(u'How it Works')
                         }, {
                             'value': '/guide',
-                            'label': u'User Guide'
+                            'label': _(u'User Guide')
                         }, {
                             'value': '/library',
-                            'label': u'Browse Library'
+                            'label': _(u'Browse Library')
                         }, {
                             'value': '/download',
-                            'label': u'Download Plugin'
+                            'label': _(u'Download Plugin')
                         }
                     ]
                   %>
@@ -121,7 +121,7 @@
                       
                     %>
                     <li class="${selected and 'selected' or ''}">
-                      <a href="${value}" title="${label}">${label}</a>
+                      <a href="${value}">${label}</a>
                     </li>
                   % endfor
                 </ul>
@@ -134,8 +134,8 @@
         </div>
         <div class="row">
           <div class="social-links">
-            <span class="st_twitter_hcount" displayText="Tweet"></span>
-            <span class="st_facebook_hcount" displayText="Facebook"></span>
+            <span class="st_twitter_hcount" displayText="${_(u'Tweet')}"></span>
+            <span class="st_facebook_hcount" displayText="${_(u'Facebook')}"></span>
             <span class="st_fblike_hcount"></span>
             <span class="st_plusone_hcount"></span>
           </div>
@@ -158,6 +158,8 @@
     </script>
     <script type="text/javascript">
       stLight.options({'publisher': '386e0e7b-fee7-485d-af13-172a5107f9fb'});
+    </script>
+    <script type="text/javascript" src="/i18n/message_strings.json">
     </script>
     <script type="text/javascript" src="${get_static_url('js/wikihouse.js')}">
     </script>

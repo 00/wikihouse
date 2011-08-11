@@ -47,70 +47,72 @@
         ${escape(target.user.nickname())}</a>
     </div>
     <div class="verification">
-      Verification: 
+      ${_(u'Verification:')} 
       % if target.verification == u'unverified':
-        not structurally checked.
+        ${_(u'not structurally checked.')} 
       % elif target.status == u'verified':
-        structurally checked.
+        ${_(u'structurally checked.')}
       % elif target.status == u'built':
-        structurally checked, tested &amp; built.
+        ${_(u'structurally checked, tested &amp; built.')}
       % endif
     </div>
     % if is_admin or is_user:
       % if target.notes:
         <div class="notes">
-          Notes: ${target.notes}
+          ${_(u'Notes:')} ${target.notes}
         </div>
       % endif
       <div class="status">
-        Moderation status: 
+        ${_(u'Moderation status:')} 
         % if target.status == u'pending':
-          pending moderation.
+          ${_(u'pending moderation.')}
         % elif target.status == u'rejected':
-          rejected.
+          ${_(u'rejected.')}
         % else:
-          approved.
+          ${_(u'approved.')}
         % endif
       </div>
       % if is_admin and target.status == u'pending':
         <form class="moderation-form" action="/moderate" method="post">
           ${xsrf_input}
           <input type="hidden" name="id" value="${target.key().id()}" />
-          <input type="submit" name="action" value="Approve" />
-          <input type="submit" name="action" value="Reject" />
+          <input type="submit" name="action" value="${_(u'Approve')}" />
+          <input type="submit" name="action" value="${_(u'Reject')}" />
         </form>
       % endif
     % endif
     % if target.model:
       <div class="download model">
-        <a href="/blob/${target.model.key()}/${quote(target.title)}.skp" title="Download SketchUp Model"
-           id="design-download" rel="${target.component and '1' or '0'}">Download SketchUp Model</a>
+        <a href="/blob/${target.model.key()}/${quote(target.title)}.skp"
+            id="design-download" 
+            rel="${target.component and '1' or '0'}">
+          ${_(u'Download SketchUp Model')}</a>
       </div>
       <!--
         
         This link is just to show...
         
         
-      -->
       <div class="hidden download base64 model">
         <a href="/blob64/${target.model.key()}"
            id="design-download-base64">Download Base64 Encoded</a>
         <textarea id="design-download-data"></textarea>
       </div>
+      -->
     % endif
     % if target.sheets:
       <div class="download sheets">
-        <a href="/blob/${target.sheets.key()}" title="Download CNC Cutting Sheets">
-          Download CNC Cutting Sheets</a>
+        <a href="/blob/${target.sheets.key()}">
+          ${_(u'Download CNC Cutting Sheets')}</a>
       </div>
     % endif
   % elif target.status == u'pending':
     <div class="status pending">
-      This design is pending moderation.
+      ${_(u'This design is pending moderation.')}
     </div>
   % elif target.status == u'rejected':
     <div class="status pending">
-      This design was rejected.
+      ${_(u'This design was rejected.')}
     </div>
   % endif
   <div class="comments row">
@@ -125,10 +127,11 @@
     <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
     </script>
     <noscript>
-      Please enable JavaScript to view the 
-      <a href="http://wikihouse.disqus.com/?ref_noscript">comments powered by Disqus</a>.
+      ${_(u'Please enable JavaScript to view the comments.')}
     </noscript>
-    <a href="http://disqus.com" class="dsq-brlink">Comments powered by <span class="logo-disqus">Disqus</span></a>
+    <a href="http://disqus.com" class="dsq-brlink">
+      ${_(u'Comments powered by')}
+      <span class="logo-disqus">Disqus</span></a>
   </div>
   </div>
 </%def>

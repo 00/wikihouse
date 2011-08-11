@@ -1,18 +1,18 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Open community construction set</%def>
+<%def name="sub_title()">${_(u'Open community construction set')}</%def>
 
 <%def name="main_content()">
-  Welcome to WikiHouse!
+  ${_(u'Welcome to WikiHouse!')}
   <iframe style="border:none;width:500px;height:300px;" src="http://icant.co.uk/slidesharehtml/embed.php?url=http://www.slideshare.net/00alice/open-source-table-design-ldn-petal-table&current=1"></iframe>
 </%def>
 
 <%def name="actions()">
   <div class="call-to-action">
-    <a href="/library">Browse the Library >></a>
+    <a href="/library">${_(u'Browse the Library >>')}</a>
   </div>
   <div class="call-to-action">
-    <a href="/download">Download the Plugin >></a>
+    <a href="/download">${_(u'Download the Plugin >>')}</a>
   </div>
 </%def>
 

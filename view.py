@@ -362,9 +362,9 @@ class Moderate(RequestHandler):
         params = self.request.params
         action = params.get('action')
         design = model.Design.get_by_id(int(params.get('id')))
-        if action == 'Approve':
+        if action == self._(u'Approve'):
             design.status = u'approved'
-        elif action == 'Reject':
+        elif action == self._('Reject'):
             design.status = u'rejected'
         design.put()
         return self.get()

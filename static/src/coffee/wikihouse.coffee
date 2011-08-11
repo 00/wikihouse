@@ -25,7 +25,7 @@ window.wikihouse.init = (id) ->
       # Title is required.
       $error = $('#design-title').closest('.field').find('.error')
       if not data.title
-        $error.text 'You must provide a title'
+        $error.text _ 'You must provide a title'
         valid = false
       else
         $error.text ''
@@ -33,7 +33,7 @@ window.wikihouse.init = (id) ->
       # Description is required.
       $error = $('#design-description').closest('.field').find('.error')
       if not data.description
-        $error.text 'You must provide a description.'
+        $error.text _ 'You must provide a description.'
         valid = false
       else
         $error.text ''
@@ -41,14 +41,14 @@ window.wikihouse.init = (id) ->
       # Must select at least one series.
       $error = $('#design-series').closest('.field').find('.error')
       if not data.series or data.series.length is 0
-        $error.text 'You must select at least one series.'
+        $error.text _ 'You must select at least one series.'
         valid = false
       else
         $error.text ''
 
       # If valid, show processing state and call SketchUp.
       if valid
-        wikihouse.showProgress 'Processing SketchUp files ...'
+        wikihouse.showProgress _ 'Processing SketchUp files ...'
         window.location = 'skp:process'
 
       # Either way, make sure we squish the event.
@@ -58,7 +58,7 @@ window.wikihouse.init = (id) ->
     # Show upload state and post the form by ajax, redirect on success / show error.
     wikihouse.upload = ->
       # Show upload state.
-      wikihouse.showProgress 'Uploading ...'
+      wikihouse.showProgress _ 'Uploading ...'
       # Post form by ajax.
       url = $form.attr 'action'
       data = $form.serialize()
@@ -81,7 +81,7 @@ window.wikihouse.init = (id) ->
         error: ->
           # Show error.
           window.location = 'skp:uploaded@error'
-          wikihouse.showError 'Upload failed. Please try again.'
+          wikihouse.showError _ 'Upload failed. Please try again.'
 
     # Call `wikihouse.showProgress(msg)` to trigger the in-progress state.
     wikihouse.showProgress = (msg) ->

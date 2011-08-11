@@ -1,6 +1,6 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">${target is None and 'Browse Library' or target.title}</%def>
+<%def name="sub_title()">${target is None and _(u'Browse Library') or target.title}</%def>
 
 <%def name="design_listing(item, show_series=False)">
   <li>
@@ -28,7 +28,7 @@
       </div>
     % endif
     <div class="user">
-      by 
+      ${_(u'by')} 
       <a href="/library/user/${item.user.user_id()}">
         ${escape(item.user.nickname())}</a>
     </div>
@@ -36,7 +36,7 @@
 </%def>
 
 <%def name="main_content()">
-  <h4>Designs</h4>
+  <h4>${_(u'Designs')}</h4>
   <ul class="designs">
     <% 
       show_series = target is None
@@ -48,7 +48,7 @@
 </%def>
 
 <%def name="actions()">
-  <h4>Series</h4>
+  <h4>${_(u'Series')}</h4>
   <ul class="series-nav">
     <!--
       
@@ -75,7 +75,7 @@
             ${item.description}
           </div>
           <div class="more-info-link">
-            <a href="/about#series">More information</a>
+            <a href="/about#series">${_(u'More information')}</a>
           </div>
         </div>
       </li>
@@ -97,7 +97,7 @@
               ${item.description}
             </div>
             <div class="more-info-link">
-              <a href="/about#series">More information</a>
+              <a href="/about#series">${_(u'More information')}</a>
             </div>
           </div>
         % endif

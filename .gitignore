@@ -1,5 +1,7 @@
 *.pyc
+*.po
 *.mo
+static/i18n
 .DS_Store
 .Python
 .sass-cache/

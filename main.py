@@ -22,7 +22,10 @@ config = {
     'moderation_notification_email_addresses': emails,
     'assetgen_manifest': get_manifest(),
     'static_files_path': 'static',
-    'template_directories': ['templates']
+    'template_directories': ['templates'],
+    'locale_directory': os.path.join('static', 'i18n'),
+    'default_language': 'en',
+    'supported_languages': ['en', 'ko']
 }
 
 def main():

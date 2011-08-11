@@ -8,6 +8,7 @@ from __future__ import with_statement
 
 import base64
 import cgi
+import gettext
 import logging
 import urllib
 
@@ -16,11 +17,73 @@ from pytz.gae import pytz
 from google.appengine.api import files, mail, users
 from google.appengine.ext import blobstore, db
 
-from weblayer import RequestHandler
+from weblayer import RequestHandler as BaseRequestHandler
 from weblayer.utils import encode_to_utf8, unicode_urlencode
 
 import auth
 import model
+
+class RequestHandler(BaseRequestHandler):
+    """ Adds i18n support to `weblayer.RequestHandler`, providing `self._` and
+      passing `_()` through to templates.
+    """
+    
+    def _get_accepted_languages(self):
+        """ Return a list of language tags sorted by their "q" values.
+        """
+        
+        header = self.request.headers.get('Accept-Language', None)
+        if header is None:
+            return []
+        langs = [v for v in header.split(",") if v]
+        qs = []
+        for lang in langs:
+            pieces = lang.split(";")
+            lang, params = pieces[0].strip().lower(), pieces[1:]
+            q = 1
+            for param in params:
+                if '=' not in param:
+                    # Malformed request; probably a bot, we'll ignore
+                    continue
+                lvalue, rvalue = param.split("=")
+                lvalue = lvalue.strip().lower()
+                rvalue = rvalue.strip()
+                if lvalue == "q":
+                    q = float(rvalue)
+            qs.append((lang, q))
+        qs.sort(lambda a, b: -cmp(a[1], b[1]))
+        return [lang for (lang, q) in qs]
+        
+    
+    def render(self, tmpl_name, **kwargs):
+        """ Pass `users` and `_` through to the template.
+        """
+        
+        return super(RequestHandler, self).render(
+            tmpl_name, 
+            users=users, 
+            _=self._, 
+            **kwargs
+        )
+        
+    
+    def __init__(self, *args, **kwargs):
+        super(RequestHandler, self).__init__(*args, **kwargs)
+        localedir = self.settings.get('locale_directory')
+        supported = self.settings.get('supported_languages')
+        target = self.settings.get('default_language')
+        for item in self._get_accepted_languages():
+            if item in supported:
+                target = item
+                break
+        logging.info(localedir)
+        logging.info([target])
+        translation = gettext.translation('wikihouse', localedir=localedir, languages=[target])
+        self._ = translation.ugettext
+        
+    
+    
+
 
 class Index(RequestHandler):
     """

@@ -13,14 +13,11 @@ __all__ = [
     'ManifestedStaticURLGenerator'
 ]
 
-from os.path import dirname, join as join_path
-
 from zope.component import adapts
 from zope.interface import implements
 
 from weblayer.interfaces import IRequest, ISettings, IStaticURLGenerator
 from weblayer.settings import require_setting
-from weblayer.utils import json_decode
 
 require_setting('static_url_prefix', default=u'/static/')
 require_setting('assetgen_manifest')
@@ -54,16 +51,5 @@ class ManifestedStaticURLGenerator(object):
         )
         
     
-    
-
-
-def get_manifest(directory=None, filename='assets.json'):
-    if directory is None:
-        directory = dirname(__file__)
-    file_path = join_path(directory, filename)
-    sock = open(file_path)
-    manifest = json_decode(sock.read())
-    sock.close()
-    return manifest
     
 

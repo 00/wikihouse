@@ -13,6 +13,7 @@ import logging
 import optparse
 import codecs
 import htmllib
+import time
 
 log = logging.getLogger(__name__)
 
@@ -28,27 +29,37 @@ def unescape(s):
     p.feed(s)
     return p.save_end()
 
-def translate(text, sourceLanguage, destLanguage):
-    """Translate a text
-    
-    @param text: text to translate
-    @param sourceLanguage: the language original text is in
-    @param destLanguage: language to translate to
+def translate(message_strings, sourceLanguage, destLanguage):
+    """ Translate a text
+      
+      @param message_strings: list of texts to translate
+      @param sourceLanguage: the language original text is in
+      @param destLanguage: language to translate to
+      
     """
-    log.debug('Translate %s from %s to %s', text, sourceLanguage, destLanguage)
-    query = dict(v='1.0',
-                 q=text.encode('utf8'),
-                 langpair='%s|%s' % (sourceLanguage, destLanguage))
-    file = urllib.urlopen(
-        'http://ajax.googleapis.com/ajax/services/language/translate',
+    
+    query = [
+        ('key', 'AIzaSyC50uIaMik-Ib2Gjo1g10VhzpDjtPhc1FM'),
+        ('v', '1.0'),
+        ('langpair', '%s|%s' % (sourceLanguage, destLanguage))
+    ]
+    for item in message_strings:
+        query.append(('q', item.encode('utf8')))
+    sock = urllib.urlopen(
+        'https://ajax.googleapis.com/ajax/services/language/translate',
         data=urllib.urlencode(query)
     )
-    result = file.read()
-    file.close()
-    jsonResult = json.loads(result)
-    if not jsonResult['responseData']:
-        return None
-    return unescape(jsonResult['responseData']['translatedText'])
+    text = sock.read()
+    translations = json.loads(text).get('responseData')
+    sock.close()
+    results = {}
+    for i in range(len(message_strings)):
+        k = message_strings[i]
+        v = translations[i].get('responseData').get('translatedText')
+        results[k] = unescape(v)
+    return results
+    
+
 
 def main():
     import polib
@@ -71,21 +82,39 @@ def main():
     log.info('Translate %s (in %s) to %s (in %s)', 
              sourceFilePath, sourceLang, destFilePath, destLang) 
     
+    def process_cache(cache):
+        msgstrs = [item.msgstr for item in cache]
+        results = translate(msgstrs, sourceLang, destLang)
+        for item in cache:
+            translated = results[item.msgstr]
+            if translated is not None:
+                log.info('Translated %r to %r', item.msgstr, translated)
+                item.msgstr = translated
+        
+    
+    
     po = polib.pofile(sourceFilePath)
+    i = 0
+    cache = []
     for entry in po:
         if not entry.msgstr.strip():
             entry.msgstr = entry.msgid.strip()
         if not entry.msgstr.strip():
             continue
-        translated = translate(entry.msgstr, sourceLang, destLang)
-        if not translated:
-            continue
-        log.info('Translate %r to %r', entry.msgstr, translated)
-        entry.msgstr = translated
-            
+        if i < 20:
+            i = i + 1
+            cache.append(entry)
+        else:
+            process_cache(cache)
+            cache = []
+            i = 0
+            time.sleep(1)
+    process_cache(cache)
+    
     po.metadata['Translated-By'] = 'po_translator' #' %s' % __version__
     po.save(destFilePath)
     log.info('Done')
+    
 
 if __name__ == '__main__':
     main()

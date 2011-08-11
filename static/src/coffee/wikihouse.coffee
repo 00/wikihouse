@@ -121,6 +121,11 @@ window.wikihouse.init = (id) ->
     designBase64 = $('#design-download-base64').attr 'href'
     isComponent = $download.attr 'rel'
 
+    # Strip the filename from the URL.
+    designURL = designURL.split "/"
+    designURL = designURL.slice(0, designURL.legnth-1)
+    designURL = designURL.join "/"
+
     wikihouse.download = (id, url) ->
       # Grab the model data over ajax.
       $.ajax
@@ -143,15 +148,17 @@ window.wikihouse.init = (id) ->
 
 $(document).ready ->
 
-  # Attempt to generate a unique session id to distinguish potential SketchUp
-  # WebDialogs.
-  id = "#{(new Date).getTime()}:#{Math.random()}"
-  window.SKETCHUP_SESSION_ID = id
+  if WIKIHOUSE_UPLOAD_PAGE? or WIKIHOUSE_DOWNLOAD_PAGE?
 
-  # Create an iframe.
-  iframe = document.createElement 'iframe'
-  iframe.src = "skp:init@#{id}"
-  iframe.style.display = 'none'
+    # Attempt to generate a unique session id to distinguish potential SketchUp
+    # WebDialogs.
+    id = "#{(new Date).getTime()}:#{Math.random()}"
+    window.SKETCHUP_SESSION_ID = id
 
-  # Append the iframe and thus try and call SketchUp.
-  document.body.appendChild iframe
+    # Create an iframe.
+    iframe = document.createElement 'iframe'
+    iframe.src = "skp:init@#{id}"
+    iframe.style.display = 'none'
+
+    # Append the iframe and thus try and call SketchUp.
+    document.body.appendChild iframe

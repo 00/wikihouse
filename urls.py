@@ -54,7 +54,10 @@ mapping = [(
         r'/bootstrap\/?',
         Bootstrap
     ), (
-        r'/blob64/([^/]+)?',
+        r'/blob64/([^/]+)/([^/]+)\/?',
+        Base64Blob
+    ), (
+        r'/blob64/([^/]+)\/?',
         Base64Blob
     ), (
         r'/.*',

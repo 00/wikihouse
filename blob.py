@@ -25,9 +25,9 @@ class ServeHandler(blobstore_handlers.BlobstoreDownloadHandler):
 
 
 mapping = [
-    ('/blob/([^/]+)?/([^/]+)?', ServeHandler),
-    ('/blob/([^/]+)?', ServeHandler),
-    ]
+    ('/blob/([^/]+)/([^/]+)\/?', ServeHandler),
+    ('/blob/([^/]+)\/?', ServeHandler),
+]
 
 def main():
     """

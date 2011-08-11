@@ -286,6 +286,7 @@ class AddDesign(RequestHandler):
             error = u'Series `%s` does not exist.' % series[i]
         attrs['series'] = keys
         
+        attrs['component'] = params.get('component') == '1'
         attrs['verification'] = params.get('verification')
         attrs['notes'] = params.get('notes')
         attrs['sketchup_version'] = params.get('sketchup_version')

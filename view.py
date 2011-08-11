@@ -423,6 +423,23 @@ class Base64Blob(RequestHandler):
     
 
 
+class MessageStrings(RequestHandler):
+    """ Return a translated dictionary of message strings using the keys
+      in `/static/build/js/message_strings.json`.
+    """
+    
+    def get(self):
+        data = {}
+        for k in self.settings.get('js_message_strings'):
+            data[k] = self._(k)
+        return data
+        
+    
+    
+
+
+
+
 class NotFound(RequestHandler):
     """
     """

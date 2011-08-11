@@ -38,6 +38,10 @@ config = {
     'static_files_path': 'static',
     'template_directories': ['templates'],
     'locale_directory': os.path.join('static', 'i18n'),
+    'js_message_strings': get_data(
+        'message_strings.json', 
+        os.path.join('static', 'i18n')
+    ),
     'default_language': 'en',
     'supported_languages': ['en', 'ko']
 }

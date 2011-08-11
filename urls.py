@@ -60,6 +60,9 @@ mapping = [(
         r'/blob64/([^/]+)\/?',
         Base64Blob
     ), (
+        r'/i18n/message_strings.json',
+        MessageStrings
+    ),(
         r'/.*',
         NotFound
     )

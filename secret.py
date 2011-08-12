@@ -5,4 +5,4 @@
 """
 
 cookie = '...'
-emails = []
+email = []

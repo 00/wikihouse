@@ -124,28 +124,19 @@
               <%
                 nav_items = [{
                         'value': '/',
-                        'label': u'About',
-                        'slot': u'slot-0'
+                        'label': _(u'Home')
                     }, {
                         'value': '/about',
-                        'label': u'How it Works',
-                        'slot': u'slot-1'
-                    }, {
-                        'value': '/library',
-                        'label': u'Browse for Models',
-                        'slot': u'slot-2'
-                    }, {
-                        'value': '/download',
-                        'label': u'Download the Plugin',
-                        'slot': u'slot-3'
+                        'label': _(u'How it Works')
                     }, {
                         'value': '/guide',
-                        'label': u'Guide for Designers',
-                        'slot': u'slot-4'
+                        'label': _(u'User Guide')
                     }, {
-                        'value': '/collaborate',
-                        'label': u'Community',
-                        'slot': u'slot-5'
+                        'value': '/library',
+                        'label': _(u'Browse Library')
+                    }, {
+                        'value': '/download',
+                        'label': _(u'Download Plugin')
                     }
                 ]
               %>
@@ -153,18 +144,15 @@
                 <%
                   value = item['value']
                   label = item['label']
-                  slot = item['slot']
                   if value == '/':
                       selected = request.path == '/'
                   else:
                       selected = request.path.startswith(value)
-                      
+
                 %>
-                <a href="${value}" title="${label}">
-                    <li class="${slot}${selected and ' selected' or ' unselected'} padding-top-bottom-small">
-                    ${label}
-                    </li>
-                </a>
+                <li class="${selected and 'selected' or ''}">
+                  <a href="${value}">${label}</a>
+                </li>
               % endfor
             </ul>
           </div>

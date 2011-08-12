@@ -2,17 +2,86 @@
 
 <%def name="sub_title()">${_(u'Open community construction set')}</%def>
 
-<%def name="main_content()">
-  ${_(u'Welcome to WikiHouse!')}
-  <iframe style="border:none;width:500px;height:300px;" src="http://icant.co.uk/slidesharehtml/embed.php?url=http://www.slideshare.net/00alice/open-source-table-design-ldn-petal-table&current=1"></iframe>
-</%def>
-
-<%def name="actions()">
-  <div class="call-to-action">
-    <a href="/library">${_(u'Browse the Library >>')}</a>
+<%def name="content()">
+  <div class="super-graphic">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/super-graphic.png')}" />
+    </div>
+    <div class="super-graphic-copy">
+      <h1>${_(u'Open Source Construction')}</h1>
+      <p>
+        ${_(u'WikiHouse is an open community construction set.  Design, share, download and print CNC milled houses and components.')}
+      </p>
+      <a href="/about" title="${_(u'Find out how WikiHouse works')}">
+        <div class="how-it-works-button">
+          ${_(u"Here's how it works")}
+        </div>
+      </a>
+    </div>
   </div>
-  <div class="call-to-action">
-    <a href="/download">${_(u'Download the Plugin >>')}</a>
+  <div class="slot-0-1-2-3">
+    <div class="community">
+      <h4>${_(u'Featured contributors')}</h4>
+      <ul>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+      </ul>
+      <a href="/library/users">
+        <div class="more-link">
+          ${_(u'View all the contributors')}
+        </div>
+      </a>
+    </div>
+    <div class="press">
+      <h4>${_(u'Press')}</h4>
+      <ul>
+        <li>
+          <p>
+            <em>Here comes the revolution.</em>
+            <br />
+            Tech Crunch
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>WikiHouse is the future of construction.  Period.</em>
+            <br />
+            Kanye West
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="slot-4-5">
+    <ul class="action-box">
+      <li>
+        <a href="/download">
+          Download the plugin >>
+        </a>
+      </li>
+      <li>
+        <a href="/library">
+          Browse the library >>
+        </a>
+      </li>
+    </ul>
   </div>
 </%def>
-

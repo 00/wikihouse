@@ -4,34 +4,41 @@
 
 <%def name="design_listing(item, show_series=False)">
   <li>
-    % if item.model_preview:
-      <div class="thumbnail">
-        <img src="/blob/${item.model_preview.key()}" />
+  <div class="row">
+    <div class="design-panel">
+      % if item.model_preview:
+        <div class="thumbnail left">
+          <img src="/blob/${item.model_preview.key()}" />
+        </div>
+      % endif
+      <div class="design-details left padding-left">
+        <div class="title">
+          <!--${item.key().id()}-->
+          <a href="/library/design/${item.key().id()}">
+            <h4>${escape(item.title)}</h4></a>
+        </div>
+        <div class="user padding-top">
+          by: 
+          <a href="/library/user/${item.user.user_id()}">
+            ${escape(item.user.nickname())}</a>
+        </div>
       </div>
-    % endif
-    <div class="title">
-      ${item.key().id()} 
-      <a href="/library/design/${item.key().id()}">
-        ${escape(item.title)}</a>
+      % if show_series:
+        <div class="series left">
+          Series: 
+          <%
+            i = 0
+            l = len(item.series)
+          %>
+          % for s in item.series:
+            <% i = i + 1 %>
+            <a href="/library/series/${s.name()}">
+              ${s.name().upper()}</a>${i < l and ', ' or ''}
+          % endfor
+        </div>
+      % endif
     </div>
-    % if show_series:
-      <div class="series">
-        <%
-          i = 0
-          l = len(item.series)
-        %>
-        % for s in item.series:
-          <% i = i + 1 %>
-          <a href="/library/series/${s.name()}">
-            ${s.name().upper()}</a>${i < l and ', ' or ''}
-        % endfor
-      </div>
-    % endif
-    <div class="user">
-      by 
-      <a href="/library/user/${item.user.user_id()}">
-        ${escape(item.user.nickname())}</a>
-    </div>
+  <div>
   </li>
 </%def>
 
@@ -49,6 +56,31 @@
 
 <%def name="actions()">
   <h4>Series</h4>
+  <div class="panel">
+        <div class="padding-sides-small ${target and 'hide' or 'show'}">
+          <div class="description padding-top-bottom">
+            Select a Series...
+          </div>
+          <div class="more-info-link padding-bottom">
+            <a href="/about#series" class="link small strong">More information...</a>
+          </div>
+        </div>
+    % if target:
+      % for item in series:   
+        % if target.key() == item.key():
+          <div class="padding-sides-small selected">
+            <div class="description padding-top-bottom">
+            ${item.title}
+            ${item.description}
+            </div>
+            <div class="more-info-link padding-bottom">
+              <a href="/about#series" class="link small strong">More information...</a>
+            </div>
+          </div>
+        % endif
+      % endfor
+    % endif
+  </div>
   <ul class="series-nav">
     <!--
       
@@ -62,21 +94,19 @@
       
     -->
     % for item in series:
-      <li class="${target and target.key() == item.key() and 'selected' or ''}">
+      <li class="series-selectors left ${target and target.key() == item.key() and 'selected-series' or ''}">
         <div class="bar">
           <a href="/library/series/${item.key().name()}">
-            ${item.title}</a>
-        </div>
-        <div class="panel">
-          <div class="series-image">
-            <img src="${get_static_url('gfx/series/%s.png' % item.key().name())}" />
-          </div>
-          <div class="description">
-            ${item.description}
-          </div>
-          <div class="more-info-link">
-            <a href="/about#series">More information</a>
-          </div>
+          % if target:
+            % if target.key() == item.key():
+                <img class="series-button-sel" width="68px" height="68px" src="${get_static_url('gfx/series/%s.tr.png' % item.key().name())}" />
+            % else:
+                <img class="series-button" width="68px" height="68px" src="${get_static_url('gfx/series/%s.tr.png' % item.key().name())}" />
+            % endif
+          % else:
+              <img class="series-button" width="68px" height="68px" src="${get_static_url('gfx/series/%s.tr.png' % item.key().name())}" />
+          % endif
+          </a>
         </div>
       </li>
     % endfor
@@ -107,10 +137,24 @@
 </%def>
 
 <%def name="content()">
-  <div class="slot-0-1">
+  <div class="series-small">
+    <div class="series padding-top">
     ${self.actions()}
+    </div>
   </div>
-  <div class="slot-2-3-4-5">
+  <div class="slot-6-7-8 series-small padding-top-bottom">
+    <div class="padding-left padding-top">
     ${self.main_content()}
+    </div>
+  </div>
+  <div class="slot-6-7-8 series-big padding-top-bottom">
+    <div class="padding-left padding-top">
+    ${self.main_content()}
+    </div>
+  </div>
+  <div class="slot-9 series-big padding-top-bottom">
+    <div class="series padding-top">
+    ${self.actions()}
+    </div>
   </div>
 </%def>

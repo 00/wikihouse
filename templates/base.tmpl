@@ -52,8 +52,6 @@
             <div class="slot-0-1-2-3-4-5 border-bottom border-right">
                <ul class="top-nav">
                   <li class="left no-border">
-                    <a href="" title="">
-                      English / Korean</a>
                   </li>
                   % if users.get_current_user() is None:
                     <a href="${users.create_login_url(request.path)}" title="Login">
@@ -136,7 +134,7 @@
                         'slot': u'slot-1'
                     }, {
                         'value': '/library',
-                        'label': u'Browse the Warehouse',
+                        'label': u'Browse for Models',
                         'slot': u'slot-2'
                     }, {
                         'value': '/download',
@@ -165,7 +163,7 @@
                       
                 %>
                 <a href="${value}" title="${label}">
-                    <li class="${slot}${selected and ' selected' or ' unselected'} padding-top-bottom">
+                    <li class="${slot}${selected and ' selected' or ' unselected'} padding-top-bottom-small">
                     ${label}
                     </li>
                 </a>
@@ -173,13 +171,13 @@
             </ul>
           </div>
         </div>
-        <div class="row padding-all">
+        <div class="row">
           ${self.content()}
         </div>
-        <div class="row border-top padding-top-bottom padding-sides-small">
+        <div class="row border-top padding-top-bottom-small padding-sides-small">
           <div class="slot-6">
-            <div class="left">
-              <a class="link" target="blank" href="/terms" alt="Terms and Conditions"><span class="small strong">Terms of Use...</span></a>
+            <div class="left padding-top-small">
+              <a class="link strong" target="blank" href="/terms" alt="Terms and Conditions">Terms of Use...</a>
             </div>  
           </div>
           <div class=slot-7-8-9">

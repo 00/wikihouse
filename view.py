@@ -57,12 +57,13 @@ class RequestHandler(BaseRequestHandler):
         
     
     def render(self, tmpl_name, **kwargs):
-        """ Pass `users` and `_` through to the template.
+        """ Pass `users` `quote` and `_` through to the template.
         """
         
         return super(RequestHandler, self).render(
             tmpl_name, 
             users=users, 
+            quote=urllib.quote,
             _=self._, 
             **kwargs
         )

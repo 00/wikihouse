@@ -248,29 +248,14 @@ a.wh-logo-cc
   display: none
 
 @media screen and (min-width: 720px)
-  .series-block
-    display: none
-  
   .series-nav li
     display: block
     margin: 0em 0em
+    float: left
   
-  .series-nav li.selected-series .panel
-    display: none
-  
-.bar
-  height: 69px      
-         
 .series
   width: 138px
 
-@media screen and (max-width: 767px)
-  .series
-    width: 100% 
-    
-  .series-nav
-    width: 100%
-  
 .series-selectors
   padding-right: 1px  
   
@@ -281,12 +266,25 @@ a.wh-logo-cc
 
   &:hover
     background-color: #555
-  
-.series-button-sel
+
+.series-button.selected
   background-color: #DBD9C9
   width: 68px
   height: 68px 
     
+
+@media screen and (max-width: 767px)
+  .series
+    width: 100% 
+  
+  .series-nav
+    width: 100%
+  
+  .series-button, .series-button.selected
+    width: 51px
+    height: 51px
+  
+
 @media screen and (max-width: 767px)
   #fdbk_tab
     display: none

@@ -56,24 +56,26 @@
 
 <%def name="actions()">
   <h4>Series</h4>
-  <div class="series-block">
-    % for item in series:   
-      % if target.key() == item.key():
-        <div class="padding-sides-small selected">
-          <div class="series-title padding-top-bottom">
-            <a href="/library/series/${item.key().name()}">
-              ${item.title}</a>
+  % if target:
+    <div class="series-block">
+      % for item in series:   
+        % if target.key() == item.key():
+          <div class="padding-sides-small selected">
+            <div class="series-title padding-top-bottom">
+              <a href="/library/series/${item.key().name()}">
+                ${item.title}</a>
+            </div>
+            <div class="description padding-top-bottom">
+              ${item.description}
+            </div>
+            <div class="more-info-link padding-bottom">
+              <a href="/about#series" class="link small strong">More information...</a>
+            </div>
           </div>
-          <div class="description padding-top-bottom">
-            ${item.description}
-          </div>
-          <div class="more-info-link padding-bottom">
-            <a href="/about#series" class="link small strong">More information...</a>
-          </div>
-        </div>
-      % endif
-    % endfor
-  </div>
+        % endif
+      % endfor
+    </div>
+  % endif
   <ul class="series-nav">
     % for item in series:
       <%

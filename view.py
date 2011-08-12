@@ -19,7 +19,7 @@ from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
 from weblayer.utils import encode_to_utf8, unicode_urlencode
-from weblayer.utils import json_decode, json_encode
+from weblayer.utils import json_decode, json_encode, xhtml_escape
 
 import auth
 import model
@@ -250,26 +250,32 @@ class AddDesign(RequestHandler):
     
     
     def notify(self, design):
-        """ Notify the moderators.
+        """ Notify the moderators.  Note that we use the first email in the
+          moderators list as the sender.
         """
         
         url = self.request.host_url
         user = users.get_current_user()
-        
-        sender = user.email()
-        subject = u'New design submitted to WikiHouse.'
-        body = u'Please moderate the submission:\n\n%s/moderate\n' % url
-        
-        recipients = self.settings['moderation_notification_email_addresses']
-        for item in recipients:
-            message = mail.EmailMessage(
-                to=item,
-                sender=sender, 
-                subject=subject, 
-                body=body
-            )
-            message.send()
-            
+        recipient = user.email()
+        sender = self.settings['moderator_email_address']
+        subject = self._(u'New design submitted to WikiHouse')
+        body = u'%s\n\n%s %s\n%s %s/library/design/%s\n\n%s\nWikiHouse\n%s\n' % (
+            self._(u'Your design has been queued for moderation:'),
+            self._(u'Title:'),
+            xhtml_escape(design.title),
+            self._(u'Url:'),
+            url,
+            design.key().id(),
+            self._(u'Thanks,'),
+            url
+        )
+        message = mail.EmailMessage(
+            to=recipient,
+            sender=sender, 
+            subject=subject, 
+            body=body
+        )
+        message.send()
         
     
     
@@ -332,6 +338,7 @@ class AddDesign(RequestHandler):
         
     
     
+
 
 class AddDesignSuccess(RequestHandler):
     """

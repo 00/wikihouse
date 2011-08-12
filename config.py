@@ -6,7 +6,7 @@
 
 import os
 from os.path import dirname, join as join_path
-from secret import emails, cookie as cookie_secret
+from secret import email, cookie as cookie_secret
 try:
     from weblayer.utils import json_decode
 except ImportError:
@@ -26,7 +26,7 @@ def get_data(filename, directory=None):
 settings = {
     'dev': os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'),
     'cookie_secret': cookie_secret,
-    'moderation_notification_email_addresses': emails,
+    'moderator_email_address': email,
     'assetgen_manifest': get_data('assets.json'),
     'static_files_path': 'static',
     'template_directories': ['templates'],

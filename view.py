@@ -19,6 +19,7 @@ from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
 from weblayer.utils import encode_to_utf8, unicode_urlencode
+from weblayer.utils import json_decode, json_encode
 
 import auth
 import model
@@ -436,7 +437,9 @@ class MessageStrings(RequestHandler):
         data = {}
         for k in self.settings.get('js_message_strings'):
             data[k] = self._(k)
-        return data
+        self.response.headers['Content-Type'] = 'text/javascript'
+        self.response.charset = 'utf8'
+        return u'window.message_strings = %s;' % json_encode(data)
         
     
     

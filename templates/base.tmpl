@@ -52,32 +52,35 @@
                   <li class="left no-border">
                   </li>
                   % if users.get_current_user() is None:
-                    <a href="${users.create_login_url(request.path)}" title="Login">
+                    <a href="${users.create_login_url(request.path)}">
                       <li class="right border-left unselected">
-                      Login
+                        ${_(u'Login')}
                       </li>
                     </a>
                   % else:
                     % if users.is_current_user_admin():
-                      <a href="/moderate" title="Moderate">
+                      <a href="/moderate">
                         <li class="right border-left unselected">
-                          Moderate
+                          ${_(u'Moderate')}
                         </li>
                       </a>
                     % endif
-                    <a href="${users.create_logout_url(request.path)}" title="Logout">
+                    <a href="${users.create_logout_url(request.path)}">
                         <li class="right border-left unselected">
-                            Logout
+                          ${_(u'Logout')}
                         </li>
                     </a>
                   % endif
                   <%
                     secondary_nav_items = [{
                             'value': '/contact',
-                            'label': u'Contact'
+                            'label': _(u'Contact')
                         }, {
                             'value': '/donate',
-                            'label': u'Donate'
+                            'label': _(u'Donate')
+                        }, {
+                            'value': '/collaborate',
+                            'label': _(u'Collaborate')
                         }
                     ]
                   %>
@@ -88,15 +91,15 @@
                       selected = request.path.startswith(value)
                     %>
                     <a href="${value}" title="${label}">
-                        <li class="${selected and ' selected' or ' unselected'} right border-left">
+                      <li class="${selected and 'selected' or 'unselected'} right border-left">
                         ${label}
-                        </li>
+                      </li>
                     </a>
                   % endfor
-                  <a href="http://wikihouse.tumblr.com/" target="blank" title="Goto the WikiHouse Tumblog">
-                      <li class="external right border-left unselected">
-                          ${_(u'News')}
-                      </li>
+                  <a href="http://wikihouse.tumblr.com/" target="blank" title="${_(u'Goto the WikiHouse Tumblog')}">
+                    <li class="external right border-left unselected">
+                      ${_(u'News')}
+                    </li>
                   </a>
                 </ul>
             </div>
@@ -166,7 +169,7 @@
               <a class="link strong" target="blank" href="/terms" alt="Terms and Conditions">Terms of Use...</a>
             </div>  
           </div>
-          <div class=slot-7-8-9">
+          <div class="slot-7-8-9">
             <div class="social-links right">
               <span class="st_email_custom right padding-left-small"><a class="email-logo">Email</a></span>
               <span class="st_plusone_custom right padding-left-small"><a class="google-logo">Google Plus One</a></span>

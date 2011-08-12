@@ -62,7 +62,7 @@ mapping = [(
     ), (
         r'/i18n/message_strings.json',
         MessageStrings
-    ),(
+    ), (
         r'/.*',
         NotFound
     )

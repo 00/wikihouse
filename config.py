@@ -16,9 +16,13 @@ def get_data(filename, directory=None):
     if directory is None:
         directory = dirname(__file__)
     file_path = join_path(directory, filename)
-    sock = open(file_path)
-    data = json_decode(sock.read())
-    sock.close()
+    try:
+        sock = open(file_path)
+    except IOError:
+        data = None
+    else:
+        data = json_decode(sock.read())
+        sock.close()
     return data
     
 

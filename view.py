@@ -13,12 +13,14 @@ import logging
 import urllib
 
 from pytz.gae import pytz
+from xml.etree import ElementTree as etree
 
 from google.appengine.api import files, mail, users
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
 from weblayer.utils import encode_to_utf8, unicode_urlencode
+from weblayer.utils import json_decode, json_encode, xhtml_escape
 
 import auth
 import model
@@ -56,12 +58,13 @@ class RequestHandler(BaseRequestHandler):
         
     
     def render(self, tmpl_name, **kwargs):
-        """ Pass `users` and `_` through to the template.
+        """ Pass `users` `quote` and `_` through to the template.
         """
         
         return super(RequestHandler, self).render(
             tmpl_name, 
             users=users, 
+            quote=urllib.quote,
             _=self._, 
             **kwargs
         )
@@ -73,12 +76,16 @@ class RequestHandler(BaseRequestHandler):
         supported = self.settings.get('supported_languages')
         target = self.settings.get('default_language')
         for item in self._get_accepted_languages():
+            # Convert `en-us` to `en`.
+            item = item.split('-')[0]
             if item in supported:
                 target = item
                 break
-        logging.info(localedir)
-        logging.info([target])
-        translation = gettext.translation('wikihouse', localedir=localedir, languages=[target])
+        translation = gettext.translation(
+            'wikihouse', 
+            localedir=localedir, 
+            languages=[target]
+        )
         self._ = translation.ugettext
         
     
@@ -245,26 +252,32 @@ class AddDesign(RequestHandler):
     
     
     def notify(self, design):
-        """ Notify the moderators.
+        """ Notify the moderators.  Note that we use the first email in the
+          moderators list as the sender.
         """
         
         url = self.request.host_url
         user = users.get_current_user()
-        
-        sender = user.email()
-        subject = u'New design submitted to WikiHouse.'
-        body = u'Please moderate the submission:\n\n%s/moderate\n' % url
-        
-        recipients = self.settings['moderation_notification_email_addresses']
-        for item in recipients:
-            message = mail.EmailMessage(
-                to=item,
-                sender=sender, 
-                subject=subject, 
-                body=body
-            )
-            message.send()
-            
+        recipient = user.email()
+        sender = self.settings['moderator_email_address']
+        subject = self._(u'New design submitted to WikiHouse')
+        body = u'%s\n\n%s %s\n%s %s/library/design/%s\n\n%s\nWikiHouse\n%s\n' % (
+            self._(u'Your design has been queued for moderation:'),
+            self._(u'Title:'),
+            xhtml_escape(design.title),
+            self._(u'Url:'),
+            url,
+            design.key().id(),
+            self._(u'Thanks,'),
+            url
+        )
+        message = mail.EmailMessage(
+            to=recipient,
+            sender=sender, 
+            subject=subject, 
+            body=body
+        )
+        message.send()
         
     
     
@@ -328,6 +341,7 @@ class AddDesign(RequestHandler):
     
     
 
+
 class AddDesignSuccess(RequestHandler):
     """
     """
@@ -362,9 +376,9 @@ class Moderate(RequestHandler):
         params = self.request.params
         action = params.get('action')
         design = model.Design.get_by_id(int(params.get('id')))
-        if action == 'Approve':
+        if action == self._(u'Approve'):
             design.status = u'approved'
-        elif action == 'Reject':
+        elif action == self._('Reject'):
             design.status = u'rejected'
         design.put()
         return self.get()
@@ -418,6 +432,82 @@ class Base64Blob(RequestHandler):
                 break
         blob_reader.close()
         return response
+        
+    
+    
+
+
+class MessageStrings(RequestHandler):
+    """ Return a translated dictionary of message strings using the keys
+      in `/static/build/js/message_strings.json`.
+    """
+    
+    def get(self):
+        data = {}
+        for k in self.settings.get('js_message_strings'):
+            data[k] = self._(k)
+        self.response.headers['Content-Type'] = 'text/javascript'
+        self.response.charset = 'utf8'
+        return u'window.message_strings = %s;' % json_encode(data)
+        
+    
+    
+
+
+class ActivityFeed(RequestHandler):
+    """ Consume the latest Disqus comments and convert into a feed with design
+      and user images.
+    """
+    
+    def get(self):
+        """ Get Disqus feed.  Loop through.  If we can get a profile
+          image, return an item with user image and model image in it.
+        """
+        
+        # XXX cache this
+        
+        # get the Disque feed
+        sock = urllib.urlopen('http://wikihouse.disqus.com/latest.rss')
+        text = sock.read()
+        sock.close()
+        
+        # Build a list of items.
+        items = []
+        tree = etree.fromstring(text)
+        last_build_date = tree.find('channel/lastBuildDate').text
+        for item in tree.findall('channel/item'):
+            # Add the creator as an item.
+            creator = item.find('{http://purl.org/dc/elements/1.1/}creator').text
+            items.append({
+                    'title': creator,
+                    'description': item.find('description').text,
+                    'link': u'http://disqus.com/api/users/avatars/%s.jpg' % creator
+            })
+            # Add the design as an item.
+            link = item.find('link').text
+            design_id = link.split('/')[-1].split('#')[0]
+            logging.info(design_id)
+            design = model.Design.get_by_id(int(design_id))
+            if design and design.model_preview:
+                link = u'%s/blob/%s/%s.png' % (
+                    self.request.host_url,
+                    design.model_preview.key(),
+                    urllib.quote(design.title)
+                )
+                items.append({
+                        'title': design.title,
+                        'description': design.description,
+                        'link': link
+                })
+            
+        # Render an RSS feed.
+        self.response.headers['Content-Type'] = 'application/xml'
+        self.response.charset = 'utf8'
+        return self.render(
+            'rss/activity.tmpl', 
+            items=items, 
+            last_build_date=last_build_date
+        )
         
     
     

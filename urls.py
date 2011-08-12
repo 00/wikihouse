@@ -54,8 +54,17 @@ mapping = [(
         r'/bootstrap\/?',
         Bootstrap
     ), (
-        r'/blob64/([^/]+)?',
+        r'/blob64/([^/]+)/([^/]+)\/?',
         Base64Blob
+    ), (
+        r'/blob64/([^/]+)\/?',
+        Base64Blob
+    ), (
+        r'/i18n/message_strings.json',
+        MessageStrings
+    ), (
+        r'/feeds/activity.rss',
+        ActivityFeed
     ), (
         r'/.*',
         NotFound

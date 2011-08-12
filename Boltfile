@@ -8,7 +8,7 @@ import re
 from pkg_resources import require
 from commands import getoutput
 
-from os.path import dirname
+from os.path import dirname, exists, join as join_path
 here = dirname(__file__)
 
 from bolt.api import *
@@ -32,10 +32,68 @@ def extract():
     """
     
     require('babel')
-    require('mako')
     
+    from config import settings
     with cd(here):
         local('pybabel extract -F babel.cfg -o static/i18n/messages.pot .')
+        for item in settings.get('supported_languages'):
+            path = join_path(here, 'static', 'i18n', item, 'LC_MESSAGES', 'wikihouse.po')
+            if not exists(path):
+                local('pybabel init --domain=wikihouse --input-file=static/i18n/messages.pot --output-dir=static/i18n --locale=%s' % item)
+        local('pybabel update --domain=wikihouse --input-file=static/i18n/messages.pot --output-dir=static/i18n')
+    
+    # Update `message_strings.json` data.
+    import babel.messages.extract
+    import json 
+    
+    sock = open('assets.json')
+    data = json.loads(sock.read())
+    sock.close()
+    
+    file_path = 'static/build/%s' % data.get('js/wikihouse.js')
+    items = babel.messages.extract.extract_from_file('javascript', file_path)
+    messages = [item[1] for item in items]
+    
+    sock = open('static/i18n/message_strings.json', 'w')
+    sock.write(json.dumps(messages))
+    sock.close()
+    
+
+
+@task
+def autotranslate(language=None):
+    """
+    """
+    
+    require('po_translate')
+    
+    from config import settings
+    source_lang = settings.get('default_language')
+    if language is None:
+        dest_langs = settings.get('supported_languages')[:]
+        dest_langs.pop(dest_langs.index(source_lang))
+    else:
+        dest_langs = [language]
+    with cd(here):
+        for item in dest_langs:
+            local(
+                'python po_translate.py static/i18n/%s/LC_MESSAGES/wikihouse.po static/i18n/%s/LC_MESSAGES/wikihouse.po %s %s' % (
+                    source_lang,
+                    item,
+                    source_lang,
+                    item
+                )
+            )
+        
+    
+
+
+@task
+def i18n(translate=False):
+    extract()
+    if translate:
+        autotranslate()
+    compile()
     
 
 
@@ -46,11 +104,13 @@ def build():
     
     require('assetgen')
     
+    # Kill any assetgen processes.
     ps_id = re.compile(r'^\S+\s+([0-9]+)', re.M)
     ps_ids = ps_id.findall(getoutput('ps -aux | grep [a]ssetgen'))
     if len(ps_ids):
         local('kill %s' % ' '.join(ps_ids))
     
+    # Run assetgen.
     with cd(here):
         local('assetgen assetgen.yaml --force')
         
@@ -70,11 +130,12 @@ def update():
 
 
 @task
-def deploy():
+def deploy(translate=False):
     """ Build and deploy.
     """
     
     build()
+    i18n(translate=translate)
     update()
     
 

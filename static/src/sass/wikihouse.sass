@@ -469,9 +469,64 @@ a.email-logo
   .series-big
     display: block  
 
+
 @media screen and (max-width: 767px)  
   .series-small
     display: block 
   
   .series-big
     display: none
+
+// Super Graphic
+.super-graphic-image img
+  width: 100%
+
+.super-graphic-copy
+  position: relative
+  display: block
+  width: 100%
+
+// This is example positioning: these values need to be tailored to the actual 
+// dimensions of the super graphic.
+@media screen and (min-width: 720px)
+  .super-graphic-copy
+    position: absolute
+    margin-top: -165px
+    margin-left: 400px
+    width: 250px
+  
+@media screen and (min-width: 986px)
+  .super-graphic-copy
+    margin-top: -200px
+    margin-left: 500px
+    width: 300px
+  
+@media screen and (min-width: 1236px)
+  .super-graphic-copy
+    margin-top: -200px
+    margin-left: 600px
+    width: 350px
+
+// These are dummy styles to show the homepage structure
+h1
+  font-size: 261.797899582%
+h4
+  font-size: 161.803399%
+  margin: 0.5em 0em 0.2em 0em
+
+.community li
+  display: inline-block
+  width: 20%
+  padding: 2%
+
+.press li
+  display: inline-block
+  width: 40%
+  padding: 4%
+
+.action-box
+  margin-top: 0.809em
+  
+.action-box li
+  padding: 2em
+  border:  2px solid #ccc

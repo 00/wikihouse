@@ -1,6 +1,6 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Share Your Model!</%def>
+<%def name="sub_title()">${_("Share Your Model")}</%def>
 
 <%def name="content()">
   <div id="progress-indicator">
@@ -13,17 +13,17 @@
     ${xsrf_input}
     <div class="error"></div>
     <div class="field">
-      <label for="title">Title</label>
+      <label for="title">${_("Title")}</label>
       <input type="text" name="title" id="design-title"/>
       <div class="error"></div>
     </div>
     <div class="field">
-      <label for="description">Description</label>
+      <label for="description">${_("Description")}</label>
       <textarea name="description" id="design-description"></textarea>
       <div class="error"></div>
     </div>
     <div class="field">
-      <label for="series">Series</label>
+      <label for="series">${_("Series")}</label>
       <select name="series" multiple="true" id="design-series">
         % for item in series:
           <option value="${item.key().name()}">${item.title}</option>
@@ -33,25 +33,25 @@
     </div>
     <div class="field">
       <input type="checkbox" name="component" value="1" />
-      <label for="component">Component</label>
+      <label for="component">${_("Component")}</label>
     </div>
     <div class="field">
-      <label for="verification">Verification status</label>
+      <label for="verification">${_("Verification status")}</label>
       <select name="verification" id="design-verification">
         <option value="unverified" selected="selected">
-          Not structurally checked
+          ${_("Not structurally checked")}
         </option>
         <option value="verified">
-          Structurally checked
+          ${_("Structurally checked")}
         </option>
         <option value="built">
-          Structurally checked, tested &amp; built
+          ${_("Structurally checked, tested &amp; built")}
         </option>
       </select>
       <div class="error"></div>
     </div>
     <div class="field">
-      <label for="description">Verification notes</label>
+      <label for="description">${_("Verification notes")}</label>
       <textarea name="notes" id="design-notes"></textarea>
       <div class="error"></div>
     </div>
@@ -60,23 +60,23 @@
     </div>
     <div class="hidden file-inputs">
       <div class="field">
-        <label for="model">Model</label>
+        <label for="model">${_("Model")}</label>
         <textarea name="model" id="design-model"></textarea>
       </div>
       <div class="field">
-        <label for="model_preview">Model preview image</label>
+        <label for="model_preview">${_("Model preview image")}</label>
         <textarea name="model_preview" id="design-model-preview"></textarea>
       </div>
       <div class="field">
-        <label for="model_preview_reverse">Reverse model preview image</label>
+        <label for="model_preview_reverse">${_("Reverse model preview image")}</label>
         <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
       </div>
       <div class="field">
-        <label for="sheets">Cutting sheets</label>
+        <label for="sheets">${_("Cutting sheets")}</label>
         <textarea name="sheets" id="design-sheets"></textarea>
       </div>
       <div class="field">
-        <label for="sheets_preview">Cutting sheets preview image</label>
+        <label for="sheets_preview">${_("Cutting sheets preview image")}</label>
         <textarea name="sheets_preview" id="design-sheets-preview"></textarea>
       </div>
     </div>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss">
+  <channel>
+    <title>${_(u'WikiHouse Activity Stream')}</title>
+    <link>${request.url}</link>
+    <description>${_(u'The latest comments on WikiHouse')}</description>
+    <lastBuildDate>${last_build_date}</lastBuildDate>
+    % for item in items:
+      <item>
+        <title>${escape(item['title'])}</title>
+        <description>${escape(item['description'])}</description>
+        <link>${item['link']}</link>
+      </item>
+    % endfor
+  </channel>
+</rss>

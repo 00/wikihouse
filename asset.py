@@ -13,14 +13,13 @@ __all__ = [
     'ManifestedStaticURLGenerator'
 ]
 
-from os.path import dirname, join as join_path
+from itertools import cycle
 
 from zope.component import adapts
 from zope.interface import implements
 
 from weblayer.interfaces import IRequest, ISettings, IStaticURLGenerator
 from weblayer.settings import require_setting
-from weblayer.utils import json_decode
 
 require_setting('static_url_prefix', default=u'/static/')
 require_setting('assetgen_manifest')
@@ -36,34 +35,32 @@ class ManifestedStaticURLGenerator(object):
     implements(IStaticURLGenerator)
     
     def __init__(self, request, settings):
-        self._host_url = settings.get('static_host_url', request.host_url)
+        self._dev = settings.get('dev', False)
+        self._host = settings.get('static_host', request.host)
         self._static_url_prefix = settings['static_url_prefix']
         self._manifest = settings['assetgen_manifest']
+        self._subdomains = cycle(
+            settings.get('static_subdomains', '12345')
+        )
         
     
     
     def get_url(self, path):
         """ Get a fully expanded url for the given static resource ``path``.
+          
+          If we're in production then appends a subdomain to the beginning
+          of the host, to avoid too many connections to the same url.
         """
         
         file_path = self._manifest.get(path, path)
-        return u'%s%s%s' % (
-            self._host_url, 
-            self._static_url_prefix, 
-            file_path
-        )
+        
+        if self._dev:
+            host = self._host
+        else:
+            host = '%s.%s' % (self._subdomains.next(), self._host)
+        
+        return u'//%s%s%s' % (host, self._static_url_prefix, file_path)
         
     
-    
-
-
-def get_manifest(directory=None, filename='assets.json'):
-    if directory is None:
-        directory = dirname(__file__)
-    file_path = join_path(directory, filename)
-    sock = open(file_path)
-    manifest = json_decode(sock.read())
-    sock.close()
-    return manifest
     
 

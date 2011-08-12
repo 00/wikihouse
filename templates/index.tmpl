@@ -1,25 +1,87 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">Open community construction set</%def>
+<%def name="sub_title()">${_(u'Open community construction set')}</%def>
 
-<%def name="main_content()">
-  <div class="slot-0-1 no-padding no-margin">
-    <a class="slide-01" target="blank" href="/library">Browse the Library >></a>
+<%def name="content()">
+  <div class="super-graphic">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/super-graphic.png')}" />
+    </div>
+    <div class="super-graphic-copy">
+      <h1>${_(u'Open Source Construction')}</h1>
+      <p>
+        ${_(u'WikiHouse is an open community construction set.  Design, share, download and print CNC milled houses and components.')}
+      </p>
+      <a href="/about" title="${_(u'Find out how WikiHouse works')}">
+        <div class="how-it-works-button">
+          ${_(u"Here's how it works")}
+        </div>
+      </a>
+    </div>
   </div>
-  <div class="slot-2-3 no-padding no-margin">
-    <a class="slide-02" target="blank" href="/download">Download the Plugin >></a>
+  <div class="slot-0-1-2-3">
+    <div class="community">
+      <h4>${_(u'Featured contributors')}</h4>
+      <ul>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+        <li>
+          <a href="/library/users/...">
+            AVATAR IMAGE
+          </a>
+        </li>
+      </ul>
+      <a href="/library/users">
+        <div class="more-link">
+          ${_(u'View all the contributors')}
+        </div>
+      </a>
+    </div>
+    <div class="press">
+      <h4>${_(u'Press')}</h4>
+      <ul>
+        <li>
+          <p>
+            <em>Here comes the revolution.</em>
+            <br />
+            Tech Crunch
+          </p>
+        </li>
+        <li>
+          <p>
+            <em>WikiHouse is the future of construction.  Period.</em>
+            <br />
+            Kanye West
+          </p>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div class="slot-4-5 no-padding no-margin">
-    <a class="slide-03" target="blank" href="/download">Download the Plugin >></a>
+  <div class="slot-4-5">
+    <ul class="action-box">
+      <li>
+        <a href="/download">
+          Download the plugin >>
+        </a>
+      </li>
+      <li>
+        <a href="/library">
+          Browse the library >>
+        </a>
+      </li>
+    </ul>
   </div>
 </%def>
-
-<%def name="actions()">
-  <div class="call-to-action">
-    <a href="/library">Browse the Library >></a>
-  </div>
-  <div class="call-to-action">
-    <a href="/download">Download the Plugin >></a>
-  </div>
-</%def>
-

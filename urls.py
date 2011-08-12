@@ -63,6 +63,9 @@ mapping = [(
         r'/i18n/message_strings.json',
         MessageStrings
     ), (
+        r'/feeds/activity.rss',
+        ActivityFeed
+    ), (
         r'/.*',
         NotFound
     )

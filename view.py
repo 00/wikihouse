@@ -13,6 +13,7 @@ import logging
 import urllib
 
 from pytz.gae import pytz
+from xml.etree import ElementTree as etree
 
 from google.appengine.api import files, mail, users
 from google.appengine.ext import blobstore, db
@@ -453,6 +454,63 @@ class MessageStrings(RequestHandler):
     
 
 
+class ActivityFeed(RequestHandler):
+    """ Consume the latest Disqus comments and convert into a feed with design
+      and user images.
+    """
+    
+    def get(self):
+        """ Get Disqus feed.  Loop through.  If we can get a profile
+          image, return an item with user image and model image in it.
+        """
+        
+        # XXX cache this
+        
+        # get the Disque feed
+        sock = urllib.urlopen('http://wikihouse.disqus.com/latest.rss')
+        text = sock.read()
+        sock.close()
+        
+        # Build a list of items.
+        items = []
+        tree = etree.fromstring(text)
+        last_build_date = tree.find('channel/lastBuildDate').text
+        for item in tree.findall('channel/item'):
+            # Add the creator as an item.
+            creator = item.find('{http://purl.org/dc/elements/1.1/}creator').text
+            items.append({
+                    'title': creator,
+                    'description': item.find('description').text,
+                    'link': u'http://disqus.com/api/users/avatars/%s.jpg' % creator
+            })
+            # Add the design as an item.
+            link = item.find('link').text
+            design_id = link.split('/')[-1].split('#')[0]
+            logging.info(design_id)
+            design = model.Design.get_by_id(int(design_id))
+            if design and design.model_preview:
+                link = u'%s/blob/%s/%s.png' % (
+                    self.request.host_url,
+                    design.model_preview.key(),
+                    urllib.quote(design.title)
+                )
+                items.append({
+                        'title': design.title,
+                        'description': design.description,
+                        'link': link
+                })
+            
+        # Render an RSS feed.
+        self.response.headers['Content-Type'] = 'application/xml'
+        self.response.charset = 'utf8'
+        return self.render(
+            'rss/activity.tmpl', 
+            items=items, 
+            last_build_date=last_build_date
+        )
+        
+    
+    
 
 
 class NotFound(RequestHandler):

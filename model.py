@@ -239,7 +239,7 @@ class Design(db.Model):
         # Get the user's designs.
         query = cls.all().order('-m')
         if filter_by is not None:
-            for k, v in filter_by.iteritems():
+            for k, v in filter_by:
                 query.filter(k, v)
         owned_results = []
         if google_user is not None:

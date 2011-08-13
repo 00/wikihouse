@@ -188,8 +188,7 @@ class Library(RequestHandler):
         # Get either the most recent 9 `Design`s or the `Design`s in the
         # target `Series`.
         if target is None:
-            query = model.Design.all().filter("status =", u'approved')
-            designs = query.order('-m').fetch(9)
+            designs = model.Design.all_listings(limit=9)
         else:
             designs = target.designs
         
@@ -330,6 +329,7 @@ class AddDesign(RequestHandler):
                 
         if not error:
             attrs['user'] = user.key()
+            attrs['google_user_id'] = google_user_id
             attrs['component'] = params.get('component') == '1'
             attrs['verification'] = params.get('verification')
             attrs['notes'] = params.get('notes')

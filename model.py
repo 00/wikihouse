@@ -4,11 +4,13 @@
 """ Database ``Model`` classes.
 """
 
+import itertools
 import hashlib
 import logging
 import urllib
 import urllib2
 
+from google.appengine.api import users
 from google.appengine.ext import blobstore, db
 
 from weblayer.utils import json_decode
@@ -69,8 +71,7 @@ class User(db.Model):
     
     @property
     def designs(self):
-        query = Design.all().filter("status =", u'approved')
-        return query.filter("user =", self.key())
+        return Design.all_listings(filter=("user =", self.key()))
         
     
     
@@ -170,8 +171,7 @@ class Series(db.Model):
     
     @property
     def designs(self):
-        query = Design.all().filter("status =", u'approved')
-        return query.filter("series =", self.key())
+        return Design.all_listings(filter=("series =", self.key()))
         
     
     
@@ -192,6 +192,7 @@ class Design(db.Model):
     series = db.ListProperty(db.Key)
     
     user = db.ReferenceProperty(User)
+    google_user_id = db.StringProperty()
     country = db.StringProperty()                       # X-AppEngine-Country
     
     status = db.StringProperty(
@@ -218,6 +219,47 @@ class Design(db.Model):
     model_preview_reverse = blobstore.BlobReferenceProperty()
     sheets = blobstore.BlobReferenceProperty()
     sheets_preview = blobstore.BlobReferenceProperty()
+    
+    @classmethod
+    def all_listings(cls, filter_by=None, limit=99):
+        """ Return all designs that are either approved or by the current user.
+        """
+        
+        google_user = users.get_current_user()
+        google_user_id = google_user and str(google_user.user_id()) or ''
+        
+        # Get the approved designs.
+        query = cls.all().order('-m')
+        if filter_by is not None:
+            for k, v in filter_by.iteritems():
+                query.filter(k, v)
+        approved = query.filter("status =", u'approved')
+        approved_results = approved.fetch(limit)
+        
+        # Get the user's designs.
+        query = cls.all().order('-m')
+        if filter_by is not None:
+            for k, v in filter_by.iteritems():
+                query.filter(k, v)
+        owned_results = []
+        if google_user is not None:
+            owned = query.filter("google_user_id =", google_user_id)
+            owned_results = owned.fetch(limit)
+        
+        # Merge the two.
+        if len(owned_results) == 0:
+            results = approved_results
+        else:
+            chained = itertools.chain(approved_results, owned_results)
+            results = dict((str(item.key()), item) for item in chained).values()
+        
+        # Sorting by modified date.
+        results = sorted(results, key=lambda item: item.m)
+        results.reverse()
+        
+        return results[:limit]
+        
+    
     
 
 

@@ -213,3 +213,23 @@ class Design(db.Model):
     sheets_preview = blobstore.BlobReferenceProperty()
     
 
+
+class Quote(db.Model):
+    """ A press quote, uses `org` as key name.
+    """
+    
+    v = db.IntegerProperty(default=1)                   # version
+    c = db.DateTimeProperty(auto_now_add=True)          # created
+    m = db.DateTimeProperty(auto_now=True)              # modified
+    
+    name = db.StringProperty()
+    content = db.TextProperty(default='')
+    
+    @classmethod
+    def get_all(cls):
+        return cls.all()
+        
+    
+    
+
+

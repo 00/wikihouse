@@ -317,12 +317,6 @@ class AddDesign(RequestHandler):
                         google_user=google_user,
                         google_user_id=google_user_id
                     )
-                    user.set_avatar()
-                    user.put()
-                except db.Error, err:
-                    error = unicode(err)
-            else: # Otherwise "touch" it to update the modified datetime
-                try:
                     user.put()
                 except db.Error, err:
                     error = unicode(err)
@@ -406,6 +400,15 @@ class Moderate(RequestHandler):
         design = model.Design.get_by_id(int(params.get('id')))
         if action == self._(u'Approve'):
             design.status = u'approved'
+            user = design.user
+            # If this user doesn't have their avatar set, set it.
+            if not user.avatar:
+                user.set_avatar()
+            # Save / touch to update the modified datetime.
+            try:
+                user.put()
+            except db.Error, err:
+                error = unicode(err)
         elif action == self._('Reject'):
             design.status = u'rejected'
         design.put()

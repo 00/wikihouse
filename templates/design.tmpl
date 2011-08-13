@@ -9,8 +9,8 @@
     <a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a>
   </h4>
   <%
-    user = users.get_current_user()
-    is_user = user and bool(user.user_id() == target.user.user_id())
+    google_user = users.get_current_user()
+    is_user = google_user and google_user == target.user.google_user
     is_admin = users.is_current_user_admin()
   %>
   % if target.status == u'approved' or is_admin or is_user:
@@ -43,8 +43,8 @@
     </div>
     <div class="user">
       by 
-      <a href="/library/user/${target.user.user_id()}">
-        ${escape(target.user.nickname())}</a>
+      <a href="/library/user/${target.user.id}">
+        ${escape(target.user.nickname)}</a>
     </div>
     <div class="verification">
       ${_(u'Verification:')} 

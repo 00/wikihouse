@@ -301,24 +301,41 @@ class AddDesign(RequestHandler):
             error = u'Series `%s` does not exist.' % series[i]
         attrs['series'] = keys
         
-        attrs['component'] = params.get('component') == '1'
-        attrs['verification'] = params.get('verification')
-        attrs['notes'] = params.get('notes')
-        attrs['sketchup_version'] = params.get('sketchup_version')
+        if not error:
+            google_user = users.get_current_user()
+            google_user_id = google_user.user_id()
+            user = model.User.get_by_user_id(google_user_id)
+            if user is None:
+                try:
+                    user = model.User(
+                        google_user=google_user,
+                        google_user_id=google_user_id
+                    )
+                    user.set_avatar()
+                    user.put()
+                except db.Error, err:
+                    error = unicode(err)
+            
+        if not error:
+            attrs['user'] = user.key()
+            attrs['component'] = params.get('component') == '1'
+            attrs['verification'] = params.get('verification')
+            attrs['notes'] = params.get('notes')
+            attrs['sketchup_version'] = params.get('sketchup_version')
         
-        country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
-        try:
-            country = pytz.country_names[country_code.lower()]
-        except KeyError:
-            country = country_code
-        attrs['country'] = country
+            country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
+            try:
+                country = pytz.country_names[country_code.lower()]
+            except KeyError:
+                country = country_code
+            attrs['country'] = country
         
-        attrs.update(uploads)
-        try:
-            design = model.Design(**attrs)
-            design.put()
-        except db.Error, err:
-            error = unicode(err)
+            attrs.update(uploads)
+            try:
+                design = model.Design(**attrs)
+                design.put()
+            except db.Error, err:
+                error = unicode(err)
         
         if error:
             data = unicode_urlencode({'error': error})

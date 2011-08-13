@@ -6,6 +6,7 @@ generate:
           // See the Ampify UNLICENSE file for details.
           (function ($) {
       - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.parsequery.js
+      - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.cycle.lite.js
       - static/src/coffee/*.coffee
       - raw: |
           })(jQuery);

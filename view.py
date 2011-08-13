@@ -311,6 +311,7 @@ class AddDesign(RequestHandler):
             google_user = users.get_current_user()
             google_user_id = google_user.user_id()
             user = model.User.get_by_user_id(google_user_id)
+            # If this user has not been stored yet, create and store it.
             if user is None:
                 try:
                     user = model.User(
@@ -321,7 +322,12 @@ class AddDesign(RequestHandler):
                     user.put()
                 except db.Error, err:
                     error = unicode(err)
-            
+            else: # Otherwise "touch" it to update the modified datetime
+                try:
+                    user.put()
+                except db.Error, err:
+                    error = unicode(err)
+                
         if not error:
             attrs['user'] = user.key()
             attrs['component'] = params.get('component') == '1'

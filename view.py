@@ -97,7 +97,13 @@ class Index(RequestHandler):
     """
     
     def get(self):
-        return self.render('index.tmpl')
+        quotes = model.Quote.get_all()
+        users_with_avatars = model.User.get_with_real_avatars()
+        return self.render(
+            'index.tmpl', 
+            quotes=quotes, 
+            users_with_avatars=users_with_avatars
+        )
         
     
     

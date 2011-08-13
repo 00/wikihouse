@@ -3,7 +3,7 @@
 <%def name="sub_title()">${_(u'Open community construction set')}</%def>
 
 <%def name="content()">
-  <div class="super-graphic">
+  <div class="super-graphic row">
     <div class="super-graphic-image">
       <img src="${get_static_url('gfx/super-graphic.png')}" />
     </div>
@@ -19,69 +19,31 @@
       </a>
     </div>
   </div>
-  <div class="slot-0-1-2-3">
-    <div class="community">
-      <h4>${_(u'Featured contributors')}</h4>
-      <ul>
+  <div class="row">
+    <ul class="quotes-widget">
+      % for item in quotes:
         <li>
-          <a href="/library/users/...">
-            AVATAR IMAGE
-          </a>
+          <div class="quote-image">
+            <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
+          </div>
+          <div class="quote-content">
+            ${item.content}
+          </div>
+          <div class="quote-name">
+            ${item.name}
+          </div>
         </li>
-        <li>
-          <a href="/library/users/...">
-            AVATAR IMAGE
-          </a>
-        </li>
-        <li>
-          <a href="/library/users/...">
-            AVATAR IMAGE
-          </a>
-        </li>
-        <li>
-          <a href="/library/users/...">
-            AVATAR IMAGE
-          </a>
-        </li>
-      </ul>
-      <a href="/library/users">
-        <div class="more-link">
-          ${_(u'View all the contributors')}
-        </div>
-      </a>
-    </div>
-    <div class="press">
-      <h4>${_(u'Press')}</h4>
-      <ul>
-        <li>
-          <p>
-            <em>Here comes the revolution.</em>
-            <br />
-            Tech Crunch
-          </p>
-        </li>
-        <li>
-          <p>
-            <em>WikiHouse is the future of construction.  Period.</em>
-            <br />
-            Kanye West
-          </p>
-        </li>
-      </ul>
-    </div>
+      % endfor
+    </ul>
   </div>
-  <div class="slot-4-5">
-    <ul class="action-box">
-      <li>
-        <a href="/download">
-          Download the plugin >>
-        </a>
-      </li>
-      <li>
-        <a href="/library">
-          Browse the library >>
-        </a>
-      </li>
+  <div class="row">
+    <ul class="avatars-widget">
+      % for item in users_with_avatars:
+        <li>
+          <a href="/library/users/${item.id}" title="${item.nickname}">
+            <img src="${item.avatar}" /></a>
+        </li>
+      % endfor
     </ul>
   </div>
 </%def>

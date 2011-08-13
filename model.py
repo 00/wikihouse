@@ -60,6 +60,13 @@ class User(db.Model):
         
     
     
+    @classmethod
+    def get_with_real_avatars(cls, limit=40):
+        query = cls.all().filter('has_real_avatar =', True)
+        return query.order('-m').fetch(limit)
+        
+    
+    
     @property
     def designs(self):
         query = Design.all().filter("status =", u'approved')
@@ -227,7 +234,7 @@ class Quote(db.Model):
     
     @classmethod
     def get_all(cls):
-        return cls.all()
+        return cls.all().order('m')
         
     
     

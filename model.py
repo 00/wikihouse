@@ -71,7 +71,7 @@ class User(db.Model):
     
     @property
     def designs(self):
-        return Design.all_listings(filter=("user =", self.key()))
+        return Design.all_listings(filter_by=[("user =", self.key())])
         
     
     
@@ -171,7 +171,7 @@ class Series(db.Model):
     
     @property
     def designs(self):
-        return Design.all_listings(filter=("series =", self.key()))
+        return Design.all_listings(filter_by=[("series =", self.key())])
         
     
     
@@ -231,7 +231,7 @@ class Design(db.Model):
         # Get the approved designs.
         query = cls.all().order('-m')
         if filter_by is not None:
-            for k, v in filter_by.iteritems():
+            for k, v in filter_by:
                 query.filter(k, v)
         approved = query.filter("status =", u'approved')
         approved_results = approved.fetch(limit)

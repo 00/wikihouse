@@ -7,6 +7,7 @@
 import hashlib
 import logging
 import urllib
+import urllib2
 
 from google.appengine.ext import blobstore, db
 
@@ -25,6 +26,7 @@ class User(db.Model):
     google_user_id = db.StringProperty()
     
     avatar = db.StringProperty()
+    has_real_avatar = db.BooleanProperty(default=False)
     
     @property
     def id(self):
@@ -76,6 +78,7 @@ class User(db.Model):
         """
         
         avatar = None
+        has_real_avatar = False
         
         # If we can get a google username from the email (quite likely) then try
         # scraping the profile image from Google+ (nasty).
@@ -114,6 +117,7 @@ class User(db.Model):
                 if results is not None:
                     src = results['img']['src']
                     avatar = src.replace('?sz=200', '?sz=%s' % size)
+                    has_real_avatar = True
                     break
                 
         # Fall back on Gravatar.
@@ -122,11 +126,18 @@ class User(db.Model):
             # Using `d=mm` to fallback on the "mystery man" image if no gravatar
             # is found.
             avatar = 'http://www.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
-        
-        logging.info(avatar)
-        
+            # Calling the thing with `d=404` to determine whether the avatar is real
+            # or not.
+            try:
+                sock = urllib2.urlopen(avatar.replace('&d=mm', '&d=404'))
+            except urllib2.URLError, e:
+                has_real_avatar = False
+            else:
+                has_real_avatar = True
+            
         # Set `self.avatar`.
         self.avatar = avatar
+        self.has_real_avatar = has_real_avatar
         
     
     

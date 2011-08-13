@@ -36,6 +36,12 @@ mapping = [(
         r'/library/series/(\w+)\/?',
         Library
     ), (
+        r'/library/users\/?',
+        Users
+    ), (
+        r'/library/user/([0-9]+)\/?',
+        User
+    ), (
         r'/library/design/([0-9]+)\/?',
         Design
     ), (

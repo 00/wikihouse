@@ -1,0 +1,19 @@
+<%inherit file="base.tmpl"/>
+
+<%def name="sub_title()">${_(u'Contributors')}</%def>
+
+<%def name="user_listing(item)">
+  <li>
+    <a href="/library/user/${item.id}" title="${item.nickname}">
+      <img src="${item.avatar}" /></a>
+  </li>
+</%def>
+
+<%def name="content()">
+  <h4>${_(u'Contributors')}</h4>
+  <ul class="designs">
+    % for item in contributors:
+      ${self.user_listing(item)}
+    % endfor
+  </ul>
+</%def>

@@ -1,0 +1,21 @@
+<%inherit file="library.tmpl"/>
+
+<%def name="sub_title()">${target.nickname}</%def>
+
+<%def name="main_content()">
+  <h4>${_(u'Designs')}</h4>
+  <ul class="designs">
+    % for item in designs:
+      ${self.design_listing(item, show_series=True)}
+    % endfor
+  </ul>
+</%def>
+
+<%def name="actions()">
+  <h4>${_(u'User')}</h4>
+  <div class="user-block">
+    <a href="/library/user/${target.id}" title="${target.nickname}">
+      <img src="${target.avatar}" /></a>
+    ${target.nickname}
+  </div>
+</%def>

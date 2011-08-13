@@ -232,7 +232,7 @@ class AddDesign(RequestHandler):
             while data:
                 f.write(data[:921600])
                 data = data[921600:]
-
+        
         # Finalize the file. Do this before attempting to read it.
         files.finalize(file_name)
         
@@ -370,7 +370,6 @@ class AddDesign(RequestHandler):
     
     
 
-
 class AddDesignSuccess(RequestHandler):
     """
     """
@@ -440,6 +439,33 @@ class Design(RequestHandler):
         
     
     
+
+
+class Users(RequestHandler):
+    """ 
+    """
+    
+    def get(self):
+        contributors = model.User.get_all()
+        return self.render('users.tmpl', contributors=contributors)
+        
+    
+    
+
+
+class User(RequestHandler):
+    """ 
+    """
+    
+    def get(self, id):
+        target = model.User.get_by_id(int(id))
+        designs = target.designs
+        return self.render('user.tmpl', target=target, designs=designs)
+        
+    
+    
+
+
 
 
 class Base64Blob(RequestHandler):

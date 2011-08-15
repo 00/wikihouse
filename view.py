@@ -393,6 +393,39 @@ class Moderate(RequestHandler):
     
     __all__ = ['get', 'post']
     
+    def notify(self, design, user):
+        """ Notify the design's user that they need to register their email with
+          gravatar.
+        """
+        
+        url = self.request.host_url
+        recipient = user.email
+        sender = self.settings['moderator_email_address']
+        subject = self._(u'Complete your WikiHouse profile with a gravatar')
+        body = u'%s\n\n%s %s\n%s %s/library/design/%s\n\n%s\n\n%s%s\n\n%s\nWikiHouse\n%s\n' % (
+            self._(u'Your design has been approved and included in the WikiHouse library:'),
+            self._(u'Title:'),
+            xhtml_escape(design.title),
+            self._(u'Url:'),
+            url,
+            design.key().id(),
+            self._(u'To complete your user profile and have your design featured, register a profile image against your email address here:'),
+            'http://en.gravatar.com/site/signup/',
+            urllib.quote(user.email),
+            self._(u'Thanks,'),
+            url
+        )
+        logging.info(body)
+        message = mail.EmailMessage(
+            to=recipient,
+            sender=sender, 
+            subject=subject, 
+            body=body
+        )
+        message.send()
+        
+    
+    
     @auth.admin
     def post(self):
         params = self.request.params
@@ -409,6 +442,9 @@ class Moderate(RequestHandler):
                 user.put()
             except db.Error, err:
                 error = unicode(err)
+            # If the user doesn't have a real avatar, notify them
+            if not user.has_real_avatar:
+                self.notify(design, user)
         elif action == self._('Reject'):
             design.status = u'rejected'
         design.put()

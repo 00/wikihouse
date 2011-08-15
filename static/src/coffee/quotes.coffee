@@ -2,5 +2,4 @@
 $(document).ready ->
   $widget = $ '.quotes-widget'
   $widget.cycle()
-  console.log '*'
 

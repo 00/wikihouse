@@ -213,6 +213,7 @@ class Design(db.Model):
     )
     notes = db.TextProperty()
     sketchup_version = db.StringProperty()
+    plugin_version = db.StringProperty()
     
     model = blobstore.BlobReferenceProperty()
     model_preview = blobstore.BlobReferenceProperty()

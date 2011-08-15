@@ -15,7 +15,7 @@ import urllib
 from pytz.gae import pytz
 from xml.etree import ElementTree as etree
 
-from google.appengine.api import files, mail, memcache, users
+from google.appengine.api import files, images, mail, memcache, users
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
@@ -240,7 +240,8 @@ class AddDesign(RequestHandler):
         
     
     def _get_uploads(self):
-        """ Lazy decode and store file uploads.
+        """ Lazy decode and store file uploads.  If we're handling an image,
+          adds a `${key}_serving_url` string property.
         """
         
         if self._uploads is None:
@@ -251,6 +252,10 @@ class AddDesign(RequestHandler):
                     mime_type = self._upload_files.get(key)
                     data = base64.urlsafe_b64decode(encode_to_utf8(value))
                     blob_key = self._write_file(mime_type, data)
+                    if mime_type.startswith('image'):
+                        serving_key = '%s_serving_url' % key
+                        serving_url = images.get_serving_url(blob_key)
+                        self._uploads[serving_key] = serving_url
                     self._uploads[key] = blob_key
         return self._uploads
         

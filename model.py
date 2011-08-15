@@ -218,8 +218,11 @@ class Design(db.Model):
     model = blobstore.BlobReferenceProperty()
     model_preview = blobstore.BlobReferenceProperty()
     model_preview_reverse = blobstore.BlobReferenceProperty()
+    model_preview_serving_url = db.StringProperty()
+    model_preview_reverse_serving_url = db.StringProperty()
     sheets = blobstore.BlobReferenceProperty()
     sheets_preview = blobstore.BlobReferenceProperty()
+    sheets_preview_serving_url = db.StringProperty()
     
     @classmethod
     def all_listings(cls, filter_by=None, limit=99):

@@ -1,9 +1,12 @@
 # Edit the configuration below (writen in `YAML <http://yaml.org/>`_) and then
 # call `/bootstrap` to overwrite the `Quotes`.  Images for the quotes are looked
 # up using `gfx/logos/${org}.png`.
+# 
+# Use an optional `href: ...` to add a hyperlink to the article.
 - org: wired
   name: Bruce Sterling
   content: "The first one I've seen that I could quite likely build and inhabit."
+  href: "http://www.wired.com/beyond_the_beyond/2011/08/architecture-fiction-wikihouse/"
 - org: org1
   name: Dummy
   content: "Lorum ipsum dolores dulcit foobar."

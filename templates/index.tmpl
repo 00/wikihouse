@@ -30,7 +30,12 @@
             ${item.content}
           </div>
           <div class="quote-name">
-            ${item.name}
+            % if item.href:
+              <a href="${item.href}" target="_blank">
+                ${item.name}</a>
+            % else:
+              ${item.name}
+            % endif
           </div>
         </li>
       % endfor

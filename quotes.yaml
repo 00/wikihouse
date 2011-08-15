@@ -4,9 +4,9 @@
 - org: wired
   name: Bruce Sterling
   content: "The first one I've seen that I could quite likely build and inhabit."
-- org: org1
+- org: lsn
   name: Dummy
   content: "Lorum ipsum dolores dulcit foobar."
-- org: org2
+- org: protein
   name: Dummy 2
   content: "To be or not to be.  That is the question."

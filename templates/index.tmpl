@@ -19,24 +19,24 @@
       </a>
     </div>
   </div>
-  <div class="row">
-    <ul class="quotes-widget">
+  <div class="row padding-top-bottom">
+    <ul class="quotes-widget padding-top-bottom">
       % for item in quotes:
         <li>
-          <div class="quote-image">
+          <div class="quote-image left">
             <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
           </div>
-          <div class="quote-content">
+          <div class="quote-content left">
             ${item.content}
           </div>
-          <div class="quote-name">
+          <div class="quote-name left">
             ${item.name}
           </div>
         </li>
       % endfor
     </ul>
   </div>
-  <div class="row">
+  <div class="row padding-top-bottom">
     <ul class="avatars-widget">
       % for item in users_with_avatars:
         <li>

@@ -1,0 +1,4 @@
+cron:
+- description: ping the thing every 2 minutes to avoid loading requests
+  url: /cron/ping
+  schedule: every 2 minutes

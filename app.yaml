@@ -6,6 +6,9 @@ api_version: 1
 builtins:
 - datastore_admin: on
 
+inbound_services:
+- warmup
+
 handlers:
 - url: /favicon.ico
   static_files: static/build/gfx/favicon.ico

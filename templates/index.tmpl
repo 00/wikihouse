@@ -29,8 +29,13 @@
           <div class="quote-content left">
             ${item.content}
           </div>
-          <div class="quote-name left">
-            ${item.name}
+          <div class="quote-name">
+            % if item.href:
+              <a href="${item.href}" target="_blank">
+                ${item.name}</a>
+            % else:
+              ${item.name}
+            % endif
           </div>
         </li>
       % endfor

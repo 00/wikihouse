@@ -17,5 +17,18 @@
     <a href="/library/user/${target.id}" title="${target.nickname}">
       <img src="${target.avatar}" /></a>
     ${target.nickname}
+    <% 
+      google_user = users.get_current_user()
+      is_user = google_user and google_user.user_id() == target.google_user_id
+    %>
+    % if target.avatar and not target.has_real_avatar:
+      % if is_user:
+        <div class="gravatar-prompt">
+          ${_(u'Not seeing your profile image?')}
+          <a href="http://en.gravatar.com/site/signup/${quote(target.email)}">
+            ${_(u'Register with Gravatar')}</a>.
+        </div>
+      % endif
+    % endif
   </div>
 </%def>

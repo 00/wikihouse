@@ -273,6 +273,7 @@ class Quote(db.Model):
     
     name = db.StringProperty()
     content = db.TextProperty(default='')
+    href = db.LinkProperty()
     
     @classmethod
     def get_all(cls):

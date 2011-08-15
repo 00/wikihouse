@@ -2,12 +2,78 @@
 
 <%def name="sub_title()">${_("How it Works")}</%def>
 
-<%def name="main_content()">
-  Information about WikiHouse, what it is, videos, slides, etc.
+<%def name="overview_panel()">
+  Overview
+  ...
 </%def>
 
-<%def name="actions()">
-  <div>
-    <!-- link -->
+<%def name="install_panel()">
+  Install
+  ...
+</%def>
+
+<%def name="download_panel()">
+  Download
+  ...
+</%def>
+
+<%def name="print_panel()">
+  Print
+  ...
+</%def>
+
+<%def name="assemble_panel()">
+  Assemble
+  ...
+</%def>
+
+<%def name="main_content(steps)">
+  <div class="panels">
+    % for item in steps:
+      <div id="step-${item['slug']}">
+        ${getattr(self, u'%s_panel' % item['slug'])()}
+      </div>
+    % endfor
+  </div>
+</%def>
+
+<%def name="actions(steps)">
+  <ul class="tabs">
+    % for item in steps:
+      <li class="step step-${item['slug']}">
+        <a href="#step-${item['slug']}" data-slug="${item['slug']}">
+          ${item['title']}</a>
+      </li>
+    % endfor
+  </ul>
+</%def>
+
+<%def name="content()">
+  <%
+    steps = [{
+            'slug': 'overview',
+            'title': _(u'Overview')
+        }, {
+            'slug': 'install',
+            'title': _(u'Install the plugin')
+        }, {
+            'slug': 'download',
+            'title': _(u'Download houses &amp; components')
+        }, {
+            'slug': 'print',
+            'title': _(u'Print your design')
+        }, {
+            'slug': 'assemble',
+            'title': _(u'Assemble your house')
+        }
+    ]
+  %>
+  <div class="how-it-works-container">
+    <div>
+      ${self.main_content(steps)}
+    </div>
+    <div>
+      ${self.actions(steps)}
+    </div>
   </div>
 </%def>

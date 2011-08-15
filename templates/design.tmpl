@@ -4,6 +4,12 @@
 
 <%def name="main_content()">
   <div id="design">
+  % if is_sketchup:
+    <div class="back-to-series-button">
+      <a rel="back" href="#back">
+        Go back</a>
+    </div>
+  % endif
   <h4>
     ${target.key().id()}
     <a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a>
@@ -115,23 +121,25 @@
       ${_(u'This design was rejected.')}
     </div>
   % endif
-  <div class="comments row">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'wikihouse';
-      var disqus_identifier = 'Design ${target.key().id()}';
-      var disqus_url = '${request.path_url}';
-      var disqus_developer = ${disqus_developer and '1' or '0'};
-      var WIKIHOUSE_DOWNLOAD_PAGE = true;
-    </script>
-    <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
-    </script>
-    <noscript>
-      ${_(u'Please enable JavaScript to view the comments.')}
-    </noscript>
-    <a href="http://disqus.com" class="dsq-brlink">
-      ${_(u'Comments powered by')}
-      <span class="logo-disqus">Disqus</span></a>
-  </div>
+  % if not is_sketchup:
+    <div class="comments row">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'wikihouse';
+        var disqus_identifier = 'Design ${target.key().id()}';
+        var disqus_url = '${request.path_url}';
+        var disqus_developer = ${disqus_developer and '1' or '0'};
+        var WIKIHOUSE_DOWNLOAD_PAGE = true;
+      </script>
+      <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
+      </script>
+      <noscript>
+        ${_(u'Please enable JavaScript to view the comments.')}
+      </noscript>
+      <a href="http://disqus.com" class="dsq-brlink">
+        ${_(u'Comments powered by')}
+        <span class="logo-disqus">Disqus</span></a>
+    </div>
+  % endif
   </div>
 </%def>

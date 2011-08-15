@@ -209,7 +209,9 @@ class Library(SketchupAwareHandler):
             target = None
         else:
             target = model.Series.get_by_key_name(name)
-        
+            if target is None:
+                return self.error(status=404)
+            
         # Get either the most recent 9 `Design`s or the `Design`s in the
         # target `Series`.
         if target is None:
@@ -498,6 +500,8 @@ class Design(RequestHandler):
     
     def get(self, id):
         target = model.Design.get_by_id(int(id))
+        if target is None:
+            return self.error(status=404)
         series = model.Series.get_all()
         developer = self.settings['dev'] or 'appspot.com' in self.request.host
         return self.render(
@@ -529,6 +533,8 @@ class User(RequestHandler):
     
     def get(self, id):
         target = model.User.get_by_id(int(id))
+        if target is None:
+            return self.error(status=404)
         designs = target.designs
         return self.render('user.tmpl', target=target, designs=designs)
         

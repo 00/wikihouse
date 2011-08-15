@@ -362,13 +362,17 @@ class AddDesign(SketchupAwareHandler):
             attrs['sketchup_version'] = params.get('sketchup_version')
             attrs['plugin_version'] = params.get('plugin_version')
             
+            # If the current user is an admin, skip moderation.
+            if users.is_current_user_admin():
+                attrs['status'] = u'approved'
+            
             country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
             try:
                 country = pytz.country_names[country_code.lower()]
             except KeyError:
                 country = country_code
             attrs['country'] = country
-        
+            
             attrs.update(uploads)
             try:
                 design = model.Design(**attrs)
@@ -381,8 +385,10 @@ class AddDesign(SketchupAwareHandler):
             response = self.redirect('/library/add_design/error?%s' % data)
         else:
             response = self.redirect('/library/add_design/success/%s' % design.key().id())
-            self.notify(design)
-        
+            # Notify design will be moderated, unless the current user is an admin.
+            if not users.is_current_user_admin():
+                self.notify(design)
+            
         response.body = ''
         return response
         

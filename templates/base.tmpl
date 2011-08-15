@@ -214,6 +214,10 @@
     </script>
     <script type="text/javascript">
       stLight.options({'publisher': '386e0e7b-fee7-485d-af13-172a5107f9fb'});
+      if (typeof window.wikihouse === "undefined" || window.wikihouse === null) {
+        window.wikihouse = {};
+        window.wikihouse.is_sketchup = ${str(is_sketchup).lower()};
+      }
     </script>
     <script type="text/javascript" src="/i18n/message_strings.json">
     </script>

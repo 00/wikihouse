@@ -26,8 +26,11 @@ import auth
 import model
 
 class RequestHandler(BaseRequestHandler):
-    """ Adds i18n support to `weblayer.RequestHandler`, providing `self._` and
-      passing `_()` through to templates.
+    """ Adds i18n and SketchUp awareness support to `weblayer.RequestHandler`:
+      
+      * providing `self._` and passing `_()` through to templates
+      * providing `self.is_sketchup` and passing `is_sketchup` to templates
+      
     """
     
     def _get_accepted_languages(self):
@@ -66,6 +69,7 @@ class RequestHandler(BaseRequestHandler):
             users=users, 
             quote=urllib.quote,
             _=self._, 
+            is_sketchup=self.is_sketchup,
             **kwargs
         )
         
@@ -87,6 +91,7 @@ class RequestHandler(BaseRequestHandler):
             languages=[target]
         )
         self._ = translation.ugettext
+        self.is_sketchup = self.cookies.get('is_sketchup') == 'true'
         
     
     
@@ -171,7 +176,27 @@ class Contact(RequestHandler):
     
 
 
-class Library(RequestHandler):
+class SketchupAwareHandler(RequestHandler):
+    """ Looks for optional `sketchup\/?` at the end of the url.  If present sets
+      a `is_sketchup` session cookie to be `true`.
+      
+      N.b.: this uses the url path and not a request param because the request
+      param gets lost through the Google authentication redirect.
+    """
+    
+    def __init__(self, *args, **kwargs):
+        super(SketchupAwareHandler, self).__init__(*args, **kwargs)
+        path = self.request.path
+        if path.endswith('sketchup') or path.endswith('sketchup/'):
+            self.cookies.set('is_sketchup', 'true', expires_days=None)
+            self.is_sketchup = True
+            
+        
+    
+    
+
+
+class Library(SketchupAwareHandler):
     """
     """
     
@@ -204,7 +229,7 @@ class Library(RequestHandler):
     
 
 
-class AddDesign(RequestHandler):
+class AddDesign(SketchupAwareHandler):
     """
     """
     

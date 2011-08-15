@@ -505,8 +505,6 @@ class User(RequestHandler):
     
 
 
-
-
 class Base64Blob(RequestHandler):
     """
     """

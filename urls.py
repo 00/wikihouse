@@ -33,6 +33,9 @@ mapping = [(
         r'/library\/?',
         Library
     ), (
+        r'/library/sketchup\/?',
+        Library
+    ), (
         r'/library/series/(\w+)\/?',
         Library
     ), (
@@ -46,6 +49,9 @@ mapping = [(
         Design
     ), (
         r'/library/add_design\/?',
+        AddDesign
+    ), (
+        r'/library/add_design/sketchup\/?',
         AddDesign
     ), (
         r'/library/add_design/success/([0-9]+)\/?',

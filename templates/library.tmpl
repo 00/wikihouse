@@ -8,7 +8,7 @@
     <div class="design-panel">
       % if item.model_preview:
         <div class="thumbnail left">
-          <img src="/blob/${item.model_preview.key()}" />
+          <img src="${item.model_preview_serving_url}=s110" />
         </div>
       % endif
       <div class="design-details left padding-left">
@@ -95,24 +95,14 @@
 </%def>
 
 <%def name="content()">
-  <div class="series-small">
+  <div class="slot-6">
     <div class="series">
       ${self.actions()}
     </div>
   </div>
-  <div class="slot-6-7-8 series-small">
+  <div class="slot-7-8-9">
     <div class="">
       ${self.main_content()}
-    </div>
-  </div>
-  <div class="slot-6-7-8 series-big">
-    <div class="">
-      ${self.main_content()}
-    </div>
-  </div>
-  <div class="slot-9 series-big">
-    <div class="series">
-      ${self.actions()}
     </div>
   </div>
 </%def>

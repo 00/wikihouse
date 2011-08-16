@@ -4,6 +4,12 @@
 
 <%def name="main_content()">
   <div id="design">
+  % if is_sketchup:
+    <div class="back-to-series-button">
+      <a rel="back" href="#back">
+        Go back</a>
+    </div>
+  % endif
   <h4>
     ${target.key().id()}
     <a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a>
@@ -16,17 +22,17 @@
   % if target.status == u'approved' or is_admin or is_user:
     % if target.model_preview:
       <div class="preview">
-        <img src="/blob/${target.model_preview.key()}" />
+        <img src="${target.model_preview_serving_url}=s320" />
       </div>
     % endif
     % if target.model_preview_reverse:
       <div class="preview">
-        <img src="/blob/${target.model_preview_reverse.key()}" />
+        <img src="${target.model_preview_reverse_serving_url}=s320" />
       </div>
     % endif
     % if target.sheets_preview:
       <div class="preview">
-        <img src="/blob/${target.sheets_preview.key()}" />
+        <img src="${target.sheets_preview_serving_url}=s320" />
       </div>
     % endif
     <div class="series">
@@ -88,17 +94,11 @@
             rel="${target.component and '1' or '0'}">
           ${_(u'Download SketchUp Model')}</a>
       </div>
-      <!--
-        
-        This link is just to show...
-        
-        
       <div class="hidden download base64 model">
         <a href="/blob64/${target.model.key()}"
            id="design-download-base64">Download Base64 Encoded</a>
         <textarea id="design-download-data"></textarea>
       </div>
-      -->
     % endif
     % if target.sheets:
       <div class="download sheets">
@@ -115,23 +115,27 @@
       ${_(u'This design was rejected.')}
     </div>
   % endif
-  <div class="comments row">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-      var disqus_shortname = 'wikihouse';
-      var disqus_identifier = 'Design ${target.key().id()}';
-      var disqus_url = '${request.path_url}';
-      var disqus_developer = ${disqus_developer and '1' or '0'};
-      var WIKIHOUSE_DOWNLOAD_PAGE = true;
-    </script>
-    <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
-    </script>
-    <noscript>
-      ${_(u'Please enable JavaScript to view the comments.')}
-    </noscript>
-    <a href="http://disqus.com" class="dsq-brlink">
-      ${_(u'Comments powered by')}
-      <span class="logo-disqus">Disqus</span></a>
-  </div>
+  % if not is_sketchup:
+    <div class="comments row">
+      <div id="disqus_thread"></div>
+      <script type="text/javascript">
+        var disqus_shortname = 'wikihouse';
+        var disqus_identifier = 'Design ${target.key().id()}';
+        var disqus_url = '${request.path_url}';
+        var disqus_developer = ${disqus_developer and '1' or '0'};
+      </script>
+      <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
+      </script>
+      <noscript>
+        ${_(u'Please enable JavaScript to view the comments.')}
+      </noscript>
+      <a href="http://disqus.com" class="dsq-brlink">
+        ${_(u'Comments powered by')}
+        <span class="logo-disqus">Disqus</span></a>
+    </div>
+  % endif
+  <script>
+    var WIKIHOUSE_DOWNLOAD_PAGE = true;
+  </script>
   </div>
 </%def>

@@ -3,11 +3,7 @@
 
 window.wikihouse ?= {}
 
-window.wikihouse.init = (id) ->
-
-  # Exit early if it's not the same SketchUp WebDialog.
-  if id is not SKETCHUP_SESSION_ID
-    return
+window.wikihouse.init = ->
 
   # Setup the controls and methods for the upload page.
   if WIKIHOUSE_UPLOAD_PAGE?
@@ -147,18 +143,5 @@ window.wikihouse.init = (id) ->
       return false
 
 $(document).ready ->
-
-  if WIKIHOUSE_UPLOAD_PAGE? or WIKIHOUSE_DOWNLOAD_PAGE?
-
-    # Attempt to generate a unique session id to distinguish potential SketchUp
-    # WebDialogs.
-    id = "#{(new Date).getTime()}:#{Math.random()}"
-    window.SKETCHUP_SESSION_ID = id
-
-    # Create an iframe.
-    iframe = document.createElement 'iframe'
-    iframe.src = "skp:init@#{id}"
-    iframe.style.display = 'none'
-
-    # Append the iframe and thus try and call SketchUp.
-    document.body.appendChild iframe
+  if WIKIHOUSE_IS_SKETCHUP
+    wikihouse.init()

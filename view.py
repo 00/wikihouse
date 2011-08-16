@@ -15,7 +15,7 @@ import urllib
 from pytz.gae import pytz
 from xml.etree import ElementTree as etree
 
-from google.appengine.api import files, mail, memcache, users
+from google.appengine.api import files, images, mail, memcache, users
 from google.appengine.ext import blobstore, db
 
 from weblayer import RequestHandler as BaseRequestHandler
@@ -26,8 +26,11 @@ import auth
 import model
 
 class RequestHandler(BaseRequestHandler):
-    """ Adds i18n support to `weblayer.RequestHandler`, providing `self._` and
-      passing `_()` through to templates.
+    """ Adds i18n and SketchUp awareness support to `weblayer.RequestHandler`:
+      
+      * providing `self._` and passing `_()` through to templates
+      * providing `self.is_sketchup` and passing `is_sketchup` to templates
+      
     """
     
     def _get_accepted_languages(self):
@@ -66,6 +69,7 @@ class RequestHandler(BaseRequestHandler):
             users=users, 
             quote=urllib.quote,
             _=self._, 
+            is_sketchup=self.is_sketchup,
             **kwargs
         )
         
@@ -87,6 +91,7 @@ class RequestHandler(BaseRequestHandler):
             languages=[target]
         )
         self._ = translation.ugettext
+        self.is_sketchup = self.cookies.get('is_sketchup') == 'true'
         
     
     
@@ -171,7 +176,27 @@ class Contact(RequestHandler):
     
 
 
-class Library(RequestHandler):
+class SketchupAwareHandler(RequestHandler):
+    """ Looks for optional `sketchup\/?` at the end of the url.  If present sets
+      a `is_sketchup` session cookie to be `true`.
+      
+      N.b.: this uses the url path and not a request param because the request
+      param gets lost through the Google authentication redirect.
+    """
+    
+    def __init__(self, *args, **kwargs):
+        super(SketchupAwareHandler, self).__init__(*args, **kwargs)
+        path = self.request.path
+        if path.endswith('sketchup') or path.endswith('sketchup/'):
+            self.cookies.set('is_sketchup', 'true', expires_days=None)
+            self.is_sketchup = True
+            
+        
+    
+    
+
+
+class Library(SketchupAwareHandler):
     """
     """
     
@@ -184,7 +209,9 @@ class Library(RequestHandler):
             target = None
         else:
             target = model.Series.get_by_key_name(name)
-        
+            if target is None:
+                return self.error(status=404)
+            
         # Get either the most recent 9 `Design`s or the `Design`s in the
         # target `Series`.
         if target is None:
@@ -204,7 +231,7 @@ class Library(RequestHandler):
     
 
 
-class AddDesign(RequestHandler):
+class AddDesign(SketchupAwareHandler):
     """
     """
     
@@ -240,7 +267,8 @@ class AddDesign(RequestHandler):
         
     
     def _get_uploads(self):
-        """ Lazy decode and store file uploads.
+        """ Lazy decode and store file uploads.  If we're handling an image,
+          adds a `${key}_serving_url` string property.
         """
         
         if self._uploads is None:
@@ -251,6 +279,10 @@ class AddDesign(RequestHandler):
                     mime_type = self._upload_files.get(key)
                     data = base64.urlsafe_b64decode(encode_to_utf8(value))
                     blob_key = self._write_file(mime_type, data)
+                    if mime_type.startswith('image'):
+                        serving_key = '%s_serving_url' % key
+                        serving_url = images.get_serving_url(blob_key)
+                        self._uploads[serving_key] = serving_url
                     self._uploads[key] = blob_key
         return self._uploads
         
@@ -328,14 +360,19 @@ class AddDesign(RequestHandler):
             attrs['verification'] = params.get('verification')
             attrs['notes'] = params.get('notes')
             attrs['sketchup_version'] = params.get('sketchup_version')
-        
+            attrs['plugin_version'] = params.get('plugin_version')
+            
+            # If the current user is an admin, skip moderation.
+            if users.is_current_user_admin():
+                attrs['status'] = u'approved'
+            
             country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
             try:
                 country = pytz.country_names[country_code.lower()]
             except KeyError:
                 country = country_code
             attrs['country'] = country
-        
+            
             attrs.update(uploads)
             try:
                 design = model.Design(**attrs)
@@ -348,8 +385,10 @@ class AddDesign(RequestHandler):
             response = self.redirect('/library/add_design/error?%s' % data)
         else:
             response = self.redirect('/library/add_design/success/%s' % design.key().id())
-            self.notify(design)
-        
+            # Notify design will be moderated, unless the current user is an admin.
+            if not users.is_current_user_admin():
+                self.notify(design)
+            
         response.body = ''
         return response
         
@@ -467,6 +506,8 @@ class Design(RequestHandler):
     
     def get(self, id):
         target = model.Design.get_by_id(int(id))
+        if target is None:
+            return self.error(status=404)
         series = model.Series.get_all()
         developer = self.settings['dev'] or 'appspot.com' in self.request.host
         return self.render(
@@ -498,6 +539,8 @@ class User(RequestHandler):
     
     def get(self, id):
         target = model.User.get_by_id(int(id))
+        if target is None:
+            return self.error(status=404)
         designs = target.designs
         return self.render('user.tmpl', target=target, designs=designs)
         

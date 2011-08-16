@@ -22,17 +22,17 @@
   % if target.status == u'approved' or is_admin or is_user:
     % if target.model_preview:
       <div class="preview">
-        <img src="${target.model_preview_serving_url}=320" />
+        <img src="${target.model_preview_serving_url}=s320" />
       </div>
     % endif
     % if target.model_preview_reverse:
       <div class="preview">
-        <img src="${target.model_preview_reverse_serving_url}=320" />
+        <img src="${target.model_preview_reverse_serving_url}=s320" />
       </div>
     % endif
     % if target.sheets_preview:
       <div class="preview">
-        <img src="${target.sheets_preview_serving_url}=320" />
+        <img src="${target.sheets_preview_serving_url}=s320" />
       </div>
     % endif
     <div class="series">

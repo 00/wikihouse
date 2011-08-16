@@ -35,7 +35,7 @@
         href="${get_static_url('css/simplegrid/986_grid.css')}" 
     />
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 1236px)"
-        href="${get_static_url('css/simplegrid/1236_grid.css')}" 
+        href="${get_static_url('css/simplegrid/986_grid.css')}" 
     />
     <link rel="stylesheet" type="text/css" 
         href="${get_static_url('css/wikihouse.css')}"
@@ -109,9 +109,9 @@
             <a class="wh-logo-img" href="/">[ WIKI HOUSE LOGO ]</a>
           </div>
         </div>
-        <div class="row">
-          <div class="slot-0-1-2-3-4-5 padding-sides">
-            <div id="wh-logo-text">
+        <div class="row border-bottom">
+          <div class="slot-0-1">
+            <div id="wh-logo-text" class="padding-left">
               <div>
                 <a class="wh-logo-text" href="/">[ WIKI HOUSE LOGO TEXT ]</a>
               </div>
@@ -120,10 +120,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="slot-0-1-2-3-4-5 border-bottom padding-top">
-            <ul class="main-nav">
+          <div class="slot-2-3-4-5 padding-top">
+            <ul class="main-nav right">
               <%
                 nav_items = [{
                         'value': '/',
@@ -153,7 +151,7 @@
                       selected = request.path.startswith(value)
 
                 %>
-                <li class="${selected and 'selected' or ''}">
+                <li class="padding-sides padding-top-bottom ${selected and 'selected' or ''}">
                   <a href="${value}">${label}</a>
                 </li>
               % endfor
@@ -184,15 +182,15 @@
               <span class="small">Powered by:</span>
             </div>
             <div class="left">
-              <a class="logo-00" target="blank" href="http://www.architecture00.net" alt="00:/">[ 00:/ ]</a>
+              <a class="logo-00" target="blank" href="http://www.architecture00.net" alt="00:/" title="Architecture 00:/">[ 00:/ ]</a>
             </div>
             <div class="left">
-              <a class="logo-esp" target="blank" href="http://www.espians.com" alt="Espians">[ ESPIANS ]</a>
+              <a class="logo-esp" target="blank" href="http://www.espians.com" alt="Espians" title="Espians">[ ESPIANS ]</a>
             </div>
             </div>
             <div class="right">
               <div class="border-left padding-sides padding-top-small right">
-              <a class="logo-gw" target="blank" href="http://gb.or.kr/?mid=main_eng" alt="Gwangju Design Biennale 2011">[Gwangju Design Biennale 2011]</a>
+              <a class="logo-gw" target="blank" href="http://gb.or.kr/?mid=main_eng" alt="Gwangju Design Biennale 2011" title="Gwangju Design Biennale 2011">[Gwangju Design Biennale 2011]</a>
               </div>
             </div>
           </div>

@@ -1,5 +1,8 @@
 //Variables
 
+$accentcolor: #DBD9C9
+$highlightcolor: #eee
+
 $border: 1px solid #ddd
 $padding-01: 0.5em
 $padding-02: 1em
@@ -150,7 +153,7 @@ a
     color: #000
 
 li.selected
-  background-color: #DBD9C9
+  background-color: #eee
   
 a:hover li.unselected
   background-color: #eee  
@@ -160,6 +163,9 @@ a:hover li.unselected
   
 .strong
   font-weight: bold
+  
+.grey
+  color: #bbb 
   
 a.link
   color: #bbb
@@ -268,7 +274,7 @@ a.wh-logo-cc
     background-color: #555
 
 .series-button.selected
-  background-color: #DBD9C9
+  background-color: $accentcolor
   width: 68px
   height: 68px 
     
@@ -483,35 +489,64 @@ a.email-logo
   position: relative
   display: block
   width: 100%
+  text-align: right
 
+.super-graphic-link
+  position: relative
+  display: block  
+  
 // This is example positioning: these values need to be tailored to the actual 
 // dimensions of the super graphic.
 @media screen and (min-width: 720px)
   .super-graphic-copy
     position: absolute
-    margin-top: -165px
-    margin-left: 400px
+    margin-top: 60px
+    margin-left: 450px
     width: 250px
+    
+  .super-graphic-link
+    position: relative
+    margin-top: 20px
+    margin-right: 20px
   
 @media screen and (min-width: 986px)
   .super-graphic-copy
-    margin-top: -200px
-    margin-left: 500px
+    margin-top: 150px
+    margin-left: 650px
     width: 300px
+    
+  .super-graphic-link
+    position: relative
+    margin-top: 60px
+    margin-right: 25px
   
 @media screen and (min-width: 1236px)
   .super-graphic-copy
-    margin-top: -200px
+    margin-top: 150px
     margin-left: 600px
     width: 350px
+    
+  .super-graphic-link
+    position: relative
+    margin-top: 60px
+    margin-right: 25px
 
 // These are dummy styles to show the homepage structure
 h1
-  font-size: 261.797899582%
+  font-size: 250%
+  font-weight: bold
+  line-height: 125%
+  
+@media screen and (min-width: 720px)  
+  h1
+    font-size: 250%
+    font-weight: bold
+    line-height: 125%  
+  
 h4
-  font-size: 161.803399%
+  font-size: 130%
   margin: 0.5em 0em 0.2em 0em
-
+  
 .community li
   display: inline-block
   width: 20%
@@ -528,3 +563,47 @@ h4
 .action-box li
   padding: 2em
   border:  2px solid #ccc
+
+.quote-content
+  font-style: italic
+  font-family: verdana
+  width: 250px
+  
+.shadow
+  -moz-box-shadow: -3px -3px 8px #444
+  -webkit-box-shadow: -3px -3px 8px #444
+  box-shadow: -3px -3px 8px #444
+
+.inner-shadow
+  box-shadow: inset 0px 5px 15px rgba(0,0,0,.5)
+  -webkit-box-shadow: inset 0px 5px 5px rgba(0,0,0,.5)
+  -moz-box-shadow: inset 0px 5px 15px rgba(0,0,0,.5)
+    
+.overflow-hidden
+  overflow: hidden
+  
+.quotes-widget
+  min-height: 20px
+  
+.avatars-widget
+  height: 44px
+  
+.vignette
+  position: relative
+  z-index: -1
+  
+a.how-it-works
+  display: block
+  background: transparent embed("how-it-works.png") no-repeat 0 0
+  height: 50px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: right
+  
+  &:hover
+    background-position: 0 -50px 
+    
+.call-to-action
+  width: 100%

@@ -4,12 +4,11 @@
 # 
 # Use an optional `href: ...` to add a hyperlink to the article.
 - org: wired
-  name: Bruce Sterling
-  content: "The first one I've seen that I could quite likely build and inhabit."
+  content: "I see my share of off-the-wall schemes... this is the first one I've seen that I could quite likely build and inhabit, personally."
   href: "http://www.wired.com/beyond_the_beyond/2011/08/architecture-fiction-wikihouse/"
 - org: lsn
-  name: Dummy
-  content: "Lorum ipsum dolores dulcit foobar."
+  content: "...a compelling example of an open source platform emerging in a new area."
+  href: "https://www.lsnglobal.com/seed/view/4268" 
 - org: protein
-  name: Dummy 2
-  content: "To be or not to be.  That is the question."
+  content: "The innovative concept opens opportunities to the public to experiment with building their own personalised structures."
+  href: "http://prote.in/feed/2011/08/wikihouse"

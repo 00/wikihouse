@@ -3,28 +3,69 @@
 <%def name="sub_title()">${_("How it Works")}</%def>
 
 <%def name="overview_panel()">
-  Overview
-  ...
+  <div class="row">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/slides/slide.01.png')}" />
+    </div>
+  </div>
+  <div class="row">
+    <br />
+  </div>
 </%def>
 
 <%def name="install_panel()">
-  Install
-  ...
+  <div class="row">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/slides/slide.02.png')}" />
+    </div>
+  </div>
+  <div class="row">
+    Download houses and components which are created and shared by an open community of designers from around the world. Models are combined or adapted using Google Sketchup.
+  </div>
 </%def>
 
 <%def name="download_panel()">
-  Download
-  ...
+  <div class="row">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/slides/slide.03.png')}" />
+    </div>
+  </div>
+  <div class="row">
+    Click 'Make this House' from within Google Sketchup and WikiHouse will generate a complete set of milling drawings from your model, which can be used by a CNC cutter to fabricate the house parts.
+  </div>
 </%def>
 
 <%def name="print_panel()">
-  Print
-  ...
+  <div class="row">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/slides/slide.04.png')}" />
+    </div>
+  </div>
+  <div class="row">
+    The parts are cut by a CNC mill using locally-sourced material. This is 18mm plywood, in the standard sheet size of 2440mm x 1220mm (8' x 4').
+  </div>
 </%def>
 
 <%def name="assemble_panel()">
-  Assemble
-  ...
+  <div class="row">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/slides/slide.05.png')}" />
+    </div>
+  </div>
+  <div class="row">
+    Set out the parts for each section onto the ground, assembling it like a double-layered jigsaw. You won't need any power tools.
+  </div>
+</%def>
+
+<%def name="bolt_panel()">
+  <div class="row">
+    <div class="super-graphic-image">
+      <img src="${get_static_url('gfx/slides/slide.06.png')}" />
+    </div>
+  </div>
+  <div class="row">
+    Bolt together the two layers to form a single section. Invite friends and family to help with the barn-raising!
+  </div>
 </%def>
 
 <%def name="main_content(steps)">
@@ -65,6 +106,9 @@
         }, {
             'slug': 'assemble',
             'title': _(u'Assemble your house')
+        }, {
+            'slug': 'bolt',
+            'title': _(u'Introduce the Fixings')
         }
     ]
   %>

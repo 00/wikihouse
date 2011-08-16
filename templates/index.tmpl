@@ -1,50 +1,61 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">${_(u'Open community construction set')}</%def>
+<%def name="sub_title()">${_(u'Open Source Construction Set')}</%def>
 
 <%def name="content()">
-  <div class="super-graphic row">
-    <div class="super-graphic-image">
+  <div class="super-graphic row border-bottom">
+    <div class="super-graphic-image slot-0-1-2-3">
       <img src="${get_static_url('gfx/super-graphic.png')}" />
     </div>
-    <div class="super-graphic-copy">
-      <h1>${_(u'Open Source Construction')}</h1>
-      <p>
-        ${_(u'WikiHouse is an open community construction set.  Design, share, download and print CNC milled houses and components.')}
-      </p>
-      <a href="/about" title="${_(u'Find out how WikiHouse works')}">
-        <div class="how-it-works-button">
-          ${_(u"Here's how it works")}
+    <div class="super-graphic-copy slot-4-5">
+      <div class="call-to-action">
+        <div class="padding-all left">
+          <h1>${_(u'Open Source Construction Set.')}</h1>
         </div>
-      </a>
+        <div class="super-graphic-link right">
+          <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
+            <!--<h4>${_(u"How it works...")}</h4>-->
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row padding-top-bottom">
+  <div class="row padding-top-bottom border-bottom">
     <ul class="quotes-widget padding-top-bottom">
       % for item in quotes:
         <li>
-          <div class="quote-image left">
-            <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
-          </div>
-          <div class="quote-content left">
-            ${item.content}
-          </div>
-          <div class="quote-name">
-            % if item.href:
-              <a href="${item.href}" target="_blank">
-                ${item.name}</a>
+          <div class="row">
+            <div class="quote-image left padding-sides">
+            % if item.href: 
+            <a href="${item.href}" target="_blank">
+              <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
+            </a>
             % else:
-              ${item.name}
+              <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
             % endif
+            </div>
+            <div class="quote-content left">
+              "${item.content}"
+            </div>
+            <div class="quote-name">
+              % if item.name:   
+                  ${item.name}
+              % endif
+            </div>
           </div>
         </li>
       % endfor
     </ul>
   </div>
-  <div class="row padding-top-bottom">
+  <div class="row overflow-hidden">
     <ul class="avatars-widget">
+      <li>
+       <div class="inner-shadow">
+         <img class="vignette" src="${get_static_url('gfx/avatars-widget.png')}">
+       </div>
+      </li>
       % for item in users_with_avatars:
-        <li>
+        <li class="left">
           <a href="/library/user/${item.id}" title="${item.nickname}">
             <img src="${item.avatar}" /></a>
         </li>

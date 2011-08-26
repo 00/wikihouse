@@ -4,28 +4,26 @@
 
 <%def name="content()">
   <div class="super-graphic row border-bottom">
-    <div class="super-graphic-image slot-0-1-2-3">
+    <div class="super-graphic-image slot-6-7-8">
       <img src="${get_static_url('gfx/super-graphic.png')}" />
     </div>
-    <div class="super-graphic-copy slot-4-5">
-      <div class="call-to-action">
-        <div class="padding-all left">
-          <h1>${_(u'Open Source Construction Set.')}</h1>
-        </div>
-        <div class="super-graphic-link right">
-          <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
-            <!--<h4>${_(u"How it works...")}</h4>-->
-          </a>
-        </div>
+    <div class="super-graphic-copy slot-9">
+      <div class="super-graphic-link">
+        <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
+          <!--<h4>${_(u"How it works...")}</h4>-->
+        </a>
+      </div>
+      <div class="right call-to-action">
+        <h1>${_(u'Open Source Construction Set.')}</h1>
       </div>
     </div>
   </div>
-  <div class="row padding-top-bottom border-bottom">
-    <ul class="quotes-widget padding-top-bottom">
+  <div class="row padding-top-bottom border-bottom quotes">
+    <ul class="quotes-widget padding-top-bottom" style="display:none;">
       % for item in quotes:
         <li>
           <div class="row">
-            <div class="quote-image left padding-sides">
+            <div class="quote-image left padding-sides-large">
             % if item.href: 
             <a href="${item.href}" target="_blank">
               <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
@@ -47,7 +45,7 @@
       % endfor
     </ul>
   </div>
-  <div class="row overflow-hidden">
+  <div class="row overflow-hidden avatars">
     <ul class="avatars-widget">
       <li>
        <div class="inner-shadow">
@@ -55,7 +53,7 @@
        </div>
       </li>
       % for item in users_with_avatars:
-        <li class="left">
+        <li class="left home-avatar">
           <a href="/library/user/${item.id}" title="${item.nickname}">
             <img src="${item.avatar}" /></a>
         </li>

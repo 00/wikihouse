@@ -15,67 +15,67 @@ $super-graphic-height-01: 451px
 $super-graphic-height-02: 329px 
 //$super-graphic-height-03: 452px        
 
-  
+
 //Layout-related Floats 
- 
+
 .right
   float: right
-  
+
 .left
   float: left
 
 //Layout-related Borders  
-      
+
 .no-border
   border: 0 !important  
-  
+
 .border-top
   border-top: $border    
-  
+
 .border-bottom
   border-bottom: $border    
 
 .border-right
   border-right: $border    
-    
+
 .border-left
   border-left: $border  
- 
+
 .border-sides
   border:
     left: $border
     right: $border 
- 
+
 //Layout-related Margins    
-      
+
 .no-margin
   margin: 0 !important    
 
 .margin-top
   margin:
     top: $margin-02 
-   
+
 .margin-bottom
   margin:
     ottom: $margin-02     
-    
+
 .margin-right
   margin:
     right: $margin-02 
-  
+
 .margin-left
   margin:
     left: $margin-02     
 
 //Layout-related Paddings
-    
+
 .no-padding
   padding: 0 !important      
-    
+
 .padding-top
   padding:
     top: $padding-02  
-       
+
 .padding-top-small
   padding:
     top: $padding-01     
@@ -83,29 +83,29 @@ $super-graphic-height-02: 329px
 .padding-top-large
   padding:
     top: $padding-03      
-    
+
 .padding-bottom  
   padding:
     bottom: $padding-02  
-    
+
 .padding-bottom-small
   padding:
     bottom: $padding-01     
-    
+
 .padding-bottom-large  
   padding:
     bottom: $padding-03  
-          
+
 .padding-top-bottom
   padding:
     top: $padding-02
     bottom: $padding-02    
- 
+
 .padding-top-bottom-small
   padding:
     top: $padding-01
     bottom: $padding-01      
-      
+
 .padding-top-bottom-large
   padding:
     top: $padding-03
@@ -126,7 +126,7 @@ $super-graphic-height-02: 329px
 .padding-right  
   padding:
     right: $padding-02        
-        
+
 .padding-right-small  
   padding:
     right: $padding-01        
@@ -139,36 +139,36 @@ $super-graphic-height-02: 329px
   padding:
     left: $padding-02
     right: $padding-02 
-    
+
 .padding-sides-small
   padding:
     left: $padding-01
     right: $padding-01      
-           
+
 .padding-sides-large  
   padding:
     left: $padding-03
     right: $padding-03 
-                        
+
 .padding-all
   padding:
     top: $padding-02
     bottom: $padding-02 
     left: $padding-03
     right: $padding-03 
-    
+
 .row, .clear
   clear: both
-  
+
 .error
   color: red  
 
 .show
   display: block
-  
+
 .hide, .hidden
   display: none  
-  
+
 
 //General Elements & Classes
 
@@ -180,33 +180,33 @@ body
 a
   text-decoration: none
   color: #000
-  
+
   &:hover
     text-decoration: none
     color: #000
-  
+
   &:visited
     text-decoration: none
     color: #000
 
 li.selected
   background-color: #eee
-  
+
 a:hover li.unselected
   background-color: #eee  
- 
+
 .small
   font-size: 90%
-  
+
 .strong
   font-weight: bold
-  
+
 .grey
   color: #bbb 
-  
+
 a.link
   color: #bbb
-  
+
   &:hover
     color: #000
 
@@ -214,24 +214,46 @@ h3
   font-size: 1.2em
   font-weight: bold
   padding: 0.5em 0em 0.5em 0em        
-         
+
 h4
   font-size: 1.3em
   font-weight: bold
   padding: 0.5em    
 
-      
+
 //Primary Elements    
-    
+
 .wrapper
   padding: 1em 3em 1em 3em
+  margin: auto
 
-          
+.actions
+  float: right
+
+.main-content
+  float: left
+
+@media screen and (max-width: 720px)
+  .actions
+    float: none
+
+  .main-content
+    float: none
+
+.section-heading
+  font-weight: bold
+
+
 //Logo-related Elements
-  
+
+#wh-logo
+  width: 240px
+  height: 135px
+  padding-bottom: 15px
+
 #wh-logo-text
   width: 200px
-  
+
 .wh-logo-img
   display: block
   background: transparent embed("logo.wh.img.png") no-repeat 0 0
@@ -240,7 +262,7 @@ h4
   margin-top: 10px
   padding: 0
   text-indent: -9999px
-  
+
 .wh-logo-text
   display: block
   background: transparent embed("logo.wh.txt.png") no-repeat 0 0
@@ -250,7 +272,7 @@ h4
   padding: 0
   text-indent: -9999px
   float: left
-  
+
 a.wh-logo-cc
   display: block
   background: transparent embed("logo.wh.cc.png") no-repeat 0 0
@@ -259,272 +281,116 @@ a.wh-logo-cc
   margin: 0
   padding: 0
   text-indent: -9999px
-  float: right 
-  
-  &:hover   
-    background-position: 0 -35px 
-  
-    
-//Nav-related Elements & Classes 
-  
-.main-nav
-  text-align: center
+  float: right
 
-.main-nav li
-  display: inline-block  
-  
+  &:hover   
+    background-position: 0 -35px
+
+
+//Nav-related Elements & Classes
+
+.top-row
+  height: 2em
+
 .top-nav li
   display: inline-block
-  padding: $padding-01 $padding-02
+  padding: 6px $padding-02
+
+#main-menu
+  position: relative
+  height: 150px
+  margin-left: 235px
+
+.main-nav
+  text-align: center
+  position: absolute
+  bottom: 0
+  right: 0
+
+.main-nav li
+  display: inline-block
+  padding: $padding-02 $padding-03
+
+.main-nav li:hover
+  background-color: #F9F9F9
+
+.main-nav li.selected:hover
+  background-color: #EEE
+
+@media screen and (max-width: 986px)
+  .main-nav
+    text-align: left
+
+  .main-nav li
+    display: block
+    padding: 7px $padding-03
+
+.series
+  width: 138px
 
 .series-nav
-  width: 138px  
-  
+  width: 138px
+
 .series-nav li
   display: inline-block
-  margin-right: 1px
-
-.panel
-  margin: 3px 1px 3px 0
-  
-.panel .selected
-  background-color: #efefef
-  
-// n.b.: this show / hides the series block but needs to take into account
-// media query width and whether to be block or inline block
 
 .series-nav li .panel
   display: none
 
-@media screen and (min-width: 720px)
-  .series-nav li
-    display: block
-    margin: 0em 0em
-    float: left
-  
-.series
-  width: 138px
+.panel
+  margin: 3px 1px 3px 0
+
+.panel .selected
+  background-color: #efefef
 
 .series-selectors
-  padding-right: 1px  
-  
+  padding-right: 1px
+
 .series-button
   background-color: #000
-  width: 68px
-  height: 68px
+  width: 55px
+  height: 55px
 
   &:hover
     background-color: #555
 
 .series-button.selected
   background-color: $accentcolor
-  width: 68px
-  height: 68px 
-    
+  width: 55px
+  height: 55px
 
-@media screen and (max-width: 767px)
+@media screen and (min-width: 720px)
+  .series-nav
+    padding-left: $padding-02
+
+@media screen and (max-width: 720px)
   .series
     width: 100% 
-  
+
   .series-nav
     width: 100%
-  
+
+  .series-nav li
+    display: inline-block
+    margin: 0
+
   .series-button, .series-button.selected
-    width: 51px
-    height: 51px
-  
+    width: 45px
+    height: 45px
 
-@media screen and (max-width: 767px)
-  #fdbk_tab
-    display: none
-      
-  
-//Other Elements & Classes    
 
-.designs li
-  padding: $padding-02
-  margin: $margin-02
-  border: 1px dashed #eee
+//Home Screen Layout
 
-form .field
-  padding: $padding-01
-  margin: $margin-01
-  border: 1px dashed #ccc
-
-.thumbnail img
-  width: 110px
-
-.preview img
-  width: 320px
-  
-.call-to-action
-  margin-top: 20px
-
-#progress-indicator
-  display: none
-  width: auto
-  height: 400px
-  background-image: embed("ajax-loader.gif")
-  background-position: center center
-  background-repeat: no-repeat
-  
-    
-//Footer Elements
-  
-#credits
-  width: 231px
+.super-graphic-image
   position: relative
-  top: 1em
-  color: #bbb
-      
-a.logo-00
-  display: block
-  background: transparent embed("logo.00.png") no-repeat 0 0
-  height: 36px
-  width: 67px
-  margin: 0
-  margin-left: 7px
-  padding: 0
-  text-indent: -9999px
-  float: left
-  
-  &:hover
-    background-position: 0 -36px 
-  
-a.logo-esp
-  display: block
-  background: transparent embed("logo.esp.png") no-repeat 0 0
-  height: 36px
-  width: 44px
-  margin: 0
-  margin-left: 7px
-  padding: 0
-  text-indent: -9999px
-  float: left
-  
-  &:hover
-    background-position: 0 -36px 
-  
-a.logo-gw
-  display: block
-  background: transparent embed("logo.gw.png") no-repeat 0 0
-  height: 48px
-  width: 110px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-  float: right
-  
-  &:hover
-    background-position: 0 -48px 
-  
-.st_fblike_hcount
-  width: 90px !important
-  position: relative
-  top: -6px !important
-  
-.st_plusone_hcount
-  width: 70px !important
-  position: relative
-  top: 1px !important
-  
-a.slide-01
-  display: block
-  background: transparent embed("slide.01.png") no-repeat 0 0
-  width: 100%
-  height: 440px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-    
-a.slide-02
-  display: block
-  background: transparent embed("slide.02.png") no-repeat 0 0
-  width: 100%
-  height: 440px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-    
-a.slide-03
-  display: block
-  background: transparent embed("slide.03.png") no-repeat 0 0
-  height: 440px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
 
-  
-//Share Buttons  
-  
-a.google-logo
-  display: block
-  background: transparent embed("logo.share.gp.png") no-repeat 0 0
-  width: 25px
-  height: 20px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-  cursor: pointer 
-  
-  &:hover
-    background-position: 0 -20px 
+.clicknavs
+  position: absolute
+  top: 0
+  left: 0
+  width: 50%
+  height: 100%
 
-a.twitter-logo
-  display: block
-  background: transparent embed("logo.share.tw.png") no-repeat 0 0
-  width: 19px
-  height: 20px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-  cursor: pointer 
-  
-  &:hover
-    background-position: 0 -20px
-    
-a.fb-logo
-  display: block
-  background: transparent embed("logo.share.fb.png") no-repeat 0 0
-  width: 19px
-  height: 20px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-  cursor: pointer 
-  
-  &:hover
-    background-position: 0 -20px 
-    
-a.email-logo
-  display: block
-  background: transparent embed("logo.share.em.png") no-repeat 0 0
-  width: 25px
-  height: 20px
-  margin: 0
-  padding: 0
-  text-indent: -9999px
-  cursor: pointer 
-  
-  &:hover
-    background-position: 0 -20px 
-
-//@media screen and (min-width: 720px)    
-//  .series-small
-//    display: none
-//  
-//  .series-big
-//    display: block  
-//
-//
-//@media screen and (max-width: 767px)  
-//  .series-small
-//    display: block 
-//  
-//  .series-big
-//    display: none
-
-// Super Graphic
 .super-graphic-image img
   width: 100%
 
@@ -536,60 +402,104 @@ a.email-logo
 
 .super-graphic-link
   position: relative
-  display: block  
-  
-// This is example positioning: these values need to be tailored to the actual 
+  display: block
+
+// This is example positioning: these values need to be tailored to the actual
 // dimensions of the super graphic.
 @media screen and (min-width: 720px)
+  .call-to-action
+    margin-top: 20px
+    width: 100%
+
+  .super-graphic
+    height: $super-graphic-height-02
+
   .super-graphic-copy
     position: absolute
-    margin-top: 60px
-    margin-left: 450px
-    width: 250px
-    
-  .super-graphic-link
-    position: relative
-    margin-top: 20px
-    margin-right: 20px
-  
-@media screen and (min-width: 986px)
-  .super-graphic-copy
-    margin-top: 150px
-    margin-left: 650px
-    width: 300px
-    
-  .super-graphic-link
-    position: relative
-    margin-top: 60px
-    margin-right: 25px
-  
-@media screen and (min-width: 1236px)
-  .super-graphic-copy
-    margin-top: 150px
-    margin-left: 600px
-    width: 350px
-    
-  .super-graphic-link
-    position: relative
-    margin-top: 60px
-    margin-right: 25px
+    margin-left: 522px
+    height: $super-graphic-height-02
+    width: 178px
 
-// These are dummy styles to show the homepage structure
+  .super-graphic-link
+    position: absolute
+    bottom: 20px
+    right: 0px
+
+@media screen and (min-width: 986px)
+  .call-to-action
+    margin-top: 150px
+    width: 100%
+
+  .super-graphic
+    height: $super-graphic-height-01
+
+  .super-graphic-copy
+    width: 248px
+    height: $super-graphic-height-01
+    margin-left: 718px
+
+  .super-graphic-link
+    position: absolute
+    bottom: 20px
+    right: 0px
+
+@media screen and (min-width: 1236px)
+  .call-to-action
+    margin-top: 150px
+    width: 100%
+
+  .super-graphic
+    height: $super-graphic-height-01
+
+  .super-graphic-copy
+    width: 248px
+    height: $super-graphic-height-01
+    margin-left: 718px
+
+  .super-graphic-link
+    position: absolute
+    bottom: 20px
+    right: 0px
+
 h1
-  font-size: 250%
+  font-size: 180%
   font-weight: bold
   line-height: 125%
-  
-@media screen and (min-width: 720px)  
+  padding-top: 0.4em
+  margin-right: 20px
+
+@media screen and (min-width: 720px)
   h1
-    font-size: 250%
-    font-weight: bold
-    line-height: 125%  
-  
-h4
-  font-size: 130%
-  margin: 0.5em 0em 0.2em 0em
-  
+    font-size: 220%
+
+@media screen and (min-width: 986px)
+  h1
+    font-size: 240%
+
+a.how-it-works
+  display: block
+  background: transparent embed("how-it-works.png") no-repeat 10px 10px
+  background-color: #000
+  margin: 0
+  padding: 0
+  width: 35px
+  height: 35px
+  text-indent: -9999px
+  float: right
+
+  &:hover
+    background-color: #555
+
+@media screen and (min-width: 720px)
+  a.how-it-works
+    width: 100px
+    height: 100px
+
+@media screen and (min-width: 986px)
+  a.how-it-works
+    width: 100px
+    height: 100px
+
 .community li
   display: inline-block
   width: 20%
@@ -602,16 +512,16 @@ h4
 
 .action-box
   margin-top: 0.809em
-  
+
 .action-box li
   padding: 2em
-  border:  2px solid #ccc
+  border:  2px solid #CCC
 
 .quote-content
   font-style: italic
   font-family: verdana
-  width: 250px
-  
+  width: 260px
+
 .shadow
   -moz-box-shadow: -3px -3px 8px #444
   -webkit-box-shadow: -3px -3px 8px #444
@@ -621,32 +531,386 @@ h4
   box-shadow: inset 0px 5px 15px rgba(0,0,0,.5)
   -webkit-box-shadow: inset 0px 5px 5px rgba(0,0,0,.5)
   -moz-box-shadow: inset 0px 5px 15px rgba(0,0,0,.5)
-    
+
 .overflow-hidden
   overflow: hidden
-  
+
 .quotes-widget
   min-height: 20px
-  
+
+.home-avatar
+  height: 44px
+
 .avatars-widget
   height: 44px
-  
+
 .vignette
   position: relative
   z-index: -1
-  
-a.how-it-works
+
+
+//Other Elements & Classes    
+
+.super-text
+  font-size: 1.5em
+  font-weight: bold
+  padding: 0.5em 0.5em
+  line-height: 1.3em
+  text-align: justify
+
+@media screen and (min-width: 720px)
+  .super-text
+    font-size: 2.5em
+    font-weight: bold
+    padding: 0.5em 0.5em
+    line-height: 1.2em
+    text-align: justify
+
+@media screen and (min-width: 986px)
+  .super-text
+    font-size: 3.3em
+    font-weight: bold
+    padding: 0.5em 0.5em
+    line-height: 1.2em
+    text-align: justify
+
+@media screen and (min-width: 720px)
+  .about-panel
+    height: 350px
+
+@media screen and (min-width: 986px)
+  .about-panel
+    height: 483px
+
+.design-pane
+  border-top: 1px dotted #AAA
+
+.design-content
+  margin-left: 170px
+
+.design-panel
+  margin-top: 10px
+
+form .field
+  padding: $padding-01
+  margin: $margin-01
+  border: 1px dashed #CCC
+
+.thumbnail img
+  width: 160px
+
+.preview
+  width: 364px
+  float: left
+
+.preview img
+  width: 364px
+
+#progress-indicator
+  display: none
+  width: auto
+  height: 400px
+  background-image: embed("ajax-loader.gif")
+  background-position: center center
+  background-repeat: no-repeat
+
+@media screen and (max-width: 720px)
+  .quotes
+    display: none
+
+  .avatars
+    display: none
+
+.step
+  display: inline-block
+  cursor: pointer
+
+.step a
+  color: #BBB
+
+.tabs
+  text-align: center
+
+.model-details
+  float: none
+
+.model-downloads
+  float: none
+
+.model-description
+  text-align: justify
+  padding-right: $padding-02
+
+@media screen and (min-width: 986px)
+  .model-description
+    width: 250px
+
+@media screen and (max-width: 720px)
+  .design-info
+    width: 100%
+    text-align: justify
+
+@media screen and (min-width: 720px)
+  .design-info
+    width: 480px
+    text-align: justify
+
+@media screen and (min-width: 986px)
+  .design-info
+    width: 270px
+    text-align: justify
+    padding-left: $padding-03
+
+.user-image
+  height: 80px
+  width: 80px
+
+.user-name
+  font-weight: bold
+  font-size: 1.2em
+
+.id
+  padding-top: 3px
+
+.download-links
+  text-align: center
+
+.download-link
+  display: inline-block
+  text-align: center
+  width: 65px
+  vertical-align: top
+
+.download-model
+  text-align: center
+
+.download-sheets
+  text-align: center
+
+
+//Footer Elements
+
+#footer
+  height: 53px
+
+#credits
+  width: 231px
+  position: relative
+  top: 1em
+  color: #BBB
+
+a.logo-00
   display: block
-  background: transparent embed("how-it-works.png") no-repeat 0 0
-  height: 50px
-  width: 50px
+  background: transparent embed("logo.00.png") no-repeat 0 0
+  height: 36px
+  width: 67px
+  margin: 0
+  margin-left: 7px
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -36px 
+
+a.logo-esp
+  display: block
+  background: transparent embed("logo.esp.png") no-repeat 0 0
+  height: 36px
+  width: 44px
+  margin: 0
+  margin-left: 7px
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -36px 
+
+a.logo-gw
+  display: block
+  background: transparent embed("logo.gw.png") no-repeat 0 0
+  height: 48px
+  width: 110px
   margin: 0
   padding: 0
   text-indent: -9999px
   float: right
-  
+
   &:hover
-    background-position: 0 -50px 
-    
-.call-to-action
-  width: 100%
+    background-position: 0 -48px 
+
+.st_fblike_hcount
+  width: 90px !important
+  position: relative
+  top: -6px !important
+
+.st_plusone_hcount
+  width: 70px !important
+  position: relative
+  top: 1px !important
+
+.about-texts
+  text-align: center
+  margin: 0 12.5%
+  font-size: 1em
+
+.navlinks
+  padding:
+    left: $padding-02
+    right: $padding-02
+
+@media screen and (min-width: 720px)
+  .navlinks
+    padding:
+      left: $padding-03
+      right: $padding-03
+
+.navs-pre a
+  position: absolute
+  left: 0
+  margin-left: 10px
+  margin-top: 0.25em
+  font-size: 2em
+  color: #BBB
+
+.navs-next a
+  position: absolute
+  right: 0
+  margin-right: 10px
+  margin-top: 0.25em
+  font-size: 2em
+  color: #BBB
+
+@media screen and (min-width: 720px)
+  .about-texts
+    margin: 0 25%
+    font-size: 1.1em
+
+
+//Share Buttons  
+
+a.google-logo
+  display: block
+  background: transparent embed("logo.share.gp.png") no-repeat 0 0
+  width: 25px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+
+  &:hover
+    background-position: 0 -20px 
+
+a.twitter-logo
+  display: block
+  background: transparent embed("logo.share.tw.png") no-repeat 0 0
+  width: 19px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+
+  &:hover
+    background-position: 0 -20px
+
+a.fb-logo
+  display: block
+  background: transparent embed("logo.share.fb.png") no-repeat 0 0
+  width: 19px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+
+  &:hover
+    background-position: 0 -20px 
+
+a.email-logo
+  display: block
+  background: transparent embed("logo.share.em.png") no-repeat 0 0
+  width: 25px
+  height: 20px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  cursor: pointer 
+
+  &:hover
+    background-position: 0 -20px 
+
+.logo-03
+  width: 155px
+
+
+//THIRD PARTY SERVICES
+
+#fdbk_tab
+  background-image: embed("feedback_trans_tab.png") !important
+  background-color: #BBB !important
+
+#fdbk_screen
+  height: 100% !important
+
+#dsq-content .dsq-textarea .dsq-textarea-wrapper, #dsq-content .dsq-input-wrapper
+  border: 1px solid #DDD !important
+  border-top: 1px solid #DDD !important
+  padding: 10px 10px !important
+  background: none !important
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+
+#dsq-content .dsq-request-user-avatar
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+
+button.dsq-button
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+
+#dsq-content .dsq-comment-header
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+
+#dsq-content .dsq-comment:hover .dsq-header-avatar a.dsq-avatar img
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+
+button.dsq-button, button.dsq-button-small
+  background: none
+  background-color: #EEE !important
+  border: 1px solid #DDD !important
+
+#dsq-content .dsq-trackback-url
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+  -moz-box-shadow: none !important
+  -webkit-box-shadow: none !important
+
+#dsq-content .dsq-request-user-avatar
+  border-radius: 0 !important
+  -moz-border-radius: 0 !important
+  -webkit-border-radius: 0 !important
+  -moz-box-shadow: none !important
+  -webkit-box-shadow: none !important
+
+@media screen and (max-width: 720px)
+  #fdbk_tab
+    display: none
+
+.dsq-brlink
+  display: none !important
+
+#dsq-content .dsq-item-trackback
+  margin: 0 0 1em 0 !important
+  padding: 0 !important
+  float: right

@@ -7,35 +7,38 @@
 #   e.g.: `gfx/series/a.png`, so save them in the corresponding `./gfx/series`
 #   folder inside `wikihouse-resources`.
 - value: houses
-  title: Houses
-  description: XXX ...
+  title: HOUSES
+  description: Complete Houses designed from WikiHouse Components
+- value: joints
+  title: JOINTS
+  description: Joints used in the WikiHouse Kit
 - value: a
-  title: A Series
-  description: XXX ...
+  title: A-SERIES
+  description: Single sections of WikiHouse - 1.2M wide
 - value: b
-  title: B Series
-  description: XXX ...
+  title: B-SERIES
+  description: Single sections of WikiHouse - 2.4M wide
 - value: c
-  title: C Series
-  description: XXX ...
+  title: C-SERIES
+  description: Single sections of WikiHouse - 3.6M wide
 - value: ac
-  title: AC Series
-  description: XXX ...
+  title: AC-SERIES
+  description: Composite sections of WikiHouse - 1.2M + 3.6M wide
 - value: bb
-  title: BB Series
-  description: XXX ...
+  title: BB-SERIES
+  description:  Composite sections of WikiHouse - 2.4M + 2.4M wide
 - value: bc
-  title: BC Series
-  description: XXX ...
+  title: BC-SERIES
+  description:  Composite sections of WikiHouse - 2.4M + 3.6M wide
 - value: cc
-  title: CC Series
-  description: XXX ...
+  title: CC-SERIES
+  description:  Composite sections of WikiHouse - 3.6M + 3.6M wide
 - value: cac
-  title: CAC Series
-  description: XXX ...
+  title: CAC-SERIES
+  description:  Composite sections of WikiHouse - 3.6M + 1.2M + 3.6M wide
 - value: cbc
-  title: CBC Series
-  description: XXX ...
+  title: CBC-SERIES
+  description:  Composite sections of WikiHouse - 3.6M + 2.4M + 3.6M wide
 - value: other
-  title: Other
-  description: XXX ...
+  title: OTHER COMPONENTS
+  description: Other miscellaneous Components

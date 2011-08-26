@@ -4,75 +4,317 @@
 
 <%def name="overview_panel()">
   <div class="row">
-    <div class="super-graphic-image">
-      <img src="${get_static_url('gfx/slides/slide.01.png')}" />
-    </div>
+    <a href="about#step-install"><div class="super-graphic-image padding-all">
+      <div class="super-text"><p>WikiHouse is an open source construction set. It's aim is to allow anyone to design, download, and 'print' CNC-milled houses and components, which can be assembled with minimal formal skill or training.</p></div>
+      <!--<img src="${get_static_url('gfx/slides/slide.01.png')}" />-->
+    </div></a>
   </div>
-  <div class="row">
-    <br />
+</%def>
+
+<%def name="overview_nav_pre()">
+</%def>
+
+<%def name="overview_nav_next()">
+  <div class="right">
+    <a href="about#step-install">></a>
   </div>
+</%def>
+
+<%def name="overview_description()">
 </%def>
 
 <%def name="install_panel()">
   <div class="row">
     <div class="super-graphic-image">
-      <img src="${get_static_url('gfx/slides/slide.02.png')}" />
+      <a href="about#step-download"><img src="${get_static_url('gfx/slides/slide.02.png')}" /></a>
     </div>
   </div>
-  <div class="row">
-    Download houses and components which are created and shared by an open community of designers from around the world. Models are combined or adapted using Google Sketchup.
+</%def>
+
+<%def name="install_nav_pre()">
+  <div class="left">
+    <a href="about#step-overview"><</a>
+  </div>
+</%def>
+
+<%def name="install_nav_next()">
+  <div class="right">
+    <a href="about#step-download">></a>
+  </div>
+</%def>
+
+<%def name="install_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+      Download houses and components which are created and shared by an open community of designers from around the world. Models are combined or adapted using Google Sketchup.
+    </div>
   </div>
 </%def>
 
 <%def name="download_panel()">
   <div class="row">
     <div class="super-graphic-image">
-      <img src="${get_static_url('gfx/slides/slide.03.png')}" />
+      <a href="about#step-print"><img src="${get_static_url('gfx/slides/slide.03.png')}" /></a>
     </div>
   </div>
-  <div class="row">
-    Click 'Make this House' from within Google Sketchup and WikiHouse will generate a complete set of milling drawings from your model, which can be used by a CNC cutter to fabricate the house parts.
+</%def>
+
+<%def name="download_nav_pre()">
+  <div class="left">
+    <a href="about#step-install"><</a>
+  </div>
+</%def>
+
+<%def name="download_nav_next()">
+  <div class="right">
+    <a href="about#step-print">></a>
+  </div>
+</%def>
+
+<%def name="download_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+      Click 'Make this House' from within Google Sketchup and WikiHouse will generate a complete set of milling drawings from your model, which can be used by a CNC cutter to fabricate the house parts.
+    </div>
   </div>
 </%def>
 
 <%def name="print_panel()">
   <div class="row">
     <div class="super-graphic-image">
-      <img src="${get_static_url('gfx/slides/slide.04.png')}" />
+      <a href="about#step-assemble"><img src="${get_static_url('gfx/slides/slide.04.png')}" /></a>
     </div>
   </div>
-  <div class="row">
-    The parts are cut by a CNC mill using locally-sourced material. This is 18mm plywood, in the standard sheet size of 2440mm x 1220mm (8' x 4').
+</%def>
+
+<%def name="print_nav_pre()">
+  <div class="left">
+    <a href="about#step-download"><</a>
+  </div>
+</%def>
+
+<%def name="print_nav_next()">
+  <div class="right">
+    <a href="about#step-assemble">></a>
+  </div>
+</%def>
+
+<%def name="print_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+      The parts are cut by a CNC mill using locally-sourced material. This is 18mm plywood, in the standard sheet size of 2440mm x 1220mm (8' x 4').
+    </div>
   </div>
 </%def>
 
 <%def name="assemble_panel()">
   <div class="row">
     <div class="super-graphic-image">
-      <img src="${get_static_url('gfx/slides/slide.05.png')}" />
+      <a href="about#step-bolt"><img src="${get_static_url('gfx/slides/slide.05.png')}" /></a>
     </div>
   </div>
-  <div class="row">
-    Set out the parts for each section onto the ground, assembling it like a double-layered jigsaw. You won't need any power tools.
+</%def>
+
+<%def name="assemble_nav_pre()">
+  <div class="left">
+    <a href="about#step-print"><</a>
+  </div>
+</%def>
+
+<%def name="assemble_nav_next()">
+  <div class="right">
+    <a href="about#step-bolt">></a>
+  </div>
+</%def>
+
+<%def name="assemble_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+      Set out the parts for each section onto the ground, assembling it like a double-layered jigsaw. You won't need any power tools.
+    </div>
   </div>
 </%def>
 
 <%def name="bolt_panel()">
   <div class="row">
     <div class="super-graphic-image">
-      <img src="${get_static_url('gfx/slides/slide.06.png')}" />
+      <a href="about#step-raise"><img src="${get_static_url('gfx/slides/slide.06.png')}" /></a>
     </div>
   </div>
+</%def>
+
+<%def name="bolt_nav_pre()">
+  <div class="left">
+    <a href="about#step-assemble"><</a>
+  </div>
+</%def>
+
+<%def name="bolt_nav_next()">
+  <div class="right">
+    <a href="about#step-raise">></a>
+  </div>
+</%def>
+
+<%def name="bolt_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+    Bolt together the two layers to form a single section.
+    </div>
+  </div>
+</%def>
+
+<%def name="raise_panel()">
   <div class="row">
-    Bolt together the two layers to form a single section. Invite friends and family to help with the barn-raising!
+    <div class="super-graphic-image">
+      <a href="about#step-primary"><img src="${get_static_url('gfx/slides/slide.07.png')}" /></a>
+    </div>
+  </div>
+</%def>
+
+<%def name="raise_nav_pre()">
+  <div class="left">
+    <a href="about#step-bolt"><</a>
+  </div>
+</%def>
+
+<%def name="raise_nav_next()">
+  <div class="right">
+    <a href="about#step-primary">></a>
+  </div>
+</%def>
+
+<%def name="raise_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+    Raise the sectional profiles of WikiHouse, two or three at a time. Invite friends and family to help with the barn-raising!
+    </div>
+  </div>
+</%def>
+
+<%def name="primary_panel()">
+  <div class="row">
+    <div class="super-graphic-image">
+      <a href="about#step-secondary"><img src="${get_static_url('gfx/slides/slide.08.png')}" /></a>
+    </div>
+  </div>
+</%def>
+
+<%def name="primary_nav_pre()">
+  <div class="left">
+    <a href="about#step-raise"><</a>
+  </div>
+</%def>
+
+<%def name="primary_nav_next()">
+  <div class="right">
+    <a href="about#step-secondary">></a>
+  </div>
+</%def>
+
+<%def name="primary_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+    Insert the primary connectors between the sectional profiles to brace the structure. Use a mallet and the wedges to tighten the connections.
+    </div>
+  </div>
+</%def>
+
+<%def name="secondary_panel()">
+  <div class="row">
+    <div class="super-graphic-image">
+      <a href="about#step-facings"><img src="${get_static_url('gfx/slides/slide.09.png')}" /></a>
+    </div>
+  </div>
+</%def>
+
+<%def name="secondary_nav_pre()">
+  <div class="left">
+    <a href="about#step-primary"><</a>
+  </div>
+</%def>
+
+<%def name="secondary_nav_next()">
+  <div class="right">
+    <a href="about#step-facings">></a>
+  </div>
+</%def>
+
+<%def name="secondary_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+    Insert the secondary connectors. These should slot into position between the sectional profiles. Use screws to optionally strengthen the connections.
+    </div>
+  </div>
+</%def>
+
+<%def name="facings_panel()">
+  <div class="row">
+    <div class="super-graphic-image">
+      <a href="about#step-services"><img src="${get_static_url('gfx/slides/slide.10.png')}" /></a>
+    </div>
+  </div>
+</%def>
+
+<%def name="facings_nav_pre()">
+  <div class="left">
+    <a href="about#step-secondary"><</a>
+  </div>
+</%def>
+
+<%def name="facings_nav_next()">
+  <div class="right">
+    <a href="about#step-services">></a>
+  </div>
+</%def>
+
+<%def name="facings_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+    Attach the plywood facing sheets to the insides and outsides of the structure. These should slot into position. Use screws to fix the facings through to the sub-structure.
+    </div>
+  </div>
+</%def>
+
+<%def name="services_panel()">
+  <div class="row">
+    <div class="super-graphic-image">
+      <a href="about#overview"><img src="${get_static_url('gfx/slides/slide.11.png')}" /></a>
+    </div>
+  </div>
+</%def>
+
+<%def name="services_nav_pre()">
+  <div class="left">
+    <a href="about#step-facings"><</a>
+  </div>
+</%def>
+
+<%def name="services_nav_next()">
+</%def>
+
+<%def name="services_description()">
+  <div class="border-top">
+    <div class="padding-all about-texts">
+    The WikiHouse is ready for glazing, services, and insulation.
+    </div>
   </div>
 </%def>
 
 <%def name="main_content(steps)">
   <div class="panels">
     % for item in steps:
-      <div id="step-${item['slug']}">
+      <div id="step-${item['slug']}" style="display:none;">
         ${getattr(self, u'%s_panel' % item['slug'])()}
+      </div>
+    % endfor
+  </div>
+</%def>
+
+<%def name="pre(steps)">
+  <div class="navs-pre">
+    % for item in steps:
+      <div id="nav-pre-${item['slug']}" style="display:none;">
+        ${getattr(self, u'%s_nav_pre' % item['slug'])()}
       </div>
     % endfor
   </div>
@@ -81,7 +323,7 @@
 <%def name="actions(steps)">
   <ul class="tabs">
     % for item in steps:
-      <li class="step step-${item['slug']}">
+      <li class="padding-top-bottom navlinks step step-${item['slug']}" data-this-slug="${item['slug']}">
         <a href="#step-${item['slug']}" data-slug="${item['slug']}">
           ${item['title']}</a>
       </li>
@@ -89,35 +331,75 @@
   </ul>
 </%def>
 
+<%def name="next(steps)">
+  <div class="navs-next">
+    % for item in steps:
+      <div id="nav-next-${item['slug']}" style="display:none;">
+        ${getattr(self, u'%s_nav_next' % item['slug'])()}
+      </div>
+    % endfor
+  </div>
+</%def>
+
+<%def name="description(steps)">
+  <div class="descriptions">
+    % for item in steps:
+      <div id="description-${item['slug']}" style="display:none;">
+        ${getattr(self, u'%s_description' % item['slug'])()}
+      </div>
+    % endfor
+  </div>
+</%def>
+
 <%def name="content()">
   <%
     steps = [{
             'slug': 'overview',
-            'title': _(u'Overview')
+            'title': _(u'0')
         }, {
             'slug': 'install',
-            'title': _(u'Install the plugin')
+            'title': _(u'1')
         }, {
             'slug': 'download',
-            'title': _(u'Download houses &amp; components')
+            'title': _(u'2')
         }, {
             'slug': 'print',
-            'title': _(u'Print your design')
+            'title': _(u'3')
         }, {
             'slug': 'assemble',
-            'title': _(u'Assemble your house')
+            'title': _(u'4')
         }, {
             'slug': 'bolt',
-            'title': _(u'Introduce the Fixings')
+            'title': _(u'5')
+        }, {
+            'slug': 'raise',
+            'title': _(u'6')
+        }, {
+            'slug': 'primary',
+            'title': _(u'7')
+        }, {
+            'slug': 'secondary',
+            'title': _(u'8')
+        }, {
+            'slug': 'facings',
+            'title': _(u'9')
+        }, {
+            'slug': 'services',
+            'title': _(u'10')
         }
     ]
   %>
   <div class="how-it-works-container">
-    <div>
+    <div class="row about-panel">
       ${self.main_content(steps)}
     </div>
-    <div>
+    <div class="row" style="position: relative;">
+      ${self.next(steps)}
+      ${self.pre(steps)}
       ${self.actions(steps)}
+    </div>
+    <div class="row">
+      ${self.description(steps)}
     </div>
   </div>
 </%def>

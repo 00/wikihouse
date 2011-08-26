@@ -7,13 +7,15 @@
   % if is_sketchup:
     <div class="back-to-series-button">
       <a rel="back" href="#back">
-        Go back</a>
+        Back to Warehouse</a>
     </div>
   % endif
-  <h4>
-    ${target.key().id()}
-    <a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a>
-  </h4>
+    <div class="padding-right">
+      <div class="row padding-bottom">
+        <h4 class="padding-sides">${_(u'Model/')}&nbsp;&nbsp;&nbsp;<a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a></h4>
+      </div>
+    </div>
+  <div class="model_content padding-all">
   <%
     google_user = users.get_current_user()
     is_user = google_user and google_user == target.user.google_user
@@ -22,120 +24,148 @@
   % if target.status == u'approved' or is_admin or is_user:
     % if target.model_preview:
       <div class="preview">
-        <img src="${target.model_preview_serving_url}=s320" />
+        <img src="${target.model_preview_serving_url}=s364" />
       </div>
     % endif
     % if target.model_preview_reverse:
-      <div class="preview">
-        <img src="${target.model_preview_reverse_serving_url}=s320" />
-      </div>
+      <!--<div class="preview">
+        <img src="${target.model_preview_reverse_serving_url}=s364" />
+      </div>-->
     % endif
     % if target.sheets_preview:
       <div class="preview">
-        <img src="${target.sheets_preview_serving_url}=s320" />
+        <img src="${target.sheets_preview_serving_url}=s364" />
       </div>
     % endif
-    <div class="series">
-      Series: 
-      <%
-        i = 0
-        l = len(target.series)
-      %>
-      % for s in target.series:
-        <% i = i + 1 %>
-        <a href="/library/series/${s.name()}">
-          ${s.name().upper()}</a>${i < l and ', ' or ''}
-      % endfor
-    </div>
-    <div class="user">
-      by 
-      <a href="/library/user/${target.user.id}">
-        ${escape(target.user.nickname)}</a>
-    </div>
-    <div class="verification">
-      ${_(u'Verification:')} 
-      % if target.verification == u'unverified':
-        ${_(u'not structurally checked.')} 
-      % elif target.status == u'verified':
-        ${_(u'structurally checked.')}
-      % elif target.status == u'built':
-        ${_(u'structurally checked, tested &amp; built.')}
-      % endif
-    </div>
-    % if is_admin or is_user:
-      % if target.notes:
-        <div class="notes">
-          ${_(u'Notes:')} ${target.notes}
+      <div class="left design-info">
+        <div class="row model-details padding-top-large padding-bottom">
+          <div class="series">
+            <span class="section-heading">Series:</span>
+            <%
+              i = 0
+              l = len(target.series)
+            %>
+            % for s in target.series:
+              <% i = i + 1 %>
+              <a href="/library/series/${s.name()}">
+                ${s.name().upper()}</a>${i < l and ', ' or ''}
+            % endfor
+          </div>
+          <div class="id grey">
+            <span class="section-heading">${_(u'Model No.')}</span> ${target.key().id()}
+          </div>
+          <div class="user padding-top">
+            <span class="section-heading">${_(u'By:')}</span>
+            <a href="/library/user/${target.user.id}">
+              ${escape(target.user.nickname)}</a>
+          </div>
+          <div class="verification padding-top">
+            <span class="section-heading">${_(u'Verification:')}</span>
+            % if target.verification == u'unverified':
+              ${_(u'not structurally checked.')}
+            % elif target.status == u'verified':
+              ${_(u'structurally checked.')}
+            % elif target.status == u'built':
+              ${_(u'structurally checked, tested &amp; built.')}
+            % endif
+          </div>
+          % if is_admin or is_user:
+            % if target.notes:
+              <div class="notes padding-top">
+                <span class="section-heading">${_(u'Notes:')}</span> ${target.notes}
+              </div>
+            % endif
+            <div class="status padding-top">
+              <span class="section-heading">${_(u'Moderation status:')}</span>
+              % if target.status == u'pending':
+                ${_(u'pending moderation.')}
+              % elif target.status == u'rejected':
+                ${_(u'rejected.')}
+              % else:
+                ${_(u'approved.')}
+              % endif
+            </div>
+            % if is_admin and target.status == u'pending':
+              <form class="moderation-form" action="/moderate" method="post">
+                ${xsrf_input}
+                <input type="hidden" name="id" value="${target.key().id()}" />
+                <input type="submit" name="action" value="${_(u'Approve')}" />
+                <input type="submit" name="action" value="${_(u'Reject')}" />
+              </form>
+            % endif
+          % endif
         </div>
-      % endif
-      <div class="status">
-        ${_(u'Moderation status:')} 
-        % if target.status == u'pending':
-          ${_(u'pending moderation.')}
-        % elif target.status == u'rejected':
-          ${_(u'rejected.')}
-        % else:
-          ${_(u'approved.')}
-        % endif
-      </div>
-      % if is_admin and target.status == u'pending':
-        <form class="moderation-form" action="/moderate" method="post">
-          ${xsrf_input}
-          <input type="hidden" name="id" value="${target.key().id()}" />
-          <input type="submit" name="action" value="${_(u'Approve')}" />
-          <input type="submit" name="action" value="${_(u'Reject')}" />
-        </form>
-      % endif
-    % endif
-    % if target.model:
-      <div class="download model">
-        <a href="/blob/${target.model.key()}/${quote(target.title)}.skp"
-            id="design-download" 
-            rel="${target.component and '1' or '0'}">
-          ${_(u'Download SketchUp Model')}</a>
-      </div>
-      <div class="hidden download base64 model">
-        <a href="/blob64/${target.model.key()}"
-           id="design-download-base64">Download Base64 Encoded</a>
-        <textarea id="design-download-data"></textarea>
-      </div>
-    % endif
-    % if target.sheets:
-      <div class="download sheets">
-        <a href="/blob/${target.sheets.key()}">
-          ${_(u'Download CNC Cutting Sheets')}</a>
-      </div>
-    % endif
+        <div class="row model-description padding-top-bottom">
+          <span class="section-heading">Description:</span><br /><br /> ${escape(target.description)}
+        </div>
+        <div class="row model-downloads padding-top padding-bottom-large">
+          <span class="section-heading">Downloads:</span><br />
+          <ul class="download-links small">
+          % if target.model:
+            <li class="download-link">
+              <div class="download-model">
+                <a href="/blob/${target.model.key()}/${quote(target.title)}.skp"
+                    id="design-download"
+                    rel="${target.component and '1' or '0'}">
+                  <div class="download-button padding-top">
+                    <img class="series-button" src="${get_static_url('gfx/download.model.png')}">
+                  </div>
+                  ${_(u'Download Model')}
+                </a>
+              </div>
+              <div class="hidden download-base64 model">
+                <a href="/blob64/${target.model.key()}"
+                   id="design-download-base64">Download Base64 Encoded</a>
+                <textarea id="design-download-data"></textarea>
+              </div>
+            </li>
+          % endif
+         ## % if target.sheets:
+            <li class="download-link">
+            <div class="download-sheets">
+         ##     <a href="/blob/${target.sheets.key()}">
+                  <div class="download-button padding-top">
+                    <img class="series-button" src="${get_static_url('gfx/download.sheets.png')}">
+                  </div>
+                  ${_(u'Download Cutting Templates')}
+         ##     </a>
+            </div>
+            </li>
+         ## % endif
+          </ul>
+        </div>
   % elif target.status == u'pending':
     <div class="status pending">
-      ${_(u'This design is pending moderation.')}
+      <span class="section-heading">${_(u'This design is pending moderation.')}</span>
     </div>
   % elif target.status == u'rejected':
     <div class="status pending">
-      ${_(u'This design was rejected.')}
+      <span class="section-heading">${_(u'This design was rejected.')}</span>
     </div>
   % endif
-  % if not is_sketchup:
-    <div class="comments row">
-      <div id="disqus_thread"></div>
-      <script type="text/javascript">
-        var disqus_shortname = 'wikihouse';
-        var disqus_identifier = 'Design ${target.key().id()}';
-        var disqus_url = '${request.path_url}';
-        var disqus_developer = ${disqus_developer and '1' or '0'};
-      </script>
-      <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
-      </script>
-      <noscript>
-        ${_(u'Please enable JavaScript to view the comments.')}
-      </noscript>
-      <a href="http://disqus.com" class="dsq-brlink">
-        ${_(u'Comments powered by')}
-        <span class="logo-disqus">Disqus</span></a>
+  </div>
+    % if not is_sketchup:
+      <div class="comments row padding-top-small border-top">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+          var disqus_shortname = 'wikihouse';
+          var disqus_identifier = 'Design ${target.key().id()}';
+          var disqus_url = '${request.path_url}';
+          var disqus_developer = ${disqus_developer and '1' or '0'};
+        </script>
+        <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
+        </script>
+        <noscript>
+          ${_(u'Please enable JavaScript to view the comments.')}
+        </noscript>
+        <a href="http://disqus.com" class="dsq-brlink">
+          ${_(u'Comments powered by')}
+          <span class="logo-disqus">Disqus</span></a>
+      </div>
+    % endif
+    <script>
+      var WIKIHOUSE_DOWNLOAD_PAGE = true;
+    </script>
     </div>
-  % endif
-  <script>
-    var WIKIHOUSE_DOWNLOAD_PAGE = true;
-  </script>
   </div>
 </%def>

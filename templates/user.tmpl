@@ -3,7 +3,7 @@
 <%def name="sub_title()">${target.nickname}</%def>
 
 <%def name="main_content()">
-  <h4>${_(u'Designs')}</h4>
+  <h4 class="padding-sides">${_(u'Designs')}</h4>
   <ul class="designs">
     % for item in designs:
       ${self.design_listing(item, show_series=True)}
@@ -12,11 +12,20 @@
 </%def>
 
 <%def name="actions()">
-  <h4>${_(u'User')}</h4>
-  <div class="user-block">
+  <h4 class="padding-sides">${_(u'User')}</h4>
+  <div class="user-block padding-left-large">
+    <div class="user-image">
     <a href="/library/user/${target.id}" title="${target.nickname}">
-      <img src="${target.avatar}" /></a>
+      % if target.avatar:
+        <img src="${target.avatar}" />
+      % else:
+        <img src="${get_static_url('gfx/avatar.png')}" />
+      % endif
+    </a>
+    </div>
+    <div class="user-name padding-top">
     ${target.nickname}
+    </div>
     <% 
       google_user = users.get_current_user()
       is_user = google_user and google_user.user_id() == target.google_user_id

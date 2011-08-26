@@ -9,42 +9,47 @@ $padding-02: 1em
 $padding-03: 2em
 $margin-01: 0.5em
 $margin-02: 1em
-$margin-03: 2em       
+$margin-03: 2em
+
+$super-graphic-height-01: 451px
+$super-graphic-height-02: 329px 
+//$super-graphic-height-03: 452px        
 
   
-//Layout-related Classes 
+//Layout-related Floats 
  
 .right
   float: right
   
 .left
   float: left
-    
+
+//Layout-related Borders  
+      
 .no-border
   border: 0 !important  
+  
+.border-top
+  border-top: $border    
+  
+.border-bottom
+  border-bottom: $border    
 
-.no-padding
-  padding: 0 !important  
-  
-.no-margin
-  margin: 0 !important    
-  
+.border-right
+  border-right: $border    
+    
+.border-left
+  border-left: $border  
+ 
 .border-sides
   border:
     left: $border
     right: $border 
-  
-.border-left
-  border-left: $border  
-  
-.border-right
-  border-right: $border      
-  
-.border-bottom
-  border-bottom: $border  
-
-.border-top
-  border-top: $border    
+ 
+//Layout-related Margins    
+      
+.no-margin
+  margin: 0 !important    
 
 .margin-top
   margin:
@@ -61,65 +66,96 @@ $margin-03: 2em
 .margin-left
   margin:
     left: $margin-02     
+
+//Layout-related Paddings
     
+.no-padding
+  padding: 0 !important      
+    
+.padding-top
+  padding:
+    top: $padding-02  
+       
+.padding-top-small
+  padding:
+    top: $padding-01     
+
+.padding-top-large
+  padding:
+    top: $padding-03      
+    
+.padding-bottom  
+  padding:
+    bottom: $padding-02  
+    
+.padding-bottom-small
+  padding:
+    bottom: $padding-01     
+    
+.padding-bottom-large  
+  padding:
+    bottom: $padding-03  
+          
+.padding-top-bottom
+  padding:
+    top: $padding-02
+    bottom: $padding-02    
+ 
+.padding-top-bottom-small
+  padding:
+    top: $padding-01
+    bottom: $padding-01      
+      
+.padding-top-bottom-large
+  padding:
+    top: $padding-03
+    bottom: $padding-03   
+
+.padding-left  
+  padding:
+    left: $padding-02    
+
+.padding-left-small  
+  padding:
+    left: $padding-01
+
+.padding-left-large  
+  padding:
+    left: $padding-03          
+
+.padding-right  
+  padding:
+    right: $padding-02        
+        
+.padding-right-small  
+  padding:
+    right: $padding-01        
+
+.padding-right-large
+  padding:
+    right: $padding-03       
+
+.padding-sides 
+  padding:
+    left: $padding-02
+    right: $padding-02 
+    
+.padding-sides-small
+  padding:
+    left: $padding-01
+    right: $padding-01      
+           
+.padding-sides-large  
+  padding:
+    left: $padding-03
+    right: $padding-03 
+                        
 .padding-all
   padding:
     top: $padding-02
     bottom: $padding-02 
     left: $padding-03
     right: $padding-03 
-       
-.padding-sides  
-  padding:
-    left: $padding-03
-    right: $padding-03 
-
-.padding-sides-small 
-  padding:
-    left: $padding-02
-    right: $padding-02 
-      
-.padding-top-bottom
-  padding:
-    top: $padding-02
-    bottom: $padding-02   
- 
-.padding-top-bottom-small
-  padding:
-    top: $padding-01
-    bottom: $padding-01    
-           
-.padding-top
-  padding:
-    top: $padding-02
-    
-.padding-top-small
-  padding:
-    top: $padding-01    
-    
-.padding-bottom  
-  padding:
-    bottom: $padding-01  
-
-.padding-left  
-  padding:
-    left: $padding-03
-
-.padding-left-mid  
-  padding:
-    left: $padding-02    
-                
-.padding-left-small  
-  padding:
-    left: $padding-01
-    
-.padding-right  
-  padding:
-    right: $padding-03
-    
-.padding-right-small  
-  padding:
-    right: $padding-01    
     
 .row, .clear
   clear: both
@@ -139,6 +175,7 @@ $margin-03: 2em
 body
   font-family: helvetica, "report", sans-serif
   font-size: 0.7em
+  min-width: 450px
 
 a
   text-decoration: none
@@ -172,10 +209,16 @@ a.link
   
   &:hover
     color: #000
-     
-h4
+
+h3
   font-size: 1.2em
-  font-weight: bold    
+  font-weight: bold
+  padding: 0.5em 0em 0.5em 0em        
+         
+h4
+  font-size: 1.3em
+  font-weight: bold
+  padding: 0.5em    
 
       
 //Primary Elements    

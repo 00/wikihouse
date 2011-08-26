@@ -3,47 +3,93 @@
 <%def name="sub_title()">${target is None and _(u'Browse Library') or target.title}</%def>
 
 <%def name="design_listing(item, show_series=False)">
-  <li>
-  <div class="row">
-    <div class="design-panel">
-      % if item.model_preview:
+  <li class="padding-sides">
+  <div class="row design-pane padding-top-bottom-large">
+    <div>
         <div class="thumbnail left">
-          <img src="${item.model_preview_serving_url}=s110" />
-        </div>
+      % if item.model_preview:
+        <a href="/library/design/${item.key().id()}"><img src="${item.model_preview_serving_url}=s160" /></a>
+      % else:
+        <a href="/library/design/${item.key().id()}"><img src="${get_static_url('gfx/no-thumb.png')}" /></a>
       % endif
-      <div class="design-details left padding-left">
+        </div>
+      <div class="design-content padding-left">
         <div class="title">
-          <!--${item.key().id()}-->
           <a href="/library/design/${item.key().id()}">
             <h4>${escape(item.title)}</h4></a>
         </div>
-        <div class="user padding-top">
-          by: 
-          <a href="/library/user/${item.user.id}">
-            ${escape(item.user.nickname)}</a>
+        <div class="design-details left padding-sides padding-bottom">
+          % if show_series:
+          <div class="series">
+            Series:
+            <%
+              i = 0
+              l = len(item.series)
+            %>
+            % for s in item.series:
+              <% i = i + 1 %>
+              <a href="/library/series/${s.name()}">
+                ${s.name().upper()}</a>${i < l and ', ' or ''}
+            % endfor
+          </div>
+          % endif
+          <div class="id grey">
+            <span class="section-heading">${_(u'Model No.')}</span> ${item.key().id()}
+          </div>
+          <div class="user padding-top">
+            <span class="section-heading">${_(u'By:')}</span>
+            <a href="/library/user/${item.user.id}">
+              ${escape(item.user.nickname)}</a>
+          </div>
+          <div class="verification padding-top">
+            <span class="section-heading">${_(u'Verification:')}</span>
+            % if item.verification == u'unverified':
+                ${_(u'not structurally checked.')}
+            % elif item.status == u'verified':
+                ${_(u'structurally checked.')}
+            % elif item.status == u'built':
+                ${_(u'structurally checked, tested &amp; built.')}
+            % endif
+          </div>
+        </div>
+        <div class="design-description left">
+          <div class="row model-description padding-sides padding-bottom">
+            <span class="section-heading">Description:</span><br /><br /> ${escape(item.description)}
+          </div>
         </div>
       </div>
-      % if show_series:
-        <div class="series left">
-          Series: 
-          <%
-            i = 0
-            l = len(item.series)
-          %>
-          % for s in item.series:
-            <% i = i + 1 %>
-            <a href="/library/series/${s.name()}">
-              ${s.name().upper()}</a>${i < l and ', ' or ''}
-          % endfor
-        </div>
-      % endif
     </div>
-  <div>
+  </div>
   </li>
 </%def>
 
 <%def name="main_content()">
-  <h4>${_(u'Designs')}</h4>
+  <div class="row padding-bottom">
+    % if target:
+      <div class="series-block left">
+        % for item in series:
+          % if target.key() == item.key():
+            <div class="selected">
+              <div class="series-title padding-right left">
+                <div class="row">
+                  <h4 class="padding-sides">${_(u'Designs/')}&nbsp;&nbsp;&nbsp;${item.title}</h4>
+                </div>
+              </div>
+              <div class="left padding-top">
+                <div class="row padding-left-large padding-bottom">
+                  [ ${item.description} ]
+                  <a class="link padding-left" href="/about#series" class="link">More...</a>
+                </div>
+              </div>
+            </div>
+          % endif
+        % endfor
+      </div>
+    % else:
+      <h4 class="padding-sides">${_(u'Designs/ ')}</h4>
+    % endif
+  </div>
+  <div class="row">
   <ul class="designs">
     <% 
       show_series = target is None
@@ -52,56 +98,41 @@
       ${self.design_listing(item, show_series=show_series)}
     % endfor
   </ul>
+  </div>
 </%def>
 
 <%def name="actions()">
-  <h4>Series</h4>
-  % if target:
-    <div class="series-block">
-      % for item in series:   
-        % if target.key() == item.key():
-          <div class="padding-sides-small selected">
-            <div class="series-title padding-top-bottom">
-              <a href="/library/series/${item.key().name()}">
-                ${item.title}</a>
-            </div>
-            <div class="description padding-top-bottom">
-              ${item.description}
-            </div>
-            <div class="more-info-link padding-bottom">
-              <a href="/about#series" class="link small strong">More information...</a>
-            </div>
+  <div class="row padding-bottom">
+    <h4 class="padding-sides">Series/</h4>
+  </div>
+  <div class="row">
+    <ul class="series-nav padding-bottom">
+      % for item in series:
+        <%
+          selected = bool(target and target.key() == item.key()) and True or False
+        %>
+        <li class="series-selectors ${selected and 'selected-series' or ''}">
+          <div class="bar">
+            <a href="/library/series/${item.key().name()}">
+              <img class="series-button ${selected and 'selected' or ''}"
+                  src="${get_static_url('gfx/series/%s.tr.png' % item.key().name())}"
+              />
+            </a>
           </div>
-        % endif
+        </li>
       % endfor
-    </div>
-  % endif
-  <ul class="series-nav">
-    % for item in series:
-      <%
-        selected = bool(target and target.key() == item.key()) and True or False
-      %>
-      <li class="series-selectors ${selected and 'selected-series' or ''}">
-        <div class="bar">
-          <a href="/library/series/${item.key().name()}">
-            <img class="series-button ${selected and 'selected' or ''}"
-                src="${get_static_url('gfx/series/%s.tr.png' % item.key().name())}"
-            />
-          </a>
-        </div>
-      </li>
-    % endfor
-  </ul>
+    </ul>
+  </div>
 </%def>
 
 <%def name="content()">
-  <div class="slot-6">
+  <div class="slot-6 actions padding-top">
     <div class="series">
       ${self.actions()}
     </div>
   </div>
-  <div class="slot-7-8-9">
-    <div class="">
+  <div class="slot-7-8-9 main-content padding-top">
+    <div>
       ${self.main_content()}
     </div>
   </div>

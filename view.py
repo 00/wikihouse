@@ -73,6 +73,7 @@ class RequestHandler(BaseRequestHandler):
             quote=urllib.quote,
             _=self._, 
             target_language=self.target_language,
+            remaining_languages=self.remaining_languages,
             is_sketchup=self.is_sketchup,
             **kwargs
         )
@@ -115,6 +116,9 @@ class RequestHandler(BaseRequestHandler):
         )
         self._ = translation.ugettext
         self.target_language = target
+        remaining = supported[:]
+        remaining.remove(target)
+        self.remaining_languages = remaining
         # provide `self.country_code` by setting a `country_code` cookie
         cc = self.cookies.get('country_code')
         if cc is None or cc == 'zz':

@@ -72,6 +72,7 @@ class RequestHandler(BaseRequestHandler):
             users=users, 
             quote=urllib.quote,
             _=self._, 
+            target_language=self.target_language,
             is_sketchup=self.is_sketchup,
             **kwargs
         )
@@ -113,6 +114,7 @@ class RequestHandler(BaseRequestHandler):
             languages=[target]
         )
         self._ = translation.ugettext
+        self.target_language = target
         # provide `self.country_code` by setting a `country_code` cookie
         cc = self.cookies.get('country_code')
         if cc is None or cc == 'zz':
@@ -234,7 +236,6 @@ class SketchupAwareHandler(RequestHandler):
         
     
     
-
 
 class Library(SketchupAwareHandler):
     """

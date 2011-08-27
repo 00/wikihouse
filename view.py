@@ -185,6 +185,17 @@ class Contact(RequestHandler):
     
 
 
+class Terms(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('terms.tmpl')
+        
+    
+    
+
+
 class SketchupAwareHandler(RequestHandler):
     """ Looks for optional `sketchup\/?` at the end of the url.  If present sets
       a `is_sketchup` session cookie to be `true`.

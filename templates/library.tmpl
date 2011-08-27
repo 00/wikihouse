@@ -8,14 +8,14 @@
     <div>
         <div class="thumbnail left">
       % if item.model_preview:
-        <a href="/library/design/${item.key().id()}"><img src="${item.model_preview_serving_url}=s160" /></a>
+        <a href="/library/designs/${item.key().id()}"><img src="${item.model_preview_serving_url}=s160" /></a>
       % else:
-        <a href="/library/design/${item.key().id()}"><img src="${get_static_url('gfx/no-thumb.png')}" /></a>
+        <a href="/library/designs/${item.key().id()}"><img src="${get_static_url('gfx/no-thumb.png')}" /></a>
       % endif
         </div>
       <div class="design-content padding-left">
         <div class="title">
-          <a href="/library/design/${item.key().id()}">
+          <a href="/library/designs/${item.key().id()}">
             <h4>${escape(item.title)}</h4></a>
         </div>
         <div class="design-details left padding-sides padding-bottom">
@@ -38,7 +38,7 @@
           </div>
           <div class="user padding-top">
             <span class="section-heading">${_(u'By:')}</span>
-            <a href="/library/user/${item.user.id}">
+            <a href="/library/users/${item.user.id}">
               ${escape(item.user.nickname)}</a>
           </div>
           <div class="verification padding-top">

@@ -318,7 +318,7 @@ class AddDesign(SketchupAwareHandler):
         recipient = user.email()
         sender = self.settings['moderator_email_address']
         subject = self._(u'New design submitted to WikiHouse')
-        body = u'%s\n\n%s %s\n%s %s/library/design/%s\n\n%s\nWikiHouse\n%s\n' % (
+        body = u'%s\n\n%s %s\n%s %s/library/designs/%s\n\n%s\nWikiHouse\n%s\n' % (
             self._(u'Your design has been queued for moderation:'),
             self._(u'Title:'),
             xhtml_escape(design.title),
@@ -429,7 +429,7 @@ class AddDesignSuccess(RequestHandler):
     
     @auth.required
     def get(self, id):
-        path = '/library/design/%s' % id
+        path = '/library/designs/%s' % id
         return {'success': path}
         
     
@@ -461,7 +461,7 @@ class Moderate(RequestHandler):
         recipient = user.email
         sender = self.settings['moderator_email_address']
         subject = self._(u'Complete your WikiHouse profile with a gravatar')
-        body = u'%s\n\n%s %s\n%s %s/library/design/%s\n\n%s\n\n%s%s\n\n%s\nWikiHouse\n%s\n' % (
+        body = u'%s\n\n%s %s\n%s %s/library/designs/%s\n\n%s\n\n%s%s\n\n%s\nWikiHouse\n%s\n' % (
             self._(u'Your design has been approved and included in the WikiHouse library:'),
             self._(u'Title:'),
             xhtml_escape(design.title),

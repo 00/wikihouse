@@ -56,7 +56,7 @@
           </div>
           <div class="user padding-top">
             <span class="section-heading">${_(u'By:')}</span>
-            <a href="/library/user/${target.user.id}">
+            <a href="/library/users/${target.user.id}">
               ${escape(target.user.nickname)}</a>
           </div>
           <div class="verification padding-top">
@@ -86,7 +86,7 @@
               % endif
             </div>
             % if is_admin and target.status == u'pending':
-              <form class="moderation-form" action="/moderate" method="post">
+              <form class="moderation-form" action="/admin/moderate" method="post">
                 ${xsrf_input}
                 <input type="hidden" name="id" value="${target.key().id()}" />
                 <input type="submit" name="action" value="${_(u'Approve')}" />

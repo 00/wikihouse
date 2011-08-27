@@ -45,10 +45,10 @@ mapping = [(
         r'/library/users\/?',
         Users
     ), (
-        r'/library/user/([0-9]+)\/?',
+        r'/library/users/([0-9]+)\/?',
         User
     ), (
-        r'/library/design/([0-9]+)\/?',
+        r'/library/designs/([0-9]+)\/?',
         Design
     ), (
         r'/library/add_design\/?',
@@ -63,10 +63,10 @@ mapping = [(
         r'/library/add_design/error\/?',
         AddDesignError
     ), (
-        r'/moderate\/?',
+        r'/admin/moderate\/?',
         Moderate
     ), (
-        r'/bootstrap\/?',
+        r'/admin/bootstrap\/?',
         Bootstrap
     ), (
         r'/blob64/([^/]+)/([^/]+)\/?',

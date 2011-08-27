@@ -282,7 +282,7 @@ class Design(SketchupAwareHandler):
         'model': 'application/vnd.sketchup.skp',
         'model_preview': 'image/jpeg',
         'model_preview_reverse': 'image/jpeg',
-        'sheets': 'application/octet-stream', # XXX tbc
+        'sheets': 'image/vnd.dxf',
         'sheets_preview': 'image/jpeg'
     }
     
@@ -427,7 +427,7 @@ class Design(SketchupAwareHandler):
                 # and, if it's an image then set the corresponding `serving_url`.
                 if blob_key is not None:
                     mime_type = self._upload_files.get(key)
-                    if mime_type.startswith('image'):
+                    if mime_type == 'image/jpeg':
                         serving_key = '%s_serving_url' % key
                         serving_url = images.get_serving_url(blob_key)
                         self._uploads[serving_key] = serving_url

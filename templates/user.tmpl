@@ -3,7 +3,7 @@
 <%def name="sub_title()">${target.nickname}</%def>
 
 <%def name="main_content()">
-  <h4 class="padding-sides">${_(u'Designs')}</h4>
+  <h4 class="padding-sides">${_(u'Designs/')}</h4>
   <ul class="designs">
     % for item in designs:
       ${self.design_listing(item, show_series=True)}
@@ -12,7 +12,7 @@
 </%def>
 
 <%def name="actions()">
-  <h4 class="padding-sides">${_(u'User')}</h4>
+  <h4 class="padding-sides">${_(u'User/')}</h4>
   <div class="user-block padding-left-large">
     <div class="user-image">
     <a href="/library/user/${target.id}" title="${target.nickname}">

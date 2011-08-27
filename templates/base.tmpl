@@ -52,7 +52,7 @@
                     </a>
                   % else:
                     % if users.is_current_user_admin():
-                      <a href="/moderate">
+                      <a href="/admin/moderate">
                         <li class="right border-left unselected">
                           ${_(u'Moderate')}
                         </li>
@@ -157,7 +157,7 @@
         <div class="row border-top">
           <div class="slot-6">
             <div class="left margin-top padding-bottom-small padding-left">
-              <a class="link strong" target="blank" href="/terms" alt="Terms and Conditions">${_(u'Terms of Use...')}</a>
+              <a class="link strong" href="/legal/terms" alt="$_(u'Terms and Conditions')}">${_(u'Terms of Use...')}</a>
             </div>
           </div>
           <div class="slot-7-8-9">

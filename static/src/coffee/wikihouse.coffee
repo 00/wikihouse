@@ -3,21 +3,21 @@
 
 window.wikihouse ?= {}
 
-window.wikihouse.init = ->
-
+$(document).ready ->
+  
+  $progress = $ '#progress-indicator'
+  $message = $ '.message', $progress
+  
   # Setup the controls and methods for the upload page.
   if WIKIHOUSE_UPLOAD_PAGE?
-
-    $progress = $ '#progress-indicator'
-    $message = $ '.message', $progress
-    $form = $ '#submit-design-form'
-
+    
     # Validate the submit design form, show processing state and call sketchup.
+    $form = $ '#submit-design-form'
     $form.bind 'submit', (event) ->
-
+      
       data = $.parseQuery $form.serialize()
       valid = true
-
+      
       # Title is required.
       $error = $('#design-title').closest('.field').find('.error')
       if not data.title
@@ -25,7 +25,7 @@ window.wikihouse.init = ->
         valid = false
       else
         $error.text ''
-
+      
       # Description is required.
       $error = $('#design-description').closest('.field').find('.error')
       if not data.description
@@ -33,7 +33,7 @@ window.wikihouse.init = ->
         valid = false
       else
         $error.text ''
-
+      
       # Must select at least one series.
       $error = $('#design-series').closest('.field').find('.error')
       if not data.series or data.series.length is 0
@@ -41,16 +41,21 @@ window.wikihouse.init = ->
         valid = false
       else
         $error.text ''
-
-      # If valid, show processing state and call SketchUp.
+      
+      # If valid, either show processing state and call SketchUp
+      # or submit via ajax.
       if valid
-        wikihouse.showProgress _ 'Processing SketchUp files ...'
-        window.location = 'skp:process'
-
+        if WIKIHOUSE_IS_SKETCHUP
+          wikihouse.showProgress _ 'Processing SketchUp files ...'
+          window.location = 'skp:process'
+        else
+          wikihouse.upload()
+        
       # Either way, make sure we squish the event.
       event.stopImmediatePropagation()
       return false
-
+    
+    
     # Show upload state and post the form by ajax, redirect on success / show error.
     wikihouse.upload = ->
       # Show upload state.
@@ -66,19 +71,27 @@ window.wikihouse.init = ->
         success: (data) ->
           if data.success?
             # Redirect on success.
-            window.location = 'skp:uploaded@success'
-            setTimeout ->
-              window.location.replace data.success,
-              1500
+            if WIKIHOUSE_IS_SKETCHUP
+              window.location = 'skp:uploaded@success'
+              setTimeout ->
+                window.location.replace data.success,
+                1500
+            else
+              window.location.replace data.success
           else
             # Show error.
-            window.location = 'skp:uploaded@error'
+            if WIKIHOUSE_IS_SKETCHUP
+              window.location = 'skp:uploaded@error'
             wikihouse.showError data.error
         error: ->
           # Show error.
-          window.location = 'skp:uploaded@error'
+          if WIKIHOUSE_IS_SKETCHUP
+            window.location = 'skp:uploaded@error'
           wikihouse.showError _ 'Upload failed. Please try again.'
-
+        
+      
+    
+    
     # Call `wikihouse.showProgress(msg)` to trigger the in-progress state.
     wikihouse.showProgress = (msg) ->
       # Clear any validation error message.
@@ -88,7 +101,9 @@ window.wikihouse.init = ->
       $form.hide()
       $message.text msg
       $progress.show()
-
+      
+    
+    
     # Call `wikihouse.showError(errmsg)` to show validation errors.
     wikihouse.showError = (errmsg) ->
       # Hide the progress indicator.
@@ -97,51 +112,77 @@ window.wikihouse.init = ->
       # Display the error message.
       $error = $form.find('.error').first()
       $error.text errmsg
-
+    
+    
     # Inform SketchUp to preload input variables.
-    window.location = 'skp:load'
-
+    if WIKIHOUSE_IS_SKETCHUP
+      window.location = 'skp:load'
+    
+  
   # Setup the controls and methods for a download page.
   if WIKIHOUSE_DOWNLOAD_PAGE?
-
-    $progress = $ '#progress-indicator'
-    $message = $ '.message', $progress
-
-    $download = $ '#design-download'
-    if !$download.get(0)
-      return
-
-    # Get the design's title and download urls.
-    designTitle = $('#design-title').text()
-    designURL = $download.attr 'href'
-    designBase64 = $('#design-download-base64').attr 'href'
-    isComponent = $download.attr 'rel'
-
-    # Strip the filename from the URL.
-    designURL = designURL.split "/"
-    designURL = designURL.slice(0, designURL.legnth-1)
-    designURL = designURL.join "/"
-
-    wikihouse.download = (id, url) ->
-      # Grab the model data over ajax.
-      $.ajax
-        type: 'GET'
-        url: url
-        dataType: 'text'
-        success: (data) ->
-          # Set the data into the hidden textarea.
-          $('#design-download-data').text(data)
-          # Inform SketchUp of the available data.
-          window.location = "skp:save@#{id}"
-        error: ->
-          # Inform SketchUp of the failed download.
-          window.location = "skp:error@#{id}"
-
-    # Call SketchUp when the download link is clicked.
-    $download.click ->
-      window.location = "skp:download@#{isComponent},#{designBase64},#{designURL},#{designTitle}"
+    
+    # Ask the user to confirm before deleting.
+    $delete_form = $ '.delete-form'
+    $delete_form.bind 'submit', ->
+      # If the user confirms, update the confirmation input to `true` and send
+      # the form via XmlHttpRequest (so we can be sure the DELETE is respected).
+      msg = _ 'Are you sure you want to delete this design from the WikiHouse library?'
+      if confirm msg
+        $.ajax
+          type: 'DELETE'
+          url: "#{$delete_form.attr 'action'}?confirmed=true"
+          dataType: 'json'
+          success: (data) ->
+            if data.success?
+              window.location.replace data.success
+            else
+              alert "#{error_stub}.\n#{data.error}"
+          error: ->
+            alert error_stub
+      # Stop the event.
       return false
+    
+    
+    if WIKIHOUSE_IS_SKETCHUP
+      
+      $download = $ '#design-download'
+      if !$download.get(0)
+        return
+      
+      # Get the design's title and download urls.
+      designTitle = $('#design-title').text()
+      designURL = $download.attr 'href'
+      designBase64 = $('#design-download-base64').attr 'href'
+      isComponent = $download.attr 'rel'
+      
+      # Strip the filename from the URL.
+      designURL = designURL.split "/"
+      designURL = designURL.slice(0, designURL.legnth-1)
+      designURL = designURL.join "/"
+      
+      wikihouse.download = (id, url) ->
+        # Grab the model data over ajax.
+        $.ajax
+          type: 'GET'
+          url: url
+          dataType: 'text'
+          success: (data) ->
+            # Set the data into the hidden textarea.
+            $('#design-download-data').text(data)
+            # Inform SketchUp of the available data.
+            window.location = "skp:save@#{id}"
+          error: ->
+            # Inform SketchUp of the failed download.
+            window.location = "skp:error@#{id}"
+        
+      
+      
+      # Call SketchUp when the download link is clicked.
+      $download.click ->
+        window.location = "skp:download@#{isComponent},#{designBase64},#{designURL},#{designTitle}"
+        return false
+      
+    
+  
 
-$(document).ready ->
-  if WIKIHOUSE_IS_SKETCHUP
-    wikihouse.init()

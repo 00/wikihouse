@@ -1,0 +1,182 @@
+<%inherit file="base.tmpl"/>
+
+<%def name="sub_title()">
+  % if target:
+    ${_("Edit")} ${escape(target.title)}
+  % else:
+    ${_("Add New Component")}
+  % endif
+</%def>
+
+<%def name="content()">
+  <div id="progress-indicator">
+    <div class="message"></div>
+  </div>
+  <%
+    if is_sketchup:
+      # We are sending base64 encoded data directly to a request handler.
+      action = request.path
+      method = target and 'PUT' or 'POST'
+      enctype = 'application/x-www-form-urlencoded'
+    else:
+      # We are posting multipart form data via a blobstore handler which makes
+      # a POST redirect to our handler.
+      action = upload_url
+      method = 'POST'
+      enctype = 'multipart/form-data'
+  %>
+  <form id="submit-design-form" action="${action}" method="${method}" enctype="${enctype}">
+    % if target and is_sketchup:
+      <div class="back-to-series-button">
+        <a rel="back" href="#back">
+          ${_(u'Back to Design')}</a>
+      </div>
+    % endif
+    <div class="padding-right">
+      <div class="row padding-bottom">
+        <h4 class="padding-sides">
+          % if target:
+            ${_("Edit/")}
+            &nbsp;
+            <a href="/library/designs/${target.key().id()}">${escape(target.title)}</a>
+          % else:
+            ${_("Add New Component")}
+          % endif
+        </h4>
+      </div>
+    </div>
+    ${xsrf_input}
+    <div class="error"></div>
+    <div class="field">
+      <label for="title">${_("Title")}</label>
+      <input type="text" name="title" id="design-title"
+          value="${target and escape(target.title) or ''}"
+      />
+      <div class="error"></div>
+    </div>
+    <div class="field">
+      <label for="description">${_("Description")}</label>
+      <textarea name="description" id="design-description">${target and escape(target.description) or ''}</textarea>
+      <div class="error"></div>
+    </div>
+    <div class="field">
+      <label for="series">${_("Series")}</label>
+      <select name="series" multiple="true" id="design-series">
+        % for item in series:
+          % if target and item.key() in target.series:
+            <option value="${item.key().name()}" selected="selected">${item.title}</option>
+          % else:
+            <option value="${item.key().name()}">${item.title}</option>
+          % endif
+        % endfor
+      </select>
+      <div class="error"></div>
+    </div>
+    <div class="field">
+      % if target and target.component:
+        <input type="checkbox" name="component" value="1" checked="checked" />
+      % else:
+        <input type="checkbox" name="component" value="1"  />
+      % endif
+      <label for="component">${_("Component")}</label>
+    </div>
+    <div class="field">
+      <label for="verification">${_("Verification status")}</label>
+      <select name="verification" id="design-verification">
+        <%
+          states = ({
+                  'value': u'unverified',
+                  'label': _("Not structurally checked"),
+                  'default': True
+              }, {
+                  'value': u'verified',
+                  'label': _("Structurally checked"),
+                  'default': False
+              }, {
+                  'value': u'built',
+                  'label': _("Structurally checked, tested &amp; built"),
+                  'default': False
+              }
+          )
+        %>
+        % for item in states:
+          % if target and item['value'] == target.verification or item['default']:
+            <option value="${item['value']}" selected="selected">
+              ${item['label']}
+            </option>
+          % else:
+            <option value="${item['value']}">
+              ${item['label']}
+            </option>
+          % endif
+        % endfor
+      </select>
+      <div class="error"></div>
+    </div>
+    <div class="field">
+      <label for="design-notes">${_("Verification notes")}</label>
+      <% notes = target and target.notes or None %>
+      <textarea name="notes" id="design-notes">${notes and escape(notes) or ''}</textarea>
+      <div class="error"></div>
+    </div>
+    <div class="hidden field">
+      <input type="hidden" name="sketchup_version" id="design-sketchup-version"
+          value="${target and target.sketchup_version or ''}"
+      />
+      <input type="hidden" name="plugin_version" id="design-plugin-version"
+          value="${target and target.plugin_version or ''}"
+      />
+    </div>
+    % if is_sketchup:
+      <div class="hidden file-inputs">
+        <div class="field">
+          <label for="model">${_("Model")}</label>
+          <textarea name="model" id="design-model"></textarea>
+        </div>
+        <div class="field">
+          <label for="model_preview">${_("Model preview image")}</label>
+          <textarea name="model_preview" id="design-model-preview"></textarea>
+        </div>
+        <div class="field">
+          <label for="model_preview_reverse">${_("Reverse model preview image")}</label>
+          <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
+        </div>
+        <div class="field">
+          <label for="sheets">${_("Cutting sheets")}</label>
+          <textarea name="sheets" id="design-sheets"></textarea>
+        </div>
+        <div class="field">
+          <label for="sheets_preview">${_("Cutting sheets preview image")}</label>
+          <textarea name="sheets_preview" id="design-sheets-preview"></textarea>
+        </div>
+      </div>
+    % elif users.is_current_user_admin():
+      <div class="file-inputs">
+        <div class="field">
+          <label for="model">${_("Override model")}</label>
+          <input name="model" type="file" id="design-model" />
+        </div>
+        <div class="field">
+          <label for="model_preview">${_("Override model preview image")}</label>
+          <input name="model_preview" type="file" id="design-model-preview" />
+        </div>
+        <div class="field">
+          <label for="model_preview_reverse">${_("Override reverse model preview image")}</label>
+          <input name="model_preview_reverse" type="file" id="design-model-preview-reverse" />
+        </div>
+        <div class="field">
+          <label for="sheets">${_("Override cutting sheets")}</label>
+          <input name="sheets" type="file" id="design-sheets" />
+        </div>
+        <div class="field">
+          <label for="sheets_preview">${_("Override cutting sheets preview image")}</label>
+          <input name="sheets_preview" type="file" id="design-sheets-preview" />
+        </div>
+      </div>
+    % endif
+    <input type="submit" name="submit" value="${_(u'Save &amp; Upload')}" />
+  </form>
+  <script>
+    var WIKIHOUSE_UPLOAD_PAGE = true;
+  </script>
+</%def>

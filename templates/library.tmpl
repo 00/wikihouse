@@ -8,14 +8,14 @@
     <div>
         <div class="thumbnail left">
       % if item.model_preview:
-        <a href="/library/design/${item.key().id()}"><img src="${item.model_preview_serving_url}=s160" /></a>
+        <a href="/library/designs/${item.key().id()}"><img src="${item.model_preview_serving_url}=s160" /></a>
       % else:
-        <a href="/library/design/${item.key().id()}"><img src="${get_static_url('gfx/no-thumb.png')}" /></a>
+        <a href="/library/designs/${item.key().id()}"><img src="${get_static_url('gfx/no-thumb.png')}" /></a>
       % endif
         </div>
       <div class="design-content padding-left">
         <div class="title">
-          <h4 class="uppercase"><a href="/library/design/${item.key().id()}">${escape(item.title)}</a></h4>
+          <h4 class="uppercase"><a href="/library/designs/${item.key().id()}">${escape(item.title)}</a></h4>
         </div>
         <div class="design-details left padding-sides padding-top">
           <div class="id grey padding-top-large">

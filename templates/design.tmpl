@@ -7,7 +7,7 @@
   % if is_sketchup:
     <div class="back-to-series-button">
       <a rel="back" href="#back">
-        ${_(u'Back to Warehouse')}</a>
+        ${_(u'Back to Components')}</a>
     </div>
   % endif
     <div class="padding-right">
@@ -40,7 +40,7 @@
       <div class="left design-info">
         <div class="row model-details padding-top">
           <div class="model-name">
-            <a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a>
+            <a href="/library/designs/${target.key().id()}" id="design-title">${escape(target.title)}</a>
           </div>
           <div class="id grey">
             <span class="section-heading">${_(u'Model No.')}</span> ${target.key().id()}
@@ -89,13 +89,20 @@
               % endif
             </div>
             % if is_admin and target.status == u'pending':
-              <form class="moderation-form" action="/moderate" method="post">
+              <form class="moderation-form" action="/admin/moderate" method="post">
                 ${xsrf_input}
                 <input type="hidden" name="id" value="${target.key().id()}" />
                 <input type="submit" name="action" value="${_(u'Approve')}" />
                 <input type="submit" name="action" value="${_(u'Reject')}" />
               </form>
             % endif
+            <form class="edit-form" action="${request.path}/edit" method="get">
+              <input type="submit" name="action" value="${_(u'Edit')}" />
+            </form>
+            <form class="delete-form" action="${request.path}" method="delete">
+              ${xsrf_input}
+              <input type="submit" name="action" value="${_(u'Delete')}" />
+            </form>
           % endif
         </div>
         <div class="row model-description padding-top-bottom-large">
@@ -157,7 +164,7 @@
           var disqus_shortname = 'wikihouse';
           var disqus_identifier = 'Design ${target.key().id()}';
           var disqus_url = '${request.path_url}';
-          var disqus_developer = ${disqus_developer and '1' or '0'};
+          var disqus_dev_mode = ${disqus_dev_mode and '1' or '0'};
         </script>
         <script type="text/javascript" src="//wikihouse.disqus.com/embed.js">
         </script>

@@ -1,14 +1,18 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">${_(u'Collaborate')}</%def>
+<%def name="sub_title()">${_(u'Get Involved')}</%def>
 
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
-    <div class="row padding-bottom">
+    <div class="row">
       <h4 class="padding-sides">${_(u'Resources/')}</h4>
     </div>
-    <div class="padding-left-large">
-      <a target="blank" href="http://github.com/thruflo/wikihouse">Github</a>
+    <div class="row padding-left-large padding-top-bottom padding-right">
+      <ul class="nav-list">
+        <li class="strong"><a href="http://wikihouse.tumblr.com">${_(u'News Blog')}</a></li>
+        <li class="strong"><a href="/contact">${_(u'Contact')}</a></li>
+        <li class="strong"><a href="http://github.com/thruflo/wikihouse">${_(u'Github')}</a></li>
+      </ul>
     </div>
   </div>
 </%def>
@@ -23,8 +27,8 @@
         ${_(u"""WikiHouse is a mass-collaborative experiment, still in its early stages. It is published as an open invitation to designers, makers and programmers to use and develop it. If you are interested in WikiHouse and would like to be part of the team, there are a number of ways you can contribute:""")}
       </div>
       <div class="padding-top padding-sides text-block justify"><span class="strong">1.</span> ${_(u""" Download some of the models to play, edit and develop in Google SketchUp. Using the WikiHouse plugin to share your models, login via a Google account and contribute to the library.""")}</div>
-      <div class="padding-top padding-sides text-block justify"><span class="strong">2.</span> ${_(u""" WikiHouse is currently being exhibited at the Gwangju Design Biennale in Korea. You are invited to download the Biennale prototype model and design the 'fourth section' for the exhibition. The selected design for the fourth section will be erected on XX september, and its designer(s) will be featured as part of the exhibition. For more information about this, follow the news blog.""")}</div>
-      <div class="padding-top padding-sides text-block justify"><span class="strong">3.</span> ${_(u""" The WikiHouse ruby plugin script is also published under an open license. Software developers of all kinds are invited to download, improve and build upon it. In particular anyone familiar with Sketchup scripting and CAD/CAM programming is invited to help us develop and improve on a nesting algorithm for minimizing material waste, and going straight to GCODE for milling.""")}</div>
+      <div class="padding-top padding-sides text-block justify"><span class="strong">2.</span> ${_(u""" WikiHouse is currently being exhibited at the Gwangju Design Biennale in Korea. You are invited to download the Biennale prototype model and design the 'fourth section' for the exhibition. The selected design, chosen by the organisers of the event and voted on by users of the website (like-count) will be erected at the start of October, and its designer(s) will be featured as part of the exhibition. For more information about this, follow the news blog.""")}</div>
+      <div class="padding-top padding-sides text-block justify"><span class="strong">3.</span> ${_(u""" The WikiHouse ruby plugin script is also published under an open license. Software developers of all kinds are invited to download, improve and build upon it. In particular anyone familiar with Sketchup scripting and CAD/CAM programming is invited to help us develop and improve on a nesting algorithm for minimizing material waste, and going straight from SketchUp to G-Code for CNC-milling.""")}</div>
       <div class="padding-top padding-sides text-block justify"><span class="strong">4.</span> ${_(u""" WikiHouse is looking to establish a number of 'labs' around the world: groups of individuals interested in designing and testing prototype houses, with a view to making full-scale weather-tight structures. It is also an ambition that with services, cladding and fit-out solutions will be openly shared under a CC license. If you're interested in setting up or supporting one of these labs, please get in touch.""")}</div>
     </div>
   </div>

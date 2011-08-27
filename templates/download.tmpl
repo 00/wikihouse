@@ -4,7 +4,7 @@
 
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
-    <div class="row padding-bottom">
+    <div class="row">
       <h4 class="padding-sides">${_(u'Download/')}</h4>
     </div>
     <div class="row download-link padding-left-large padding-top padding-bottom-large">
@@ -12,7 +12,7 @@
         <a class="download-button-rb" href=""
                   id="design-download"
                   rel="">
-                  [Download the Plugin]
+                  ${_(u'[Download the Plugin]')}
         </a>
       </div>
       <div class="download-caption">
@@ -28,7 +28,7 @@
       <h4 class="padding-sides">${_(u'Using the Plugin/')}</h4>
     </div>
     <div class="padding-left-large">
-      How to use it...
+      ${_(u"""How to use it...""")}
     </div>
   </div>
 </%def>

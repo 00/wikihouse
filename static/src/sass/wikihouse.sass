@@ -226,9 +226,8 @@ h4
   font-weight: bold
   padding: 0.5em
 
-@media screen and (max-width: 720px)
-  .scale
-    width: 100%
+.fullwidth
+  width: 100%
 
 //Primary Elements    
 
@@ -573,9 +572,8 @@ a.how-it-works
 .guide-pane
   max-width: 510px
 
-@media screen and (max-width: 720px)
-  .guide-standards-img img
-    //width: 100%
+.guide-wide-img img
+  width: 100%
 
 .text-block
   max-width: 510px
@@ -636,7 +634,7 @@ a.how-it-works
 form .field
   padding-top: $padding-01
   margin-top: $margin-01
-  
+
 textarea
   min-width: 250px
   max-width: 250px
@@ -753,6 +751,60 @@ input
   padding-top: 30px
   margin-left: 55px
 
+.nav-list li
+  padding-top: 3px
+
+a.download-button-model
+  display: block
+  background: transparent embed("download.model.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px  
+    
+a.download-button-sheets
+  display: block
+  background: transparent embed("download.sheets.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px   
+
+a.download-button-pdf
+  display: block
+  background: transparent embed("download.pdf.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px    
+
+a.download-button-rb
+  display: block
+  background: transparent embed("download.rb.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px      
 
 //Footer Elements
 

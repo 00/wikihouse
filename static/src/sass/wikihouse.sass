@@ -201,6 +201,12 @@ a:hover li.unselected
 .strong
   font-weight: bold
 
+.uppercase
+  text-transform: uppercase
+
+.justify
+  text-align: justify
+
 .grey
   color: #bbb 
 
@@ -218,8 +224,11 @@ h3
 h4
   font-size: 1.3em
   font-weight: bold
-  padding: 0.5em    
+  padding: 0.5em
 
+@media screen and (max-width: 720px)
+  .scale
+    width: 100%
 
 //Primary Elements    
 
@@ -391,6 +400,9 @@ a.wh-logo-cc
   width: 50%
   height: 100%
 
+.descriptions
+  min-height: 60px
+
 .super-graphic-image img
   width: 100%
 
@@ -549,6 +561,26 @@ a.how-it-works
   z-index: -1
 
 
+//Static Page Classes
+
+.section-header
+  font-size: 150%
+  font-weight: bold
+  padding:
+    top: $margin-01
+    bottom: $margin-02
+
+.guide-pane
+  max-width: 510px
+
+@media screen and (max-width: 720px)
+  .guide-standards-img img
+    //width: 100%
+
+.text-block
+  max-width: 510px
+
+
 //Other Elements & Classes    
 
 .super-text
@@ -591,10 +623,39 @@ a.how-it-works
 .design-panel
   margin-top: 10px
 
+.field-title
+  width: 100px
+  text-align: right
+  padding-top: 7px
+  
+.field
+  padding:
+    top: $padding-03
+    bottom: $padding-02 
+
 form .field
-  padding: $padding-01
-  margin: $margin-01
-  border: 1px dashed #CCC
+  padding-top: $padding-01
+  margin-top: $margin-01
+  
+textarea
+  min-width: 250px
+  max-width: 250px
+  padding: 0
+  margin: 0
+
+select
+  width: 250px
+
+input[type=text]
+  width: 250px
+  padding: 0
+  margin: 0
+
+input
+  width: 250px
+
+.submit
+  margin-left: 115px
 
 .thumbnail img
   width: 160px
@@ -631,6 +692,13 @@ form .field
 .tabs
   text-align: center
 
+.model-name
+  font-size: 150%
+  font-weight: bold
+  text-transform: uppercase
+  padding:
+    bottom: $padding-01
+
 .model-details
   float: none
 
@@ -639,7 +707,6 @@ form .field
 
 .model-description
   text-align: justify
-  padding-right: $padding-02
 
 @media screen and (min-width: 986px)
   .model-description
@@ -673,19 +740,18 @@ form .field
   padding-top: 3px
 
 .download-links
-  text-align: center
+  text-align: left
 
 .download-link
-  display: inline-block
-  text-align: center
-  width: 65px
-  vertical-align: top
+  display: block
 
-.download-model
-  text-align: center
+.download-button
+  width: 50px
+  height: 60px
 
-.download-sheets
-  text-align: center
+.download-caption
+  padding-top: 30px
+  margin-left: 55px
 
 
 //Footer Elements
@@ -785,7 +851,7 @@ a.logo-gw
 @media screen and (min-width: 720px)
   .about-texts
     margin: 0 25%
-    font-size: 1.1em
+    font-size: 1em
 
 
 //Share Buttons  

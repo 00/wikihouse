@@ -18,6 +18,8 @@ from xml.etree import ElementTree as etree
 from google.appengine.api import files, images, mail, memcache, users
 from google.appengine.ext import blobstore, db
 
+from webob.exc import status_map, HTTPNotFound, HTTPForbidden
+
 from weblayer import RequestHandler as BaseRequestHandler
 from weblayer.utils import encode_to_utf8, unicode_urlencode
 from weblayer.utils import json_decode, json_encode, xhtml_escape
@@ -73,6 +75,24 @@ class RequestHandler(BaseRequestHandler):
             is_sketchup=self.is_sketchup,
             **kwargs
         )
+        
+    
+    def error(self, exception=None, status=500, **kwargs):
+        """ Override weblayer default to render error messages using a nice
+          template.
+        """
+        
+        status = int(status)
+        if exception is None:
+            ExceptionClass = status_map[status]
+            exception = ExceptionClass(**kwargs)
+        response = self.request.get_response(exception)
+        response.body = self.render(
+            'error.tmpl', 
+            title=exception.title,
+            error=unicode(exception)
+        )
+        return response
         
     
     def __init__(self, *args, **kwargs):
@@ -907,7 +927,7 @@ class NotFound(RequestHandler):
     """
     
     def get(self):
-        return self.render('errors/404.tmpl')
+        raise HTTPNotFound
         
     
     

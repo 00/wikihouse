@@ -289,6 +289,9 @@ class AddDesign(SketchupAwareHandler):
     
     
     def notify(self, design):
+        """ Hack for local install...
+        """
+        return
         """ Notify the moderators.  Note that we use the first email in the
           moderators list as the sender.
         """

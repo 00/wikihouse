@@ -250,12 +250,11 @@ class Library(SketchupAwareHandler):
     
     
 
-
-class AddDesign(SketchupAwareHandler):
-    """
+class Design(SketchupAwareHandler):
+    """ RESTful handler for a `model.Design`.
     """
     
-    __all__ = ['get', 'post']
+    __all__ = ['head', 'get', 'post', 'put', 'delete']
     
     _uploads = None
     _upload_files = {
@@ -265,6 +264,14 @@ class AddDesign(SketchupAwareHandler):
         'sheets': 'application/octet-stream', # XXX tbc
         'sheets_preview': 'image/jpeg'
     }
+    
+    @property
+    def _disqus_dev_mode(self):
+        is_dev_mode = self.settings['dev']
+        is_dev_url = 'appspot.com' in self.request.host
+        return is_dev_mode or is_dev_url
+        
+    
     
     def _write_file(self, mime_type, data):
         """ Write `data` to the blob store and return a blob key.
@@ -286,31 +293,9 @@ class AddDesign(SketchupAwareHandler):
         return files.blobstore.get_blob_key(file_name)
         
     
-    def _get_uploads(self):
-        """ Lazy decode and store file uploads.  If we're handling an image,
-          adds a `${key}_serving_url` string property.
-        """
-        
-        if self._uploads is None:
-            self._uploads = {}
-            params = self.request.params
-            for key, value in params.iteritems():
-                if value and key in self._upload_files:
-                    mime_type = self._upload_files.get(key)
-                    data = base64.urlsafe_b64decode(encode_to_utf8(value))
-                    blob_key = self._write_file(mime_type, data)
-                    if mime_type.startswith('image'):
-                        serving_key = '%s_serving_url' % key
-                        serving_url = images.get_serving_url(blob_key)
-                        self._uploads[serving_key] = serving_url
-                    self._uploads[key] = blob_key
-        return self._uploads
-        
-    
-    
-    def notify(self, design):
-        """ Notify the moderators.  Note that we use the first email in the
-          moderators list as the sender.
+    def _send_notification(self, design):
+        """ Notify the user and moderators that a design has been queued for
+          moderation.
         """
         
         url = self.request.host_url
@@ -337,9 +322,101 @@ class AddDesign(SketchupAwareHandler):
         message.send()
         
     
+    def _ensure_edit_allowed(self, context):
+        """ Ensure that the current user is allowed to edit the `context`.
+        """
+        
+        current_user = users.get_current_user()
+        is_user = current_user and current_user == context.user.google_user
+        is_allowed = is_user or users.is_current_user_admin()
+        if not is_allowed:
+            raise HTTPForbidden
+            
+        
     
-    @auth.required
-    def post(self):
+    def _redirect_on(self, id=None, error=None):
+        """ Build a redirect response to return error data or success data.
+          
+          n.b.: We would return the data directly but add and edit forms used
+          from the browser go via the blobstore upload machinery, which requires
+          a redirect.
+          
+        """
+        
+        if error:
+            data = unicode_urlencode({'error': error})
+            path = '/redirect/error?%s' % data
+        else:
+            path = '/redirect/success/%s' % id
+        
+        response = self.redirect(path)
+        response.body = ''
+        
+        return response
+        
+    
+    
+    def _get_context(self, id):
+        """ Get the `model.Design` instance with the provided `id`.
+          
+          If no `id`, returns `None`.  Otherwise if there's no design with that
+          `id`, raises a 404.
+          
+        """
+        
+        if id is not None:
+            context = model.Design.get_by_id(int(id))
+            if context is None or context.deleted:
+                raise HTTPNotFound
+            return context
+            
+        
+    
+    def _get_uploads(self):
+        """ Lazy decode and store file uploads from either:
+          
+          * base64 encoded form body data
+          * the app engine blob store upload_url machinery
+          
+          If we're handling an image, adds a `${key}_serving_url` string property.
+          
+        """
+        
+        if self._uploads is None:
+            self._uploads = {}
+            params = self.request.params
+            for key, value in params.iteritems():
+                
+                logging.info(key)
+                logging.info(value)
+                
+                blob_key = None
+                # If we're dealing with a post from the blob store upload url,
+                # get the blob key from the already stored blob.
+                if isinstance(value, cgi.FieldStorage) and 'blob-key' in value.type_options:
+                    info = blobstore.parse_blob_info(value)
+                    blob_key = info.key()
+                # Otherwise if we're dealing with our own base64 encoded data
+                # decode it, save a blob and use its key.
+                elif value and key in self._upload_files:
+                    mime_type = self._upload_files.get(key)
+                    data = base64.urlsafe_b64decode(encode_to_utf8(value))
+                    blob_key = self._write_file(mime_type, data)
+                # Either way, if we have a blob key, add it to self._uploads
+                # and, if it's an image then set the corresponding `serving_url`.
+                if blob_key is not None:
+                    mime_type = self._upload_files.get(key)
+                    if mime_type.startswith('image'):
+                        serving_key = '%s_serving_url' % key
+                        serving_url = images.get_serving_url(blob_key)
+                        self._uploads[serving_key] = serving_url
+                    self._uploads[key] = blob_key
+        return self._uploads
+        
+    
+    def _get_attrs(self):
+        """ Get the attributes to update the context with from the 
+        """
         
         attrs = {}
         error = u''
@@ -385,6 +462,8 @@ class AddDesign(SketchupAwareHandler):
             # If the current user is an admin, skip moderation.
             if users.is_current_user_admin():
                 attrs['status'] = u'approved'
+            else:
+                attrs['status'] = u'pending'
             
             country_code = self.country_code
             try:
@@ -394,36 +473,201 @@ class AddDesign(SketchupAwareHandler):
             attrs['country'] = country
             
             attrs.update(uploads)
-            try:
-                design = model.Design(**attrs)
-                design.put()
-            except db.Error, err:
-                error = unicode(err)
         
-        if error:
-            data = unicode_urlencode({'error': error})
-            response = self.redirect('/library/add_design/error?%s' % data)
-        else:
-            response = self.redirect('/library/add_design/success/%s' % design.key().id())
-            # Notify design will be moderated, unless the current user is an admin.
-            if not users.is_current_user_admin():
-                self.notify(design)
-            
-        response.body = ''
-        return response
+        logging.info('attrs')
+        logging.info(attrs)
+        logging.info('error')
+        logging.info(error)
+        
+        return attrs, error
         
     
     
     @auth.required
-    def get(self):
+    def _add_edit_form(self, context=None):
+        """ Return page containing an add or edit form.
+          
+          n.b.: pops the last part of the url, so `../designs/add` becomes
+          `../designs` and `../designs/1/edit` becomes `../designs/1`.
+          
+        """
+        
+        target = context
         series = model.Series.get_all()
-        upload_url = blobstore.create_upload_url(self.request.path)
-        return self.render('add.tmpl', upload_url=upload_url, series=series)
+        
+        parts = self.request.path.split('/')
+        if parts[-1] == 'sketchup':
+            parts = parts[:-2]
+        else:
+            parts = parts[:-1]
+        path = '/'.join(parts)
+        upload_url = blobstore.create_upload_url(path)
+        
+        logging.info(path)
+        logging.info(upload_url)
+        
+        return self.render(
+            'add_edit_form.tmpl',
+            target=target,
+            series=series,
+            upload_url=upload_url
+        )
+        
+    
+    def _view_page(self, context):
+        """ Return page to display the design.
+        """
+        
+        series = model.Series.get_all()
+        return self.render(
+            'design.tmpl', 
+            target=context, 
+            series=series,
+            disqus_dev_mode=self._disqus_dev_mode
+        )
+        
+    
+    def get(self, id=None, is_edit=False):
+        """ If a context is provided, display it.  Otherwise, display an add form.
+        """
+        
+        context = self._get_context(id)
+        
+        if context is None:
+            return self._add_edit_form()
+        
+        elif is_edit:
+            self._ensure_edit_allowed(context)
+            return self._add_edit_form(context)
+        
+        return self._view_page(context)
+        
+    
+    
+    @auth.required
+    def post(self, id=None, is_edit=False):
+        """ Create a new `Design`.  Redirect afterwards to return JSON data
+          indicating success or failure.
+        """
+        
+        logging.info('post')
+        
+        # If an `id` is provided, it's actually a `PUT`.  (Should only ever
+        # have an `id` present in a `POST` if its a redirect from the blob
+        # store upload url).
+        if id is not None:
+            return self.put(id)
+        
+        # Get the new design's properties from the request.
+        attrs, error = self._get_attrs()
+        
+        # If there wasn't a problem, then save the new design, if appropriate
+        # sending a notification email to the user and moderator alike.
+        if not error:
+            try: 
+                design = model.Design(**attrs)
+                design.put()
+            except db.Error, err:
+                error = unicode(err)
+            else:
+                if not users.is_current_user_admin():
+                    self._send_notification(design)
+                
+        # If there was an error redirect to return the error data.
+        if error:
+            return self._redirect_on(error=error)
+        
+        # Otherwise redirect to return the id of the new design.
+        return self._redirect_on(id=design.key().id())
+        
+    
+    
+    @auth.required
+    def put(self, id):
+        """ Update an existing `Design`.  Redirect afterwards to return JSON data
+          indicating success or failure.
+        """
+        
+        logging.info('put %s' % id)
+        
+        # Make sure the model exists
+        context = self._get_context(id)
+        if context is None:
+            raise HTTPNotFound
+        
+        # Make sure the current user is allowed to edit it.
+        self._ensure_edit_allowed(context)
+        
+        # Get the properties from the request.
+        attrs, error = self._get_attrs()
+        
+        # If there wasn't a problem, then update the existing design, if appropriate
+        # sending a notification email to the user and moderator alike.
+        design = context
+        if not error:
+            try: 
+                for k, v in attrs.iteritems():
+                    setattr(design, k, v)
+                design.put()
+            except db.Error, err:
+                error = unicode(err)
+            else:
+                if not users.is_current_user_admin():
+                    self._send_notification(design)
+                
+        # If there was an error redirect to return the error data.
+        if error:
+            return self._redirect_on(error=error)
+        
+        # Otherwise redirect to return the id of the updated design.
+        return self._redirect_on(id=id)
+        
+    
+    
+    @auth.required
+    def delete(self, id):
+        """ Delete an existing `Design`.  Redirect afterwards to return JSON data
+          indicating success or failure.
+          
+          n.b.: Doesn't actually remove the entity from the datastore, instead sets
+          the status to 'deleted'.
+          
+        """
+        
+        # Make sure the model exists
+        context = self._get_context(id)
+        if context is None:
+            raise HTTPNotFound
+        
+        # Make sure the current user is allowed to edit it.
+        self._ensure_edit_allowed(context)
+        
+        logging.info(self.request.params)
+        
+        # If the user provided the confirmation param, "delete" the design.
+        error = None
+        confirmed = self.request.params.get('confirmed', False)
+        if not confirmed:
+            error = self._(u'You must confirm the delete.')
+        else:
+            try: 
+                context.deleted = True
+                context.put()
+            except db.Error, err:
+                error = unicode(err)
+        
+        # If there was an error redirect to return the error data.
+        if error:
+            return self._redirect_on(error=error)
+        
+        # Otherwise redirect to return the id of the deleted design.
+        return self._redirect_on(id=id)
         
     
     
 
-class AddDesignSuccess(RequestHandler):
+
+class RedirectSuccess(RequestHandler):
     """
     """
     
@@ -435,7 +679,7 @@ class AddDesignSuccess(RequestHandler):
     
     
 
-class AddDesignError(RequestHandler):
+class RedirectError(RequestHandler):
     """
     """
     
@@ -517,27 +761,6 @@ class Moderate(RequestHandler):
         query = query.filter("deleted =", False).filter("status =", u'pending')
         designs = query.fetch(99)
         return self.render('moderate.tmpl', designs=designs)
-    
-    
-
-
-class Design(RequestHandler):
-    """
-    """
-    
-    def get(self, id):
-        target = model.Design.get_by_id(int(id))
-        if target is None:
-            return self.error(status=404)
-        series = model.Series.get_all()
-        developer = self.settings['dev'] or 'appspot.com' in self.request.host
-        return self.render(
-            'design.tmpl', 
-            target=target, 
-            series=series,
-            disqus_developer=developer
-        )
-        
     
     
 

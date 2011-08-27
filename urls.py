@@ -51,17 +51,20 @@ mapping = [(
         r'/library/designs/([0-9]+)\/?',
         Design
     ), (
-        r'/library/add_design\/?',
-        AddDesign
+        r'/library/designs/([0-9]+)/(edit)\/?',
+        Design
     ), (
-        r'/library/add_design/sketchup\/?',
-        AddDesign
+        r'/library/designs/add\/?',
+        Design
     ), (
-        r'/library/add_design/success/([0-9]+)\/?',
-        AddDesignSuccess
+        r'/library/designs/add/sketchup\/?',
+        Design
     ), (
-        r'/library/add_design/error\/?',
-        AddDesignError
+        r'/redirect/success/([0-9]+)\/?',
+        RedirectSuccess
+    ), (
+        r'/redirect/error\/?',
+        RedirectError
     ), (
         r'/admin/moderate\/?',
         Moderate

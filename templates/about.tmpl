@@ -44,7 +44,7 @@
 </%def>
 
 <%def name="install_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
       Download houses and components which are created and shared by an open community of designers from around the world. Models are combined or adapted using Google Sketchup.
     </div>
@@ -72,7 +72,7 @@
 </%def>
 
 <%def name="download_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
       Click 'Make this House' from within Google Sketchup and WikiHouse will generate a complete set of milling drawings from your model, which can be used by a CNC cutter to fabricate the house parts.
     </div>
@@ -100,7 +100,7 @@
 </%def>
 
 <%def name="print_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
       The parts are cut by a CNC mill using locally-sourced material. This is 18mm plywood, in the standard sheet size of 2440mm x 1220mm (8' x 4').
     </div>
@@ -128,7 +128,7 @@
 </%def>
 
 <%def name="assemble_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
       Set out the parts for each section onto the ground, assembling it like a double-layered jigsaw. You won't need any power tools.
     </div>
@@ -156,7 +156,7 @@
 </%def>
 
 <%def name="bolt_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
     Bolt together the two layers to form a single section.
     </div>
@@ -184,7 +184,7 @@
 </%def>
 
 <%def name="raise_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
     Raise the sectional profiles of WikiHouse, two or three at a time. Invite friends and family to help with the barn-raising!
     </div>
@@ -212,7 +212,7 @@
 </%def>
 
 <%def name="primary_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
     Insert the primary connectors between the sectional profiles to brace the structure. Use a mallet and the wedges to tighten the connections.
     </div>
@@ -240,7 +240,7 @@
 </%def>
 
 <%def name="secondary_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
     Insert the secondary connectors. These should slot into position between the sectional profiles. Use screws to optionally strengthen the connections.
     </div>
@@ -268,7 +268,7 @@
 </%def>
 
 <%def name="facings_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
     Attach the plywood facing sheets to the insides and outsides of the structure. These should slot into position. Use screws to fix the facings through to the sub-structure.
     </div>
@@ -293,7 +293,7 @@
 </%def>
 
 <%def name="services_description()">
-  <div class="border-top">
+  <div>
     <div class="padding-all about-texts">
     The WikiHouse is ready for glazing, services, and insulation.
     </div>
@@ -393,13 +393,13 @@
     <div class="row about-panel">
       ${self.main_content(steps)}
     </div>
+    <div class="row">
+      ${self.description(steps)}
+    </div>
     <div class="row" style="position: relative;">
       ${self.next(steps)}
       ${self.pre(steps)}
       ${self.actions(steps)}
-    </div>
-    <div class="row">
-      ${self.description(steps)}
     </div>
   </div>
 </%def>

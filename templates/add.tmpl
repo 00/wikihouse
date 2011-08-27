@@ -13,17 +13,17 @@
     ${xsrf_input}
     <div class="error"></div>
     <div class="field">
-      <label for="title">${_("Title")}</label>
+      <div class="field-title padding-left left padding-right-small"><label for="title">${_("Title:")}</label></div>
       <input type="text" name="title" id="design-title"/>
       <div class="error"></div>
     </div>
     <div class="field">
-      <label for="description">${_("Description")}</label>
+      <div class="field-title padding-left left padding-right-small"><label for="description">${_("Description:")}</label></div>
       <textarea name="description" id="design-description"></textarea>
       <div class="error"></div>
     </div>
-    <div class="field">
-      <label for="series">${_("Series")}</label>
+    <div class="field border-bottom padding-bottom">
+      <div class="field-title padding-left left padding-right-small"><label for="series">${_("Series:")}</label></div>
       <select name="series" multiple="true" id="design-series">
         % for item in series:
           <option value="${item.key().name()}">${item.title}</option>
@@ -31,12 +31,12 @@
       </select>
       <div class="error"></div>
     </div>
-    <div class="field">
+    <div class="field hidden">
       <input type="checkbox" name="component" value="1" />
       <label for="component">${_("Component")}</label>
     </div>
     <div class="field">
-      <label for="verification">${_("Verification status")}</label>
+      <div class="field-title padding-left left padding-right-small"><label for="verification">${_("Verification status:")}</label></div>
       <select name="verification" id="design-verification">
         <option value="unverified" selected="selected">
           ${_("Not structurally checked")}
@@ -50,8 +50,8 @@
       </select>
       <div class="error"></div>
     </div>
-    <div class="field">
-      <label for="description">${_("Verification notes")}</label>
+    <div class="field border-bottom padding-bottom">
+      <div class="field-title padding-left left padding-right-small"><label for="description">${_("Verification notes:")}</label></div>
       <textarea name="notes" id="design-notes"></textarea>
       <div class="error"></div>
     </div>
@@ -61,27 +61,27 @@
     </div>
     <div class="hidden file-inputs">
       <div class="field">
-        <label for="model">${_("Model")}</label>
+        <div class="field-title padding-left left padding-right-small"><label for="model">${_("Model:")}</label></div>
         <textarea name="model" id="design-model"></textarea>
       </div>
       <div class="field">
-        <label for="model_preview">${_("Model preview image")}</label>
+        <div class="field-title padding-left left padding-right-small"><label for="model_preview">${_("Model preview image")}</label></div>
         <textarea name="model_preview" id="design-model-preview"></textarea>
       </div>
       <div class="field">
-        <label for="model_preview_reverse">${_("Reverse model preview image")}</label>
+        <div class="field-title padding-left left padding-right-small"><label for="model_preview_reverse">${_("Reverse model preview image")}</label></div>
         <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
       </div>
       <div class="field">
-        <label for="sheets">${_("Cutting sheets")}</label>
+        <div class="field-title padding-left left padding-right-small"><label for="sheets">${_("Cutting sheets")}</label></div>
         <textarea name="sheets" id="design-sheets"></textarea>
       </div>
       <div class="field">
-        <label for="sheets_preview">${_("Cutting sheets preview image")}</label>
+        <div class="field-title padding-left left padding-right-small"><label for="sheets_preview">${_("Cutting sheets preview image")}</label></div>
         <textarea name="sheets_preview" id="design-sheets-preview"></textarea>
       </div>
     </div>
-    <input type="submit" name="submit" value="Submit" />
+    <input class="submit" type="submit" name="submit" value="Submit" />
   </form>
   <script>
     var WIKIHOUSE_UPLOAD_PAGE = true;

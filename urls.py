@@ -54,6 +54,9 @@ mapping = [(
         r'/library/designs/([0-9]+)/(edit)\/?',
         Design
     ), (
+        r'/library/designs\/?',
+        Design
+    ), (
         r'/library/designs/add\/?',
         Design
     ), (

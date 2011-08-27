@@ -16,11 +16,7 @@
   <div class="user-block padding-left-large">
     <div class="user-image">
     <a href="/library/users/${target.id}" title="${target.nickname}">
-      % if target.avatar:
-        <img src="${target.avatar}" />
-      % else:
-        <img src="${get_static_url('gfx/avatar.png')}" />
-      % endif
+      <img src="${target.avatar and target.avatar or target.get_gravatar()}" />
     </a>
     </div>
     <div class="user-name padding-top">

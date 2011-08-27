@@ -7,12 +7,12 @@
   % if is_sketchup:
     <div class="back-to-series-button">
       <a rel="back" href="#back">
-        Back to Warehouse</a>
+        ${_(u'Back to Components')}</a>
     </div>
   % endif
     <div class="padding-right">
       <div class="row padding-bottom">
-        <h4 class="padding-sides">${_(u'Model/')}&nbsp;&nbsp;&nbsp;<a href="/library/design/${target.key().id()}" id="design-title">${escape(target.title)}</a></h4>
+        <h4 class="padding-sides">${_(u'Designs/')}&nbsp;&nbsp;&nbsp;<a href="/library/designs/${target.key().id()}" id="design-title">${escape(target.title)}</a></h4>
       </div>
     </div>
   <div class="model_content padding-all">

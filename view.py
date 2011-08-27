@@ -29,6 +29,7 @@ class RequestHandler(BaseRequestHandler):
     """ Adds i18n and SketchUp awareness support to `weblayer.RequestHandler`:
       
       * providing `self._` and passing `_()` through to templates
+      * provide `self.country_code` by setting a `country_code` cookie
       * providing `self.is_sketchup` and passing `is_sketchup` to templates
       
     """
@@ -76,6 +77,7 @@ class RequestHandler(BaseRequestHandler):
     
     def __init__(self, *args, **kwargs):
         super(RequestHandler, self).__init__(*args, **kwargs)
+        # provide `self._` and passing `_()` through to templates
         localedir = self.settings.get('locale_directory')
         supported = self.settings.get('supported_languages')
         target = self.settings.get('default_language')
@@ -91,6 +93,13 @@ class RequestHandler(BaseRequestHandler):
             languages=[target]
         )
         self._ = translation.ugettext
+        # provide `self.country_code` by setting a `country_code` cookie
+        cc = self.cookies.get('country_code')
+        if cc is None or cc == 'zz':
+            cc = self.request.headers.get('X-AppEngine-Country', 'GB').lower()
+            self.cookies.set('country_code', cc, expires_days=None)
+        self.country_code = cc
+        # provide `self.is_sketchup`
         self.is_sketchup = self.cookies.get('is_sketchup') == 'true'
         
     
@@ -171,6 +180,17 @@ class Contact(RequestHandler):
     
     def get(self):
         return self.render('contact.tmpl')
+        
+    
+    
+
+
+class Terms(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('terms.tmpl')
         
     
     
@@ -369,7 +389,7 @@ class AddDesign(SketchupAwareHandler):
             if users.is_current_user_admin():
                 attrs['status'] = u'approved'
             
-            country_code = self.request.headers.get('X-AppEngine-Country', 'GB')
+            country_code = self.country_code
             try:
                 country = pytz.country_names[country_code.lower()]
             except KeyError:

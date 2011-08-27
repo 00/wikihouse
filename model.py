@@ -185,6 +185,7 @@ class Design(db.Model):
     c = db.DateTimeProperty(auto_now_add=True)          # created
     m = db.DateTimeProperty(auto_now=True)              # modified
     
+    deleted = db.BooleanProperty(required=True, default=False)
     
     component = db.BooleanProperty(required=True, default=False)
     title = db.StringProperty(required=True)
@@ -233,7 +234,7 @@ class Design(db.Model):
         google_user_id = google_user and str(google_user.user_id()) or ''
         
         # Get the approved designs.
-        query = cls.all().order('-m')
+        query = cls.all().order('-m').filter("deleted =", False)
         if filter_by is not None:
             for k, v in filter_by:
                 query.filter(k, v)
@@ -241,7 +242,7 @@ class Design(db.Model):
         approved_results = approved.fetch(limit)
         
         # Get the user's designs.
-        query = cls.all().order('-m')
+        query = cls.all().order('-m').filter("deleted =", False)
         if filter_by is not None:
             for k, v in filter_by:
                 query.filter(k, v)

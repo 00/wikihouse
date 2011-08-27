@@ -513,8 +513,9 @@ class Moderate(RequestHandler):
     
     @auth.admin
     def get(self):
-        query = model.Design.all().filter("status =", u'pending')
-        designs = query.order('-m').fetch(99)
+        query = model.Design.all().order('-m')
+        query = query.filter("deleted =", False).filter("status =", u'pending')
+        designs = query.fetch(99)
         return self.render('moderate.tmpl', designs=designs)
     
     
@@ -649,7 +650,7 @@ class ActivityFeed(RequestHandler):
                 link = item.find('link').text
                 design_id = link.split('/')[-1].split('#')[0]
                 design = model.Design.get_by_id(int(design_id))
-                if design and design.model_preview:
+                if design and design.model_preview and not design.deleted:
                     link = u'%s/blob/%s/%s.png' % (
                         self.request.host_url,
                         design.model_preview.key(),

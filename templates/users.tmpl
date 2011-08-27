@@ -5,7 +5,8 @@
 <%def name="user_listing(item)">
   <li>
     <a href="/library/users/${item.id}" title="${item.nickname}">
-      <img src="${item.avatar}" /></a>
+      <img src="${item.avatar and item.avatar or item.get_gravatar()}" />
+    </a>
   </li>
 </%def>
 

@@ -471,6 +471,10 @@ class Design(SketchupAwareHandler):
                         google_user=google_user,
                         google_user_id=google_user_id
                     )
+                    # If they're an admin (and thus won't be moderated) make sure
+                    # they have an avatar here.
+                    if users.is_current_user_admin() and not user.avatar:
+                        user.set_avatar()
                     user.put()
                 except db.Error, err:
                     error = unicode(err)

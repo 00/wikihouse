@@ -75,6 +75,15 @@ class User(db.Model):
         
     
     
+    def get_gravatar(self, size=80):
+        """ Get URL to gravatar image, using `d=mm` to fallback on the 
+          "mystery man" image if no gravatar is registered.
+        """
+        
+        hash_ = hashlib.md5(self.email.strip().lower()).hexdigest()
+        return 'http://www.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
+        
+    
     def set_avatar(self, size=80):
         """ Try and scrape the profile image from Google+ using YQL, falling back
           on `Gravatar`_ if this fails.
@@ -130,10 +139,7 @@ class User(db.Model):
                 
         # Fall back on Gravatar.
         if avatar is None:
-            hash_ = hashlib.md5(self.email.strip().lower()).hexdigest()
-            # Using `d=mm` to fallback on the "mystery man" image if no gravatar
-            # is found.
-            avatar = 'http://www.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
+            avatar = self.get_gravatar(size=size)
             # Calling the thing with `d=404` to determine whether the avatar is real
             # or not.
             try:

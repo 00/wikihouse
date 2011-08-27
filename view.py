@@ -92,7 +92,7 @@ class RequestHandler(BaseRequestHandler):
         response.body = self.render(
             'error.tmpl', 
             title=exception.title,
-            error=unicode(exception)
+            error=exception.explanation
         )
         return response
         

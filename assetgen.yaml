@@ -28,6 +28,10 @@ generate:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/gfx/*
     type: binary
 
+- doc/*:
+    source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/doc/*
+    type: binary
+
 - css/reset.css:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/reset.css
     type: binary

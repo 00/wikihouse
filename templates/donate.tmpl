@@ -12,7 +12,7 @@
       Paypal donate button.
     -->
     </div>
-    <div class="padding-left-large">
+    <div class="padding-left-large padding-top-bottom padding-right">
     <a href="http://flattr.com/thing/364964/Wiki-House">
       <img src="http://api.flattr.com/button/flattr-badge-large.png"
           alt="Flattr this" 
@@ -25,19 +25,22 @@
 
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom">
-    <div class="row padding-bottom">
+    <div class="row padding-bottom-large">
       <h4 class="padding-sides">${_(u'Supporting WikiHouse/')}</h4>
     </div>
-    <div class="padding-left-large">
-      <p>
-      <!--
-      
-        Donate copy.
-      
-      
-      -->
-      ${_(u'This page is under construction.')}
-      </p>
+    <div class="padding-bottom-large padding-sides">
+      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
+        ${_(u"""WikiHouse is offered as a free service. All information is shared via a Creative Commons license and you are not expected to pay for anything you find on this site. However the WikiHouse process is still at a very early stage. In order for WikiHouse to be successful much further testing and development is required, to improve the platform and build further physical prototypes.""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
+        ${_(u"""To a large extent the success of WikiHouse will rely on a community of active participants - makers, designers, programmers, and architects from around the world working together to build on this early offering, and to push the boundary of what is possible when the Open-Hardware movement tackles the problem of 'house'. That community is growing, but will need all the support it can get.""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
+        ${_(u"""With WikiHouse we envisage a future where access to precision manufacturing techniques and tools, coupled with open access to design sharing and knowledge exchange will lower the threshold for access to housing. We are grateful for any donations, which will go towards realising this vision by resourcing further work on WikiHouse and associated projects, helping us to support our growing community of collaborators around the world.""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
+        ${_(u"""Thank you!""")}
+      </div>
     </div>
   </div>
 </%def>

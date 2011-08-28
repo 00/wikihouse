@@ -5,13 +5,19 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row">
-      <h4 class="padding-sides">${_(u'Download/')}</h4>
+      <h4 class="padding-sides">${_(u'Links/')}</h4>
+    </div>
+    <div class="row padding-left-large padding-bottom padding-top-large padding-right">
+      <ul class="nav-list">
+        <li class="strong"><a href="guide#installation">${_(u'INSTALLING THE PLUGIN')}</a></li>
+        <li class="strong"><a href="guide#usage">${_(u'WORKING WITH THE PLUGIN')}</a></li>
+        <li class="strong"><a href="guide#guidelines">${_(u'MODELLING GUIDELINES')}</a></li>
+      </ul>
     </div>
     <div class="row download-link padding-left-large padding-top padding-bottom-large">
       <div class="left download-button">
-        <a class="download-button-rb" href=""
-                  id="design-download"
-                  rel="">
+        <a class="download-button-rb" href="https://github.com/tav/wikihouse-plugin/zipball/master"
+                  id="plugin-download">
                   ${_(u'[Download the Plugin]')}
         </a>
       </div>
@@ -27,8 +33,32 @@
     <div class="row padding-bottom">
       <h4 class="padding-sides">${_(u'Using the Plugin/')}</h4>
     </div>
-    <div class="padding-left-large">
-      ${_(u"""How to use it...""")}
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-system justify guide-pane">
+      <div class="section-header padding-left"><a name="system">${_(u'INSTALLING THE PLUGIN')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        ${_(u"""To use the WikiHouse plugin you must be running """)}<a class="strong" target="blank" href="http://sketchup.google.com/">${_(u'Google SketchUp')}</a>${_(u""" version 8 or above. To install WikiHouse follow the 'Download the Plugin' link on this page:""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        <span class="strong">1.</span> ${_(u"""Download the zip archive and extract the Ruby script and supporting documentation into your Google SketchUp Plugins folder (usually located in 'Google/Google SketchUp 8/Plugins').""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        <span class="strong">2.</span> ${_(u"""Launch SketchUp and access WikiHouse via the 'Plugins' menu > WikiHouse >""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        <span class="strong">3.</span> ${_(u"""In order to share models to the WikiHouse site online you will need a Google account (login to WikiHouse using the same credentials you use to login to GMail, Google+, Google docs, or any other Google service).""")}
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-system justify guide-pane">
+      <div class="section-header padding-left"><a name="system">${_(u'WORKING WITH THE PLUGIN')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        ${_(u"""The WikiHouse plugin provides 3 main features: 'Get Models', 'Share Model', and 'Make This House'.""")}
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large guide-principles justify guide-pane">
+      <div class="section-header padding-left"><a name="principles">${_(u'MODELLING GUIDELINES')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="padding-top">${_(u"""In order to operate effectively the WikiHouse plugin requires """)}</div>
+      </div>
     </div>
   </div>
 </%def>

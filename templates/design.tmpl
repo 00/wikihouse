@@ -12,7 +12,7 @@
   % endif
     <div class="padding-right">
       <div class="row padding-bottom">
-        <h4 class="padding-sides">${_(u'Model/')}&nbsp;&nbsp;</h4>
+        <h4 class="padding-sides">${_(u'Model/')}&nbsp;&nbsp;<a rel="back" href="#back">${escape(target.title)}</a></h4>
       </div>
     </div>
   <div class="model_content padding-all">
@@ -22,25 +22,27 @@
     is_admin = users.is_current_user_admin()
   %>
   % if target.status == u'approved' or is_admin or is_user:
-    % if target.model_preview:
-      <div class="preview padding-bottom-large">
-        <img src="${target.model_preview_serving_url}=s364" />
-      </div>
-    % endif
-    % if target.model_preview_reverse:
-      <!--<div class="preview">
-        <img src="${target.model_preview_reverse_serving_url}=s364" />
-      </div>-->
-    % endif
-    % if target.sheets_preview:
       <div class="preview">
-        <img src="${target.sheets_preview_serving_url}=s364" />
+      % if target.model_preview:
+        <div class="preview padding-bottom-large">
+          <img src="${target.model_preview_serving_url}=s364" />
+        </div>
+      % endif
+      % if target.model_preview_reverse:
+        <div class="preview padding-bottom-large">
+          <img src="${target.model_preview_reverse_serving_url}=s364" />
+        </div>
+      % endif
+      % if target.sheets_preview:
+        <div class="preview padding-bottom-large">
+          <img src="${target.sheets_preview_serving_url}=s364" />
+        </div>
+      % endif
       </div>
-    % endif
       <div class="left design-info">
         <div class="row model-details padding-top">
           <div class="model-name">
-            <a href="/library/designs/${target.key().id()}" id="design-title">${escape(target.title)}</a>
+            ${escape(target.title)}
           </div>
           <div class="id grey">
             <span class="section-heading">${_(u'Model No.')}</span> ${target.key().id()}
@@ -89,14 +91,14 @@
               % endif
             </div>
             % if is_admin and target.status == u'pending':
-              <form class="moderation-form" action="/admin/moderate" method="post">
+              <form class="moderation-form padding-top" action="/admin/moderate" method="post">
                 ${xsrf_input}
                 <input type="hidden" name="id" value="${target.key().id()}" />
                 <input type="submit" name="action" value="${_(u'Approve')}" />
                 <input type="submit" name="action" value="${_(u'Reject')}" />
               </form>
             % endif
-            <form class="edit-form" action="${request.path}/edit" method="get">
+            <form class="edit-form padding-top" action="${request.path}/edit" method="get">
               <input type="submit" name="action" value="${_(u'Edit')}" />
             </form>
             <form class="delete-form" action="${request.path}" method="delete">
@@ -142,6 +144,20 @@
               </div>
               <div class="download-caption">
                 ${_(u'Download Cutting Templates')}
+              </div>
+            </div>
+         ## % endif
+         ## % if target.docs:
+            <div class="row download-link padding-top">
+              <div class="left download-button">
+             ## href="/blob/${target.docs.key()}"
+                <a class="download-button-attachment">
+                    <img src="${get_static_url('gfx/download.docs.png')}">
+                    ${_(u'[Download Documentation]')}
+                </a>
+              </div>
+              <div class="download-caption">
+                ${_(u'Download Documentation')}
               </div>
             </div>
          ## % endif

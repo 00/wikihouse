@@ -3,11 +3,11 @@
 (->
   throw 'Underscore is already defined.' if window._?
   window._ = (msg) ->
-    try
-      window.message_strings[msg]
-    catch err
+    if msg of window.message_strings
+      return window.message_strings[msg]
+    else
       console.warn "Message not translated: #{msg}" if console? and console.warn?
-      msg
+      return msg
     
   
 )()

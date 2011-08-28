@@ -411,10 +411,6 @@ class Design(SketchupAwareHandler):
             self._uploads = {}
             params = self.request.params
             for key, value in params.iteritems():
-                
-                logging.info(key)
-                logging.info(value)
-                
                 blob_key = None
                 # If we're dealing with a post from the blob store upload url,
                 # get the blob key from the already stored blob.
@@ -503,11 +499,6 @@ class Design(SketchupAwareHandler):
             
             attrs.update(uploads)
         
-        logging.info('attrs')
-        logging.info(attrs)
-        logging.info('error')
-        logging.info(error)
-        
         return attrs, error
         
     
@@ -531,9 +522,6 @@ class Design(SketchupAwareHandler):
             parts = parts[:-1]
         path = '/'.join(parts)
         upload_url = blobstore.create_upload_url(path)
-        
-        logging.info(path)
-        logging.info(upload_url)
         
         return self.render(
             'add_edit_form.tmpl',
@@ -579,8 +567,6 @@ class Design(SketchupAwareHandler):
           indicating success or failure.
         """
         
-        logging.info('post')
-        
         # If an `id` is provided, it's actually a `PUT`.  (Should only ever
         # have an `id` present in a `POST` if its a redirect from the blob
         # store upload url).
@@ -616,8 +602,6 @@ class Design(SketchupAwareHandler):
         """ Update an existing `Design`.  Redirect afterwards to return JSON data
           indicating success or failure.
         """
-        
-        logging.info('put %s' % id)
         
         # Make sure the model exists
         context = self._get_context(id)
@@ -670,8 +654,6 @@ class Design(SketchupAwareHandler):
         
         # Make sure the current user is allowed to edit it.
         self._ensure_edit_allowed(context)
-        
-        logging.info(self.request.params)
         
         # If the user provided the confirmation param, "delete" the design.
         error = None
@@ -747,7 +729,6 @@ class Moderate(RequestHandler):
             self._(u'Thanks,'),
             url
         )
-        logging.info(body)
         message = mail.EmailMessage(
             to=recipient,
             sender=sender, 

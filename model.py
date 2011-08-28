@@ -196,6 +196,7 @@ class Design(db.Model):
     component = db.BooleanProperty(required=True, default=False)
     title = db.StringProperty(required=True)
     description = db.TextProperty(required=True)
+    url = db.LinkProperty()
     series = db.ListProperty(db.Key)
     
     user = db.ReferenceProperty(User)

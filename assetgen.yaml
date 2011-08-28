@@ -5,8 +5,9 @@ generate:
           // Public Domain (-) 2011 The Ampify Authors.
           // See the Ampify UNLICENSE file for details.
           (function ($) {
-      - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.parsequery.js
       - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.cycle.lite.js
+      - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.parsequery.js
+      - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.url.js
       - %(AMPIFY_ROOT)s/third_party/jslibs/css3-mediaqueries.js
       - static/src/coffee/*.coffee
       - raw: |

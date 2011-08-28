@@ -16,6 +16,7 @@ from pytz.gae import pytz
 from xml.etree import ElementTree as etree
 
 from google.appengine.api import files, images, mail, memcache, users
+from google.appengine.api import datastore_errors
 from google.appengine.ext import blobstore, db
 
 from webob.exc import status_map, HTTPNotFound, HTTPForbidden
@@ -447,6 +448,13 @@ class Design(SketchupAwareHandler):
         
         attrs['title'] = params.get('title')
         attrs['description'] = params.get('description')
+        attrs['url'] = params.get('url', None)
+        try:
+            model.Design.url.validate(attrs['url'])
+        except datastore_errors.BadValueError:
+            msg = self._(u'Web link is not a valid URL.')
+            hint = self._(u'(If you don\'t have a web link, leave the field blank)')
+            error = '%s %s' % (msg, hint)
         
         series = params.getall('series')
         keys = [db.Key.from_path('Series', item) for item in series]

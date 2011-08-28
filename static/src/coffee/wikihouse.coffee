@@ -34,6 +34,22 @@ $(document).ready ->
       else
         $error.text ''
       
+      # URL must be valid if provided.
+      $error = $('#design-url').closest('.field').find('.error')
+      if data.url
+        msg = _ 'Web link is not a valid URL.'
+        hint = _ '(If you don\'t have a web link, leave the field blank)'
+        try
+          url = $.url data.url
+        catch error
+          $error.text "#{msg} #{hint}" 
+          valid = false
+        if url? and not (url.attr('protocol') and '.' in url.attr('host'))
+          $error.text "#{msg} #{hint}"
+          valid = false
+        else
+          $error.text ''
+        
       # Must select at least one series.
       $error = $('#design-series').closest('.field').find('.error')
       if not data.series or data.series.length is 0

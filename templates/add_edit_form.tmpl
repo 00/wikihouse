@@ -60,6 +60,13 @@
       <div class="error"></div>
     </div>
     <div class="field">
+      <label for="url">${_("Web link")}</label>
+      <input name="url" type="text" id="design-url"
+          value="${target and escape(target.url) or ''}"
+      />
+      <div class="error"></div>
+    </div>
+    <div class="field">
       <label for="series">${_("Series")}</label>
       <select name="series" multiple="true" id="design-series">
         % for item in series:

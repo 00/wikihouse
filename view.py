@@ -461,7 +461,8 @@ class Design(SketchupAwareHandler):
         instances = model.Series.get(keys)
         if None in instances:
             i = instances.index(None)
-            error = u'Series `%s` does not exist.' % series[i]
+            msg = self._(u'Series does not exist:')
+            error = '%s `%s`' % (msg, series[i])
         attrs['series'] = keys
         
         if not error:

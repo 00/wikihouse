@@ -67,7 +67,7 @@ $(document).ready ->
       
     
     # Handle back button.
-    $window.bind 'hashchange', ->
+    handle_hash_change = ->
       if click_triggered_hashchange
         click_triggered_hashchange = false     
       else
@@ -80,6 +80,24 @@ $(document).ready ->
         $navs_next = $ '.navs-next > div', $container
         $navs_next.hide()
         select_hash window.location.hash
+      
+    
+    # If hashchange is supported (and we're not in an old IE -- logic borrowed
+    # from Backbone.js) then listen to hash changes, otherwise poll for them
+    # ten times a second.
+    doc_mode = document.documentMode
+    is_ie = /msie [\w.]+/.exec navigator.userAgent.toLowerCase()
+    is_old_is = is_ie and (!doc_mode || doc_mode <= 7)
+    if 'onhashchange' of window and not is_old_is
+      $window.bind 'hashchange', handle_hash_change
+    else
+      previous_hash = window.location.hash
+      window.setInterval ->
+          current_hash = window.location.hash
+          if previous_hash != current_hash
+            handle_hash_change()
+            previous_hash = current_hash
+        , 100
       
     
     # Select the first tab.

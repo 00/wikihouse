@@ -25,7 +25,8 @@
       method = 'POST'
       enctype = 'multipart/form-data'
   %>
-  <form id="submit-design-form" action="${action}" method="${method}" enctype="${enctype}">
+  <form id="submit-design-form" action="${action}" method="${method}" enctype="${enctype}"
+      target="design-form-communication-frame">
     % if target and is_sketchup:
       <div class="back-to-series-button">
         <a rel="back" href="#back">
@@ -183,6 +184,8 @@
     % endif
     <input type="submit" name="submit" value="${_(u'Save &amp; Upload')}" />
   </form>
+  <iframe id="design-form-communication-frame" name="design-form-communication-frame" class="hidden">
+  </iframe>
   <script>
     var WIKIHOUSE_UPLOAD_PAGE = true;
   </script>

@@ -11,13 +11,12 @@ $(document).ready ->
   # Setup the controls and methods for the upload page.
   if WIKIHOUSE_UPLOAD_PAGE?
     
-    # Validate the submit design form, show processing state and call sketchup.
+    # Validate the submit design form, allowing the event to proceed if valid and
+    # in the browser, or calling sketchup if valid an in sketchup.
     $form = $ '#submit-design-form'
     $form.bind 'submit', (event) ->
-      
       data = $.parseQuery $form.serialize()
       valid = true
-      
       # Title is required.
       $error = $('#design-title').closest('.field').find('.error')
       if not data.title
@@ -25,7 +24,6 @@ $(document).ready ->
         valid = false
       else
         $error.text ''
-      
       # Description is required.
       $error = $('#design-description').closest('.field').find('.error')
       if not data.description
@@ -33,7 +31,6 @@ $(document).ready ->
         valid = false
       else
         $error.text ''
-      
       # URL must be valid if provided.
       $error = $('#design-url').closest('.field').find('.error')
       if data.url
@@ -49,7 +46,6 @@ $(document).ready ->
           valid = false
         else
           $error.text ''
-        
       # Must select at least one series.
       $error = $('#design-series').closest('.field').find('.error')
       if not data.series or data.series.length is 0
@@ -57,26 +53,56 @@ $(document).ready ->
         valid = false
       else
         $error.text ''
-      
       # If valid, either show processing state and call SketchUp
       # or submit via ajax.
       if valid
         if WIKIHOUSE_IS_SKETCHUP
           wikihouse.showProgress _ 'Processing SketchUp files ...'
           window.location = 'skp:process'
+          return false
         else
-          wikihouse.upload()
+          wikihouse.showProgress _ 'Uploading ...'
+          return true
         
-      # Either way, make sure we squish the event.
-      event.stopImmediatePropagation()
       return false
+      
     
     
-    # Show upload state and post the form by ajax, redirect on success / show error.
+    # In the browser, handle the post response, via iframe load event (to make the
+    # file uploads work without a page refresh).
+    $frame = $ '#design-form-communication-frame'
+    $frame.bind 'load', (event) ->
+      data = null
+      response = $frame.contents().find 'body'
+      try
+        data = $.parseJSON response.html()
+      catch error
+        if WIKIHOUSE_IS_SKETCHUP
+          window.location = 'skp:uploaded@error'
+        wikihouse.showError _ 'Upload failed. Please try again.'
+      if data?
+        if data.success?
+          if WIKIHOUSE_IS_SKETCHUP
+            window.location = 'skp:uploaded@success'
+            setTimeout ->
+                window.location.replace data.success
+              , 1500
+          else
+            window.location.replace data.success
+        else
+          if WIKIHOUSE_IS_SKETCHUP
+            window.location = 'skp:uploaded@error'
+          else
+            $form.action = data.upload_url
+          wikihouse.showError data.error
+        
+      
+    
+    
+    # In sketchup, post and handle the form using `$.ajax`.
     wikihouse.upload = ->
       # Show upload state.
       wikihouse.showProgress _ 'Uploading ...'
-      # Post form by ajax.
       url = $form.attr 'action'
       data = $form.serialize()
       $.ajax
@@ -86,7 +112,6 @@ $(document).ready ->
         dataType: 'json'
         success: (data) ->
           if data.success?
-            # Redirect on success.
             if WIKIHOUSE_IS_SKETCHUP
               window.location = 'skp:uploaded@success'
               setTimeout ->
@@ -95,16 +120,15 @@ $(document).ready ->
             else
               window.location.replace data.success
           else
-            # Show error.
             if WIKIHOUSE_IS_SKETCHUP
               window.location = 'skp:uploaded@error'
+            else
+              $form.action = data.upload_url
             wikihouse.showError data.error
         error: ->
-          # Show error.
           if WIKIHOUSE_IS_SKETCHUP
             window.location = 'skp:uploaded@error'
           wikihouse.showError _ 'Upload failed. Please try again.'
-        
       
     
     
@@ -118,7 +142,6 @@ $(document).ready ->
       $message.text msg
       $progress.show()
       
-    
     
     # Call `wikihouse.showError(errmsg)` to show validation errors.
     wikihouse.showError = (errmsg) ->

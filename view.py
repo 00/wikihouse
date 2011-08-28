@@ -398,6 +398,21 @@ class Design(SketchupAwareHandler):
             
         
     
+    def _get_upload_url(self):
+        """ Get rid of a trailing 'sketchup', 'add' or 'edit'.
+        """
+        
+        parts = self.request.path.split('/')
+        
+        if parts[-1] == 'sketchup':
+            parts = parts[:-1]
+        if parts[-1] == 'add' or parts[-1] == 'edit':
+            parts = parts[:-1]
+        
+        path = '/'.join(parts)
+        return blobstore.create_upload_url(path)
+        
+    
     def _get_uploads(self):
         """ Lazy decode and store file uploads from either:
           
@@ -524,13 +539,7 @@ class Design(SketchupAwareHandler):
         target = context
         series = model.Series.get_all()
         
-        parts = self.request.path.split('/')
-        if parts[-1] == 'sketchup':
-            parts = parts[:-2]
-        else:
-            parts = parts[:-1]
-        path = '/'.join(parts)
-        upload_url = blobstore.create_upload_url(path)
+        upload_url = self._get_upload_url()
         
         return self.render(
             'add_edit_form.tmpl',
@@ -694,7 +703,8 @@ class RedirectSuccess(RequestHandler):
     @auth.required
     def get(self, id):
         path = '/library/designs/%s' % id
-        return {'success': path}
+        data = {'success': path}
+        return self.is_sketchup and data or json_encode(data)
         
     
     
@@ -703,10 +713,28 @@ class RedirectError(RequestHandler):
     """
     """
     
+    def _get_upload_url(self):
+        """ Get rid of a trailing 'sketchup', 'add' or 'edit'.
+        """
+        
+        parts = self.request.path.split('/')
+        
+        if parts[-1] == 'sketchup':
+            parts = parts[:-1]
+        if parts[-1] == 'add' or parts[-1] == 'edit':
+            parts = parts[:-1]
+        
+        path = '/'.join(parts)
+        return blobstore.create_upload_url(path)
+        
+    
+    
     @auth.required
     def get(self):
         message = self.request.params.get('error')
-        return {'error': message}
+        upload_url = self._get_upload_url()
+        data = {'error': message, 'upload_url': upload_url}
+        return self.is_sketchup and data or json_encode(data)
         
     
     

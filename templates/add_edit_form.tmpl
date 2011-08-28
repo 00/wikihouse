@@ -63,7 +63,7 @@
     <div class="field">
       <label for="url">${_("Web link")}</label>
       <input name="url" type="text" id="design-url"
-          value="${target and escape(target.url) or ''}"
+          value="${bool(target and target.url) and escape(target.url) or ''}"
       />
       <div class="error"></div>
     </div>
@@ -123,7 +123,7 @@
     </div>
     <div class="field">
       <label for="design-notes">${_("Verification notes")}</label>
-      <% notes = target and target.notes or None %>
+      <% notes = target and target.notes or '' %>
       <textarea name="notes" id="design-notes">${notes and escape(notes) or ''}</textarea>
       <div class="error"></div>
     </div>

@@ -48,20 +48,20 @@
     ${xsrf_input}
     <div class="error"></div>
     <div class="field">
-      <label for="title">${_("Title")}</label>
+      <div class="field-title padding-left left padding-right-small"><label for="title">${_("Title:")}</label></div>
       <input type="text" name="title" id="design-title"
           value="${target and escape(target.title) or ''}"
       />
       <div class="error"></div>
     </div>
     <div class="field">
-      <label for="description">${_("Description")}</label>
+      <div class="field-title padding-left left padding-right-small"><label for="description">${_("Description:")}</label></div>
       <textarea name="description" id="design-description">${target and escape(target.description) or ''}</textarea>
       <div class="error"></div>
     </div>
-    <div class="field">
-      <label for="series">${_("Series")}</label>
-      <select name="series" multiple="true" id="design-series">
+    <div class="field border-bottom padding-bottom">
+      <div class="field-title padding-left left padding-right-small"><label for="series">${_("Series:")}</label></div>
+      <select size="6" name="series" multiple="true" id="design-series">
         % for item in series:
           % if target and item.key() in target.series:
             <option value="${item.key().name()}" selected="selected">${item.title}</option>
@@ -73,15 +73,15 @@
       <div class="error"></div>
     </div>
     <div class="field">
+      <div class="field-title padding-left left padding-right-small"><label for="component">${_("Component:")}</label></div>
       % if target and target.component:
         <input type="checkbox" name="component" value="1" checked="checked" />
       % else:
         <input type="checkbox" name="component" value="1"  />
       % endif
-      <label for="component">${_("Component")}</label>
     </div>
     <div class="field">
-      <label for="verification">${_("Verification status")}</label>
+      <div class="field-title padding-left left padding-right-small"><label for="verification">${_("Verification status:")}</label></div>
       <select name="verification" id="design-verification">
         <%
           states = ({
@@ -113,8 +113,8 @@
       </select>
       <div class="error"></div>
     </div>
-    <div class="field">
-      <label for="design-notes">${_("Verification notes")}</label>
+    <div class="field border-bottom padding-bottom">
+      <div class="field-title padding-left left padding-right-small"><label for="design-notes">${_("Verification notes:")}</label></div>
       <% notes = target and target.notes or None %>
       <textarea name="notes" id="design-notes">${notes and escape(notes) or ''}</textarea>
       <div class="error"></div>
@@ -130,51 +130,51 @@
     % if is_sketchup:
       <div class="hidden file-inputs">
         <div class="field">
-          <label for="model">${_("Model")}</label>
+          <div class="field-title padding-left left padding-right-small"><label for="model">${_("Model:")}</label></div>
           <textarea name="model" id="design-model"></textarea>
         </div>
         <div class="field">
-          <label for="model_preview">${_("Model preview image")}</label>
+          <div class="field-title padding-left left padding-right-small"><label for="model_preview">${_("Model preview image:")}</label></div>
           <textarea name="model_preview" id="design-model-preview"></textarea>
         </div>
         <div class="field">
-          <label for="model_preview_reverse">${_("Reverse model preview image")}</label>
+          <div class="field-title padding-left left padding-right-small"><label for="model_preview_reverse">${_("Reverse model preview image:")}</label></div>
           <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
         </div>
         <div class="field">
-          <label for="sheets">${_("Cutting sheets")}</label>
+          <div class="field-title padding-left left padding-right-small"><label for="sheets">${_("Cutting sheets:")}</label></div>
           <textarea name="sheets" id="design-sheets"></textarea>
         </div>
         <div class="field">
-          <label for="sheets_preview">${_("Cutting sheets preview image")}</label>
+          <div class="field-title padding-left left padding-right-small"><label for="sheets_preview">${_("Cutting sheets preview image:")}</label></div>
           <textarea name="sheets_preview" id="design-sheets-preview"></textarea>
         </div>
       </div>
     % elif users.is_current_user_admin():
       <div class="file-inputs">
         <div class="field">
-          <label for="model">${_("Override model")}</label>
+          <label for="model">${_("Override model:")}</label>
           <input name="model" type="file" id="design-model" />
         </div>
         <div class="field">
-          <label for="model_preview">${_("Override model preview image")}</label>
+          <label for="model_preview">${_("Override model preview image:")}</label>
           <input name="model_preview" type="file" id="design-model-preview" />
         </div>
         <div class="field">
-          <label for="model_preview_reverse">${_("Override reverse model preview image")}</label>
+          <label for="model_preview_reverse">${_("Override reverse model preview image:")}</label>
           <input name="model_preview_reverse" type="file" id="design-model-preview-reverse" />
         </div>
         <div class="field">
-          <label for="sheets">${_("Override cutting sheets")}</label>
+          <label for="sheets">${_("Override cutting sheets:")}</label>
           <input name="sheets" type="file" id="design-sheets" />
         </div>
         <div class="field">
-          <label for="sheets_preview">${_("Override cutting sheets preview image")}</label>
+          <label for="sheets_preview">${_("Override cutting sheets preview image:")}</label>
           <input name="sheets_preview" type="file" id="design-sheets-preview" />
         </div>
       </div>
     % endif
-    <input type="submit" name="submit" value="${_(u'Save &amp; Upload')}" />
+    <input class="submit" type="submit" name="submit" value="${_(u'Save &amp; Upload')}" />
   </form>
   <script>
     var WIKIHOUSE_UPLOAD_PAGE = true;

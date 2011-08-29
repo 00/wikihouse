@@ -4,14 +4,80 @@
 
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
-    <div class="row padding-bottom">
-      <h4 class="padding-sides">${_(u'Download/')}</h4>
+    <div class="row">
+      <h4 class="padding-sides">${_(u'Links/')}</h4>
     </div>
-    <div class="padding-left-large">
-      Spec PDF
+    <div class="row padding-left-large padding-bottom padding-top-large padding-right">
+      <ul class="nav-list">
+        <li class="strong"><a href="guide#principles">${_(u'10 DESIGN PRINCIPLES')}</a></li>
+        <li class="strong"><a href="guide#system">${_(u'SYSTEM')}</a></li>
+        <li class="strong"><a href="guide#series">${_(u'A GUIDE TO SERIES')}</a></li>
+        <li class="strong"><a href="guide#form">${_(u'FORM')}</a></li>
+        <li class="strong"><a href="guide#standards01">${_(u'DESIGN STANDARDS')}</a></li>
+        <li>
+          <ul>
+            <li><a href="guide#standards02">${_(u'Materials')}</a></li>
+            <li><a href="guide#standards03">${_(u'Dog Bones')}</a></li>
+            <li><a href="guide#standards04">${_(u'Fixings')}</a></li>
+            <li><a href="guide#standards05">${_(u'Fins (F)')}</a></li>
+            <li><a href="guide#standards06">${_(u'S-Joints')}</a></li>
+            <li><a href="guide#standards07">${_(u'Hooks and Tabs')}</a></li>
+            <li><a href="guide#standards08">${_(u'Primary Connectors (C1)')}</a></li>
+            <li><a href="guide#standards09">${_(u'Secondary Connectors (C2)')}</a></li>
+            <li><a href="guide#standards10">${_(u'Panels (P)')}</a></li>
+            <li><a href="guide#standards11">${_(u'Cladding, sealing, insulation &amp services')}</a></li>
+          </ul>
+        </li>
+        <li class="strong"><a href="guide#modelling">${_(u'MODELLING STANDARDS')}</a></li>
+        <li>
+          <ul>
+            <li><a href="guide#precision">${_(u'Precision')}</a></li>
+            <li><a href="guide#groups">${_(u'Groups and Components')}</a></li>
+            <li><a href="guide#naming">${_(u'Naming Parts')}</a></li>
+            <li><a href="guide#layers">${_(u'Layers')}</a></li>
+            <li><a href="guide#materials">${_(u'Materials')}</a></li>
+            <li><a href="guide#view">${_(u'Saved View')}</a></li>
+            <li><a href="guide#errors">${_(u'Script Errors')}</a></li>
+          </ul>
+        </li>
+        <li class="strong"><a href="guide#cutting">${_(u'PREPARING CUTTING FILES')}</a></li>
+      </ul>
     </div>
-    <div class="padding-left-large">
-      User Guide PDF, etc.
+    <div class="row download-link padding-left-large padding-top padding-bottom-large">
+      <div class="left download-button">
+        <a class="download-button-pdf" href=""
+                  id="design-download"
+                  rel="">
+                  ${_(u'[Download Guide as PDF]')}
+        </a>
+      </div>
+      <div class="download-caption">
+      ${_(u'Download the Guide')}
+      </div>
+    </div>
+    <div class="row download-link padding-left-large padding-bottom-large">
+      <div class="left download-button">
+        <a class="download-button-model" href="${get_static_url('docs/WikiHouse_Template.skp')}"
+                  id="design-download"
+                  rel="">
+                  ${_(u'[Get Template Model]')}
+        </a>
+      </div>
+      <div class="download-caption">
+      ${_(u'Get Template Model')}
+      </div>
+    </div>
+    <div class="row download-link padding-left-large padding-bottom-large">
+      <div class="left download-button">
+        <a class="download-button-sheets" href="${get_static_url('docs/WikiHouse_CNC_Template.dxf')}"
+                  id="design-download"
+                  rel="">
+                  ${_(u'[Get Template Sheets]')}
+        </a>
+      </div>
+      <div class="download-caption">
+      ${_(u'Get Template Sheets')}
+      </div>
     </div>
   </div>
 </%def>
@@ -21,9 +87,276 @@
     <div class="row padding-bottom">
       <h4 class="padding-sides">${_(u'Guide for Designers/')}</h4>
     </div>
-    <div class="padding-left-large">
-      How to use it, process, guide for designers...
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-principles justify guide-pane">
+      <div class="section-header padding-left"><a name="principles">${_(u'10 DESIGN PRINCIPLES')}</a></div>
+      <ol class="list text-block justify">
+        <div class="guide-principles-img padding-right"><img src="${get_static_url('gfx/guide/principles.01.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""'Be lazy like a fox'. Rather than solving problems from scratch, adapt other people's solutions, and then give them credit. Linus Torvalds thought of this phrase.""")}
+        </li>
+        <div class="guide-principles-img padding-right"><img src="${get_static_url('gfx/guide/principles.02.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""Design for materials and components which are reasonably cheap to buy, low-carbon and fully recyclable or biodegradable.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.03.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""Design is disruptive when it lowers the threshold. Design structures which can be assembled with minimal formal skill or training, and without the use of power tools.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.04.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""WikiHouses should be capable of being habitable throughout the year, and as efficient as possible in the use of energy and water. We are working to get to the first habitable WikiHouse prototype built in the near future.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.05.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""Design in such a way as to offer maximum provision for the safety, security and health (both mental and physical) of the users at all stages of the structure's life.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.06.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""As a general rule, design for the climate, culture, economy and legal / planning framework in which you live, and you know best. Others will then be able to adapt the design to suit their environment.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.07.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""Share your work as much and as openly as possible, it might come back better. At very least you'll have contributed to solving a common problem. All components on WikiHouse are shared under a creative commons license, and authors are always attributed.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.08.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u""""It is easier to ship recipes than cakes and biscuits" - John Maynard Keynes""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.09.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""Design to dismantle. The easier it is to dismantle structures or replace individual parts, the better.""")}
+        </li>
+        <div class="guide-principles-img padding-right padding-top"><img src="${get_static_url('gfx/guide/principles.10.png')}"></div>
+        <li class="padding-top padding-sides padding-bottom">
+          ${_(u"""Design for mistakes. Try to design components which either make it impossible for the assembler to get it wrong or are designed in such a way that it doesn't matter if they do.""")}
+        </li>
+      </ol>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-system justify guide-pane">
+      <div class="section-header padding-left"><a name="system">${_(u'SYSTEM')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        ${_(u"""The WikiHouse construction system is based on plywood fins, spaced 550mm (55cm) apart. Those fins can vary in size and shape. Once connected together and clad they form a robust timber frame structure.""")}
+      </div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-system-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/system.01.png')}"></div>
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-series justify guide-pane">
+      <div class="section-header padding-left"><a name="series">${_(u'A GUIDE TO SERIES')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        ${_(u'Wikihouse components are categorised into series, according to their width. The widths follow a modular grid of 1200mm (1.2m).')}
+      </div>
+      <div class="row padding-sides">
+        <div class="guide-series-img left padding-right"><img src="${get_static_url('gfx/guide/series.01.png')}"></div>
+        <div class="guide-series-text padding-top"><span class="strong">${_(u'A Series')}</span><br /><br />${_(u'Sections 1.2m wide.')}</div>
+      </div>
+      <div class="row padding-sides">
+        <div class="guide-series-img left padding-right"><img src="${get_static_url('gfx/guide/series.02.png')}"></div>
+        <div class="guide-series-text padding-top"><span class="strong">${_(u'B Series')}</span><br /><br />${_(u'Sections 2.4m wide.')}</div>
+      </div>
+      <div class="row padding-sides">
+        <div class="guide-series-img left padding-right"><img src="${get_static_url('gfx/guide/series.03.png')}"></div>
+        <div class="guide-series-text padding-top"><span class="strong">${_(u'C Series')}</span><br /><br />${_(u'Sections 3.6m wide. This is the longest span module.')}</div>
+      </div>
+      <div class="row padding-sides">
+        <div class="guide-series-img left padding-right"><img src="${get_static_url('gfx/guide/series.04.png')}"></div>
+        <div class="guide-series-text padding-top"><span class="strong">${_(u'CA Series')}</span><br /><br />${_(u'For sections wider than 3.6m, compound series are used, such as this one.')}</div>
+      </div>
+      <div class="row padding-sides" style="height:110px;">
+        <div class="guide-series-img left padding-right"><img src="${get_static_url('gfx/guide/series.05.png')}"></div>
+        <div class="guide-series-text padding-top"><span class="strong">${_(u'CBC Series')}</span><br /><br />${_(u'Theoretically there is no limit to the width of a section, A,B and C modules can be added to the series in any combination.')}</div>
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-form justify guide-pane">
+      <div class="section-header padding-left"><a name="form">${_(u'FORM')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        ${_(u"""The roof profiles of these series can follow more or less any form, provided it is structurally viable. Equally, footings can respond to sloping topography. One of the future aims of the project is to develop and test two-storey structures.""")}
+      </div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-form-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/form.01.png')}"></div>
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large guide-standards justify guide-pane border-bottom ">
+      <div class="section-header padding-left"><a name="standards01">${_(u'DESIGN STANDARDS')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides border-bottom">
+        ${_(u"""The following is proposed not as a fixed set of rules, but as a basic introduction to the design standards for WikiHouse. All designers are invited not only to use these rules, but to develop and change them as they improve on the construction set.""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom justify">
+        <span class="strong"><a name="standards02">${_(u'Material')}</a></span><br /><br />
+        ${_(u"""WikiHouse uses only one basic material, 18mm structural plywood, in international standard sheets sizes of 2400mm x 1200mm (approx. 8'x4'). There are a number of different sheet materials to choose from, but they must have sufficient structural strength. Parts are cut from these sheets using a CNC milling machine.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards03">${_(u'Dog Bones')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.01.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""All inside corners must have a 'dog bone' indentation, to accommodate the fact that the cutting head is circular, and can only cut rounded inside corners. Mark these 'dog bones' out in SketchUp by drawing an indentation 5mm deep and 10mm long (as shown). When cut, this will form the required 'dog bone' shape.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards04">${_(u'Fixings')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.02.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""At present, WikiHouses uses only three kinds of fixings, M8 mild steel bolts (often BZP) which are, if possible, full threaded, and 4mm x 50mm and 4mm x 30mm woodscrews with a cross-head.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards05">${_(u'Fins (F)')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="padding-right"><img src="${get_static_url('gfx/guide/standards.03.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""Each fin comprises two layers of plywood in an identical profile. Fin members are 200mm deep.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards06">${_(u'S-Joints')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="padding-right"><img src="${get_static_url('gfx/guide/standards.04.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""At the moment, a basic S-joint is being used. The aim of future versions will be to develop an all-plywood wedge joint, making the system much less intensive on bolts. S-joints are distributed around the fins. There are 3 basic rules for doing this:""")}<br /><br />
+        ${_(u"""1. No piece may be longer than 2370mm.""")}<br />
+        ${_(u"""2. S-joints should not be located on corners, as these are the areas under the most stress.""")}<br />
+        ${_(u"""3. S-joints on each layer of fin must be staggered and mirrored.""")}<br />
+      </div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.05.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom justify">
+        ${_(u"""The structure must be bolted around the S-joints. Bolting holes are modelled as 9mm squares in sets of six at the locations shown. This is a guideline only, not a strict rule. S-joints are staggered around the structure, so usually neighbouring S-joints will 'share' sets of bolts.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards07">${_(u'Hooks and Tabs')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.06.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""Hooks and tabs for cladding panels protrude outside the fin profile.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards08">${_(u'Primary connectors (C1)')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="padding-right"><img src="${get_static_url('gfx/guide/standards.07.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top justify">
+        ${_(u"""Holes for primary connectors must be located at key strategic locations around the section.""")}
+      </div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.08.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""Primary connectors are slotted through, and pegged on the far side, pulling the structure tight. The slot in the primary connector is designed such that it doesn't matter which way the peg is put it in, though the way shown here is neatest.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards09">${_(u'Secondary connectors (C2)')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class="guide-standards-img padding-right"><img src="${get_static_url('gfx/guide/standards.09.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""Secondary connectors are located at key positions where they serve as cills or lintols for windows and other openings, as well as lateral bracing for the structure as a whole.""")}
+      </div>
+      <div class="row padding-sides padding-top">
+        <div class="padding-right"><img src="${get_static_url('gfx/guide/standards.10.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""Secondary connectors are designed to slot into place. Note that most secondary connectors, like most primary connectors, have a 60mm diameter hole in the centre. This is to allow services (pipes, wiring etc) to be run through the house. The notches in the side allow access for a screwdriver, so the sides of the secondary connectors can be fixed into the fins. These screws do not do any significant structural work, they just hold the secondary connectors in place.""")}
+      </div>
+      <div class="row padding-sides padding-top">
+        <div class=".guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.11.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""As well as an 18mm wide and 30mm deep notch, 3mm squares must be drawn onto the fin as pilot holes for these screws.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards10">${_(u'Panels (P)')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class=".guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.12.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""External panels are designed to slot over the hooks on the main structure. Note therefore that the holes have to be large enough to allow the hooking-on and slotting-down movement. The hooks on the main structure can then serve as fixing points for cladding if required.""")}<br /><br />
+        ${_(u"""Internally, a flush interior finish is required, so panels only need to slot onto tabs. Many of these internal panels will also need 3mm holes, allowing the interior panels to be screwed to the main structure.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="standards11">${_(u'Cladding, sealing, insulation &amp services')}</a></div>
+      <div class="row padding-sides padding-top">
+        <div class=".guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/standards.13.png')}"></div>
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""The purpose of the WikiHouse construction set is that the end structure is ready to be made weathertight using cladding, insulation, damp-proof membranes and windows. WikiHouse is still an experiment in its early stages, and these have not yet been prototyped or developed further.  All the information shared on WikiHouse.cc is offered as an open invitation to collaborators and co-developers who are interested in putting open source solutions to these problems in the public domain. If you are working on one of these, or would like to know (or do) more, please get in touch.""")}
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-form justify guide-pane">
+      <div class="section-header padding-left"><a name="modelling">${_(u'MODELLING STANDARDS')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides">
+        ${_(u"""WikiHouse models are not just outline designs, but also serve as construction information. In order to be assembled and made, models need to be formatted in a standardised way. Here are just a few basic guidelines to follow when modelling in Google SketchUp:""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="precision">${_(u'Precision')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""Always be 100% accurate in modelling and dimensioning components, whenever possible, use keyboard inputs for key dimensions (such as plywood sheets, which must be 18mm thick).""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="groups">${_(u'Groups and Components')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""The most important discipline is carefully grouping each part as an individual component. This also saves a great deal of work when editing repeated components. You may also wish to then nest collections of parts (components) into further larger components, for example to re-use standard fin profiles.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="naming">${_(u'Naming Parts')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""Each component should be named according to whether it is part of a fin (F), connector (C) or panel (P), and numbered according to where it comes in the construction sequence. If a construction element (such as a fin) is made up for several parts, they are given a letter. So, for example, the fifth fin of a house will be F5, and the components which make it up would be F5/A, F5/B, F5/C and so on. Even if two parts are identical, you should still give each a unique name to make it easier for the assembler. Note that universal parts such as pegs, primary connectors (C1) and secondary connectors (C2) do not need to be named, you only need to name pieces which would otherwise be difficult to distinguish.""")}
+      </div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""You can name each component by going to Window> Entity Info and writing its name in the box labelled 'Name'. This information will be read automatically by the plugin script, and marked onto the piece by the CNC machine.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="layers">${_(u'Layers')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""The template model also has, in addition to the default layer, 4 layers onto which components can be placed if desired: fins, connectors, panels and pegs. This just makes it possible to hide parts by turning the layer off, so makes looking at the model easier. There is also a fifth layer called 'Grid', to help as a guide.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="materials">${_(u'Materials')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""The template model also uses a single plywood texture to denote all plywood. So all models match, please use this for your model.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="view">${_(u'Saved View')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top border-bottom">
+        ${_(u"""The template model also has a pre-set scene called 'Select this view and click zoom extents before saving'. WikiHouse generates views of your model automatically for sharing on the website. If you use the pre-set scene and zoom extents before running the plugin, it will ensure that your preview thumbnail is as large as possible, and also that different models can be compared from a similar view.""")}
+      </div>
+      <div class="strong padding-top-large padding-left"><a name="errors">${_(u'Script Errors')}</a></div>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""The 'Make This House' script may encounter modelling errors whilst processing a model, which may prevent it from working properly. In order to avoid these a high degree of care and accuracy in the modelling process is required - whilst this is sometimes time-consuming it is well worth the effort to ensure smooth operation. If the script does experience a problem with a component, there are three main checks you can make:""")}
+      </div>
+      <div class=".guide-wide-img padding-right"><img class="fullwidth" src="${get_static_url('gfx/guide/modelling.png')}"></div>
+      <ol class="list text-block justify padding-top padding-bottom-large">
+        <li class="padding-top padding-sides">
+          ${_(u"""Check the component has no missing faces. If so, replace the missing face by drawing along one edge. Ensure that this face intersects with any holes or openings in the face.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""Check that both main faces of a component are exactly the same, 18mm apart and extruded properly at 90 degrees. If they are not, you can always copy one good face, delete everything, then paste the good face and re-extrude it afresh.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""Check for split edges. This is when what appears to be a single edge is actually made up of several smaller ones. If you are having trouble with this, try downloading a suitable cleanup script such as """)}<a target="blank" class="strong" href="http://forums.sketchucation.com/viewtopic.php?t=22920">${_(u'this one')}</a>${_(u""" (requires sign-up), which should repair all these split edges.""")}
+        </li>
+      </ol>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top">
+        ${_(u"""To download a template SketchUp model, click """)}<a class="strong" href="${get_static_url('docs/WikiHouse_Template.skp')}">${_(u'HERE.')}</a>
+      </div>
+    </div>
+    <div class="row padding-sides padding-top-bottom-large border-bottom guide-form justify guide-pane">
+      <div class="section-header padding-left"><a name="cutting">${_(u'PREPARING CUTTING FILES')}</a></div>
+      <div class="row section-intro padding-bottom padding-sides">
+        ${_(u"""The aim of the 'Make This House' plugin script is to automate, as far as possible, the creation of 2D cutting files (in .dxf format) from the 3D model (in .skp format). However, at this stage, the plugin can only automate a few of the key stages. Here the full stages required to prepare cutting files are listed out so that designers can manually perform those functions pending further development of the plugin:""")}
+      </div>
+      <ol class="list text-block justify padding-bottom-large">
+        <li class="padding-top padding-sides">
+          ${_(u"""Search each group or component within the SketchUp model, and export the main face as a 2D polyline.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""Label each component with its name (set by the user in SketchUp) to be engraved onto the face.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""Identify external cut-lines, internal cut-lines and holes for drilling and place all the polylines accordingly onto the prescribed layers for the CNC process.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""Offset all polylines by 0.1mm inwards (so pieces get 0.1mm smaller around their perimeter, whilst holes within them get 0.1mm larger). This is to give the final pieces of plywood enough tolerance to slot together. For example, a slot which was 18mm wide would, after offsetting, be 18.2mm wide.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""Organise these 2D parts onto 2400mm x 1200mm plywood sheets in such a way as to optimise the layout - minimising wasted plywood.""")}
+        </li>
+      </ol>
+      <div class="row section-intro padding-bottom-large padding-sides padding-top-large">
+        ${_(u"""To download a template cutting file, click """)}<a class="strong" href="${get_static_url('docs/WikiHouse_CNC_Template.dxf')}">${_(u'HERE.')}</a>
+      </div>
+    </div>
+    <div class="row padding-sides">
+      <div class="guide-standards-img padding-right right"><img src="${get_static_url('gfx/guide/standards.cc.png')}"></div>
     </div>
   </div>
 </%def>
-

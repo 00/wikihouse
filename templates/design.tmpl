@@ -12,7 +12,7 @@
   % endif
     <div class="padding-right">
       <div class="row padding-bottom">
-        <h4 class="padding-sides">${_(u'Designs/')}&nbsp;&nbsp;&nbsp;<a href="/library/designs/${target.key().id()}" id="design-title">${escape(target.title)}</a></h4>
+        <h4 class="padding-sides">${_(u'Model/')}&nbsp;&nbsp;<a rel="back" href="#back">${escape(target.title)}</a></h4>
       </div>
     </div>
   <div class="model_content padding-all">
@@ -22,25 +22,42 @@
     is_admin = users.is_current_user_admin()
   %>
   % if target.status == u'approved' or is_admin or is_user:
-    % if target.model_preview:
       <div class="preview">
-        <img src="${target.model_preview_serving_url}=s364" />
+      % if target.model_preview:
+        <div class="preview padding-bottom-large">
+          <img src="${target.model_preview_serving_url}=s364" />
+        </div>
+      % endif
+      % if target.model_preview_reverse:
+        <div class="preview padding-bottom-large">
+          <img src="${target.model_preview_reverse_serving_url}=s364" />
+        </div>
+      % endif
+      % if target.sheets_preview:
+        <div class="preview padding-bottom-large">
+          <img src="${target.sheets_preview_serving_url}=s364" />
+        </div>
+      % else:
+        <div class="preview padding-bottom-large">
+          <img src="${get_static_url('gfx/preview.sheets.png')}" />
+        </div> 
+      % endif
       </div>
-    % endif
-    % if target.model_preview_reverse:
-      <!--<div class="preview">
-        <img src="${target.model_preview_reverse_serving_url}=s364" />
-      </div>-->
-    % endif
-    % if target.sheets_preview:
-      <div class="preview">
-        <img src="${target.sheets_preview_serving_url}=s364" />
-      </div>
-    % endif
       <div class="left design-info">
-        <div class="row model-details padding-top-large padding-bottom">
-          <div class="series">
-            <span class="section-heading">Series:</span>
+        <div class="row model-details padding-top">
+          <div class="model-name">
+            ${escape(target.title)}
+          </div>
+          <div class="id grey">
+            <span class="section-heading">${_(u'Model No.')}</span> ${target.key().id()}
+          </div>
+          <div class="user padding-top-large">
+            <span class="section-heading">${_(u'By:')}</span>
+            <a href="/library/user/${target.user.id}">
+              ${escape(target.user.nickname)}</a>
+          </div>
+          <div class="series padding-top-large">
+            <span class="section-heading">${_(u'Series:')}</span>
             <%
               i = 0
               l = len(target.series)
@@ -51,15 +68,7 @@
                 ${s.name().upper()}</a>${i < l and ', ' or ''}
             % endfor
           </div>
-          <div class="id grey">
-            <span class="section-heading">${_(u'Model No.')}</span> ${target.key().id()}
-          </div>
-          <div class="user padding-top">
-            <span class="section-heading">${_(u'By:')}</span>
-            <a href="/library/users/${target.user.id}">
-              ${escape(target.user.nickname)}</a>
-          </div>
-          <div class="verification padding-top">
+          <div class="verification padding-top-large">
             <span class="section-heading">${_(u'Verification:')}</span>
             % if target.verification == u'unverified':
               ${_(u'not structurally checked.')}
@@ -71,11 +80,11 @@
           </div>
           % if is_admin or is_user:
             % if target.notes:
-              <div class="notes padding-top">
+              <div class="notes padding-top-large">
                 <span class="section-heading">${_(u'Notes:')}</span> ${target.notes}
               </div>
             % endif
-            <div class="status padding-top">
+            <div class="status padding-top-large">
               <span class="section-heading">${_(u'Moderation status:')}</span>
               % if target.status == u'pending':
                 ${_(u'pending moderation.')}
@@ -86,14 +95,14 @@
               % endif
             </div>
             % if is_admin and target.status == u'pending':
-              <form class="moderation-form" action="/admin/moderate" method="post">
+              <form class="moderation-form padding-top" action="/admin/moderate" method="post">
                 ${xsrf_input}
                 <input type="hidden" name="id" value="${target.key().id()}" />
                 <input type="submit" name="action" value="${_(u'Approve')}" />
                 <input type="submit" name="action" value="${_(u'Reject')}" />
               </form>
             % endif
-            <form class="edit-form" action="${request.path}/edit" method="get">
+            <form class="edit-form padding-top" action="${request.path}/edit" method="get">
               <input type="submit" name="action" value="${_(u'Edit')}" />
             </form>
             <form class="delete-form" action="${request.path}" method="delete">
@@ -102,8 +111,8 @@
             </form>
           % endif
         </div>
-        <div class="row model-description padding-top-bottom">
-          <span class="section-heading">Description:</span><br /><br /> ${escape(target.description)}
+        <div class="row model-description padding-top-bottom-large">
+          <span class="section-heading">${_(u'Description:')}</span><br /><br /> ${escape(target.description)}
         </div>
         % if target.url:
           <div class="row model-url padding-top-bottom">
@@ -111,40 +120,57 @@
           </div>
         % endif
         <div class="row model-downloads padding-top padding-bottom-large">
-          <span class="section-heading">Downloads:</span><br />
-          <ul class="download-links small">
+          <span class="section-heading">${_(u'Downloads:')}</span><br />
+          <div class="download-links padding-top padding-bottom-large">
           % if target.model:
-            <li class="download-link">
-              <div class="download-model">
-                <a href="/blob/${target.model.key()}/${quote(target.title)}.skp"
+            <div class="row download-link">
+              <div class="left download-button">
+                <a class="download-button-model" href="/blob/${target.model.key()}/${quote(target.title)}.skp"
                     id="design-download"
                     rel="${target.component and '1' or '0'}">
-                  <div class="download-button padding-top">
-                    <img class="series-button" src="${get_static_url('gfx/download.model.png')}">
-                  </div>
-                  ${_(u'Download Model')}
+                    <img src="${get_static_url('gfx/download.model.png')}">
+                    ${_(u'[Download SketchUp Model]')}
                 </a>
               </div>
+              <div class="download-caption">
+                ${_(u'Download SketchUp Model')}
+              </div>
               <div class="hidden download-base64 model">
-                <a href="/blob64/${target.model.key()}"
+                <a class="download-button-base64" href="/blob64/${target.model.key()}"
                    id="design-download-base64">Download Base64 Encoded</a>
                 <textarea id="design-download-data"></textarea>
               </div>
-            </li>
+            </div>
           % endif
          ## % if target.sheets:
-            <li class="download-link">
-            <div class="download-sheets">
-         ##     <a href="/blob/${target.sheets.key()}">
-                  <div class="download-button padding-top">
-                    <img class="series-button" src="${get_static_url('gfx/download.sheets.png')}">
-                  </div>
-                  ${_(u'Download Cutting Templates')}
-         ##     </a>
+            <div class="row download-link padding-top">
+              <div class="left download-button">
+             ## href="/blob/${target.sheets.key()}"
+                <a class="download-button-sheets">
+                    <img src="${get_static_url('gfx/download.sheets.png')}">
+                    ${_(u'[Download Cutting Templates]')}
+                </a>
+              </div>
+              <div class="download-caption">
+                ${_(u'Download Cutting Templates')}
+              </div>
             </div>
-            </li>
          ## % endif
-          </ul>
+         ## % if target.docs:
+            <div class="row download-link padding-top">
+              <div class="left download-button">
+             ## href="/blob/${target.docs.key()}"
+                <a class="download-button-docs">
+                    <img src="${get_static_url('gfx/download.docs.png')}">
+                    ${_(u'[Download Documentation]')}
+                </a>
+              </div>
+              <div class="download-caption">
+                ${_(u'Download Documentation')}
+              </div>
+            </div>
+         ## % endif
+          </div>
         </div>
   % elif target.status == u'pending':
     <div class="status pending">

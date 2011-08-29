@@ -169,6 +169,12 @@ $super-graphic-height-02: 329px
 .hide, .hidden
   display: none  
 
+.list
+  list-style: decimal outside !important
+  list-style-type: decimal !important
+  list-style-position: outside !important
+  padding-left: 2em
+
 
 //General Elements & Classes
 
@@ -176,6 +182,7 @@ body
   font-family: helvetica, "report", sans-serif
   font-size: 0.7em
   min-width: 450px
+  line-height: 1em
 
 a
   text-decoration: none
@@ -201,6 +208,12 @@ a:hover li.unselected
 .strong
   font-weight: bold
 
+.uppercase
+  text-transform: uppercase
+
+.justify
+  text-align: justify
+
 .grey
   color: #bbb 
 
@@ -218,8 +231,10 @@ h3
 h4
   font-size: 1.3em
   font-weight: bold
-  padding: 0.5em    
+  padding: 0.5em
 
+.fullwidth
+  width: 100%
 
 //Primary Elements    
 
@@ -309,6 +324,7 @@ a.wh-logo-cc
 
 .main-nav li
   display: inline-block
+  #float: left
   padding: $padding-02 $padding-03
 
 .main-nav li:hover
@@ -324,6 +340,8 @@ a.wh-logo-cc
   .main-nav li
     display: block
     padding: 7px $padding-03
+    #float: none
+    #width: 100%
 
 .series
   width: 138px
@@ -333,6 +351,7 @@ a.wh-logo-cc
 
 .series-nav li
   display: inline-block
+  #float: left
 
 .series-nav li .panel
   display: none
@@ -372,6 +391,7 @@ a.wh-logo-cc
 
   .series-nav li
     display: inline-block
+    #float: left
     margin: 0
 
   .series-button, .series-button.selected
@@ -391,6 +411,9 @@ a.wh-logo-cc
   width: 50%
   height: 100%
 
+.descriptions
+  min-height: 60px
+
 .super-graphic-image img
   width: 100%
 
@@ -399,6 +422,7 @@ a.wh-logo-cc
   display: block
   width: 100%
   text-align: right
+  #margin-left: 0 !important
 
 .super-graphic-link
   position: relative
@@ -502,11 +526,13 @@ a.how-it-works
 
 .community li
   display: inline-block
+  #float: left
   width: 20%
   padding: 2%
 
 .press li
   display: inline-block
+  #float: left
   width: 40%
   padding: 4%
 
@@ -547,6 +573,27 @@ a.how-it-works
 .vignette
   position: relative
   z-index: -1
+
+
+//Static Page Classes
+
+.section-header
+  font-size: 150%
+  font-weight: bold
+  padding:
+    top: $padding-01
+    bottom: $padding-02
+
+.guide-pane
+  max-width: 510px
+  line-height: 1.1em
+
+.guide-wide-img img
+  width: 100%
+
+.text-block
+  max-width: 510px
+  line-height: 1.1em
 
 
 //Other Elements & Classes    
@@ -591,10 +638,42 @@ a.how-it-works
 .design-panel
   margin-top: 10px
 
+.field-title
+  width: 100px
+  text-align: right
+  padding-top: 7px
+  
+.field
+  padding:
+    top: $padding-03
+    bottom: $padding-02 
+
 form .field
-  padding: $padding-01
-  margin: $margin-01
-  border: 1px dashed #CCC
+  padding-top: $padding-01
+  margin-top: $margin-01
+
+textarea
+  min-width: 250px
+  max-width: 250px
+  padding: 0
+  margin: 0
+
+select
+  width: 250px
+
+input[type=text]
+  width: 250px
+  padding: 0
+  margin: 0
+
+input
+  width: 250px
+
+input[type=checkbox]
+  width: 20px
+  
+.submit
+  margin-left: 115px
 
 .thumbnail img
   width: 160px
@@ -623,6 +702,7 @@ form .field
 
 .step
   display: inline-block
+  #float: left
   cursor: pointer
 
 .step a
@@ -630,6 +710,13 @@ form .field
 
 .tabs
   text-align: center
+
+.model-name
+  font-size: 150%
+  font-weight: bold
+  text-transform: uppercase
+  padding:
+    bottom: $padding-01
 
 .model-details
   float: none
@@ -639,7 +726,6 @@ form .field
 
 .model-description
   text-align: justify
-  padding-right: $padding-02
 
 @media screen and (min-width: 986px)
   .model-description
@@ -673,20 +759,86 @@ form .field
   padding-top: 3px
 
 .download-links
-  text-align: center
+  text-align: left
 
 .download-link
-  display: inline-block
-  text-align: center
-  width: 65px
-  vertical-align: top
+  display: block
 
-.download-model
-  text-align: center
+.download-button
+  width: 50px
+  height: 60px
 
-.download-sheets
-  text-align: center
+.download-caption
+  padding-top: 30px
+  margin-left: 55px
 
+.nav-list li
+  padding-bottom: 3px
+
+a.download-button-model
+  display: block
+  background: transparent embed("download.model.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px  
+    
+a.download-button-sheets
+  display: block
+  background: transparent embed("download.sheets.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px   
+
+a.download-button-docs
+  display: block
+  background: transparent embed("download.docs.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px
+
+a.download-button-pdf
+  display: block
+  background: transparent embed("download.pdf.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px    
+
+a.download-button-rb
+  display: block
+  background: transparent embed("download.rb.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px      
 
 //Footer Elements
 
@@ -785,7 +937,7 @@ a.logo-gw
 @media screen and (min-width: 720px)
   .about-texts
     margin: 0 25%
-    font-size: 1.1em
+    font-size: 1em
 
 
 //Share Buttons  

@@ -49,20 +49,20 @@
             <div class="slot-0-1-2-3-4-5 top-row border-bottom">
                <ul class="top-nav">
                   % if users.get_current_user() is None:
-                    <a href="${users.create_login_url(request.path)}">
+                    <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
                       <li class="right border-left unselected">
                         ${_(u'Login')}
                       </li>
                     </a>
                   % else:
                     % if users.is_current_user_admin():
-                      <a href="/admin/moderate">
+                      <a href="/admin/moderate" title="${_(u'Moderate')}">
                         <li class="right border-left unselected">
                           ${_(u'Moderate')}
                         </li>
                       </a>
                     % endif
-                    <a href="${users.create_logout_url(request.path)}">
+                    <a href="${users.create_logout_url(request.path)}" title="${_(u'Logout')}">
                         <li class="right border-left unselected">
                           ${_(u'Logout')}
                         </li>
@@ -161,7 +161,7 @@
         <div class="row border-top">
           <div class="slot-6">
             <div class="left margin-top padding-bottom-small padding-left">
-              <a class="link strong" href="/legal/terms" alt="$_(u'Terms and Conditions')}">${_(u'Terms of Use...')}</a>
+              <a class="link strong" href="/legal/terms" title="$_(u'Terms and Conditions')}">${_(u'Terms of Use...')}</a>
             </div>
           </div>
           <div class="slot-7-8-9">

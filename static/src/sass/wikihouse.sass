@@ -169,6 +169,12 @@ $super-graphic-height-02: 329px
 .hide, .hidden
   display: none  
 
+.list
+  list-style: decimal outside !important
+  list-style-type: decimal !important
+  list-style-position: outside !important
+  padding-left: 2em
+
 
 //General Elements & Classes
 
@@ -318,6 +324,7 @@ a.wh-logo-cc
 
 .main-nav li
   display: inline-block
+  #float: left
   padding: $padding-02 $padding-03
 
 .main-nav li:hover
@@ -333,6 +340,8 @@ a.wh-logo-cc
   .main-nav li
     display: block
     padding: 7px $padding-03
+    #float: none
+    #width: 100%
 
 .series
   width: 138px
@@ -342,6 +351,7 @@ a.wh-logo-cc
 
 .series-nav li
   display: inline-block
+  #float: left
 
 .series-nav li .panel
   display: none
@@ -381,6 +391,7 @@ a.wh-logo-cc
 
   .series-nav li
     display: inline-block
+    #float: left
     margin: 0
 
   .series-button, .series-button.selected
@@ -411,6 +422,7 @@ a.wh-logo-cc
   display: block
   width: 100%
   text-align: right
+  #margin-left: 0 !important
 
 .super-graphic-link
   position: relative
@@ -514,11 +526,13 @@ a.how-it-works
 
 .community li
   display: inline-block
+  #float: left
   width: 20%
   padding: 2%
 
 .press li
   display: inline-block
+  #float: left
   width: 40%
   padding: 4%
 
@@ -688,6 +702,7 @@ input[type=checkbox]
 
 .step
   display: inline-block
+  #float: left
   cursor: pointer
 
 .step a
@@ -785,6 +800,19 @@ a.download-button-sheets
 
   &:hover
     background-position: 0 -60px   
+
+a.download-button-docs
+  display: block
+  background: transparent embed("download.docs.png") no-repeat 0 0
+  height: 60px
+  width: 50px
+  margin: 0
+  padding: 0
+  text-indent: -9999px
+  float: left
+
+  &:hover
+    background-position: 0 -60px
 
 a.download-button-pdf
   display: block

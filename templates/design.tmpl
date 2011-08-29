@@ -37,6 +37,10 @@
         <div class="preview padding-bottom-large">
           <img src="${target.sheets_preview_serving_url}=s364" />
         </div>
+      % else:
+        <div class="preview padding-bottom-large">
+          <img src="${get_static_url('gfx/preview.sheets.png')}" />
+        </div> 
       % endif
       </div>
       <div class="left design-info">
@@ -151,7 +155,7 @@
             <div class="row download-link padding-top">
               <div class="left download-button">
              ## href="/blob/${target.docs.key()}"
-                <a class="download-button-attachment">
+                <a class="download-button-docs">
                     <img src="${get_static_url('gfx/download.docs.png')}">
                     ${_(u'[Download Documentation]')}
                 </a>

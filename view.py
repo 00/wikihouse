@@ -360,7 +360,7 @@ class Design(SketchupAwareHandler):
             
         
     
-    def _redirect_on(self, id=None, error=None):
+    def _redirect_on(self, id=None, error=None, delete=None):
         """ Build a redirect response to return error data or success data.
           
           n.b.: We would return the data directly but add and edit forms used
@@ -372,6 +372,8 @@ class Design(SketchupAwareHandler):
         if error:
             data = unicode_urlencode({'error': error})
             path = '/redirect/error?%s' % data
+        elif delete:
+            path = '/redirect/after/delete'
         else:
             path = '/redirect/success/%s' % id
         
@@ -693,8 +695,8 @@ class Design(SketchupAwareHandler):
         if error:
             return self._redirect_on(error=error)
         
-        # Otherwise redirect to return the id of the deleted design.
-        return self._redirect_on(id=id)
+        # Otherwise redirect to library.
+        return self._redirect_on(delete=True)
         
     
     
@@ -739,6 +741,17 @@ class RedirectError(RequestHandler):
         upload_url = self._get_upload_url()
         data = {'error': message, 'upload_url': upload_url}
         return self.is_sketchup and data or json_encode(data)
+        
+    
+    
+
+class RedirectAfterDelete(RequestHandler):
+    """
+    """
+    
+    @auth.required
+    def get(self):
+        return {'success': '/library'}
         
     
     

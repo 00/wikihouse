@@ -69,6 +69,9 @@ mapping = [(
         r'/redirect/error\/?',
         RedirectError
     ), (
+        r'/redirect/after/delete\/?',
+        RedirectAfterDelete
+    ),(
         r'/admin/moderate\/?',
         Moderate
     ), (

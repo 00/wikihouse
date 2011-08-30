@@ -167,6 +167,7 @@ $(document).ready ->
       # If the user confirms, update the confirmation input to `true` and send
       # the form via XmlHttpRequest (so we can be sure the DELETE is respected).
       msg = _ 'Are you sure you want to delete this design from the WikiHouse library?'
+      error_stub = _ 'There was an error.  Please try again.'
       if confirm msg
         $.ajax
           type: 'DELETE'
@@ -176,7 +177,7 @@ $(document).ready ->
             if data.success?
               window.location.replace data.success
             else
-              alert "#{error_stub}.\n#{data.error}"
+              alert "#{error_stub}\n#{data.error}"
           error: ->
             alert error_stub
       # Stop the event.

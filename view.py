@@ -28,6 +28,14 @@ from weblayer.utils import json_decode, json_encode, xhtml_escape
 import auth
 import model
 
+def is_empty_file(value):
+    lines = unicode(value)[:200].split('\r\n')
+    if lines[1] == 'Content-Length: 0':
+        return True
+    return False
+    
+
+
 class RequestHandler(BaseRequestHandler):
     """ Adds i18n and SketchUp awareness support to `weblayer.RequestHandler`:
       
@@ -432,15 +440,20 @@ class Design(SketchupAwareHandler):
                 blob_key = None
                 # If we're dealing with a post from the blob store upload url,
                 # get the blob key from the already stored blob.
-                if isinstance(value, cgi.FieldStorage) and 'blob-key' in value.type_options:
-                    info = blobstore.parse_blob_info(value)
-                    blob_key = info.key()
+                if isinstance(value, cgi.FieldStorage):
+                    if 'blob-key' in value.type_options:
+                        info = blobstore.parse_blob_info(value)
+                        blob_key = info.key()
                 # Otherwise if we're dealing with our own base64 encoded data
                 # decode it, save a blob and use its key.
-                elif value and key in self._upload_files:
+                elif value and key in self._upload_files and not is_empty_file(value):
                     mime_type = self._upload_files.get(key)
-                    data = base64.b64decode(encode_to_utf8(value))
-                    blob_key = self._write_file(mime_type, data)
+                    try:
+                        data = base64.b64decode(encode_to_utf8(value))
+                    except TypeError, err:
+                        logging.warning(err, exc_info=True)
+                    else:
+                        blob_key = self._write_file(mime_type, data)
                 # Either way, if we have a blob key, add it to self._uploads
                 # and, if it's an image then set the corresponding `serving_url`.
                 if blob_key is not None:

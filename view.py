@@ -437,7 +437,7 @@ class Design(SketchupAwareHandler):
                 # decode it, save a blob and use its key.
                 elif value and key in self._upload_files:
                     mime_type = self._upload_files.get(key)
-                    data = base64.urlsafe_b64decode(encode_to_utf8(value))
+                    data = base64.b64decode(encode_to_utf8(value))
                     blob_key = self._write_file(mime_type, data)
                 # Either way, if we have a blob key, add it to self._uploads
                 # and, if it's an image then set the corresponding `serving_url`.

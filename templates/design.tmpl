@@ -1,6 +1,6 @@
 <%inherit file="library.tmpl"/>
 
-<%def name="sub_title()">${target.title}</%def>
+<%def name="sub_title()">${escape(target.title)}</%def>
 
 <%def name="main_content()">
   <div id="design">
@@ -48,6 +48,8 @@
           <div class="model-name">
             ${escape(target.title)}
           </div>
+          <!-- do not delete me! -->
+          <div id="design-title" class="hidden">${quote(target.title)}</div>
           <div class="id grey">
             <span class="section-heading">${_(u'Model No.')}</span> ${target.key().id()}
           </div>

@@ -203,6 +203,16 @@ class Design(db.Model):
     google_user_id = db.StringProperty()
     country = db.StringProperty()                       # X-AppEngine-Country
     
+    grid = db.StringProperty(
+        choices=[
+            u'450mm', 
+            u'550mm', 
+            u'600mm',
+            u'900mm',
+            u'other'
+        ],
+        default=u'550mm'
+    )
     status = db.StringProperty(
         choices=[
             u'pending', 

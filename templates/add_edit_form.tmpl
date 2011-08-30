@@ -89,6 +89,47 @@
       % endif
     </div>
     <div class="field">
+      <div class="field-title padding-left left padding-right-small"><label for="grid">${_("Grid:")}</label></div>
+      <select name="grid" id="design-grid">
+        <%
+          states = ({
+                  'value': u'450mm',
+                  'label': _("450 mm"),
+                  'default': False
+              }, {
+                  'value': u'550mm',
+                  'label': _("550 mm"),
+                  'default': True
+              }, {
+                  'value': u'600mm',
+                  'label': _("600 mm"),
+                  'default': False
+              }, {
+                  'value': u'900mm',
+                  'label': _("900 mm"),
+                  'default': False
+              }, {
+                  'value': u'other',
+                  'label': _("Other (please specify in description)"),
+                  'default': False
+              }
+          )
+        %>
+        % for item in states:
+          % if target and item['value'] == target.grid or item['default']:
+            <option value="${item['value']}" selected="selected">
+              ${item['label']}
+            </option>
+          % else:
+            <option value="${item['value']}">
+              ${item['label']}
+            </option>
+          % endif
+        % endfor
+      </select>
+      <div class="error"></div>
+    </div>
+    <div class="field">
       <div class="field-title padding-left left padding-right-small"><label for="verification">${_("Verification status:")}</label></div>
       <select name="verification" id="design-verification">
         <%

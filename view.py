@@ -506,6 +506,7 @@ class Design(SketchupAwareHandler):
             attrs['user'] = user.key()
             attrs['google_user_id'] = google_user_id
             attrs['component'] = params.get('component') == '1'
+            attrs['grid'] = params.get('grid')
             attrs['verification'] = params.get('verification')
             attrs['notes'] = params.get('notes')
             attrs['sketchup_version'] = params.get('sketchup_version')

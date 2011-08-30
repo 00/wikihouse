@@ -68,6 +68,13 @@
                 ${s.name().upper()}</a>${i < l and ', ' or ''}
             % endfor
           </div>
+          % if target.grid:
+            <!-- n.b.: dont use `.grid` as a class name here! -->
+            <div class="design-grid padding-top-large">
+              <span class="section-heading">${_(u'Grid:')}</span>
+              ${target.grid.replace('mm', ' mm').replace('other', 'Other')}
+            </div>
+          % endif
           <div class="verification padding-top-large">
             <span class="section-heading">${_(u'Verification:')}</span>
             % if target.verification == u'unverified':

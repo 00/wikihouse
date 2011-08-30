@@ -34,6 +34,11 @@ $(document).ready ->
       $target_description.show()
       $target_nav_pre.show()
       $target_nav_next.show()
+      # track a page view
+      if _gat?
+        pageTracker = _gat._getTracker 'UA-12527351-4'
+        pageTracker._trackPageview "/guide##{slug}"
+      
     
     # Function to select a `hash`, e.g.: `step-overview`.
     select_hash = (hash) ->
@@ -81,7 +86,6 @@ $(document).ready ->
         $navs_next.hide()
         select_hash window.location.hash
       
-    
     # If hashchange is supported (and we're not in an old IE -- logic borrowed
     # from Backbone.js) then listen to hash changes, otherwise poll for them
     # ten times a second.

@@ -189,12 +189,13 @@ class Download(RequestHandler):
     
 
 
-class Donate(RequestHandler):
+class Community(RequestHandler):
     """
     """
     
     def get(self):
-        return self.render('donate.tmpl')
+        contributors = model.User.get_all()
+        return self.render('community.tmpl', contributors=contributors)
         
     
     
@@ -847,8 +848,7 @@ class Users(RequestHandler):
     """
     
     def get(self):
-        contributors = model.User.get_all()
-        return self.render('users.tmpl', contributors=contributors)
+        return self.redirect('/community', permanent=True)
         
     
     

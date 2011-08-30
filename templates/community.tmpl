@@ -1,11 +1,19 @@
 <%inherit file="base.tmpl"/>
 
-<%def name="sub_title()">${_(u'Make a Donation')}</%def>
+<%def name="sub_title()">${_(u'Community')}</%def>
+
+<%def name="user_listing(item)">
+  <li>
+    <a href="/library/users/${item.id}" title="${item.nickname}">
+      <img src="${item.avatar and item.avatar or item.get_gravatar()}" />
+    </a>
+  </li>
+</%def>
 
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4 class="padding-sides">${_(u'Donate/')}</h4>
+      <h4 class="padding-sides">${_(u'Community/')}</h4>
     </div>
     <div class="padding-left-large">
     <!--
@@ -42,5 +50,11 @@
         ${_(u"""Thank you!""")}
       </div>
     </div>
+    <h4 class="padding-sides">${_(u'Contributors')}</h4>
+    <ul class="designs">
+      % for item in contributors:
+        ${self.user_listing(item)}
+      % endfor
+    </ul>
   </div>
 </%def>

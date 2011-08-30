@@ -21,8 +21,8 @@ mapping = [(
         r'/download\/?',
         Download
     ), (
-        r'/donate\/?',
-        Donate
+        r'/community\/?',
+        Community
     ), (
         r'/collaborate\/?',
         Collaborate

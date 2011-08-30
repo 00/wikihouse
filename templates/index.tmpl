@@ -48,18 +48,18 @@
     </ul>
   </div>
   <div class="row overflow-hidden avatars">
-    <ul class="avatars-widget">
-      <li>
-       <div class="inner-shadow">
-         <img class="vignette" src="${get_static_url('gfx/avatars-widget.png')}">
-       </div>
-      </li>
-      % for item in users_with_avatars:
-        <li class="left home-avatar">
-          <a href="/library/users/${item.id}" title="${item.nickname}">
-            <img src="${item.avatar}" /></a>
-        </li>
-      % endfor
-    </ul>
+    <div class="">
+      <a href="/community" title="${_(u'WikiHouse Community')}">
+        <ul class="right avatars-widget inner-shadow">
+          % for item in users_with_avatars:
+            <li class="right home-avatar">
+              <img src="${item.avatar}" alt="${item.nickname}" />
+            </li>
+          % endfor
+        </ul>
+      </a>
+      <div class="clear">
+      </div>
+    </div>
   </div>
 </%def>

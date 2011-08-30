@@ -1,5 +1,5 @@
 # Edit the configuration below (writen in `YAML <http://yaml.org/>`_) and then
-# call `/bootstrap` to overwrite the `Series`.  By convention:
+# call `/admin/bootstrap` to overwrite the `Series`.  By convention:
 # 
 # * series are displayed (e.g.: in the library category nav) in the order they
 #   are listed below

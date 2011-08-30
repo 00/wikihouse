@@ -1,5 +1,5 @@
 # Edit the configuration below (writen in `YAML <http://yaml.org/>`_) and then
-# call `/bootstrap` to overwrite the `Quotes`.  Images for the quotes are looked
+# call `/admin/bootstrap` to overwrite the `Quotes`.  Images for the quotes are looked
 # up using `gfx/logos/${org}.png`.
 # 
 # Use an optional `href: ...` to add a hyperlink to the article.

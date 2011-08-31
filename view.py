@@ -921,6 +921,7 @@ class ActivityScreen(RequestHandler):
       
     """
     
+    @auth.admin
     def get(self):
         """
         """
@@ -930,9 +931,9 @@ class ActivityScreen(RequestHandler):
         if avatars is None:
             avatars = model.Avatars(key_name=KEY_NAME)
         
-        # Cache the response for 15 minutes.
+        # Cache the response for 30 minutes.
         CACHE_KEY = 'activity'
-        CACHE_TIME = 60 * 15
+        CACHE_TIME = 60 * 30
         
         flag = memcache.get(CACHE_KEY)
         if flag is None:

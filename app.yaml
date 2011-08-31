@@ -27,7 +27,7 @@ handlers:
 - url: /blob/.*
   script: blob.py
 
-- url: /bootstrap
+- url: /admin/*
   script: main.py
   login: required
 

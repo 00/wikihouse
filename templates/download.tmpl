@@ -11,6 +11,7 @@
       <ul class="nav-list">
         <li><a href="download#install">${_(u'INSTALLING THE PLUGIN')}</a></li>
         <li><a href="download#usage">${_(u'WORKING WITH THE PLUGIN')}</a></li>
+        <li><a href="http://sketchup.google.com/download/">${_(u'Download Google SketchUp')}</a></li>
         <!--li>
           <ul>
             <li><a href="download#get">${_(u'Get Models')}</a></li>
@@ -23,12 +24,12 @@
     <div class="row download-link padding-top padding-bottom-large">
       <div class="left download-button">
         <a class="download-button-rb" href="https://github.com/tav/wikihouse-plugin/zipball/master"
-                  id="plugin-download">
-                  ${_(u'[Download the Plugin]')}
-        </a>
+            id="plugin-download">
+          ${_(u'[Download the Plugin]')}</a>
       </div>
       <div class="download-caption">
-      ${_(u'Download the Plugin')}
+        <a href="https://github.com/tav/wikihouse-plugin/zipball/master">
+          ${_(u'Download the Plugin')}</a>
       </div>
     </div>
   </div>
@@ -46,13 +47,13 @@
       </div>
       <ol class="list text-block justify">
         <li class="padding-sides">
-          ${_(u"""Download the zip archive and extract the Ruby script and supporting documentation into your Google SketchUp Plugins folder (usually located in 'Google/Google SketchUp 8/Plugins').""")}
+          ${_(u"""Download the zip archive and extract the Ruby script into your Google SketchUp Plugins folder (usually located in 'Google/Google SketchUp 8/Plugins').""")}
         </li>
+        <li class="padding-top padding-sides">
+           ${_(u"""Make sure that the <em>wikihouse.rb</em> script is directly inside the Plugins folder.""")}
+         </li> 
         <li class="padding-top padding-sides">
           ${_(u"""Launch SketchUp and access WikiHouse via the 'Plugins' menu > WikiHouse >""")}
-        </li>
-        <li class="padding-top padding-sides">
-          ${_(u"""In order to share models to the WikiHouse site online you will need a Google account (login to WikiHouse using the same credentials you use to login to GMail, Google+, Google Docs, or any other Google service).""")}
         </li>
       </ol>
     </div>
@@ -85,6 +86,9 @@
         </li>
         <li class="padding-top padding-sides">
           ${_(u"""Run the plugin by selecting 'Share Model' from the WikiHouse menu. Input all information on the upload form as necessary to reflect the details and status of your design, and then press 'Save and Upload'.""")}
+        </li>
+        <li class="padding-top padding-sides">
+          ${_(u"""In order to share models to the WikiHouse site online you will need a Google account (login to WikiHouse using the same credentials you use to login to GMail, Google+, Google Docs, or any other Google service).""")}
         </li>
         <li class="padding-top padding-sides">
           ${_(u"""The plugin will now prepare thumbnails of your model, generate 2D cutting templates of all the elements in the model, and then upload these to the WikiHouse website. Please be advised this can take several minutes, so grab a cup of tea and wait for it to finish processing!""")}

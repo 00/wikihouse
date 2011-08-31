@@ -13,20 +13,15 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4>${_(u'Community/')}</h4>
-    </div>
-    <div class="">
-    <!--
-      Paypal donate button.
-    -->
+      <h4>${_(u'Links/')}</h4>
     </div>
     <div class="row padding-bottom padding-right">
-      <a href="http://flattr.com/thing/364964/Wiki-House">
-        <img src="http://api.flattr.com/button/flattr-badge-large.png"
-            alt="Flattr this" 
-            title="Flattr this"
-        />
-      </a>
+      <ul class="nav-list">
+        <li><a href="http://twitter.com/wikihouse">${_(u'Follow @wikihouse')}</a></li>
+        <li><a href="http://wikihouse.tumblr.com">${_(u'Subscribe to the Blog')}</a></li>
+        <li><a href="http://github.com/thruflo/wikihouse">${_(u'Join us on Github')}</a></li>
+        <li><a href="http://flattr.com/thing/364964/Wiki-House">${_(u'Donate on Flattr')}</a></li>
+      </ul>
     </div>
   </div>
 </%def>
@@ -34,7 +29,7 @@
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom">
     <div class="row padding-bottom-large">
-      <h4>${_(u'Supporting WikiHouse/')}</h4>
+      <h4>${_(u'Community/')}</h4>
     </div>
     <div class="padding-bottom padding-sides">
       <div class="row section-intro padding-bottom-large padding-sides text-block justify">

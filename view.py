@@ -301,6 +301,9 @@ class Design(SketchupAwareHandler):
         'sheets_preview': 'image/svg+xml'
     }
     
+    _START_LINK = u'<!-- linkstart -->'
+    _END_LINK = u'<!-- linkend -->'
+    
     @property
     def _disqus_dev_mode(self):
         is_dev_mode = self.settings['dev']
@@ -465,6 +468,22 @@ class Design(SketchupAwareHandler):
                         serving_url = images.get_serving_url(blob_key)
                         self._uploads[serving_key] = serving_url
                     self._uploads[key] = blob_key
+        # Special case overwrite `sheets_preview`.
+        if 'sheets_preview' in self._uploads:
+            blob_key = self._uploads['sheets_preview']
+            blob_reader = blobstore.BlobReader(blob_key, buffer_size=921600)
+            start_link = u'<a xlink:href="/blob/%s" target="_top">' % blob_key
+            end_link = u'</a>'
+            value = blob_reader.read().replace(
+                self._START_LINK, 
+                start_link
+            ).replace(
+                self._END_LINK, 
+                end_link
+            ).strip()
+            mime_type = self._upload_files['sheets_preview']
+            blob_key = self._write_file(mime_type, value)
+            self._uploads['embeddable_sheets_preview'] = blob_key
         return self._uploads
         
     

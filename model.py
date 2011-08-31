@@ -240,7 +240,7 @@ class Design(db.Model):
     model_preview_reverse_serving_url = db.StringProperty()
     sheets = blobstore.BlobReferenceProperty()
     sheets_preview = blobstore.BlobReferenceProperty()
-    sheets_preview_serving_url = db.StringProperty()
+    embeddable_sheets_preview = blobstore.BlobReferenceProperty()
     
     @classmethod
     def all_listings(cls, filter_by=None, limit=99):

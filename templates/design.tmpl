@@ -49,33 +49,29 @@
           <a href="#reverse">${_(u'Reverse preview')}</a>
         </div>
       % endif
-      % if target.sheets and target.sheets_preview:
+      % if target.embeddable_sheets_preview:
         <div class="preview padding-bottom-large">
-          <a href="/blob/${target.sheets.key()}">
-            <!--[if !IE]>-->
-              <object data="/blob/${target.sheets_preview.key()}"
-                  type="image/svg+xml"
-                  width="364" 
-                  id="mySVGObject">
-              </object>
-            <!--<![endif]-->
-            <!--[if lt IE 9]>
-              <object src="/blob/${target.sheets_preview.key()}"
-                  classid="image/svg+xml"
-                  width="364" 
-                  height="364" 
-                  id="mySVGObject">
-              </object>
-            <![endif]-->
-            <!--[if gte IE 9]>
-              <object data="/blob/${target.sheets_preview.key()}"
-                  type="image/svg+xml"
-                  width="364" 
-                  height="364" 
-                  id="mySVGObject">
-              </object>
-            <![endif]-->
-          </a>
+          <!--[if !IE]>-->
+            <object data="/blob/${target.embeddable_sheets_preview.key()}"
+                type="image/svg+xml"
+                width="100%" 
+                id="mySVGObject">
+            </object>
+          <!--<![endif]-->
+          <!--[if lt IE 9]>
+            <object src="/blob/${target.embeddable_sheets_preview.key()}"
+                classid="image/svg+xml"
+                width="100%" 
+                id="mySVGObject">
+            </object>
+          <![endif]-->
+          <!--[if gte IE 9]>
+            <object data="/blob/${target.embeddable_sheets_preview.key()}"
+                type="image/svg+xml"
+                width="100%" 
+                id="mySVGObject">
+            </object>
+          <![endif]-->
         </div>
       % else:
         <div class="preview padding-bottom-large">

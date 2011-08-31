@@ -48,9 +48,7 @@
     <h4>${_(u'Contributors')}</h4>
     <ul class="contributor-list">
       % for item in contributors:
-        % for i in range(10):
-          ${self.user_listing(item)}
-        % endfor
+        ${self.user_listing(item)}
       % endfor
     </ul>
     <div class="clear">

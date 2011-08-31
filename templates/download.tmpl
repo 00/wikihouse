@@ -4,23 +4,23 @@
 
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
-    <div class="row">
-      <h4 class="padding-sides">${_(u'Links/')}</h4>
+    <div class="row padding-bottom">
+      <h4>${_(u'Links/')}</h4>
     </div>
-    <div class="row padding-left-large padding-bottom padding-top-large padding-right">
+    <div class="row padding-bottom padding-right">
       <ul class="nav-list">
-        <li class="strong"><a href="download#install">${_(u'INSTALLING THE PLUGIN')}</a></li>
-        <li class="strong"><a href="download#usage">${_(u'WORKING WITH THE PLUGIN')}</a></li>
-        <li>
+        <li><a href="download#install">${_(u'INSTALLING THE PLUGIN')}</a></li>
+        <li><a href="download#usage">${_(u'WORKING WITH THE PLUGIN')}</a></li>
+        <!--li>
           <ul>
             <li><a href="download#get">${_(u'Get Models')}</a></li>
             <li><a href="download#share">${_(u'Share Model')}</a></li>
             <li><a href="download#make">${_(u'Make This House')}</a></li>
           </ul>
-        </li>
+        </li-->
       </ul>
     </div>
-    <div class="row download-link padding-left-large padding-top padding-bottom-large">
+    <div class="row download-link padding-top padding-bottom-large">
       <div class="left download-button">
         <a class="download-button-rb" href="https://github.com/tav/wikihouse-plugin/zipball/master"
                   id="plugin-download">
@@ -37,15 +37,15 @@
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4 class="padding-sides">${_(u'Using the Plugin/')}</h4>
+      <h4>${_(u'Using the Plugin/')}</h4>
     </div>
-    <div class="row padding-sides padding-top-bottom-large border-bottom guide-system justify guide-pane">
-      <div class="section-header padding-left"><a name="install">${_(u'INSTALLING THE PLUGIN')}</a></div>
+    <div class="row padding-sides padding-bottom border-bottom guide-system justify guide-pane">
+      <div class="section-header"><a name="install">${_(u'INSTALLING THE PLUGIN')}</a></div>
       <div class="row section-intro padding-bottom-large padding-sides">
         ${_(u"""To use the WikiHouse plugin you must be running """)}<a class="strong" target="blank" href="http://sketchup.google.com/">${_(u'Google SketchUp')}</a>${_(u""" version 8 or above. To install WikiHouse follow the 'Download the Plugin' link on this page:""")}
       </div>
       <ol class="list text-block justify">
-        <li class="padding-top padding-sides">
+        <li class="padding-sides">
           ${_(u"""Download the zip archive and extract the Ruby script and supporting documentation into your Google SketchUp Plugins folder (usually located in 'Google/Google SketchUp 8/Plugins').""")}
         </li>
         <li class="padding-top padding-sides">
@@ -56,12 +56,12 @@
         </li>
       </ol>
     </div>
-    <div class="row padding-sides padding-top-bottom-large guide-system justify guide-pane">
-      <div class="section-header padding-left"><a name="usage">${_(u'WORKING WITH THE PLUGIN')}</a></div>
+    <div class="row padding-sides padding-top-bottom guide-system justify guide-pane">
+      <div class="section-header"><a name="usage">${_(u'WORKING WITH THE PLUGIN')}</a></div>
       <div class="row section-intro padding-bottom-large padding-sides">
         ${_(u"""The WikiHouse plugin provides 3 main features: 'Get Models', 'Share Model', and 'Make This House'.""")}
       </div>
-      <div class="strong padding-left"><a name="get">${_(u'Get Models')}</a></div>
+      <div class="strong"><a name="get">${_(u'Get Models')}</a></div>
       <div class="padding-sides text-block justify padding-bottom-large padding-top">${_(u"""The 'Get Models' menu item opens up a browser window within SketchUp displaying the WikiHouse website and library of models (located here under 'Find Components').""")}</div>
       <ol class="list text-block justify">
         <li class="padding-sides">
@@ -74,7 +74,7 @@
           ${_(u"""You will be prompted to either open the model directly in SketchUp or save it to disk...""")}
         </li>
       </ol>
-      <div class="strong padding-left padding-top-large"><a name="share">${_(u'Share Model')}</a></div>
+      <div class="strong padding-top-large"><a name="share">${_(u'Share Model')}</a></div>
       <div class="padding-sides text-block justify padding-bottom-large padding-top">${_(u"""The 'Share Model' menu item opens up a browser window within SketchUp with the upload form for sharing your design to the WikiHouse website and library.""")}</div>
       <ol class="list text-block justify">
         <li class="padding-sides">
@@ -90,7 +90,7 @@
           ${_(u"""The plugin will now prepare thumbnails of your model, generate 2D cutting templates of all the elements in the model, and then upload these to the WikiHouse website. Please be advised this can take several minutes, so grab a cup of tea and wait for it to finish processing!""")}
         </li>
       </ol>
-      <div class="strong padding-left padding-top-large"><a name="make">${_(u'Make This House')}</a></div>
+      <div class="strong padding-top-large"><a name="make">${_(u'Make This House')}</a></div>
       <div class="padding-sides text-block justify padding-bottom-large padding-top">${_(u"""The 'Make This House' menu item will attempt to create a set of cutting templates from selected elements in you model.""")}</div>
       <ol class="list text-block justify">
         <li class="padding-sides">

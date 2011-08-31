@@ -94,7 +94,7 @@ $super-graphic-height-02: 329px
 
 .padding-bottom-large  
   padding:
-    bottom: $padding-03  
+    bottom: $padding-02  
 
 .padding-top-bottom
   padding:
@@ -136,9 +136,9 @@ $super-graphic-height-02: 329px
     right: $padding-03       
 
 .padding-sides 
-  padding:
-    left: $padding-02
-    right: $padding-02 
+  //padding:
+  //  left: $padding-02
+  //  right: $padding-02 
 
 .padding-sides-small
   padding:
@@ -223,15 +223,10 @@ a.link
   &:hover
     color: #000
 
-h3
-  font-size: 1.2em
-  font-weight: bold
-  padding: 0.5em 0em 0.5em 0em        
-
 h4
-  font-size: 1.3em
+  font-size: 1.5em
   font-weight: bold
-  padding: 0.5em
+  padding: 1em 0em// 0.5em 0
 
 .fullwidth
   width: 100%
@@ -618,10 +613,10 @@ a.how-it-works
 //Static Page Classes
 
 .section-header
-  font-size: 150%
+  font-size: 120%
   font-weight: bold
   padding:
-    top: $padding-01
+    //top: $padding-01
     bottom: $padding-02
 
 .guide-pane
@@ -635,6 +630,8 @@ a.how-it-works
   max-width: 510px
   line-height: 1.1em
 
+ol.text-block, ul.text-block
+  max-width: 488px
 
 //Other Elements & Classes    
 
@@ -822,7 +819,9 @@ input[type=checkbox]
   margin-left: 55px
 
 .nav-list li
-  padding-bottom: 3px
+  padding-bottom: 0.8em
+  font-weight: bold
+  text-transform: uppercase
 
 a.download-button-model
   display: block

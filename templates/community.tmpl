@@ -13,20 +13,20 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4 class="padding-sides">${_(u'Community/')}</h4>
+      <h4>${_(u'Community/')}</h4>
     </div>
-    <div class="padding-left-large">
+    <div class="">
     <!--
       Paypal donate button.
     -->
     </div>
-    <div class="padding-left-large padding-top-bottom padding-right">
-    <a href="http://flattr.com/thing/364964/Wiki-House">
-      <img src="http://api.flattr.com/button/flattr-badge-large.png"
-          alt="Flattr this" 
-          title="Flattr this"
-      />
-    </a>
+    <div class="row padding-bottom padding-right">
+      <a href="http://flattr.com/thing/364964/Wiki-House">
+        <img src="http://api.flattr.com/button/flattr-badge-large.png"
+            alt="Flattr this" 
+            title="Flattr this"
+        />
+      </a>
     </div>
   </div>
 </%def>
@@ -34,9 +34,9 @@
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom">
     <div class="row padding-bottom-large">
-      <h4 class="padding-sides">${_(u'Supporting WikiHouse/')}</h4>
+      <h4>${_(u'Supporting WikiHouse/')}</h4>
     </div>
-    <div class="padding-bottom-large padding-sides">
+    <div class="padding-bottom padding-sides">
       <div class="row section-intro padding-bottom-large padding-sides text-block justify">
         ${_(u"""WikiHouse is offered as a free service. All information is shared via a Creative Commons license and you are not expected to pay for anything you find on this site. However the WikiHouse process is still at a very early stage. In order for WikiHouse to be successful much further testing and development is required, to improve the platform and build further physical prototypes.""")}
       </div>
@@ -50,7 +50,7 @@
         ${_(u"""Thank you!""")}
       </div>
     </div>
-    <h4 class="padding-sides">${_(u'Contributors')}</h4>
+    <h4>${_(u'Contributors')}</h4>
     <ul class="designs">
       % for item in contributors:
         ${self.user_listing(item)}

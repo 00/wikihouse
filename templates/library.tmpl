@@ -71,7 +71,7 @@
             <div class="selected">
               <div class="series-title padding-right left">
                 <div class="row">
-                  <h4 class="padding-sides">${_(u'Designs/')}&nbsp;&nbsp;&nbsp;${item.title}</h4>
+                  <h4>${_(u'Designs/')}&nbsp;&nbsp;&nbsp;${item.title}</h4>
                 </div>
               </div>
               <div class="left padding-top">
@@ -85,7 +85,7 @@
         % endfor
       </div>
     % else:
-      <h4 class="padding-sides">${_(u'Designs/ ')}</h4>
+      <h4>${_(u'Designs/ ')}</h4>
     % endif
   </div>
   <div class="row">
@@ -102,7 +102,7 @@
 
 <%def name="actions()">
   <div class="row padding-bottom">
-    <h4 class="padding-sides">Series/</h4>
+    <h4>Series/</h4>
   </div>
   <div class="row">
     <ul class="series-nav padding-bottom">

@@ -1003,7 +1003,7 @@ class ActivityScreen(RequestHandler):
         random.shuffle(images)
         
         # Render the page and cache the output.
-        return self.render('activity.tmpl', items=images)
+        return self.render('activity.tmpl', items=images[:300])
         
     
     

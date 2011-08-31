@@ -58,6 +58,8 @@
         </div>
       </div>
     </div>
+    <div class="clear">
+    </div>
   </div>
   </li>
 </%def>
@@ -71,11 +73,14 @@
             <div class="selected">
               <div class="series-title padding-right left">
                 <div class="row">
-                  <h4>${_(u'Designs/')}&nbsp;&nbsp;&nbsp;${item.title}</h4>
+                  <h4>
+                    <a href="/library">${_(u'Designs/')}</a>
+                    ${item.title}
+                  </h4>
                 </div>
               </div>
               <div class="left padding-top">
-                <div class="row padding-left-large padding-bottom">
+                <div class="row padding-left-large padding-bottom padding-top-small">
                   [ ${item.description} ]
                   <a class="link padding-left" href="/guide#series" class="link">More...</a>
                 </div>

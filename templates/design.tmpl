@@ -21,12 +21,12 @@
         ${_(u'Back to Components')}</a>
     </div>
   % endif
-    <div class="padding-right">
-      <div class="row padding-bottom">
-        <h4>${_(u'Model/')}&nbsp;&nbsp;<a rel="back" href="#back">${escape(target.title)}</a></h4>
-      </div>
+  <div class="padding-right">
+    <div class="row padding-bottom">
+      <h4><a href="/library">${_(u'Designs/')}</a>&nbsp;&nbsp;${escape(target.title)}</h4>
     </div>
-  <div class="model-content padding-all">
+  </div>
+  <div class="model-content">
   <%
     google_user = users.get_current_user()
     is_user = google_user and google_user == target.user.google_user
@@ -34,6 +34,10 @@
   %>
   % if target.status == u'approved' or is_admin or is_user:
       <div class="preview">
+      % if target.model_preview and target.model_preview_reverse:
+        <div class="preview-image-reverse-link">
+          <a href="#reverse">
+      % endif
       % if target.model_preview:
         <div class="preview preview-image padding-bottom-large">
           <img src="${target.model_preview_serving_url}=s364" />
@@ -45,8 +49,7 @@
         </div>
       % endif
       % if target.model_preview and target.model_preview_reverse:
-        <div class="preview-image-reverse-link">
-          <a href="#reverse">${_(u'Reverse preview')}</a>
+          </a>
         </div>
       % endif
       % if target.embeddable_sheets_preview:

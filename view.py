@@ -297,7 +297,7 @@ class Design(SketchupAwareHandler):
         'model_preview': 'image/jpeg',
         'model_preview_reverse': 'image/jpeg',
         'sheets': 'image/vnd.dxf',
-        'sheets_preview': 'image/jpeg'
+        'sheets_preview': 'image/svg+xml'
     }
     
     @property

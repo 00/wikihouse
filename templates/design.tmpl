@@ -2,6 +2,17 @@
 
 <%def name="sub_title()">${escape(target.title)}</%def>
 
+<%def name="sub_headers()">
+  <!-- n.b.: this must be included as the first script tag -->
+  <%
+    svgweb_src = get_static_url('svgweb/svg.js')
+    svgweb_data_path = '/'.join(svgweb_src.split('/')[:-1])
+  %>
+  <script type="text/javascript" src="${svgweb_src}"
+      data-path="${svgweb_data_path}">
+  </script>
+</%def>
+
 <%def name="main_content()">
   <div id="design">
   % if is_sketchup:
@@ -33,9 +44,33 @@
           <img src="${target.model_preview_reverse_serving_url}=s364" />
         </div>
       % endif
-      % if target.sheets_preview:
+      % if target.sheets and target.sheets_preview:
         <div class="preview padding-bottom-large">
-          <img src="${target.sheets_preview_serving_url}=s364" />
+          <a href="/blob/${target.sheets.key()}" class="download-button-sheets">
+            <!--[if !IE]>-->
+              <object data="/blob/${target.sheets_preview.key()}"
+                  type="image/svg+xml"
+                  width="364" 
+                  id="mySVGObject">
+              </object>
+            <!--<![endif]-->
+            <!--[if lt IE 9]>
+              <object src="/blob/${target.sheets_preview.key()}"
+                  classid="image/svg+xml"
+                  width="364" 
+                  height="364" 
+                  id="mySVGObject">
+              </object>
+            <![endif]-->
+            <!--[if gte IE 9]>
+              <object data="/blob/${target.sheets_preview.key()}"
+                  type="image/svg+xml"
+                  width="364" 
+                  height="364" 
+                  id="mySVGObject">
+              </object>
+            <![endif]-->
+          </a>
         </div>
       % else:
         <div class="preview padding-bottom-large">
@@ -151,36 +186,21 @@
               </div>
             </div>
           % endif
-         ## % if target.sheets:
-            <div class="row download-link padding-top">
-              <div class="left download-button">
-             ## href="/blob/${target.sheets.key()}"
-                <a class="download-button-sheets">
-                    <img src="${get_static_url('gfx/download.sheets.png')}">
-                    ${_(u'[Download Cutting Templates]')}
-                </a>
-              </div>
-              <div class="download-caption">
-                ${_(u'Download Cutting Templates')}
-              </div>
+        % if target.sheets:
+          <div class="row download-link padding-top">
+            <div class="left download-button">
+              <a href="/blob/${target.sheets.key()}" class="download-button-sheets">
+                <img src="${get_static_url('gfx/download.sheets.png')}" />
+                ${_(u'[Download Cutting Templates]')}
+              </a>
             </div>
-         ## % endif
-         ## % if target.docs:
-            <div class="row download-link padding-top">
-              <div class="left download-button">
-             ## href="/blob/${target.docs.key()}"
-                <a class="download-button-docs">
-                    <img src="${get_static_url('gfx/download.docs.png')}">
-                    ${_(u'[Download Documentation]')}
-                </a>
-              </div>
-              <div class="download-caption">
-                ${_(u'Download Documentation')}
-              </div>
+            <div class="download-caption">
+              ${_(u'Download Cutting Templates')}
             </div>
-         ## % endif
           </div>
-        </div>
+        % endif
+      </div>
+    </div>
   % elif target.status == u'pending':
     <div class="status pending">
       <span class="section-heading">${_(u'This design is pending moderation.')}</span>

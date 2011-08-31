@@ -25,6 +25,10 @@ generate:
     
 
 
+- svgweb/*:
+    source: %(AMPIFY_ROOT)s/third_party/jslibs/svgweb/*
+    type: binary
+
 - gfx/*:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/gfx/*
     type: binary

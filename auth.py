@@ -30,7 +30,7 @@ def admin(handler_method):
         if user is None:
             return self.redirect(users.create_login_url(self.request.path))
         elif not users.is_current_user_admin():
-            return self.error(403)
+            return self.error(status=403)
         return handler_method(self, *args, **kwargs)
         
     

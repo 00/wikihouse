@@ -8,7 +8,8 @@
   % endif
 </%def>
 
-<%def name="content()">
+<%def name="main_content()">
+  <div class="slot-7-8-9 padding-top-bottom">
   <div id="progress-indicator">
     <div class="message"></div>
   </div>
@@ -225,9 +226,11 @@
     % endif
     <input class="submit" type="submit" name="submit" value="${_(u'Save &amp; Upload')}" />
   </form>
+  </div>
   <iframe id="design-form-communication-frame" name="design-form-communication-frame" class="hidden">
   </iframe>
   <script>
     var WIKIHOUSE_UPLOAD_PAGE = true;
   </script>
+  
 </%def>

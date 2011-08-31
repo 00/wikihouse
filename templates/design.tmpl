@@ -26,7 +26,7 @@
         <h4 class="padding-sides">${_(u'Model/')}&nbsp;&nbsp;<a rel="back" href="#back">${escape(target.title)}</a></h4>
       </div>
     </div>
-  <div class="model_content padding-all">
+  <div class="model-content padding-all">
   <%
     google_user = users.get_current_user()
     is_user = google_user and google_user == target.user.google_user
@@ -35,13 +35,18 @@
   % if target.status == u'approved' or is_admin or is_user:
       <div class="preview">
       % if target.model_preview:
-        <div class="preview padding-bottom-large">
+        <div class="preview preview-image padding-bottom-large">
           <img src="${target.model_preview_serving_url}=s364" />
         </div>
       % endif
       % if target.model_preview_reverse:
-        <div class="preview padding-bottom-large">
+        <div class="preview preview-image padding-bottom-large">
           <img src="${target.model_preview_reverse_serving_url}=s364" />
+        </div>
+      % endif
+      % if target.model_preview and target.model_preview_reverse:
+        <div class="preview-image-reverse-link">
+          <a href="#reverse">${_(u'Reverse preview')}</a>
         </div>
       % endif
       % if target.sheets and target.sheets_preview:

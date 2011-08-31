@@ -37,10 +37,6 @@ generate:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/doc/*
     type: binary
 
-- robots.txt:
-    source: static/src/robots.txt
-    type: binary
-
 - css/reset.css:
     source: %(AMPIFY_ROOT)s/third_party/wikihouse-resources/reset.css
     type: binary

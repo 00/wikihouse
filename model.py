@@ -305,3 +305,11 @@ class Quote(db.Model):
     
 
 
+class Avatars(db.Model):
+    """
+    """
+    
+    twitter_followers = db.StringListProperty()
+    disqus_commenters = db.StringListProperty()
+    
+

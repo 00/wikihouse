@@ -78,6 +78,9 @@ mapping = [(
         r'/admin/bootstrap\/?',
         Bootstrap
     ), (
+        r'/admin/activity',
+        ActivityScreen
+    ), (
         r'/blob64/([^/]+)/([^/]+)\/?',
         Base64Blob
     ), (
@@ -86,9 +89,6 @@ mapping = [(
     ), (
         r'/i18n/message_strings.json',
         MessageStrings
-    ), (
-        r'/feeds/activity.rss',
-        ActivityFeed
     ), (
         r'/.*',
         NotFound

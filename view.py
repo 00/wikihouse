@@ -10,12 +10,13 @@ import base64
 import cgi
 import gettext
 import logging
+import random
 import urllib
 
 from pytz.gae import pytz
 from xml.etree import ElementTree as etree
 
-from google.appengine.api import files, images, mail, memcache, users
+from google.appengine.api import files, images, mail, memcache, urlfetch, users
 from google.appengine.api import datastore_errors
 from google.appengine.ext import blobstore, db
 
@@ -910,70 +911,98 @@ class MessageStrings(RequestHandler):
     
 
 
-class ActivityFeed(RequestHandler):
-    """ Consume the latest Disqus comments and convert into a feed with design
-      and user images.
+class ActivityScreen(RequestHandler):
+    """ Mash up:
+      
+      * Twitter followers
+      * Discus commenters
+      * Contributors
+      * Model images
+      
     """
     
     def get(self):
-        """ Get Disqus feed.  Loop through.  Get user and model images for
-          each comment.  Turn into an RSS feed.  Cache for 5 mins.
+        """
         """
         
-        # Cache the response for 5 minutes.
-        CACHE_KEY = 'feeds:activity'
-        CACHE_TIME = 60 * 5
+        KEY_NAME = 'v1'
+        avatars = model.Avatars.get_by_key_name(KEY_NAME)
+        if avatars is None:
+            avatars = model.Avatars(key_name=KEY_NAME)
         
-        feed = memcache.get(CACHE_KEY)
-        if feed is None:
-            
-            # get the Disque feed
-            sock = urllib.urlopen('http://wikihouse.disqus.com/latest.rss')
-            text = sock.read()
-            sock.close()
-            
-            # Build a list of items.
-            items = []
-            tree = etree.fromstring(text)
-            last_build_date = tree.find('channel/lastBuildDate').text
-            for item in tree.findall('channel/item'):
-                
-                # Add the creator as an item.
-                creator = item.find('{http://purl.org/dc/elements/1.1/}creator').text
-                items.append({
-                        'title': creator,
-                        'description': item.find('description').text,
-                        'link': u'http://disqus.com/api/users/avatars/%s.jpg' % creator
-                })
-                
-                # Add the design as an item.
-                link = item.find('link').text
-                design_id = link.split('/')[-1].split('#')[0]
-                design = model.Design.get_by_id(int(design_id))
-                if design and design.model_preview and not design.deleted:
-                    link = u'%s/blob/%s/%s.png' % (
-                        self.request.host_url,
-                        design.model_preview.key(),
-                        urllib.quote(design.title)
-                    )
-                    items.append({
-                            'title': design.title,
-                            'description': design.description,
-                            'link': link
-                    })
-            
-            # Render the feed and cache the output.
-            feed = self.render(
-                'rss/activity.tmpl', 
-                items=items, 
-                last_build_date=last_build_date
-            )
-            memcache.set(CACHE_KEY, feed, time=CACHE_TIME)
+        # Cache the response for 15 minutes.
+        CACHE_KEY = 'activity'
+        CACHE_TIME = 60 * 15
         
-        # Return the response.
-        self.response.headers['Content-Type'] = 'application/xml'
-        self.response.charset = 'utf8'
-        return feed
+        flag = memcache.get(CACHE_KEY)
+        if flag is None:
+            
+            # make async request to Twitter
+            url = 'https://api.twitter.com/1/followers/ids.json?cursor=-1&screen_name=wikihouse'
+            twitter = urlfetch.create_rpc()
+            urlfetch.make_fetch_call(twitter, url)
+            
+            # make async request to Disqus
+            url = 'http://disqus.com/api/3.0/forums/listUsers.json?forum=wikihouse'
+            public_key = '9PVKAMMxgF4Hn3q4G3XnqxNToQNGkMc6qEU8Zs0K79KZE1IkTg5kZioZSOjdZjIJ'
+            disqus = urlfetch.create_rpc()
+            urlfetch.make_fetch_call(disqus, '%s&api_key=%s' % (url, public_key))
+            
+            # Get the Twitter follower ids.
+            try:
+                result = twitter.get_result()
+                if result.status_code == 200:
+                    text = result.content
+                    data = json_decode(text)
+                    ids = ','.join([str(id) for id in data['ids']])
+                    # Get the Twitter follower profile image urls.
+                    # via another async request
+                    url = 'https://api.twitter.com/1/users/lookup.json?cursor=-1&user_id='
+                    twitter = urlfetch.create_rpc()
+                    urlfetch.make_fetch_call(twitter, '%s%s' % (url, ids))
+                    result = twitter.get_result()
+                    if result.status_code == 200:
+                        text = result.content
+                        data = json_decode(text)
+                        for item in data:
+                            avatar_url = item['profile_image_url'].replace('_normal.', '.')
+                            if avatar_url not in avatars.twitter_followers:
+                                avatars.twitter_followers.append(avatar_url)
+            except urlfetch.DownloadError:
+                pass
+            
+            # Get the disqus avatar permalinks.
+            try:
+                result = disqus.get_result()
+                if result.status_code == 200:
+                    text = result.content
+                    data = json_decode(text)
+                    for item in data['response']:
+                        avatar_url = item['avatar']['permalink']
+                        if avatar_url not in avatars.disqus_commenters:
+                            avatars.disqus_commenters.append(avatar_url)
+            except urlfetch.DownloadError:
+                pass
+            
+            # Save the avatars
+            avatars.put()
+            
+            # Flag that we don't need to do that again for a bit.
+            memcache.set(CACHE_KEY, True, time=CACHE_TIME)
+        
+        # Get the images to mix into the projection
+        designs = model.Design.all_listings()
+        images = [u'/blob/%s' % item.model_preview.key() for item in designs]
+        users_with_avatars = model.User.get_with_real_avatars()
+        images += [item.avatar for item in users_with_avatars]
+        images += avatars.twitter_followers
+        images += avatars.disqus_commenters
+        
+        # Rattle the tin.
+        random.shuffle(images)
+        
+        # Render the page and cache the output.
+        return self.render('activity.tmpl', items=images)
         
     
     

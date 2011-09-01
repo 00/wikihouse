@@ -27,11 +27,44 @@ def compile():
 
 
 @task
+def scrape_yaml():
+    """ Extract message strings from YAML config into a template
+      that babel knows how to parse.
+    """
+    
+    import yaml
+    
+    items = []
+    
+    sock = open('series.yaml', 'r')
+    series = yaml.load(sock)
+    sock.close()
+    for item in series:
+        items.append(item.get('description'))
+    
+    sock = open('quotes.yaml', 'r')
+    series = yaml.load(sock)
+    sock.close()
+    for item in series:
+        items.append(item.get('content'))
+    
+    items = ["_(u'%s')" % item.replace("'", r"\'") for item in items]
+    sock = open(join_path('templates', 'yaml_message_strings.tmpl'), 'w')
+    sock.write('<%\n')
+    sock.write('\n'.join(items))
+    sock.write('\n%>')
+    sock.close()
+    
+
+
+@task
 def extract():
     """ Extract message files.
     """
     
     require('babel')
+    
+    scrape_yaml()
     
     from config import settings
     with cd(here):

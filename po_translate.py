@@ -55,8 +55,12 @@ def translate(message_strings, sourceLanguage, destLanguage):
     results = {}
     for i in range(len(message_strings)):
         k = message_strings[i]
-        v = translations[i].get('responseData').get('translatedText')
-        results[k] = unescape(v)
+        try:
+            v = translations[i].get('responseData').get('translatedText')
+            results[k] = unescape(v)
+        except AttributeError:
+            logging.warning('Can\'t unescape')
+            logging.warning(v)
     return results
     
 
@@ -86,7 +90,7 @@ def main():
         msgstrs = [item.msgstr for item in cache]
         results = translate(msgstrs, sourceLang, destLang)
         for item in cache:
-            translated = results[item.msgstr]
+            translated = results.get(item.msgstr)
             if translated is not None:
                 log.info('Translated %r to %r', item.msgstr, translated)
                 item.msgstr = translated

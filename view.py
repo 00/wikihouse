@@ -30,9 +30,12 @@ import auth
 import model
 
 def is_empty_file(value):
-    lines = unicode(value)[:200].split('\r\n')
-    if lines[1] == 'Content-Length: 0':
-        return True
+    try:
+        lines = value[:200].split('\r\n')
+        if lines[1] == 'Content-Length: 0':
+            return True
+    except AttributeError:
+        pass
     return False
     
 
@@ -440,8 +443,7 @@ class Design(SketchupAwareHandler):
         
         if self._uploads is None:
             self._uploads = {}
-            params = self.request.params
-            for key, value in params.iteritems():
+            for key, value in self.request.params.iteritems():
                 blob_key = None
                 # If we're dealing with a post from the blob store upload url,
                 # get the blob key from the already stored blob.

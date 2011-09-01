@@ -3,6 +3,6 @@ $(document).ready ->
   $widget = $ '.quotes-widget'
   $widget.show()
   $widget.cycle
-    speed: 2000
+    speed: 4000
   
 

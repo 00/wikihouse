@@ -209,7 +209,21 @@ $(document).ready ->
           dataType: 'text'
           success: (data) ->
             # Set the data into the hidden textarea.
-            $('#design-download-data').text(data)
+            console.log data.length
+            console.log data.length / 2024
+            l = 2024
+            i = 0
+            c = 0
+            loop
+              chunk = data.slice(c, c + l)
+              if chunk.length is 0
+                break
+              $target = $('#design-download-data-' + i);
+              $target.text(chunk)
+              c = c + l
+              i++
+            $('#design-download-data').text(i)
+            console.log i
             # Inform SketchUp of the available data.
             window.location = "skp:save@#{id}"
           error: ->

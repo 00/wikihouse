@@ -54,7 +54,7 @@ class ManifestedStaticURLGenerator(object):
         
         file_path = self._manifest.get(path, path)
         
-        if self._dev:
+        if True: # self._dev:
             host = self._host
         else:
             host = '%s.%s' % (self._subdomains.next(), self._host)

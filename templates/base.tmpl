@@ -47,60 +47,72 @@
     <div class="wrapper padding-top">
       <div class="grid no-padding border-sides">
         <div class="row">
-            <div class="slot-0-1-2-3-4-5 top-row border-bottom">
-               <ul class="top-nav">
-                  % if users.get_current_user() is None:
-                    <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
-                      <li class="right border-left unselected">
-                        ${_(u'Login')}
-                      </li>
-                    </a>
-                  % else:
-                    % if users.is_current_user_admin():
-                      <a href="/admin/moderate" title="${_(u'Moderate')}">
-                        <li class="right border-left unselected">
-                          ${_(u'Moderate')}
-                        </li>
-                      </a>
-                    % endif
-                    <a href="${users.create_logout_url(request.path)}" title="${_(u'Logout')}">
-                        <li class="right border-left unselected">
-                          ${_(u'Logout')}
-                        </li>
-                    </a>
-                  % endif
-                  <%
-                    secondary_nav_items = [{
-                            'value': '/contact',
-                            'label': _(u'Contact')
-                        }, {
-                            'value': '/community',
-                            'label': _(u'Community')
-                        }, {
-                            'value': '/collaborate',
-                            'label': _(u'Collaborate')
-                        }
-                    ]
-                  %>
-                  % for item in secondary_nav_items:
-                    <%
-                      value = item['value']
-                      label = item['label']
-                      selected = request.path.startswith(value)
-                    %>
-                    <a href="${value}" title="${label}">
-                      <li class="${selected and 'selected' or 'unselected'} border-left right">
-                        ${label}
-                      </li>
-                    </a>
-                  % endfor
-                  <a href="http://blog.wikihouse.cc/" target="blank" title="${_(u'Goto the WikiHouse Tumblog')}">
-                    <li class="external unselected right">
-                      ${_(u'News')}
+          <div class="slot-0-1-2-3-4-5 top-row border-bottom">
+            <ul class="top-nav lang-nav">
+              <a href="${request.path}?override_language=en" title="English">
+                <li class="left border-right ${target_language == 'en' and 'selected' or 'unselected'}">
+                  English
+                </li>
+              </a>
+              <a href="${request.path}?override_language=ko" title="한국의">
+                <li class="left ${target_language == 'ko' and 'selected' or 'unselected'}">
+                  한국의
+                </li>
+              </a>
+            </ul>
+            <ul class="top-nav">
+              % if users.get_current_user() is None:
+                <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
+                  <li class="right border-left unselected">
+                    ${_(u'Login')}
+                  </li>
+                </a>
+              % else:
+                % if users.is_current_user_admin():
+                  <a href="/admin/moderate" title="${_(u'Moderate')}">
+                    <li class="right border-left unselected">
+                      ${_(u'Moderate')}
                     </li>
                   </a>
-                </ul>
-            </div>
+                % endif
+                <a href="${users.create_logout_url(request.path)}" title="${_(u'Logout')}">
+                    <li class="right border-left unselected">
+                      ${_(u'Logout')}
+                    </li>
+                </a>
+              % endif
+              <%
+                secondary_nav_items = [{
+                        'value': '/contact',
+                        'label': _(u'Contact')
+                    }, {
+                        'value': '/community',
+                        'label': _(u'Community')
+                    }, {
+                        'value': '/collaborate',
+                        'label': _(u'Collaborate')
+                    }
+                ]
+              %>
+              % for item in secondary_nav_items:
+                <%
+                  value = item['value']
+                  label = item['label']
+                  selected = request.path.startswith(value)
+                %>
+                <a href="${value}" title="${label}">
+                  <li class="${selected and 'selected' or 'unselected'} border-left right">
+                    ${label}
+                  </li>
+                </a>
+              % endfor
+              <a href="http://blog.wikihouse.cc/" target="blank" title="${_(u'Goto the WikiHouse Tumblog')}">
+                <li class="external unselected right">
+                  ${_(u'News')}
+                </li>
+              </a>
+            </ul>
+          </div>
         </div>
         <div class="row border-bottom">
           <div id="wh-logo" class="left">

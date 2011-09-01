@@ -11,3 +11,16 @@
     
   
 )()
+# Handle the lang-nav by ajax to avoid people sharing urls with the
+# `override_language` param in them.
+$langlinks = $ '.lang-nav a'
+$langlinks.bind 'click', (event) ->
+  $target = $ event.target
+  $link = $target.closest 'a'
+  url = $link.attr 'href'
+  $.ajax
+    url: url
+    success: window.location.reload
+  false
+  
+

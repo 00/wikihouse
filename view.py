@@ -53,6 +53,19 @@ class RequestHandler(BaseRequestHandler):
         """ Return a list of language tags sorted by their "q" values.
         """
         
+        # If a override request param is provided, use that and set an
+        # override cookie.
+        language = self.request.params.get('override_language', None)
+        if language is not None:
+            self.cookies.set('override_language', language, expires_days=None)
+            return [language]
+        
+        # Otherwise if an override cookie is provided, use that.
+        language = self.cookies.get('override_language')
+        if language is not None:
+            return [language]
+        
+        # Otherwise use the `Accept-Language` header, sorting by "q" value.
         header = self.request.headers.get('Accept-Language', None)
         if header is None:
             return []

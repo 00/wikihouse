@@ -955,7 +955,6 @@ class ActivityScreen(RequestHandler):
       
     """
     
-    @auth.admin
     def get(self):
         """
         """

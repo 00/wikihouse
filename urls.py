@@ -78,7 +78,7 @@ mapping = [(
         r'/admin/bootstrap\/?',
         Bootstrap
     ), (
-        r'/admin/activity',
+        r'/activity',
         ActivityScreen
     ), (
         r'/blob64/([^/]+)/([^/]+)\/?',

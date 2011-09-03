@@ -14,6 +14,9 @@
 </%def>
 
 <%def name="main_content()">
+  <div id="progress-indicator">
+    <div class="message"></div>
+  </div>
   <div id="design">
   % if is_sketchup:
     <div class="back-to-series-button">
@@ -44,7 +47,7 @@
         </div>
       % endif
       % if target.model_preview_reverse:
-        <div class="preview preview-image padding-bottom-large">
+        <div class="preview preview-image padding-bottom-large" style="display: none;">
           <img src="${target.model_preview_reverse_serving_url}=s364" />
         </div>
       % endif

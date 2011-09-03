@@ -190,6 +190,8 @@ $(document).ready ->
       if !$download.get(0)
         return
 
+      $design = $ '#design'
+
       # Get the design's title and download urls.
       designTitle = $('#design-title').text()
       designURL = $download.attr 'href'
@@ -200,6 +202,19 @@ $(document).ready ->
       designURL = designURL.split "/"
       designURL = designURL.slice(0, designURL.length-1)
       designURL = designURL.join "/"
+
+      # Call `wikihouse.showProgress(msg)` to trigger the in-progress state.
+      wikihouse.showProgress = (msg) ->
+        # Show the progress indicator.
+        $progress.height '200px'
+        $design.hide()
+        $message.text msg
+        $progress.show()
+
+      wikihouse.hideProgress = ->
+        # Show the progress indicator.
+        $progress.hide()
+        $design.show()
 
       wikihouse.download = (id, url) ->
         # Grab the model data over ajax.
@@ -221,9 +236,11 @@ $(document).ready ->
               c = c + l
               i++
             $('#design-download-data').text(i)
+            wikihouse.hideProgress()
             # Inform SketchUp of the available data.
             window.location = "skp:save@#{id}"
           error: ->
+            wikihouse.hideProgress()
             # Inform SketchUp of the failed download.
             window.location = "skp:error@#{id}"
 
@@ -231,6 +248,7 @@ $(document).ready ->
 
       # Call SketchUp when the download link is clicked.
       $download.click ->
+        wikihouse.showProgress "Downloading WikiHouse Model ..."
         window.location = "skp:download@#{isComponent},#{designBase64},#{designURL},#{designTitle}"
         return false
 

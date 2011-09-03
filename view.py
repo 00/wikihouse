@@ -11,6 +11,7 @@ import cgi
 import gettext
 import logging
 import random
+import re
 import urllib
 
 from pytz.gae import pytz
@@ -28,6 +29,9 @@ from weblayer.utils import json_decode, json_encode, xhtml_escape
 
 import auth
 import model
+
+find_svg_viewbox = re.compile('viewBox="([^"]*)').findall
+replace_svg_height = re.compile('<svg height="[^"]*').sub
 
 def is_empty_file(value):
     try:
@@ -496,12 +500,17 @@ class Design(SketchupAwareHandler):
                 self._END_LINK, 
                 end_link
             ).strip()
+            viewbox = find_svg_viewbox(value)
+            _, _, width, height = map(float, viewbox[0].split())
+            scale = width / 340.0 # just short of the 364px width.
+            height = '<svg height="%f' % (height / scale)
+            value = replace_svg_height(height, value)
             mime_type = self._upload_files['sheets_preview']
             blob_key = self._write_file(mime_type, value)
             self._uploads['embeddable_sheets_preview'] = blob_key
         return self._uploads
-        
-    
+
+
     def _get_attrs(self):
         """ Get the attributes to update the context with from the 
         """

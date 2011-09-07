@@ -59,13 +59,19 @@
     <div class="field">
       <div class="field-title padding-left left padding-right-small"><label for="description">${_("Description:")}</label></div>
       <textarea name="description" id="design-description">${target and escape(target.description) or ''}</textarea>
+      <div class="microcopy">
+      	 ${_("""Please provide a comprehensive description of your model. This can include intended use, notes about assembly, prototype lessons, etc...""")}
+      </div>
       <div class="error"></div>
     </div>
     <div class="field">
-      <div class="field-title padding-left left padding-right-small"><label for="url">${_("Web link")}</label></div>
+      <div class="field-title padding-left left padding-right-small"><label for="url">${_("Web link:")}</label></div>
       <input name="url" type="text" id="design-url"
           value="${bool(target and target.url) and escape(target.url) or ''}"
       />
+      <div class="microcopy">
+      	 ${_("""Please provide a valid URL to any external project website or download file.""")}
+      </div>
       <div class="error"></div>
     </div>
     <div class="field border-bottom padding-bottom">
@@ -79,18 +85,24 @@
           % endif
         % endfor
       </select>
+      <div class="microcopy">
+      	 ${_("""You can select multiple series by 'Shift-clicking'.""")}
+      </div>
       <div class="error"></div>
     </div>
     <div class="field">
-      <div class="field-title padding-left left padding-right-small"><label for="component">${_("Component:")}</label></div>
+      <div class="field-title padding-left left padding-right-small"><label for="component">${_("SK Component:")}</label></div>
       % if target and target.component:
         <input type="checkbox" name="component" value="1" checked="checked" />
       % else:
         <input type="checkbox" name="component" value="1"  />
       % endif
+      <div class="microcopy">
+      	 ${_("""Please tick this box if this model was created as a SketchUp Component. To save as a Component in SketchUp, select the desired elements, right click > 'Create Component', then right click > 'Save As...'""")}
+      </div>
     </div>
     <div class="field">
-      <div class="field-title padding-left left padding-right-small"><label for="grid">${_("Grid:")}</label></div>
+      <div class="field-title padding-left left padding-right-small"><label for="grid">${_("Gauge:")}</label></div>
       <select name="grid" id="design-grid">
         <%
           states = ({
@@ -128,6 +140,9 @@
           % endif
         % endfor
       </select>
+	  <div class="microcopy">
+      	 ${_("""To find out about gauges, please click here""")}
+      </div>
       <div class="error"></div>
     </div>
     <div class="field">
@@ -136,15 +151,15 @@
         <%
           states = ({
                   'value': u'unverified',
-                  'label': _("Not structurally checked"),
+                  'label': _("Not checked by an engineer"),
                   'default': True
               }, {
                   'value': u'verified',
-                  'label': _("Structurally checked"),
+                  'label': _("Checked by an engineer"),
                   'default': False
               }, {
                   'value': u'built',
-                  'label': _("Structurally checked, tested &amp; built"),
+                  'label': _("Checked and tested or built"),
                   'default': False
               }
           )
@@ -163,7 +178,7 @@
       </select>
       <div class="error"></div>
     </div>
-    <div class="field border-bottom padding-bottom">
+    <div class="field border-bottom padding-bottom margin-bottom">
       <div class="field-title padding-left left padding-right-small"><label for="design-notes">${_("Verification notes:")}</label></div>
       <% notes = target and target.notes or '' %>
       <textarea name="notes" id="design-notes">${notes and escape(notes) or ''}</textarea>
@@ -182,22 +197,37 @@
         <div class="field">
           <div class="field-title padding-left left padding-right-small"><label for="model">${_("Model:")}</label></div>
           <textarea name="model" id="design-model"></textarea>
+          <div class="microcopy">
+	      	 ${_("""Please specify a replacement model file...""")}
+	      </div>
         </div>
         <div class="field">
           <div class="field-title padding-left left padding-right-small"><label for="model_preview">${_("Model preview image:")}</label></div>
           <textarea name="model_preview" id="design-model-preview"></textarea>
+          <div class="microcopy">
+	      	 ${_("""Please specify a replacement model preview image.""")}
+	      </div>
         </div>
         <div class="field">
           <div class="field-title padding-left left padding-right-small"><label for="model_preview_reverse">${_("Reverse model preview image:")}</label></div>
           <textarea name="model_preview_reverse" id="design-model-preview-reverse"></textarea>
+          <div class="microcopy">
+	      	 ${_("""Please specify a replacement reverse model preview image.""")}
+	      </div>
         </div>
         <div class="field">
           <div class="field-title padding-left left padding-right-small"><label for="sheets">${_("Cutting sheets:")}</label></div>
           <textarea name="sheets" id="design-sheets"></textarea>
+		  <div class="microcopy">
+	      	 ${_("""Please specify a replacement cutting sheets '.dxf' file.""")}
+	      </div>
         </div>
         <div class="field">
           <div class="field-title padding-left left padding-right-small"><label for="sheets_preview">${_("Cutting sheets preview image:")}</label></div>
           <textarea name="sheets_preview" id="design-sheets-preview"></textarea>
+          <div class="microcopy">
+	      	 ${_("""Please specify a replacement cutting sheets preview image.""")}
+	      </div>
         </div>
       </div>
     % elif users.is_current_user_admin():

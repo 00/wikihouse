@@ -57,7 +57,7 @@ $super-graphic-height-02: 309px
 
 .margin-bottom
   margin:
-    ottom: $margin-02     
+    bottom: $margin-02     
 
 .margin-right
   margin:
@@ -136,9 +136,9 @@ $super-graphic-height-02: 309px
     right: $padding-03       
 
 .padding-sides 
-  //padding:
-  //  left: $padding-02
-  //  right: $padding-02 
+  padding:
+    left: $padding-02
+    right: $padding-02 
 
 .padding-sides-small
   padding:
@@ -226,13 +226,18 @@ a.link
 h4
   font-size: 1.5em
   font-weight: bold
-  padding: 1em 0em// 0.5em 0
+  padding: 1em 0em
 
 .design-content h4
   padding: 0.5em 0
 
 .fullwidth
   width: 100%
+
+@media screen and (max-width: 450px)
+  .partwidth
+    width: 100%
+
 
 //Primary Elements    
 
@@ -303,28 +308,28 @@ a.wh-logo-cc
 
 @media screen and (max-width: 450px)
   #wh-logo
-    width: 160px
-    height: 88px
-    margin-top: 44px
+    // width: 160px
+    // height: 88px
+    // margin-top: 44px
   
   #wh-logo-text
-    width: 167px
+    // width: 167px
   
   .wh-logo-img
-    display: block
-    background-size: 100%
-    height: 60px
-    width: 110px
-    margin-top: 5px
+    // display: block
+    // background-size: 100%
+    // height: 60px
+    // width: 110px
+    // margin-top: 5px
   
   .wh-logo-text
-    height: 23px
-    width: 109px
-    background-size: 100%
-    margin: 0
-    padding: 0
-    text-indent: -9999px
-    float: left
+    // height: 23px
+    // width: 109px
+    // background-size: 100%
+    // margin: 0
+    // padding: 0
+    // text-indent: -9999px
+    // float: left
 
   a.wh-logo-cc
     display: none
@@ -350,7 +355,6 @@ a.wh-logo-cc
     margin-left: 160px
   .top-nav
     font-size: 95%
-  
 
 .main-nav
   text-align: center
@@ -378,12 +382,6 @@ a.wh-logo-cc
     padding: 7px 2.4em//$padding-03
     #float: none
     #width: 100%
-
-.series
-  //width: 138px
-
-.series-nav
-  //width: 138px
 
 .series-nav li
   display: inline-block
@@ -416,7 +414,6 @@ a.wh-logo-cc
 
 @media screen and (min-width: 720px)
   .series-nav
-    //padding-left: $padding-02
 
 @media screen and (max-width: 720px)
   .series
@@ -434,6 +431,9 @@ a.wh-logo-cc
     width: 45px
     height: 45px
 
+@media screen and (max-width: 449px)
+  .lang-nav
+    display: none
 
 //Home Screen Layout
 
@@ -465,8 +465,7 @@ a.wh-logo-cc
   position: relative
   display: block
 
-// This is example positioning: these values need to be tailored to the actual
-// dimensions of the super graphic.
+// These values need to be tailored to the dimensions of the super graphic.
 @media screen and (min-width: 720px)
   .call-to-action
     margin-top: 20px
@@ -626,18 +625,41 @@ a.how-it-works
     bottom: $padding-02
 
 .guide-pane
-  max-width: 510px
+  max-width: 500px
   line-height: 1.1em
 
 .guide-wide-img img
   width: 100%
 
 .text-block
-  max-width: 510px
+  max-width: 500px
   line-height: 1.1em
+
+@media screen and (min-width: 720px)
+  .text-block
+    padding-right: $padding-03
 
 ol.text-block, ul.text-block
   max-width: 488px
+
+.team-list ul li
+  line-height: 1.3em
+
+@media screen and (max-width: 985px)
+  ul.designs .design-description
+    display: none
+
+.contributor-list
+  max-width: 500px
+
+.contributor-list li
+  float: left
+  padding-right: 5px
+  padding-bottom: 5px
+
+.contributor-list img
+  width: 80px
+
 
 //Other Elements & Classes    
 
@@ -682,10 +704,16 @@ ol.text-block, ul.text-block
 .design-panel
   margin-top: 10px
 
+.microcopy
+  width: 250px
+  margin-left: 95px
+  padding-top: 1em
+  color: #aaa
+
 .field-title
-  width: 100px
+  width: 80px
   text-align: right
-  padding-top: 7px
+  padding-top: 2px
   
 .field
   padding:
@@ -717,7 +745,7 @@ input[type=checkbox]
   width: 20px
   
 .submit
-  margin-left: 115px
+  margin-left: 95px
 
 .thumbnail img
   width: 160px
@@ -894,6 +922,7 @@ a.download-button-rb
 
   &:hover
     background-position: 0 -60px      
+
 
 //Footer Elements
 
@@ -1152,24 +1181,5 @@ button.dsq-button, button.dsq-button-small
   padding: 0 !important
   float: right
 
-@media screen and (max-width: 985px)
-  ul.designs .design-description
-    display: none
-  
-
-.contributor-list
-  max-width: 510px
-
-.contributor-list li
-  float: left
-  padding-right: 5px
-  padding-bottom: 5px
-
-.contributor-list img
-  width: 80px
-
-@media screen and (max-width: 449px)
-  .lang-nav
-    display: none
   
 

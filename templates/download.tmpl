@@ -5,7 +5,7 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4>${_(u'Links/')}</h4>
+      <h4>${_(u'Links')}</h4>
     </div>
     <div class="row padding-bottom padding-right">
       <ul class="nav-list">
@@ -38,75 +38,75 @@
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4>${_(u'Using the Plugin/')}</h4>
+      <h4>${_(u'Using the Plugin')}</h4>
     </div>
-    <div class="row padding-sides padding-bottom border-bottom guide-system justify guide-pane">
+    <div class="row padding-bottom border-bottom guide-system justify guide-pane">
       <div class="section-header"><a name="install">${_(u'INSTALLING THE PLUGIN')}</a></div>
-      <div class="row section-intro padding-bottom-large padding-sides">
+      <div class="row padding-bottom-large">
         ${_(u"""To use the WikiHouse plugin you must be running """)}<a class="strong" target="blank" href="http://sketchup.google.com/">${_(u'Google SketchUp')}</a>${_(u""" version 8 or above. To install WikiHouse follow the 'Download the Plugin' link on this page:""")}
       </div>
-      <ol class="list text-block justify">
-        <li class="padding-sides">
+      <ol class="list text-block justify padding-bottom-large">
+        <li>
           ${_(u"""Download the zip archive and extract the Ruby script into your Google SketchUp Plugins folder (usually located in 'Google/Google SketchUp 8/Plugins').""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
            ${_(u"""Make sure that the <em>wikihouse.rb</em> script is directly inside the Plugins folder.""")}
          </li> 
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""Launch SketchUp and access WikiHouse via the 'Plugins' menu > WikiHouse >""")}
         </li>
       </ol>
     </div>
-    <div class="row padding-sides padding-top-bottom guide-system justify guide-pane">
-      <div class="section-header"><a name="usage">${_(u'WORKING WITH THE PLUGIN')}</a></div>
-      <div class="row section-intro padding-bottom-large padding-sides">
+    <div class="row padding-top-bottom guide-system justify guide-pane">
+      <div class="section-header padding-top"><a name="usage">${_(u'WORKING WITH THE PLUGIN')}</a></div>
+      <div class="row padding-bottom-large">
         ${_(u"""The WikiHouse plugin provides 3 main features: 'Get Models', 'Share Model', and 'Make This House'.""")}
       </div>
-      <div class="strong"><a name="get">${_(u'Get Models')}</a></div>
-      <div class="padding-sides text-block justify padding-bottom-large padding-top">${_(u"""The 'Get Models' menu item opens up a browser window within SketchUp displaying the WikiHouse website and library of models (located here under 'Browse Designs').""")}</div>
+      <div class="strong padding-top"><a name="get">${_(u'Get Models')}</a></div>
+      <div class="text-block justify padding-bottom-large padding-top">${_(u"""The 'Get Models' menu item opens up a browser window within SketchUp displaying the WikiHouse website and library of models (located here under 'Browse Designs').""")}</div>
       <ol class="list text-block justify">
-        <li class="padding-sides">
+        <li>
           ${_(u"""Select 'Get Models' from the WikiHouse menu. Browse through the library to find a model you are interested in. Use the series buttons to filter by series.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""To download a particular model click through to its page from the main library and select 'Download Model' from the available options.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""You will be prompted to either open the model directly in SketchUp or save it to disk...""")}
         </li>
       </ol>
       <div class="strong padding-top-large"><a name="share">${_(u'Share Model')}</a></div>
-      <div class="padding-sides text-block justify padding-bottom-large padding-top">${_(u"""The 'Share Model' menu item opens up a browser window within SketchUp with the upload form for sharing your design to the WikiHouse website and library.""")}</div>
+      <div class="text-block justify padding-bottom-large padding-top">${_(u"""The 'Share Model' menu item opens up a browser window within SketchUp with the upload form for sharing your design to the WikiHouse website and library.""")}</div>
       <ol class="list text-block justify">
-        <li class="padding-sides">
+        <li>
           ${_(u"""You can either share your entire model or specific parts. To share specific elements please select these in SketchUp before running the plugin. If you do not make any selections your entire model will be shared (...before running the plugin, please ensure you have deleted all unnecessary elements which you do not want to include).""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""Setup the current view in Sketchup to reflect your preferred model thumbnail preview - this is the image others will see of your model.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""Run the plugin by selecting 'Share Model' from the WikiHouse menu. Input all information on the upload form as necessary to reflect the details and status of your design, and then press 'Save and Upload'.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""In order to share models to the WikiHouse site online you will need a Google account (login to WikiHouse using the same credentials you use to login to GMail, Google+, Google Docs, or any other Google service).""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""The plugin will now prepare thumbnails of your model, generate 2D cutting templates of all the elements in the model, and then upload these to the WikiHouse website. Please be advised this can take several minutes, so grab a cup of tea and wait for it to finish processing!""")}
         </li>
       </ol>
       <div class="strong padding-top-large"><a name="make">${_(u'Make This House')}</a></div>
-      <div class="padding-sides text-block justify padding-bottom-large padding-top">${_(u"""The 'Make This House' menu item will attempt to create a set of cutting templates from selected elements in you model.""")}</div>
+      <div class="text-block justify padding-bottom-large padding-top">${_(u"""The 'Make This House' menu item will attempt to create a set of cutting templates from selected elements in you model.""")}</div>
       <ol class="list text-block justify">
-        <li class="padding-sides">
+        <li>
           ${_(u"""You can either run the script on your entire model or specific parts. To process specific elements please select these in SketchUp before running the plugin. If you do not make any selections your entire model will be processed.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""Run the plugin by selecting 'Make This House' from the WikiHouse menu. You will be prompted to select a location for saving the template file. This is in '.dxf' format.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""Hit 'Save' and the plugin will attempt to extract faces from the model for all objects which conform to the modelling rules (namely objects of 18mm thickness), project these into 2-dimensions (plan view), label each component with its corresponding name identifier, and export all results to the dxf file.""")}
         </li>
-        <li class="padding-top padding-sides">
+        <li class="padding-top">
           ${_(u"""You can use the dxf file to prepare your WikiHouse for CNC-milling. We are working to improve the plugin in an upcoming version so that it will also arrange elements efficiently onto standard sheet dimensions of 1200mm x 2400mm and perform the necessary offsets to acquire tool paths.""")}
         </li>
       </ol> 

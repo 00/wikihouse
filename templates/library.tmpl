@@ -3,7 +3,7 @@
 <%def name="sub_title()">${target is None and _(u'Browse Library') or target.title}</%def>
 
 <%def name="design_listing(item, show_series=False)">
-  <li class="padding-sides">
+  <li>
   <div class="row design-pane padding-top-bottom-large">
     <div>
         <div class="thumbnail left">
@@ -17,7 +17,7 @@
         <div class="title">
           <h4 class="uppercase"><a href="/library/designs/${item.key().id()}">${escape(item.title)}</a></h4>
         </div>
-        <div class="design-details left padding-sides padding-top">
+        <div class="design-details left padding-top">
           <div class="id grey padding-top-large">
             <span class="section-heading">${_(u'Model No.')}</span> ${item.key().id()}
           </div>
@@ -74,7 +74,7 @@
               <div class="series-title padding-right left">
                 <div class="row">
                   <h4>
-                    <a href="/library">${_(u'Designs/')}</a>
+                    <a href="/library">${_(u'Designs - ')}</a>
                     ${item.title}
                   </h4>
                 </div>
@@ -90,7 +90,7 @@
         % endfor
       </div>
     % else:
-      <h4>${_(u'Designs/ ')}</h4>
+      <h4>${_(u'Designs')}</h4>
     % endif
   </div>
   <div class="row">
@@ -107,7 +107,7 @@
 
 <%def name="actions()">
   <div class="row padding-bottom">
-    <h4>Series/</h4>
+    <h4>Series</h4>
   </div>
   <div class="row">
     <ul class="series-nav padding-bottom">

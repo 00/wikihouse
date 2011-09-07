@@ -13,14 +13,14 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4>${_(u'Links/')}</h4>
+      <h4>${_(u'Links')}</h4>
     </div>
     <div class="row padding-bottom padding-right">
       <ul class="nav-list">
-        <li><a href="http://twitter.com/wikihouse">${_(u'Follow @wikihouse')}</a></li>
-        <li><a href="http://blog.wikihouse.cc">${_(u'Subscribe to the Blog')}</a></li>
-        <li><a href="http://github.com/thruflo/wikihouse">${_(u'Join us on Github')}</a></li>
-        <li><a href="http://flattr.com/thing/364964/Wiki-House">${_(u'Donate on Flattr')}</a></li>
+        <li><a href="http://twitter.com/wikihouse" title="${_(u'Follow @wikihouse')}">${_(u'Follow @wikihouse')}</a></li>
+        <li><a href="http://blog.wikihouse.cc" title="${_(u'Subscribe to the Blog')}">${_(u'Subscribe to the Blog')}</a></li>
+        <li><a href="http://github.com/thruflo/wikihouse" title="${_(u'Join us on Github')}">${_(u'Join us on Github')}</a></li>
+        <li><a href="http://flattr.com/thing/364964/Wiki-House" title="${_(u'Donate on Flattr')}">${_(u'Donate on Flattr')}</a></li>
       </ul>
     </div>
   </div>
@@ -29,23 +29,49 @@
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom">
     <div class="row padding-bottom-large">
-      <h4>${_(u'Community/')}</h4>
+      <h4>${_(u'Community')}</h4>
     </div>
-    <div class="padding-bottom padding-sides">
-      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
-        ${_(u"""WikiHouse is offered as a free service. All information is shared via a <a href="http://creativecommons.org/licenses/by-sa/2.5/" class="strong" target="_blank" title="Creative Commons Attribution-ShareAlike 2.5 License">Creative Commons Attribution-ShareAlike 2.5 License</a> and you are not expected to pay for anything you find on this site. However the WikiHouse process is still at a very early stage. In order for WikiHouse to be successful much further testing and development is required, to improve the platform and build further physical prototypes.""")}
+    <div class="padding-bottom">
+      <div class="row padding-bottom-large text-block justify">
+        ${_(u"""WikiHouse is not a single, finished product, but an open community project, the aim of which is to make it possible for anyone to design for anyone else. There is no fixed design 'team' or 'studio', but a steadily growing community of designers from all disciplines who share in common the belief that developing freely available house design solutions which are affordable, sustainable, and adaptive to differing needs is a worthwhile aim.""")}
       </div>
-      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
-        ${_(u"""To a large extent the success of WikiHouse will rely on a community of active participants - makers, designers, programmers, and architects from around the world working together to build on this early offering, and to push the boundary of what is possible when the Open-Hardware movement tackles the problem of 'house'. That community is growing, but will need all the support it can get.""")}
+      <div class="row padding-bottom-large text-block justify">
+        ${_(u"""Anyone who is interested in, or already working on, problems around this area is invited to """)}<a href="/collaborate" class="strong" title="Collaborate">${_(u'become a collaborator')}</a>${_(u""" on WikiHouse, regardless of what background they approach it from. There is already a growing community of followers, supporters, contributors and leaders who are working to develop and improve on this early experiment.""")}
       </div>
-      <div class="row section-intro padding-bottom-large padding-sides text-block justify">
-        ${_(u"""With WikiHouse we envisage a future where access to precision manufacturing techniques and tools, coupled with open access to design sharing and knowledge exchange will lower the threshold for access to housing. We are grateful for any donations, which will go towards realising this vision by resourcing further work on WikiHouse and associated projects, helping us to support our growing community of collaborators around the world.""")}
-      </div>
-      <div class="row section-intro padding-sides text-block justify">
-        ${_(u"""Thank you!""")}
+      <div class="row padding-bottom-large text-block justify">
+        ${_(u"""In many ways, this is the most important and exciting opportunity presented by open licensing and fabrication: to turn our collective inventiveness towards the creation of knowledge and physical assets which are freely available to everyone as common property.""")}
       </div>
     </div>
-    <h4>${_(u'Contributors')}</h4>
+    <h4>${_(u'Team')}</h4>
+    <div class="padding-bottom">
+      <div class="team-list">
+        <ul>
+          <li>${_(u"""Alastair Parvin""")} <a class="link" target="blank" href="http://twitter.com/alastairparvin">@alastairparvin</a>
+          </li>
+          <li>${_(u"""Nick Ierodiaconou""")} <a class="link" target="blank" href="http://twitter.com/nick_diaconou">@nick_diaconou</a>
+          </li>
+          <li>${_(u"""James Arthur""")} <a class="link" target="blank" href="http://twitter.com/thruflo">@thruflo</a>
+          </li>
+          <li>${_(u"""Tav""")} <a class="link" target="blank" href="http://twitter.com/tav">@tav</a>
+          </li>
+          <li>${_(u"""Steve Fisher""")}
+          </li>
+          <li>${_(u"""Austen Cook""")}
+          </li>
+          <li>${_(u"""Beatrice Galilee""")} <a class="link" target="blank" href="http://twitter.com/_Beatrice">@_Beatrice</a>
+          </li>
+          <li>${_(u"""Ruphina Choe""")} <a class="link" target="blank" href="http://twitter.com/yeppiNZel">@yeppiNZel</a>
+          </li>
+          <li>${_(u"""Indy Johar""")} <a class="link" target="blank" href="http://twitter.com/indy_johar">@indy_johar</a>
+          </li>
+          <li>${_(u"""Yogesh Taylor""")} <a class="link" target="blank" href="http://twitter.com/yogesh">@yogesh</a>
+          </li>
+          <br />
+		  <li><a href="/collaborate" class="strong" title="Collaborate">${_(u'___________* (*you)')}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <ul class="contributor-list">
       % for item in contributors:
         ${self.user_listing(item)}

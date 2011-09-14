@@ -13,30 +13,30 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4>${_(u'Links')}</h4>
+      <h4>${_(u'Join WikiHouse')}</h4>
     </div>
     <div class="row padding-bottom padding-right">
       <ul class="nav-list">
-        <li><a href="http://twitter.com/wikihouse" title="${_(u'Follow @wikihouse')}">${_(u'Follow @wikihouse')}</a></li>
-        <li><a href="http://blog.wikihouse.cc" title="${_(u'Subscribe to the Blog')}">${_(u'Subscribe to the Blog')}</a></li>
-        <li><a href="http://github.com/thruflo/wikihouse" title="${_(u'Join us on Github')}">${_(u'Join us on Github')}</a></li>
-        <li><a href="http://flattr.com/thing/364964/Wiki-House" title="${_(u'Donate on Flattr')}">${_(u'Donate on Flattr')}</a></li>
+        <li><a target="blank" href="http://twitter.com/wikihouse" title="${_(u'Follow @wikihouse')}">${_(u'Follow @wikihouse')}</a></li>
+        <li><a target="blank" href="http://blog.wikihouse.cc" title="${_(u'Subscribe to the Blog')}">${_(u'Subscribe to the Blog')}</a></li>
+        <li><a target="blank" href="http://github.com/tav/wikihouse-plugin" title="${_(u'Join us on Github')}">${_(u'Join us on Github')}</a></li>
+        <li><a target="blank" href="http://flattr.com/thing/364964/Wiki-House" title="${_(u'Donate on Flattr')}">${_(u'Donate on Flattr')}</a></li>
       </ul>
     </div>
   </div>
 </%def>
 
 <%def name="main_content()">
-  <div class="slot-7-8-9 padding-top-bottom">
+  <div class="slot-7-8-9 padding-top-bottom content-pane">
     <div class="row padding-bottom-large">
       <h4>${_(u'Community')}</h4>
     </div>
-    <div class="padding-bottom">
+    <div>
       <div class="row padding-bottom-large text-block justify">
         ${_(u"""WikiHouse is not a single, finished product, but an open community project, the aim of which is to make it possible for anyone to design for anyone else. There is no fixed design 'team' or 'studio', but a steadily growing community of designers from all disciplines who share in common the belief that developing freely available house design solutions which are affordable, sustainable, and adaptive to differing needs is a worthwhile aim.""")}
       </div>
       <div class="row padding-bottom-large text-block justify">
-        ${_(u"""Anyone who is interested in, or already working on, problems around this area is invited to """)}<a href="/collaborate" class="strong" title="Collaborate">${_(u'become a collaborator')}</a>${_(u""" on WikiHouse, regardless of what background they approach it from. There is already a growing community of followers, supporters, contributors and leaders who are working to develop and improve on this early experiment.""")}
+        ${_(u"""Anyone who is interested in, or already working on, problems around this area is invited to become a collaborator on WikiHouse, regardless of what background they approach it from. There is already a growing community of followers, supporters, contributors, and developers who are working to improve on this early experiment.""")}
       </div>
       <div class="row padding-bottom-large text-block justify">
         ${_(u"""In many ways, this is the most important and exciting opportunity presented by open licensing and fabrication: to turn our collective inventiveness towards the creation of knowledge and physical assets which are freely available to everyone as common property.""")}
@@ -44,7 +44,7 @@
     </div>
     <h4>${_(u'Team')}</h4>
     <div class="padding-bottom">
-      <div class="team-list">
+      <div class="team-list padding-bottom">
         <ul>
           <li>${_(u"""Alastair Parvin""")} <a class="link" target="blank" href="http://twitter.com/alastairparvin">@alastairparvin</a>
           </li>
@@ -67,7 +67,7 @@
           <li>${_(u"""Yogesh Taylor""")} <a class="link" target="blank" href="http://twitter.com/yogesh">@yogesh</a>
           </li>
           <br />
-		  <li><a href="/collaborate" class="strong" title="Collaborate">${_(u'___________* (*you)')}</a>
+		      <li><a href="/collaborate" class="strong" title="Collaborate">${_(u'___________* (*you)')}</a>
           </li>
         </ul>
       </div>

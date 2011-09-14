@@ -205,9 +205,17 @@ class Download(RequestHandler):
     
     def get(self):
         return self.render('download.tmpl')
+
+
+
+
+class Standards(RequestHandler):
+    """
+    """
+    
+    def get(self):
+        return self.render('standards.tmpl')
         
-    
-    
 
 
 class Community(RequestHandler):
@@ -217,16 +225,6 @@ class Community(RequestHandler):
     def get(self):
         contributors = model.User.get_all()
         return self.render('community.tmpl', contributors=contributors)
-        
-    
-    
-
-class Collaborate(RequestHandler):
-    """
-    """
-    
-    def get(self):
-        return self.render('collaborate.tmpl')
         
     
     

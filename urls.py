@@ -18,14 +18,14 @@ mapping = [(
         r'/guide\/?',
         Guide
     ), (
-        r'/download\/?',
+        r'/guide/download\/?',
         Download
+    ), (
+        r'/guide/standards\/?',
+        Standards
     ), (
         r'/community\/?',
         Community
-    ), (
-        r'/collaborate\/?',
-        Collaborate
     ), (
         r'/contact\/?',
         Contact

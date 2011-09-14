@@ -12,11 +12,10 @@ $margin-02: 1em
 $margin-03: 2em
 
 $super-graphic-height-01: 431px
-$super-graphic-height-02: 309px 
-//$super-graphic-height-03: 452px        
+$super-graphic-height-02: 309px
 
 
-//Layout-related Floats 
+//Layout-related Floats
 
 .right
   float: right
@@ -24,150 +23,153 @@ $super-graphic-height-02: 309px
 .left
   float: left
 
-//Layout-related Borders  
+
+//Layout-related Borders
 
 .no-border
-  border: 0 !important  
+  border: 0 !important
 
 .border-top
-  border-top: $border    
+  border-top: $border
 
 .border-bottom
-  border-bottom: $border    
+  border-bottom: $border
 
 .border-right
-  border-right: $border    
+  border-right: $border
 
 .border-left
-  border-left: $border  
+  border-left: $border
 
 .border-sides
   border:
     left: $border
-    right: $border 
+    right: $border
 
-//Layout-related Margins    
+
+//Layout-related Margins
 
 .no-margin
-  margin: 0 !important    
+  margin: 0 !important
 
 .margin-top
   margin:
-    top: $margin-02 
+    top: $margin-02
 
 .margin-bottom
   margin:
-    bottom: $margin-02     
+    bottom: $margin-02
 
 .margin-right
   margin:
-    right: $margin-02 
+    right: $margin-02
 
 .margin-left
   margin:
-    left: $margin-02     
+    left: $margin-02
+
 
 //Layout-related Paddings
 
 .no-padding
-  padding: 0 !important      
+  padding: 0 !important
 
 .padding-top
   padding:
-    top: $padding-02  
+    top: $padding-02
 
 .padding-top-small
   padding:
-    top: $padding-01     
+    top: $padding-01
 
 .padding-top-large
   padding:
-    top: $padding-03      
+    top: $padding-03
 
-.padding-bottom  
+.padding-bottom
   padding:
-    bottom: $padding-02  
+    bottom: $padding-02
 
 .padding-bottom-small
   padding:
-    bottom: $padding-01     
+    bottom: $padding-01
 
-.padding-bottom-large  
+.padding-bottom-large
   padding:
-    bottom: $padding-02  
+    bottom: $padding-02
 
 .padding-top-bottom
   padding:
     top: $padding-02
-    bottom: $padding-02    
+    bottom: $padding-02
 
 .padding-top-bottom-small
   padding:
     top: $padding-01
-    bottom: $padding-01      
+    bottom: $padding-01
 
 .padding-top-bottom-large
   padding:
     top: $padding-03
-    bottom: $padding-03   
+    bottom: $padding-03
 
-.padding-left  
+.padding-left
   padding:
-    left: $padding-02    
+    left: $padding-02
 
-.padding-left-small  
+.padding-left-small
   padding:
     left: $padding-01
 
-.padding-left-large  
+.padding-left-large
   padding:
-    left: $padding-03          
+    left: $padding-03
 
-.padding-right  
+.padding-right
   padding:
-    right: $padding-02        
+    right: $padding-02
 
-.padding-right-small  
+.padding-right-small
   padding:
-    right: $padding-01        
+    right: $padding-01
 
 .padding-right-large
   padding:
-    right: $padding-03       
+    right: $padding-03
 
-.padding-sides 
+.padding-sides
   padding:
     left: $padding-02
-    right: $padding-02 
+    right: $padding-02
 
 .padding-sides-small
   padding:
     left: $padding-01
-    right: $padding-01      
+    right: $padding-01
 
-.padding-sides-large  
+.padding-sides-large
   padding:
     left: $padding-03
-    right: $padding-03 
+    right: $padding-03
 
 .padding-all
   padding:
     top: $padding-02
-    bottom: $padding-02 
+    bottom: $padding-02
     left: $padding-03
-    right: $padding-03 
+    right: $padding-03
 
 .row, .clear
   clear: both
 
 .error
-  color: red  
+  color: red
 
 .show
   display: block
 
 .hide, .hidden
-  display: none  
+  display: none
 
 .list
   list-style: decimal outside !important
@@ -183,6 +185,7 @@ body
   font-size: 0.7em
   line-height: 1em
   background-color: #FFF
+  min-width: 320px
 
 a
   text-decoration: none
@@ -200,7 +203,7 @@ li.selected
   background-color: #eee
 
 a:hover li.unselected
-  background-color: #eee  
+  background-color: #eee
 
 .small
   font-size: 90%
@@ -215,7 +218,7 @@ a:hover li.unselected
   text-align: justify
 
 .grey
-  color: #bbb 
+  color: #bbb
 
 a.link
   color: #bbb
@@ -234,16 +237,25 @@ h4
 .fullwidth
   width: 100%
 
-@media screen and (max-width: 450px)
+@media screen and (max-width: 410px)
   .partwidth
     width: 100%
 
 
-//Primary Elements    
+//Primary Elements
 
 .wrapper
   padding: 1em 0em
   margin: auto
+  min-width: 320px
+
+@media screen and (min-width: 720px)
+  .wrapper
+    width: 720px
+
+@media screen and (min-width: 986px)
+  .wrapper
+    width: 986px
 
 .actions
   float: right
@@ -262,6 +274,10 @@ h4
 
 .section-heading
   font-weight: bold
+
+@media screen and (min-width: 720px)
+  .content-pane
+    #padding-left: 2em
 
 
 //Logo-related Elements
@@ -303,7 +319,7 @@ a.wh-logo-cc
   text-indent: -9999px
   float: right
 
-  &:hover   
+  &:hover
     background-position: 0 -35px
 
 @media screen and (max-width: 450px)
@@ -311,17 +327,17 @@ a.wh-logo-cc
     // width: 160px
     // height: 88px
     // margin-top: 44px
-  
+
   #wh-logo-text
     // width: 167px
-  
+
   .wh-logo-img
     // display: block
     // background-size: 100%
     // height: 60px
     // width: 110px
     // margin-top: 5px
-  
+
   .wh-logo-text
     // height: 23px
     // width: 109px
@@ -333,9 +349,9 @@ a.wh-logo-cc
 
   a.wh-logo-cc
     display: none
-  
 
-//Nav-related Elements & Classes
+
+//Main Nav-related Elements & Classes
 
 .top-row
   height: 2em
@@ -362,6 +378,10 @@ a.wh-logo-cc
   bottom: 0
   right: 0
 
+@media screen and (max-width: 986px)
+  .main-nav
+    text-align: left
+
 .main-nav li
   display: inline-block
   #float: left
@@ -373,15 +393,19 @@ a.wh-logo-cc
 .main-nav li.selected:hover
   background-color: #EEE
 
-@media screen and (max-width: 986px)
-  .main-nav
-    text-align: left
+@media screen and (max-width: 450px)
+  .main-nav li
+    font-size: 82%
 
+@media screen and (max-width: 986px)
   .main-nav li
     display: block
-    padding: 7px 2.4em//$padding-03
+    padding: 7px 2.4em
     #float: none
     #width: 100%
+
+.series
+  padding-bottom: 1em
 
 .series-nav li
   display: inline-block
@@ -412,12 +436,17 @@ a.wh-logo-cc
   width: 55px
   height: 55px
 
-@media screen and (min-width: 720px)
-  .series-nav
+@media screen and (min-width: 986px)
+  .series
+    #width: 200px
+
+@media screen and (min-width: 720px) and (max-width: 985px)
+  .series
+    #width: 150px
 
 @media screen and (max-width: 720px)
   .series
-    width: 100% 
+    width: 100%
 
   .series-nav
     width: 100%
@@ -435,10 +464,12 @@ a.wh-logo-cc
   .lang-nav
     display: none
 
+
 //Home Screen Layout
 
 .super-graphic-image
   position: relative
+  float: none
 
 .clicknavs
   position: absolute
@@ -447,26 +478,54 @@ a.wh-logo-cc
   width: 50%
   height: 100%
 
-.descriptions
-  min-height: 60px
-
 .super-graphic-image img
-  width: 90%
-  margin: 1em 0em
+  #max-width: 65%
+  width: 100%
+  height: auto
+
+@media screen and (max-width: 719px)
+  .super-graphic-image img
+    max-width: 100%
+    width: 100%
+    height: auto
+
+  .super-graphic
+    border-bottom: none
+
+  .super-graphic-image
+    border-bottom: $border
+
+@media screen and (min-width: 720px)
+  .super-graphic-image img
+    max-height: 100%
+    width: 100%
+    height: auto
+
+  .super-graphic
+    border-bottom: $border
+
+  .super-graphic-image
+    border-bottom: none
 
 .super-graphic-copy
   position: relative
   display: block
   width: 100%
   text-align: right
-  #margin-left: 0 !important
 
 .super-graphic-link
   position: relative
   display: block
 
 // These values need to be tailored to the dimensions of the super graphic.
+@media screen and (max-width: 400px)
+  .call-to-action h1
+    font-size: 150%
+
 @media screen and (min-width: 720px)
+  .super-graphic-image
+    float: left
+
   .call-to-action
     margin-top: 20px
     width: 100%
@@ -476,9 +535,9 @@ a.wh-logo-cc
 
   .super-graphic-copy
     position: absolute
-    margin-left: 522px
     height: $super-graphic-height-02
-    width: 178px
+    width: 220px
+    #margin-left: 31px
 
   .super-graphic-link
     position: absolute
@@ -486,6 +545,9 @@ a.wh-logo-cc
     right: 0px
 
 @media screen and (min-width: 986px)
+  .super-graphic-image
+    float: left
+
   .call-to-action
     margin-top: 150px
     width: 100%
@@ -494,9 +556,9 @@ a.wh-logo-cc
     height: $super-graphic-height-01
 
   .super-graphic-copy
-    width: 278px
     height: $super-graphic-height-01
-    margin-left: 688px
+    width: 302px
+    #margin-left: 42px
 
   .super-graphic-link
     position: absolute
@@ -504,6 +566,9 @@ a.wh-logo-cc
     right: 0px
 
 @media screen and (min-width: 1236px)
+  .super-graphic-image
+    float: left
+
   .call-to-action
     margin-top: 150px
     width: 100%
@@ -512,9 +577,9 @@ a.wh-logo-cc
     height: $super-graphic-height-01
 
   .super-graphic-copy
-    width: 278px
     height: $super-graphic-height-01
-    margin-left: 688px
+    width: 302px
+    #margin-left: 42px
 
   .super-graphic-link
     position: absolute
@@ -615,6 +680,220 @@ a.how-it-works
   z-index: -1
 
 
+//About Page Classes
+
+.how-it-works-container
+  position: relative
+  min-height: 390px
+
+@media screen and (max-width: 400px)
+  .how-it-works-container
+    min-height: 360px
+
+@media screen and (min-width: 400px) and (max-width: 450px)
+  .how-it-works-container
+    min-height: 360px
+
+@media screen and (min-width: 450px) and (max-width: 500px)
+  .how-it-works-container
+    min-height: 370px
+
+@media screen and (min-width: 500px) and (max-width: 550px)
+  .how-it-works-container
+    min-height: 380px
+
+@media screen and (min-width: 550px) and (max-width: 600px)
+  .how-it-works-container
+    min-height: 400px
+
+@media screen and (min-width: 600px) and (max-width: 650px)
+  .how-it-works-container
+    min-height: 420px
+
+@media screen and (min-width: 650px) and (max-width: 720px)
+  .how-it-works-container
+    min-height: 445px
+
+@media screen and (min-width: 720px)
+  .how-it-works-container
+    min-height: 450px
+
+@media screen and (min-width: 986px)
+  .how-it-works-container
+    min-height: 550px
+
+.step
+  display: inline-block
+  cursor: pointer
+
+.step a
+  color: #BBB
+
+.tabs
+  text-align: center
+  width: 100%
+
+.tabs li
+  #display: inline
+
+.navs-row
+  position: absolute
+  bottom: 0
+  width: 100%
+
+.navs-links
+  padding:
+    left: $padding-01
+    right: $padding-01
+
+@media screen and (min-width: 720px)
+  .navs-links
+    padding:
+      left: $padding-02
+      right: $padding-02
+
+.navs-pre a
+  position: absolute
+  left: 0
+  margin-left: 10px
+  margin-top: 0.5em
+  font-size: 2em
+  color: #BBB
+
+.navs-next a
+  position: absolute
+  right: 0
+  margin-right: 10px
+  margin-top: 0.5em
+  font-size: 2em
+  color: #BBB
+
+.about-texts
+  text-align: center
+  margin: 0 12.5%
+  font-size: 1em
+
+@media screen and (min-width: 720px)
+  .about-texts
+    margin: 0 25%
+    font-size: 1em
+
+.slide
+  position: relative
+  float: none
+  margin: auto
+
+.slide img
+  max-width: 1000px
+  margin: auto
+  width: 100%
+  height: auto
+  margin-top: 1em
+
+.thirds
+  width: 33.3%
+  float: left
+
+.thirds-last
+  width: 33.4%
+  float: left
+
+.navimg img
+  max-width: 100%
+
+.slidenav-row
+  background-color: #999787
+
+.slidenav01
+  background-color: #BFBDAA
+
+  &:hover
+    background-color: #B5B29C
+
+.slidenav02
+  background-color: #AAA897
+
+  &:hover
+    background-color: #9E9C8D
+
+.slidenav03
+  background-color: #999787
+
+  &:hover
+    background-color: #898676
+
+.slidenav-texts
+  color: #fff
+  font-weight: bold
+  padding:
+    bottom: $padding-02
+    left: $padding-02
+    right: $padding-02
+
+@media screen and (max-width: 400px)
+  .slidenav-row
+    height: 320px
+  
+  .slidenav-pane
+    height: 320px
+
+@media screen and (min-width: 400px) and (max-width: 450px)
+  .slidenav-row
+    height: 320px
+
+  .slidenav-pane
+    height: 320px
+
+@media screen and (min-width: 450px) and (max-width: 500px)
+  .slidenav-row
+    height: 330px
+
+  .slidenav-pane
+    height: 330px
+
+@media screen and (min-width: 500px) and (max-width: 550px)
+  .slidenav-row
+    height: 340px
+
+  .slidenav-pane
+    height: 340px
+
+@media screen and (min-width: 550px) and (max-width: 600px)
+  .slidenav-row
+    height: 360px
+
+  .slidenav-pane
+    height: 360px
+
+@media screen and (min-width: 600px) and (max-width: 650px)
+  .slidenav-row
+    height: 380px
+
+  .slidenav-pane
+    height: 380px
+
+@media screen and (min-width: 650px) and (max-width: 720px)
+  .slidenav-row
+    height: 405px
+
+  .slidenav-pane
+    height: 405px
+
+@media screen and (min-width: 720px)
+  .slidenav-row
+    height: 410px
+
+  .slidenav-pane
+    height: 410px
+
+@media screen and (min-width: 986px)
+  .slidenav-row
+    height: 510px
+
+  .slidenav-pane
+    height: 510px
+
+
 //Static Page Classes
 
 .section-header
@@ -658,10 +937,10 @@ ol.text-block, ul.text-block
   padding-bottom: 5px
 
 .contributor-list img
-  width: 80px
+  width: 40px
 
 
-//Other Elements & Classes    
+//Other Elements & Classes
 
 .super-text
   font-size: 1.5em
@@ -692,7 +971,7 @@ ol.text-block, ul.text-block
 
 @media screen and (min-width: 986px)
   .about-panel
-    height: 483px
+    height: 460px
 
 .design-pane
   border-top: 1px dotted #AAA
@@ -714,11 +993,11 @@ ol.text-block, ul.text-block
   width: 80px
   text-align: right
   padding-top: 2px
-  
+
 .field
   padding:
     top: $padding-03
-    bottom: $padding-02 
+    bottom: $padding-02
 
 form .field
   padding-top: $padding-01
@@ -743,7 +1022,7 @@ input
 
 input[type=checkbox]
   width: 20px
-  
+
 .submit
   margin-left: 95px
 
@@ -761,10 +1040,9 @@ input[type=checkbox]
   .preview
     width: 260px
     float: left
-  
+
   .preview img
     width: 260px
-  
 
 #progress-indicator
   display: none
@@ -780,17 +1058,6 @@ input[type=checkbox]
 
   .avatars
     display: none
-
-.step
-  display: inline-block
-  #float: left
-  cursor: pointer
-
-.step a
-  color: #BBB
-
-.tabs
-  text-align: center
 
 .model-name
   font-size: 150%
@@ -858,6 +1125,11 @@ input[type=checkbox]
   font-weight: bold
   text-transform: uppercase
 
+.nav-list li ul li
+  padding-bottom: 0.8em
+  font-weight: normal
+  text-transform: none
+
 a.download-button-model
   display: block
   background: transparent embed("download.model.png") no-repeat 0 0
@@ -869,8 +1141,8 @@ a.download-button-model
   float: left
 
   &:hover
-    background-position: 0 -60px  
-    
+    background-position: 0 -60px
+
 a.download-button-sheets
   display: block
   background: transparent embed("download.sheets.png") no-repeat 0 0
@@ -882,7 +1154,7 @@ a.download-button-sheets
   float: left
 
   &:hover
-    background-position: 0 -60px   
+    background-position: 0 -60px
 
 a.download-button-docs
   display: block
@@ -908,7 +1180,7 @@ a.download-button-pdf
   float: left
 
   &:hover
-    background-position: 0 -60px    
+    background-position: 0 -60px
 
 a.download-button-rb
   display: block
@@ -921,7 +1193,7 @@ a.download-button-rb
   float: left
 
   &:hover
-    background-position: 0 -60px      
+    background-position: 0 -60px
 
 
 //Footer Elements
@@ -930,7 +1202,7 @@ a.download-button-rb
   height: 53px
 
 #credits
-  width: 231px
+  width: 190px
   position: relative
   top: 1em
   color: #BBB
@@ -976,36 +1248,6 @@ a.logo-gw
   &:hover
     background-position: 0 -48px 
 
-@media screen and (max-width: 449px)
-  #footer
-    height: 43px
-  
-  #credits
-    width: 131px
-    
-  a.logo-00
-    height: 18px
-    width: 33.5px
-    margin-left: 4px
-    background-size: 100%
-    &:hover
-      background-position: 0 0
-  
-  a.logo-esp
-    height: 20px
-    width: 22px
-    margin-left: 4px
-    background-size: 100%
-    &:hover
-      background-position: 0 0 
-
-  a.logo-gw
-    height: 24px
-    width: 55px
-    background-size: 100%
-    &:hover
-      background-position: 0 0
-
 .st_fblike_hcount
   width: 90px !important
   position: relative
@@ -1016,45 +1258,8 @@ a.logo-gw
   position: relative
   top: 1px !important
 
-.about-texts
-  text-align: center
-  margin: 0 12.5%
-  font-size: 1em
 
-.navlinks
-  padding:
-    left: $padding-01
-    right: $padding-01
-
-@media screen and (min-width: 720px)
-  .navlinks
-    padding:
-      left: $padding-03
-      right: $padding-03
-
-.navs-pre a
-  position: absolute
-  left: 0
-  margin-left: 10px
-  margin-top: 0.25em
-  font-size: 2em
-  color: #BBB
-
-.navs-next a
-  position: absolute
-  right: 0
-  margin-right: 10px
-  margin-top: 0.25em
-  font-size: 2em
-  color: #BBB
-
-@media screen and (min-width: 720px)
-  .about-texts
-    margin: 0 25%
-    font-size: 1em
-
-
-//Share Buttons  
+//Share Buttons
 
 a.google-logo
   display: block
@@ -1064,10 +1269,10 @@ a.google-logo
   margin: 0
   padding: 0
   text-indent: -9999px
-  cursor: pointer 
+  cursor: pointer
 
   &:hover
-    background-position: 0 -20px 
+    background-position: 0 -20px
 
 a.twitter-logo
   display: block
@@ -1077,7 +1282,7 @@ a.twitter-logo
   margin: 0
   padding: 0
   text-indent: -9999px
-  cursor: pointer 
+  cursor: pointer
 
   &:hover
     background-position: 0 -20px
@@ -1090,10 +1295,10 @@ a.fb-logo
   margin: 0
   padding: 0
   text-indent: -9999px
-  cursor: pointer 
+  cursor: pointer
 
   &:hover
-    background-position: 0 -20px 
+    background-position: 0 -20px
 
 a.email-logo
   display: block
@@ -1103,13 +1308,17 @@ a.email-logo
   margin: 0
   padding: 0
   text-indent: -9999px
-  cursor: pointer 
+  cursor: pointer
 
   &:hover
-    background-position: 0 -20px 
+    background-position: 0 -20px
 
 .logo-03
   width: 155px
+
+@media screen and (max-width: 400px)
+  .logo-03
+    display: none
 
 
 //THIRD PARTY SERVICES
@@ -1180,6 +1389,3 @@ button.dsq-button, button.dsq-button-small
   margin: 0 0 1em 0 !important
   padding: 0 !important
   float: right
-
-  
-

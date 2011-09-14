@@ -4,7 +4,7 @@
 
 <%def name="overview_panel()">
   <div class="row">
-    <a href="about#step-install"><div class="super-graphic-image padding-all">
+    <a href="about#step-install"><div class="slide padding-all">
       <div class="super-text"><p>${_(u"""WikiHouse is an open source construction set. It's aim is to allow anyone to design, download, and 'print' CNC-milled houses and components, which can be assembled with minimal formal skill or training.""")}</p></div>
     </div></a>
   </div>
@@ -24,7 +24,7 @@
 
 <%def name="install_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-download"><img src="${get_static_url('gfx/slides/slide.02.png')}" /></a>
     </div>
   </div>
@@ -52,7 +52,7 @@
 
 <%def name="download_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-print"><img src="${get_static_url('gfx/slides/slide.03.png')}" /></a>
     </div>
   </div>
@@ -80,7 +80,7 @@
 
 <%def name="print_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-assemble"><img src="${get_static_url('gfx/slides/slide.04.png')}" /></a>
     </div>
   </div>
@@ -108,7 +108,7 @@
 
 <%def name="assemble_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-bolt"><img src="${get_static_url('gfx/slides/slide.05.png')}" /></a>
     </div>
   </div>
@@ -136,7 +136,7 @@
 
 <%def name="bolt_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-raise"><img src="${get_static_url('gfx/slides/slide.06.png')}" /></a>
     </div>
   </div>
@@ -164,7 +164,7 @@
 
 <%def name="raise_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-primary"><img src="${get_static_url('gfx/slides/slide.07.png')}" /></a>
     </div>
   </div>
@@ -192,7 +192,7 @@
 
 <%def name="primary_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-secondary"><img src="${get_static_url('gfx/slides/slide.08.png')}" /></a>
     </div>
   </div>
@@ -220,7 +220,7 @@
 
 <%def name="secondary_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-facings"><img src="${get_static_url('gfx/slides/slide.09.png')}" /></a>
     </div>
   </div>
@@ -248,7 +248,7 @@
 
 <%def name="facings_panel()">
   <div class="row">
-    <div class="super-graphic-image">
+    <div class="slide">
       <a href="about#step-services"><img src="${get_static_url('gfx/slides/slide.10.png')}" /></a>
     </div>
   </div>
@@ -276,8 +276,8 @@
 
 <%def name="services_panel()">
   <div class="row">
-    <div class="super-graphic-image">
-      <a href="/library"><img src="${get_static_url('gfx/slides/slide.11.png')}" /></a>
+    <div class="slide">
+      <a href="about#step-start"><img src="${get_static_url('gfx/slides/slide.11.png')}" /></a>
     </div>
   </div>
 </%def>
@@ -289,6 +289,9 @@
 </%def>
 
 <%def name="services_nav_next()">
+  <div class="right">
+    <a href="about#step-start">&gt;</a>
+  </div>
 </%def>
 
 <%def name="services_description()">
@@ -296,6 +299,61 @@
     <div class="padding-all about-texts">
     ${_(u"""The structure is ready for insulation, cladding, sealing, and services.""")}
     </div>
+  </div>
+</%def>
+
+<%def name="start_panel()">
+  <div class="row slidenav-row">
+    <a href="/guide/download">
+    <div class="slidenav01 thirds slidenav-pane">
+      <div class="navimg">
+        <img src="${get_static_url('gfx/slides/slide.12.01.png')}" />
+      </div>
+      <div class="slidenav-texts">
+      ${_(u'DOWNLOAD PLUGIN')} 
+      <br /><br />
+      ${_(u"""WikiHouse models are made and edited in Google SketchUp. Click here to download the WikiHouse plugin and get started.""")}
+      </div>
+    </div>
+    </a>
+    <a href="/library">
+    <div class="slidenav02 thirds slidenav-pane">
+      <div class="navimg">
+        <img src="${get_static_url('gfx/slides/slide.12.02.png')}" />
+      </div>
+      <div class="slidenav-texts">
+      ${_(u'BROWSE DESIGNS')} 
+      <br /><br />
+      ${_(u"""Click here to browse the warehouse for houses and components. Download, edit and upload models from within SketchUp.""")}
+      </div>
+    </div>
+    </a>
+    <a href="/guide">
+    <div class="slidenav03 thirds-last slidenav-pane">
+      <div class="navimg">
+        <img src="${get_static_url('gfx/slides/slide.12.03.png')}" />
+      </div>
+      <div class="slidenav-texts">
+      ${_(u'CNC &amp ASSEMBLE')}
+      <br /><br />
+      ${_(u"""Find a CNC workshop and cut the parts for your house. It can then be assembled by hand. To find out more click here.""")}
+      </div>
+    </div>
+    </a>
+  </div>
+</%def>
+
+<%def name="start_nav_pre()">
+  <div class="left">
+    <a href="about#step-services">&lt;</a>
+  </div>
+</%def>
+
+<%def name="start_nav_next()">
+</%def>
+
+<%def name="start_description()">
+  <div class="slidenav-padding">
   </div>
 </%def>
 
@@ -320,14 +378,16 @@
 </%def>
 
 <%def name="actions(steps)">
+  <div class="navs-tabs">
   <ul class="tabs">
     % for item in steps:
-      <li class="padding-top-bottom navlinks step step-${item['slug']}" data-this-slug="${item['slug']}">
+      <li class="padding-top-bottom navs-links step step-${item['slug']}" data-this-slug="${item['slug']}">
         <a href="#step-${item['slug']}" data-slug="${item['slug']}">
           ${item['title']}</a>
       </li>
     % endfor
   </ul>
+  </div>
 </%def>
 
 <%def name="next(steps)">
@@ -385,6 +445,9 @@
         }, {
             'slug': 'services',
             'title': _(u'10')
+        }, {
+            'slug': 'start',
+            'title': _(u'11')
         }
     ]
   %>
@@ -395,7 +458,7 @@
     <div class="row">
       ${self.description(steps)}
     </div>
-    <div class="row" style="position: relative;">
+    <div class="row navs-row">
       ${self.next(steps)}
       ${self.pre(steps)}
       ${self.actions(steps)}

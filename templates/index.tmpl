@@ -3,20 +3,24 @@
 <%def name="sub_title()">${_(u'Open Source Construction Set')}</%def>
 
 <%def name="content()">
-  <div class="super-graphic row border-bottom">
-    <div class="super-graphic-image slot-6-7-8">
-      <a href="/about" title="${_(u'Find out how WikiHouse works')}">
-        <img src="${get_static_url('gfx/super-graphic.png')}" />
-      </a>
-    </div>
-    <div class="super-graphic-copy slot-9">
-      <div class="super-graphic-link">
-        <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
-          <!--<h4>${_(u"How it works...")}</h4>-->
+  <div class="super-graphic row">
+    <div class="slot-0-1-2-3">
+      <div class="super-graphic-image">
+        <a href="/about" title="${_(u'Find out how WikiHouse works')}">
+          <img src="${get_static_url('gfx/super-graphic.png')}" />
         </a>
       </div>
-      <div class="right call-to-action">
-        <h1>${_(u'Open Source Construction Set.')}</h1>
+    </div>
+    <div class="slot-4-5">
+      <div class="super-graphic-copy">
+        <div class="super-graphic-link">
+          <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
+            <!--<h4>${_(u"How it works...")}</h4>-->
+          </a>
+        </div>
+        <div class="right call-to-action">
+          <h1>${_(u'Open Source Construction Set.')}</h1>
+        </div>
       </div>
     </div>
   </div>

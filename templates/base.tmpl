@@ -34,7 +34,7 @@
         href="${get_static_url('css/simplegrid/986_grid.css')}" 
     />
     <link rel="stylesheet" type="text/css" media="screen and (min-width: 1236px) and (device-aspect-ratio: 4/3)"
-        href="${get_static_url('css/simplegrid/1236_grid.css')}"
+        href="${get_static_url('css/simplegrid/986_grid.css')}"
     />
     <link rel="stylesheet" type="text/css" 
         href="${get_static_url('css/wikihouse.css')}"
@@ -85,12 +85,6 @@
                 secondary_nav_items = [{
                         'value': '/contact',
                         'label': _(u'Contact')
-                    }, {
-                        'value': '/community',
-                        'label': _(u'Community')
-                    }, {
-                        'value': '/collaborate',
-                        'label': _(u'Collaborate')
                     }
                 ]
               %>
@@ -108,7 +102,7 @@
               % endfor
               <a href="http://blog.wikihouse.cc/" target="blank" title="${_(u'Goto the WikiHouse Tumblog')}">
                 <li class="external unselected right">
-                  ${_(u'News')}
+                  ${_(u'Blog')}
                 </li>
               </a>
             </ul>
@@ -139,13 +133,13 @@
                         'label': _(u'How it Works')
                     }, {
                         'value': '/guide',
-                        'label': _(u'Guide for Designers')
+                        'label': _(u'Start Designing')
                     }, {
                         'value': '/library',
                         'label': _(u'Browse Designs')
                     }, {
-                        'value': '/download',
-                        'label': _(u'Download Plugin')
+                        'value': '/community',
+                        'label': _(u'Join the Community')
                     }
                 ]
               %>

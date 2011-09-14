@@ -5,20 +5,22 @@
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
     <div class="row padding-bottom">
-      <h4>${_(u'Links')}</h4>
+      <h4>${_(u'Start Designing')}</h4>
     </div>
     <div class="row padding-bottom padding-right">
       <ul class="nav-list">
-        <li><a href="download#install">${_(u'INSTALLING THE PLUGIN')}</a></li>
-        <li><a href="download#usage">${_(u'WORKING WITH THE PLUGIN')}</a></li>
-        <li><a href="http://sketchup.google.com/download/">${_(u'Download Google SketchUp')}</a></li>
-        <!--li>
-          <ul>
-            <li><a href="download#get">${_(u'Get Models')}</a></li>
-            <li><a href="download#share">${_(u'Share Model')}</a></li>
-            <li><a href="download#make">${_(u'Make This House')}</a></li>
+        <li><a href="/guide" title="${_(u'Guide for Designers')}">${_(u'Guide for Designers')}</a></li>
+        <li><a href="/guide/standards" title="${_(u'Modelling Standards')}">${_(u'Modelling Standards')}</a></li>
+        <li><a href="/guide/download" title="${_(u'Download the Plugin')}">${_(u'Download the Plugin')}</a></li>
+        <li>
+          <ul class="padding-left">
+            <li><a href="guide/download#install">${_(u'Installing the Plugin')}</a></li>
+            <li><a href="guide/download#usage">${_(u'Working with the Plugin')}</a></li>
+            <li><a href="http://sketchup.google.com/download/">${_(u'Download Google SketchUp')}</a></li>
           </ul>
-        </li-->
+        </li>
+        <li><a href="/library" title="${_(u'Browse Designs')}">${_(u'Browse Designs')}</a></li>
+        <li><a href="/community" title="${_(u'Join the Community')}">${_(u'Join the Community')}</a></li>
       </ul>
     </div>
     <div class="row download-link padding-top padding-bottom-large">
@@ -36,9 +38,9 @@
 </%def>
 
 <%def name="main_content()">
-  <div class="slot-7-8-9 padding-top-bottom">
+  <div class="slot-7-8-9 padding-top-bottom content-pane">
     <div class="row padding-bottom">
-      <h4>${_(u'Using the Plugin')}</h4>
+      <h4>${_(u'Download the Plugin')}</h4>
     </div>
     <div class="row padding-bottom border-bottom guide-system justify guide-pane">
       <div class="section-header"><a name="install">${_(u'INSTALLING THE PLUGIN')}</a></div>
@@ -57,12 +59,13 @@
         </li>
       </ol>
     </div>
-    <div class="row padding-top-bottom guide-system justify guide-pane">
+    <div class="row padding-top-bottom border-bottom guide-system justify guide-pane">
       <div class="section-header padding-top"><a name="usage">${_(u'WORKING WITH THE PLUGIN')}</a></div>
       <div class="row padding-bottom-large">
         ${_(u"""The WikiHouse plugin provides 3 main features: 'Get Models', 'Share Model', and 'Make This House'.""")}
       </div>
       <div class="strong padding-top"><a name="get">${_(u'Get Models')}</a></div>
+      <div class=".guide-wide-img padding-right"><img src="${get_static_url('gfx/guide/plugin.01.png')}"></div>
       <div class="text-block justify padding-bottom-large padding-top">${_(u"""The 'Get Models' menu item opens up a browser window within SketchUp displaying the WikiHouse website and library of models (located here under 'Browse Designs').""")}</div>
       <ol class="list text-block justify">
         <li>
@@ -76,6 +79,7 @@
         </li>
       </ol>
       <div class="strong padding-top-large"><a name="share">${_(u'Share Model')}</a></div>
+      <div class=".guide-wide-img padding-right"><img src="${get_static_url('gfx/guide/plugin.02.png')}"></div>
       <div class="text-block justify padding-bottom-large padding-top">${_(u"""The 'Share Model' menu item opens up a browser window within SketchUp with the upload form for sharing your design to the WikiHouse website and library.""")}</div>
       <ol class="list text-block justify">
         <li>
@@ -95,8 +99,9 @@
         </li>
       </ol>
       <div class="strong padding-top-large"><a name="make">${_(u'Make This House')}</a></div>
+      <div class=".guide-wide-img padding-right"><img src="${get_static_url('gfx/guide/plugin.03.png')}"></div>
       <div class="text-block justify padding-bottom-large padding-top">${_(u"""The 'Make This House' menu item will attempt to create a set of cutting templates from selected elements in you model.""")}</div>
-      <ol class="list text-block justify">
+      <ol class="list text-block justify padding-bottom-large">
         <li>
           ${_(u"""You can either run the script on your entire model or specific parts. To process specific elements please select these in SketchUp before running the plugin. If you do not make any selections your entire model will be processed.""")}
         </li>
@@ -110,6 +115,9 @@
           ${_(u"""You can use the dxf file to prepare your WikiHouse for CNC-milling. We are working to improve the plugin in an upcoming version so that it will also arrange elements efficiently onto standard sheet dimensions of 1200mm x 2400mm and perform the necessary offsets to acquire tool paths.""")}
         </li>
       </ol> 
+    </div>
+    <div class="row">
+      <div class="guide-standards-img padding-right right"><img src="${get_static_url('gfx/guide/standards.cc.png')}"></div>
     </div>
   </div>
 </%def>

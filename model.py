@@ -309,7 +309,7 @@ class Avatars(db.Model):
     """
     """
     
-    twitter_followers = db.StringListProperty()
-    disqus_commenters = db.StringListProperty()
+    twitter_followers = db.StringListProperty(indexed=False)
+    disqus_commenters = db.StringListProperty(indexed=False)
     
 

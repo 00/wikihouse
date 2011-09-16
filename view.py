@@ -169,11 +169,22 @@ class Index(RequestHandler):
     
     def get(self):
         quotes = model.Quote.get_all()
-        users_with_avatars = model.User.get_with_real_avatars()
+        
+        KEY_NAME = 'v1'
+        items = []
+        avatars = model.Avatars.get_by_key_name(KEY_NAME)
+        if avatars is not None:
+            urls = avatars.twitter_followers[:]
+            random.shuffle(urls)
+            for item in urls[:66]:
+                parts = item.split('.')
+                parts[-2] = u"%s_normal" % parts[-2]
+                items.append('.'.join(parts))
+        
         return self.render(
             'index.tmpl', 
             quotes=quotes, 
-            users_with_avatars=users_with_avatars
+            avatars=items
         )
         
     

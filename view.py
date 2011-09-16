@@ -10,6 +10,7 @@ import base64
 import cgi
 import gettext
 import logging
+import quopri
 import random
 import re
 import urllib
@@ -520,7 +521,9 @@ class Design(SketchupAwareHandler):
         uploads = self._get_uploads()
         
         attrs['title'] = params.get('title')
-        attrs['description'] = params.get('description')
+        description = params.get('description')
+        attrs['description'] = quopri.decodestring(description)
+        
         url = params.get('url', None)
         if url:
             try:

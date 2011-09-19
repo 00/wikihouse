@@ -55,9 +55,9 @@
     <div class="">
       <a href="/community" title="${_(u'WikiHouse Community')}">
         <ul class="right avatars-widget inner-shadow">
-          % for item in users_with_avatars:
+          % for item in avatars:
             <li class="right home-avatar">
-              <img src="${item.avatar}" alt="${item.nickname}" />
+              <img src="${item}" />
             </li>
           % endfor
         </ul>

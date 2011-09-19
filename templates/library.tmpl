@@ -44,9 +44,9 @@
             <span class="section-heading">${_(u'Verification:')}</span>
             % if item.verification == u'unverified':
                 ${_(u'not structurally checked.')}
-            % elif item.status == u'verified':
+            % elif item.verification == u'verified':
                 ${_(u'structurally checked.')}
-            % elif item.status == u'built':
+            % elif item.verification == u'built':
                 ${_(u'structurally checked, tested &amp; built.')}
             % endif
           </div>

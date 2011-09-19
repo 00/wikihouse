@@ -64,10 +64,21 @@
           </li>
           <li>${_(u"""Indy Johar""")} <a class="link" target="blank" href="http://twitter.com/indy_johar">@indy_johar</a>
           </li>
-          <li>${_(u"""Yogesh Taylor""")} <a class="link" target="blank" href="http://twitter.com/yogesh">@yogesh</a>
+          <li>${_(u"""Yogesh Taylor""")} <a class="link" target="blank" href="http://twitter.com/yogesh">@yogeshtaylor</a>
           </li>
           <br />
 		      <li><a href="/collaborate" class="strong" title="Collaborate">${_(u'___________* (*you)')}</a>
+		      % if users.get_current_user() is None:
+              <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
+                <li>
+                  ${_(u'___________* (*you)')}
+                </li>
+              </a>
+          % else:
+              <li>
+                ${_(u'___________* (*you)')}
+              </li>
+          % endif
           </li>
         </ul>
       </div>

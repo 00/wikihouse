@@ -4,15 +4,19 @@
 
 <%def name="content()">
   <div class="super-graphic row">
-    <div class="fitvid-container">
-      <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;"
-          width="968" height="544" 
-          frameborder="0" 
-          webkitAllowFullScreen 
-          mozallowfullscreen 
-          allowFullScreen>
-      </iframe>
+    <div id="splash-container">
+      <a href="#play-video" id="play-video">
+        <div class="splash-text-container">
+          <div class="splash-text">
+            An Open Source Construction Set.
+          </div>
+        </div>
+        <div class="splash-image-container">
+          <img src="${get_static_url('gfx/wikihouse-mac.jpg')}" />
+        </div>
+      </a>
     </div>
+    <div id="fitvid-container"></div>
   </div>
   <div class="row padding-top-bottom border-bottom quotes">
     <ul class="quotes-widget padding-top-bottom">

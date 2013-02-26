@@ -7,7 +7,25 @@ $(document).ready ->
 
   $progress = $ '#progress-indicator'
   $message = $ '.message', $progress
-
+  
+  $play_video = $ '#play-video'
+  $play_video.click ->
+      $splash_container = $ '#splash-container'
+      $splash_container.hide()
+      $vid_container = $ '#fitvid-container'
+      $vid_container.html """
+        <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1"
+            width="968" height="544" 
+            frameborder="0" 
+            webkitAllowFullScreen 
+            mozallowfullscreen 
+            allowFullScreen>
+        </iframe>
+      """
+      $vid_container.fitVids()
+      false
+  
+  
   # Setup the controls and methods for the upload page.
   if WIKIHOUSE_UPLOAD_PAGE?
 

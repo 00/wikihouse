@@ -73,8 +73,8 @@ class Bootstrap(RequestHandler):
     
     
     def get(self):
-        return '%s<br />%s' % (
-            self.bootstrap_series(),
+        return '<br />%s' % (
+            #self.bootstrap_series(),
             self.bootstrap_quotes()
         )
         

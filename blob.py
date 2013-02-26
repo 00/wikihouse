@@ -29,11 +29,4 @@ mapping = [
     ('/blob/([^/]+)\/?', ServeHandler),
 ]
 
-def main():
-    """
-    """
-    
-    application = webapp.WSGIApplication(mapping, debug=True)
-    run_wsgi_app(application)
-    
-
+app = webapp.WSGIApplication(mapping, debug=True)

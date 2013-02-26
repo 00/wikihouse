@@ -15,19 +15,10 @@ from config import settings
 from template import Renderer
 from urls import mapping
 
-def main():
-    """ Bootstrap and run the `weblayer` based WSGI application.
-    """
-    
-    # Run the application.
-    bootstrapper = Bootstrapper(settings=settings, url_mapping=mapping)
-    run_wsgi_app(
-        WSGIApplication(
-            *bootstrapper(
-                StaticURLGenerator=ManifestedStaticURLGenerator,
-                TemplateRenderer=Renderer
-            )
-        )
+bootstrapper = Bootstrapper(settings=settings, url_mapping=mapping)
+app = WSGIApplication(
+    *bootstrapper(
+        StaticURLGenerator=ManifestedStaticURLGenerator,
+        TemplateRenderer=Renderer
     )
-    
-
+)

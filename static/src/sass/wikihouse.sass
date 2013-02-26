@@ -244,20 +244,29 @@ h4
 
 
 #tagline
-  margin-left: 20px
+  @media screen and (min-width: 720px)
+    color: #fff
   @media screen and (min-width: 720px)
     margin-top: 12px
   @media screen and (min-width: 986px)
     margin-top: 35px
   h1
+    float: right
     margin-bottom: 0.2em
   p
+    float: right
+    margin-right: 20px
+    text-align: right
+    @media screen and (min-width: 720px)
+      width: 70%
     font-size: 150%
     line-height: 1.2em
     margin-bottom: 2.5em
-    @media screen and (max-width: 719px)
+    @media screen and (max-width: 985px)
       margin-bottom: 1.5em
   h2
+    float: right
+    margin-right: 20px
     font-size: 150%
     line-height: 1.2em
     @media screen and (max-width: 719px)
@@ -629,6 +638,7 @@ h1
   font-size: 150%
   margin-right: 20px
   margin-top: 2em
+  margin-bottom: 2em
   a
     margin-top: 1em
     padding: 0.5em

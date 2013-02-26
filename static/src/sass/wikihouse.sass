@@ -243,12 +243,28 @@ h4
     width: 100%
 
 
-#tagline p
-  text-shadow: 1px 1px 3px #DDDDDD
-  font-size: 24px
-  padding: 12px 20px
-  line-height: 1.2em
-  background-color: #eee
+#tagline
+  margin-left: 20px
+  @media screen and (min-width: 720px)
+    margin-top: 12px
+  @media screen and (min-width: 986px)
+    margin-top: 35px
+  h1
+    margin-bottom: 0.2em
+  p
+    font-size: 150%
+    line-height: 1.2em
+    margin-bottom: 2.5em
+    @media screen and (max-width: 719px)
+      margin-bottom: 1.5em
+  h2
+    font-size: 150%
+    line-height: 1.2em
+    @media screen and (max-width: 719px)
+      margin-bottom: 1em
+    a
+      background-color: #EEEEEE
+      padding: 0.5em
 
 
 //Primary Elements

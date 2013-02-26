@@ -301,7 +301,7 @@ class Library(SketchupAwareHandler):
         # Get either the most recent 9 `Design`s or the `Design`s in the
         # target `Series`.
         if target is None:
-            designs = model.Design.all_listings(limit=9)
+            designs = model.Design.all_listings(limit=29)
         else:
             designs = target.designs
         

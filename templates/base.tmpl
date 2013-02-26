@@ -47,18 +47,6 @@
       <div class="grid no-padding border-sides">
         <div class="row">
           <div class="slot-0-1-2-3-4-5 top-row border-bottom">
-            <ul class="top-nav lang-nav">
-              <a href="${request.path}?override_language=en" title="English">
-                <li class="left border-right ${target_language == 'en' and 'selected' or 'unselected'}">
-                  English
-                </li>
-              </a>
-              <!--a href="${request.path}?override_language=ko" title="한국어">
-                <li class="left ${target_language == 'ko' and 'selected' or 'unselected'}">
-                  한국어
-                </li>
-              </a-->
-            </ul>
             <ul class="top-nav">
               % if users.get_current_user() is None:
                 <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">

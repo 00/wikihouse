@@ -257,9 +257,11 @@ h4
     float: right
     margin-right: 20px
     text-align: right
+    @media screen and (min-width: 980px)
+      width: 64%
     @media screen and (min-width: 720px)
-      width: 70%
-    font-size: 150%
+      width: 75%
+    font-size: 180%
     line-height: 1.2em
     margin-bottom: 2.5em
     @media screen and (max-width: 985px)
@@ -640,17 +642,23 @@ h1
 
 
 .call-to-action h1
-  margin-bottom: 1.6em
+  margin-bottom: 0.6em
+  margin-right: 35px
 
 .call-to-action h2
-  font-size: 150%
-  margin-right: 20px
-  margin-top: 2em
-  margin-bottom: 2em
+  font-size: 100%
+  margin-right: 40px
+  //margin-top: 2em
+  //margin-bottom: 2em
+  float: right
   a
+    position: relative
+    display: block
+    width: 130px
     margin-top: 1em
-    padding: 0.5em
+    padding: 1em 1.5em
     background-color: #EEEEEE
+    font-weight: 700
 
 
 @media screen and (min-width: 720px)
@@ -704,11 +712,6 @@ a.how-it-works
   padding: 2em
   border:  2px solid #CCC
 
-.quote-content
-  font-style: italic
-  font-family: verdana
-  width: 260px
-
 .shadow
   -moz-box-shadow: -3px -3px 8px #444
   -webkit-box-shadow: -3px -3px 8px #444
@@ -722,8 +725,39 @@ a.how-it-works
 .overflow-hidden
   overflow: hidden
 
+
+.quotes
+  clear: top
+  padding: 2em
+  text-align: center
+  min-height: 11.5em !important
+
 .quotes-widget
-  min-height: 20px
+  min-height: 6em
+  display: block
+  position: relative
+  width: 70%
+  max-width: 400px !important
+  margin: 0px auto
+  text-align: center
+
+.quote-image
+  margin: 1em
+
+.quote-content
+  font-style: italic
+  font-family: verdana
+  font-size: 125%
+  line-height: 1.25
+  max-width: 400px !important
+  margin: 0px auto
+
+.rio-image-container
+  img
+    width: 110%
+    @media screen and (max-width: 979px)
+      width: 100%
+    margin-bottom: -2px
 
 .home-avatar
   position: relative

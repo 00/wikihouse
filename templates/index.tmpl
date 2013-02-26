@@ -4,52 +4,22 @@
 
 <%def name="content()">
   <div class="super-graphic row">
-    <div class="slot-0-1-2-3">
-      <div class="fitvid-container">
-        <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;"
-            width="500" height="281" 
-            frameborder="0" 
-            webkitAllowFullScreen 
-            mozallowfullscreen 
-            allowFullScreen>
-        </iframe>
-        <!--div class="super-graphic-container">
-          <a href="/about" title="${_(u'Find out how WikiHouse works')}">
-            <img src="${get_static_url('gfx/super-graphic.png')}" />
-          </a>
-        </div-->
-      </div>
-    </div>
-    <div class="slot-4-5">
-      <div class="super-graphic-copy">
-        <!--div class="super-graphic-link">
-          <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
-          </a>
-        </div-->
-        <div class="right call-to-action">
-          <h1>${_(u'Open Source Construction Set.')}</h1>
-          <p>
-            <h2>
-              <a href="/about">
-                Find out how it works &raquo;</a>
-            </h2>
-            <h2>
-              <a href="/community">
-                Join the community &raquo;</a>
-            </h2>
-          </p>
-        </div>
-        <div style="clear: both;">
-        </div>
-      </div>
+    <div class="fitvid-container">
+      <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;"
+          width="968" height="544" 
+          frameborder="0" 
+          webkitAllowFullScreen 
+          mozallowfullscreen 
+          allowFullScreen>
+      </iframe>
     </div>
   </div>
-  <div class="row padding-top-bottom border-bottom quotes" style="clear: top; padding: 3em 2em">
-    <ul class="quotes-widget padding-top-bottom" style="display:none;">
+  <div class="row padding-top-bottom border-bottom quotes">
+    <ul class="quotes-widget padding-top-bottom">
       % for item in quotes:
         <li>
           <div class="row">
-            <div class="quote-image left padding-sides-large">
+            <div class="quote-image padding-sides-large">
             % if item.href: 
             <a href="${item.href}" target="_blank">
               <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
@@ -58,7 +28,7 @@
               <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
             % endif
             </div>
-            <div class="quote-content left">
+            <div class="quote-content">
               "${_(item.content)}"
             </div>
             <div class="quote-name">
@@ -72,23 +42,19 @@
     </ul>
   </div>
   <div class="row border-bottom" style="clear: top; background-color: #bdbdbd">
-    <div class="slot-0-1-2-3">
-      <a href="http://wikihouserio.cc">
-        <img src="${get_static_url('gfx/wikihouse-rio.png')}" style="width: 100%" />
-      </a>
-    </div>
-    <div class="slot-4-5">
-      <div id="tagline">
-        <h1>WikiHouse/RIO</h1>
-        <p>
-          An open-source maker lab in the heart of the favela
-        </p>
-        <h2>
-          <a href="http://wikihouserio.cc">
-            Visit the website &raquo;</a>
-        </h2>
+    <a href="http://wikihouserio.cc">
+      <div class="slot-0-1-2-3 rio-image-container">
+        <img src="${get_static_url('gfx/wikihouse-rio.png')}" />
       </div>
-    </div>
+      <div class="slot-4-5">
+        <div id="tagline">
+          <h1>WikiHouse /RIO</h1>
+          <p>
+            An open-source maker lab in the heart of the favela
+          </p>
+        </div>
+      </div>
+    </a>
   </div>
   <div class="row overflow-hidden avatars">
     <div class="">

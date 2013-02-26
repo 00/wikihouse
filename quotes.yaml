@@ -9,12 +9,12 @@
 - org: lsn
   content: "...a compelling example of an open source platform emerging in a new area."
   href: "https://www.lsnglobal.com/seed/view/4268" 
-- org: protein
-  content: "The innovative concept opens opportunities to the public to experiment with building their own personalised structures."
-  href: "http://prote.in/feed/2011/08/wikihouse"
+- org: fastco
+  content: "WikiHouse, An Online Building Kit, Shows How To Make A House In 24 Hours"
+  href: "http://www.fastcodesign.com/1664873/wikihouse-an-online-building-kit-shows-how-to-make-a-house-in-24-hours"
 - org: engadget
   content: "WikiHouse promises printable homes, work for the world's idle CNC routers."
   href: "http://www.engadget.com/2011/08/17/wikihouse-promises-printable-homes-work-for-the-worlds-idle-cn/"
-- org: treehugger
-  content: "Four years ago I thought the digital house would come in a box. How primitive; now you just print it out on site."
-  href: "http://www.treehugger.com/files/2011/08/print-out-your-own-home-with-wikihouse.php"
+- org: forbes
+  content: "Yes, a downloadable house! ... this is about transforming economies not about choosing between different styles of intervention."
+  href: "http://www.forbes.com/sites/haydnshaughnessy/2012/05/05/the-house-you-download-to-your-desktop"

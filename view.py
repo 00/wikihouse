@@ -904,9 +904,18 @@ class Users(RequestHandler):
     """
     
     def get(self):
-        return self.redirect('/community', permanent=True)
+        """If you access this page logged in, you create a user!"""
         
-    
+        google_user = users.get_current_user()
+        google_user_id = google_user.user_id()
+        user = model.User.get_by_user_id(google_user_id)
+        # If this user has not been stored yet, create and store it.
+        if user is None:
+            user = model.User(google_user=google_user, google_user_id=google_user_id)
+            if not user.avatar:
+                user.set_avatar()
+            user.put()
+        return self.redirect('/community', permanent=True)
     
 
 

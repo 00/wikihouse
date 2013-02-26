@@ -14,7 +14,7 @@
   </%def>
   <head>
     <title>
-      WikiHouse / ${self.sub_title()}
+      WikiHouse ${self.sub_title()}
     </title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="content-language" content="${target_language},${','.join(remaining_languages)}" />
@@ -22,7 +22,7 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="expires" content="Fri, 01 Jan 1990 00:00:00 GMT" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta name="description" content="${_(u'WikiHouse is an open community construction set.  Design, share, download and print CNC milled houses and components.')}" />
+    <meta name="description" content="${_(u'An open source construction set to print your own house.')}" />
     <meta name="keywords" content="wikihouse, ${_(u'wiki')}, ${_(u'house')}, ${_(u'design')}, ${_(u'build')}, ${_(u'open')}, ${_(u'open source')}, ${_(u'open hardware')}, ${_(u'community')}, ${_(u'standard')}, ${_(u'construction')}, ${_(u'building')}, ${_(u'architecture')}, ${_(u'housing')}, CNC, CNC milling, ${_(u'wooden')}, ${_(u'plywood')}, 00:/, zero zero, espians, momentum engineering." />
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="${get_static_url('css/reset.css')}" />
@@ -47,6 +47,11 @@
       <div class="grid no-padding border-sides">
         <div class="row">
           <div class="slot-0-1-2-3-4-5 top-row border-bottom">
+            <ul class="top-nav left">
+              <li>
+                An open source construction set to print your own house.
+              </li>
+            </ul>
             <ul class="top-nav">
               % if users.get_current_user() is None:
                 <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">

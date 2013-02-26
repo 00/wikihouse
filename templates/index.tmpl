@@ -18,32 +18,34 @@
     </div>
     <div id="fitvid-container"></div>
   </div>
-  <div class="row padding-top-bottom border-bottom quotes">
-    <ul class="quotes-widget padding-top-bottom">
-      % for item in quotes:
-        <li>
-          <div class="row">
-            <div class="quote-image padding-sides-large">
-            % if item.href: 
-            <a href="${item.href}" target="_blank">
-              <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
-            </a>
-            % else:
-              <img src="${get_static_url('gfx/logos/%s.png' % item.key().name())}" />
-            % endif
-            </div>
-            <div class="quote-content">
-              "${_(item.content)}"
-            </div>
-            <div class="quote-name">
-              % if item.name:   
-                  ${item.name}
+  <div class="quotes">
+    <div class="quote-logos row border-bottom">
+      <ul>
+        <li class="as-featured-in">
+          As featured in:
+        </li>
+        % for item in quotes:
+          <li id="${item.key()}-quote-logo">
+            <div class="quote-logo">
+              % if item.href: 
+                <a href="${item.href}" target="_blank">
+                  <img src="${get_static_url('gfx/logos/logo.%s.png' % item.key().name())}" />
+                </a>
+              % else:
+                <img src="${get_static_url('gfx/logos/logo.%s.png' % item.key().name())}" />
               % endif
             </div>
-          </div>
-        </li>
+          </li>
+        % endfor
+      </ul>
+    </div>
+    <div class="quote-contents">
+      % for item in quotes:
+        <div data-quote-key="${item.key()}" class="quote-content">
+          &ldquo;${_(item.content)}&rdquo;
+        </div>
       % endfor
-    </ul>
+    </div>
   </div>
   <div class="row border-bottom" style="clear: top; background-color: #bdbdbd">
     <a href="http://wikihouserio.cc">

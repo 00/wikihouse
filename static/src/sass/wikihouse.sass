@@ -728,9 +728,30 @@ a.how-it-works
 
 .quotes
   clear: top
-  padding: 2em
-  text-align: center
-  min-height: 11.5em !important
+  .quote-logos
+    background-color: #f2f2f2
+    padding: 40px 20px
+    li
+      border-bottom: 1px solid #f2f2f2
+      display: inline-block
+      position: relative
+      text-align: left
+      width: 150px
+      img
+        width: 100%
+      &.as-featured-in
+        padding-top: 35px
+        vertical-align: top
+        margin-left: 10px
+        font-size: 19px
+        letter-spacing: 0.25px
+      &.active
+        border-bottom: 1px solid black
+      @media screen and (max-width: 719px)
+        width: 120px
+        &.as-featured-in
+          display: none
+
 
 .quotes-widget
   min-height: 6em
@@ -744,13 +765,21 @@ a.how-it-works
 .quote-image
   margin: 1em
 
+.quote-contents
+  position: relative
+  display: block
+  height: 150px !important
+  text-align: center
+
 .quote-content
-  font-style: italic
-  font-family: verdana
-  font-size: 125%
-  line-height: 1.25
-  max-width: 400px !important
+  font-size: 160%
+  font-weight: 300
+  line-height: 1.75
+  text-align: center
   margin: 0px auto
+  width: 70%
+  padding: 40px 15%
+  min-height: 200px !important
 
 .rio-image-container
   img
@@ -1497,9 +1526,10 @@ button.dsq-button, button.dsq-button-small
 .splash-text-container
   .splash-text
     font-size: 32px
-    font-weight: bold
-    letter-spacing: 1px
+    font-weight: normal
+    letter-spacing: 2px
     line-height: 1.3
+    text-shadow: 0 -2px 3px #000000
     @media screen and (max-width: 719px)
       text-align: center
       padding: 20px
@@ -1508,13 +1538,13 @@ button.dsq-button, button.dsq-button-small
       background-color: rgba(0,0,0,0.8)
       color: white
       float: right
-      padding: 25px 25px 25px 30px
+      padding: 20px 25px 20px 30px
       width: 295px
       margin-left: 351px
-      margin-top: 136px
+      margin-top: 146px
     @media screen and (min-width: 986px)
       margin-left: 617px
-      margin-top: 200px
+      margin-top: 220px
 
 .splash-image-container
   img

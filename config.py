@@ -29,10 +29,12 @@ def get_data(filename, directory=None):
 
 settings = {
     'dev': os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'),
+    'check_xsrf': True,
     'cookie_secret': cookie_secret,
     'moderator_email_address': email,
     'assetgen_manifest': get_data('assets.json'),
     'static_files_path': 'static',
+    'static_url_prefix': u'/static/',
     'template_directories': ['templates'],
     'locale_directory': os.path.join('static', 'i18n'),
     'js_message_strings': get_data(

@@ -46,14 +46,14 @@ settings = {
         # English.
         'en', 
         # French.
-        'fr', 
+        #'fr', 
         # Spanish.
-        'es', 
+        #'es', 
         # Mandarin.
-        'zh', 
+        #'zh', 
         # Russian.
-        'ru', 
+        #'ru', 
         # Korean.
-        'ko'
+        #'ko'
     ]
 }

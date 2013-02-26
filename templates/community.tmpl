@@ -49,7 +49,7 @@
 
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom content-pane">
-    <div class="row padding-bottom-large">
+    <div class="row">
       <h4>${_(u'Join the Community')}</h4>
     </div>
     <div>
@@ -68,23 +68,50 @@
         and one for software / web developers working on the platform,
         plugins and file format integration.
       </div>
-      <ul class="google-groups">
-        <li>
-          <a href="https://groups.google.com/forum/#!forum/wikihouse">
-            Usage / General Discussions &raquo;
-          </a>
-        </li>
-        <li>
-          <a href="https://groups.google.com/forum/#!forum/wikihouse-hardware">
-            Hardware / Designers & Makers &raquo;
-          </a>
-        </li>
-        <li>
-          <a href="https://groups.google.com/forum/#!forum/wikihouse-software">
-            Software / Web Development &raquo;
-          </a>
-        </li>
-      </ul>
+      <div class="row padding-top padding-bottom-large text-block justify">
+        <ul class="nav-list" style="text-align: right">
+          <li>
+            <a href="https://groups.google.com/forum/#!forum/wikihouse">
+              Usage / General Discussions &raquo;
+            </a>
+          </li>
+          <li>
+            <a href="https://groups.google.com/forum/#!forum/wikihouse-hardware">
+              Hardware / Designers & Makers &raquo;
+            </a>
+          </li>
+          <li>
+            <a href="https://groups.google.com/forum/#!forum/wikihouse-software">
+              Software / Web Development &raquo;
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <h4>${_(u'Support the Project')}</h4>
+    <div class="row padding-bottom-large text-block justify">
+      We are seeking to raise $1 million to fund
+      <a href="http://blog.wikihouse.cc/post/44058322943/wiki-house-openchallenge-from-architecture00">
+        a global challenge to develop an open ecosystem around WikiHouse</a>.
+      If you're interested in helping with this challenge, or you work for a
+      foundation or fundraising organisation who can help, email us on
+      <a href="mailto:hello@wikihouse.cc">hello@wikihouse.cc</a>.
+    </div>
+    <div class="row padding-bottom-large text-block justify">
+      Alternatively, you can donate online to support the project here.
+      Donations are managed by
+      <a href="http://www.architecture00.net/">
+        Architecture 00</a>
+      and go directly to funding the WikiHouse project.
+    </div>
+    <div class="row padding-bottom-large text-block justify">
+      <br />
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="float: right">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="4EJRKMTHWWG3W">
+        <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+      </form>
     </div>
     <h4>${_(u'Core Team')}</h4>
     <div class="padding-bottom">

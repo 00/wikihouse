@@ -5,21 +5,39 @@
 <%def name="content()">
   <div class="super-graphic row">
     <div class="slot-0-1-2-3">
-      <div class="super-graphic-image">
-        <a href="/about" title="${_(u'Find out how WikiHouse works')}">
-          <img src="${get_static_url('gfx/super-graphic.png')}" />
-        </a>
+      <div class="fitvid-container">
+        <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;"
+            width="500" height="281" 
+            frameborder="0" 
+            webkitAllowFullScreen 
+            mozallowfullscreen 
+            allowFullScreen>
+        </iframe>
+        <!--div class="super-graphic-container">
+          <a href="/about" title="${_(u'Find out how WikiHouse works')}">
+            <img src="${get_static_url('gfx/super-graphic.png')}" />
+          </a>
+        </div-->
       </div>
     </div>
     <div class="slot-4-5">
       <div class="super-graphic-copy">
-        <div class="super-graphic-link">
+        <!--div class="super-graphic-link">
           <a class="how-it-works" href="/about" title="${_(u'Find out how WikiHouse works')}">
-            <!--<h4>${_(u"How it works...")}</h4>-->
           </a>
-        </div>
+        </div-->
         <div class="right call-to-action">
           <h1>${_(u'Open Source Construction Set.')}</h1>
+          <p>
+            <h2>
+              <a href="/about">
+                Find out how it works &raquo;</a>
+            </h2>
+            <h2>
+              <a href="/community">
+                Join the community &raquo;</a>
+            </h2>
+          </p>
         </div>
       </div>
     </div>

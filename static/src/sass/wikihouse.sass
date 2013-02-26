@@ -739,18 +739,18 @@ a.how-it-works
       width: 150px
       img
         width: 100%
+      @media screen and (max-width: 967px)
+        width: 129px
       &.as-featured-in
         padding-top: 35px
         vertical-align: top
         margin-left: 10px
         font-size: 19px
         letter-spacing: 0.25px
+        @media screen and (max-width: 967px)
+          display: none
       &.active
         border-bottom: 1px solid black
-      @media screen and (max-width: 719px)
-        width: 120px
-        &.as-featured-in
-          display: none
 
 
 .quotes-widget
@@ -780,6 +780,10 @@ a.how-it-works
   width: 70%
   padding: 40px 15%
   min-height: 200px !important
+  @media screen and (max-width: 967px)
+    width: 90%
+    padding: 40px 5%
+
 
 .rio-image-container
   img

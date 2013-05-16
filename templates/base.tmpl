@@ -158,21 +158,6 @@
         <div class="row">
           ${self.content()}
         </div>
-        <div class="row border-top">
-          <div class="slot-6">
-            <div class="left margin-top padding-bottom-small padding-left">
-              <a class="link strong" href="/legal/terms" title="$_(u'Terms and Conditions')}">${_(u'Terms of Use...')}</a>
-            </div>
-          </div>
-          <div class="slot-7-8-9">
-            <div class="social-links right padding-right-small padding-top-bottom-small">
-              <span class="st_email_custom right padding-left-small"><a class="email-logo">${_(u'Email')}</a></span>
-              <span class="st_plusone_custom right padding-left-small"><a class="google-logo">${_(u'Google Plus One')}</a></span>
-              <span class="st_twitter_custom right padding-left-small"><a class="twitter-logo">${_(u'Tweet')}</a></span>
-              <span class="st_facebook_custom right padding-left-small"><a class="fb-logo">${_(u'Facebook')}</a></span>
-            </div>
-          </div>
-        </div>
         <div class="row border-top" id="footer">
           <div id="credits" class="padding-left left">
             <div class="left">
@@ -203,23 +188,10 @@
     </div>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js">
     </script>
-    <script type="text/javascript" src="//s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js">
-    </script>
     <script type="text/javascript"
         src="//raw.github.com/davatron5000/FitVids.js/master/jquery.fitvids.js">
     </script>
     <script type="text/javascript">
-      (function () {
-        var switchTo5x = true;
-        var using_ssl = document.location.protocol == 'https:';
-        var stub = using_ssl ? 'https://ws' : 'http://w';
-        var src = stub + '.sharethis.com/button/buttons.js';
-        var tag = '%3Cscript src="' + src + '" type="text/javascript"%3E%3C/script%3E';
-        document.write(unescape(tag));
-      })();
-    </script>
-    <script type="text/javascript">
-      stLight.options({'publisher': '386e0e7b-fee7-485d-af13-172a5107f9fb'});
       var WIKIHOUSE_IS_SKETCHUP = ${str(is_sketchup).lower()};
     </script>
     <script type="text/javascript">

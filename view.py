@@ -45,6 +45,16 @@ def is_empty_file(value):
     
 
 
+def set_edge_cache_headers(request, response):
+    """If running on the main domain, then set public cache headers as per
+      https://groups.google.com/forum/#!msg/google-appengine/6xAV2Q5x8AU/O5K4Sy72-aYJ
+    """
+    
+    if not request.host_url.endswith('appspot.com'):
+        response.headers['Cache-Control'] = 'public, max-age=61'
+        response.headers['Pragma'] = 'Public'
+
+
 class RequestHandler(BaseRequestHandler):
     """ Adds i18n and SketchUp awareness support to `weblayer.RequestHandler`:
       
@@ -181,6 +191,10 @@ class Index(RequestHandler):
                 parts[-2] = u"%s_normal" % parts[-2]
                 items.append('.'.join(parts))
         
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        # Render the template.
         return self.render(
             'index.tmpl', 
             quotes=quotes, 
@@ -196,9 +210,12 @@ class About(RequestHandler):
     """
     
     def get(self):
-        return self.render('about.tmpl')
+        """Set cache headers and render the template."""
         
-    
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('about.tmpl')
     
 
 class Guide(RequestHandler):
@@ -206,9 +223,12 @@ class Guide(RequestHandler):
     """
     
     def get(self):
-        return self.render('guide.tmpl')
+        """Set cache headers and render the template."""
         
-    
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('guide.tmpl')
     
 
 class Download(RequestHandler):
@@ -216,6 +236,11 @@ class Download(RequestHandler):
     """
     
     def get(self):
+        """Set cache headers and render the template."""
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
         return self.render('download.tmpl')
 
 
@@ -226,15 +251,26 @@ class Standards(RequestHandler):
     """
     
     def get(self):
-        return self.render('standards.tmpl')
+        """Set cache headers and render the template."""
         
-
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('standards.tmpl')
+    
 
 class Community(RequestHandler):
     """
     """
     
     def get(self):
+        """Set cache headers, get the contributors from the db and render
+          the template.
+        """
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
         contributors = model.User.get_all()
         return self.render('community.tmpl', contributors=contributors)
         
@@ -246,8 +282,12 @@ class Contact(RequestHandler):
     """
     
     def get(self):
-        return self.render('contact.tmpl')
+        """Set cache headers and render the template."""
         
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('contact.tmpl')
     
     
 
@@ -257,8 +297,12 @@ class Terms(RequestHandler):
     """
     
     def get(self):
-        return self.render('terms.tmpl')
+        """Set cache headers and render the template."""
         
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('terms.tmpl')
     
     
 

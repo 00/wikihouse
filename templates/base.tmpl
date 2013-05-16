@@ -53,25 +53,27 @@
               </li>
             </ul>
             <ul class="top-nav">
-              % if users.get_current_user() is None:
-                <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
-                  <li class="right border-left unselected">
-                    ${_(u'Login')}
-                  </li>
-                </a>
-              % else:
-                % if users.is_current_user_admin():
-                  <a href="/admin/moderate" title="${_(u'Moderate')}">
+              % if request.host_url.endswith('appspot.com'):
+                % if users.get_current_user() is None:
+                  <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
                     <li class="right border-left unselected">
-                      ${_(u'Moderate')}
+                      ${_(u'Login')}
                     </li>
                   </a>
+                % else:
+                  % if users.is_current_user_admin():
+                    <a href="/admin/moderate" title="${_(u'Moderate')}">
+                      <li class="right border-left unselected">
+                        ${_(u'Moderate')}
+                      </li>
+                    </a>
+                  % endif
+                  <a href="${users.create_logout_url(request.path)}" title="${_(u'Logout')}">
+                      <li class="right border-left unselected">
+                        ${_(u'Logout')}
+                      </li>
+                  </a>
                 % endif
-                <a href="${users.create_logout_url(request.path)}" title="${_(u'Logout')}">
-                    <li class="right border-left unselected">
-                      ${_(u'Logout')}
-                    </li>
-                </a>
               % endif
               <%
                 secondary_nav_items = [{

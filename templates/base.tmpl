@@ -53,7 +53,7 @@
               </li>
             </ul>
             <ul class="top-nav">
-              % if request.host_url.endswith('appspot.com'):
+              % if not request.host_url.endswith('wikihouse.cc'):
                 % if users.get_current_user() is None:
                   <a href="${users.create_login_url(request.path)}" title="${_(u'Login')}">
                     <li class="right border-left unselected">

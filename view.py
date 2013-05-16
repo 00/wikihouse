@@ -50,7 +50,7 @@ def set_edge_cache_headers(request, response):
       https://groups.google.com/forum/#!msg/google-appengine/6xAV2Q5x8AU/O5K4Sy72-aYJ
     """
     
-    if not request.host_url.endswith('appspot.com'):
+    if request.host_url.endswith('wikihouse.cc'):
         response.headers['Cache-Control'] = 'public, max-age=61'
         response.headers['Pragma'] = 'Public'
 

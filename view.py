@@ -174,12 +174,18 @@ class RequestHandler(BaseRequestHandler):
 
 
 class Index(RequestHandler):
-    """
-    """
+    """Render the homepage."""
     
     def get(self):
+        """Get the quotes and avatars from the db and render the template,
+          setting response headers to trigger the appengine frontend
+          cache.
+        """
+        
+        # Get the quotes.
         quotes = model.Quote.get_all()
         
+        # Get the avatars.
         KEY_NAME = 'v1'
         items = []
         avatars = model.Avatars.get_by_key_name(KEY_NAME)
@@ -200,14 +206,10 @@ class Index(RequestHandler):
             quotes=quotes, 
             avatars=items
         )
-        
     
-    
-
 
 class About(RequestHandler):
-    """
-    """
+    """Render the about page."""
     
     def get(self):
         """Set cache headers and render the template."""
@@ -219,8 +221,7 @@ class About(RequestHandler):
     
 
 class Guide(RequestHandler):
-    """
-    """
+    """Render the guide page."""
     
     def get(self):
         """Set cache headers and render the template."""
@@ -232,8 +233,7 @@ class Guide(RequestHandler):
     
 
 class Download(RequestHandler):
-    """
-    """
+    """Render the download page."""
     
     def get(self):
         """Set cache headers and render the template."""
@@ -243,12 +243,8 @@ class Download(RequestHandler):
         
         return self.render('download.tmpl')
 
-
-
-
 class Standards(RequestHandler):
-    """
-    """
+    """Render the standards page."""
     
     def get(self):
         """Set cache headers and render the template."""
@@ -260,8 +256,7 @@ class Standards(RequestHandler):
     
 
 class Community(RequestHandler):
-    """
-    """
+    """Render the community page."""
     
     def get(self):
         """Set cache headers, get the contributors from the db and render
@@ -273,13 +268,10 @@ class Community(RequestHandler):
         
         contributors = model.User.get_all()
         return self.render('community.tmpl', contributors=contributors)
-        
-    
     
 
 class Contact(RequestHandler):
-    """
-    """
+    """Render the contact page."""
     
     def get(self):
         """Set cache headers and render the template."""
@@ -289,12 +281,9 @@ class Contact(RequestHandler):
         
         return self.render('contact.tmpl')
     
-    
-
 
 class Terms(RequestHandler):
-    """
-    """
+    """Render the terms page."""
     
     def get(self):
         """Set cache headers and render the template."""
@@ -304,8 +293,6 @@ class Terms(RequestHandler):
         
         return self.render('terms.tmpl')
     
-    
-
 
 class SketchupAwareHandler(RequestHandler):
     """ Looks for optional `sketchup\/?` at the end of the url.  If present sets
@@ -321,9 +308,6 @@ class SketchupAwareHandler(RequestHandler):
         if path.endswith('sketchup') or path.endswith('sketchup/'):
             self.cookies.set('is_sketchup', 'true', expires_days=None)
             self.is_sketchup = True
-            
-        
-    
     
 
 class Library(SketchupAwareHandler):
@@ -361,8 +345,7 @@ class Library(SketchupAwareHandler):
     
 
 class Design(SketchupAwareHandler):
-    """ RESTful handler for a `model.Design`.
-    """
+    """ RESTful handler for a `model.Design`."""
     
     __all__ = ['head', 'get', 'post', 'put', 'delete']
     
@@ -813,8 +796,6 @@ class Design(SketchupAwareHandler):
         return self._redirect_on(delete=True)
         
     
-    
-
 
 class RedirectSuccess(RequestHandler):
     """
@@ -942,7 +923,6 @@ class Moderate(RequestHandler):
     
     
 
-
 class Users(RequestHandler):
     """ 
     """
@@ -962,7 +942,6 @@ class Users(RequestHandler):
         return self.redirect('/community', permanent=True)
     
 
-
 class User(RequestHandler):
     """ 
     """
@@ -976,7 +955,6 @@ class User(RequestHandler):
         
     
     
-
 
 class Base64Blob(RequestHandler):
     """
@@ -1001,7 +979,6 @@ class Base64Blob(RequestHandler):
     
     
 
-
 class MessageStrings(RequestHandler):
     """ Return a translated dictionary of message strings using the keys
       in `/static/build/js/message_strings.json`.
@@ -1017,7 +994,6 @@ class MessageStrings(RequestHandler):
         
     
     
-
 
 class ActivityScreen(RequestHandler):
     """ Mash up:
@@ -1115,7 +1091,6 @@ class ActivityScreen(RequestHandler):
     
     
 
-
 class NotFound(RequestHandler):
     """
     """
@@ -1125,5 +1100,4 @@ class NotFound(RequestHandler):
         
     
     
-
 

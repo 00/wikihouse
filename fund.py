@@ -111,6 +111,23 @@ class InstantPaymentNotificationHandler(RequestHandler):
     
 
 
+class ThankYouHandler(RequestHandler):
+    """Redirect to the community page on the main url."""
+    
+    __all__ = ['get', 'head']
+    
+    def get(self):
+        """Render the form, just to see if it works."""
+        
+        request = self.request
+        url = request.host_url
+        if request.host_url.endswith('appspot.com'):
+            url = 'http://www.wikihouse.cc'
+        path = 'community'
+        return self.redirect('{0}/{1}'.format(url, path))
+    
+
+
 def do_actual_ipn_handling(payload, kwargs):
     if kwargs['payment_status'] != 'Completed':
         return '1'

@@ -5,12 +5,15 @@
 """
 
 from bootstrap import Bootstrap
+from fund import InstantPaymentNotificationHandler
 from view import *
-
 
 mapping = [(
         r'/',
         Index
+    ), (
+        r'/ipn',
+        InstantPaymentNotificationHandler
     ), (
         r'/about\/?',
         About

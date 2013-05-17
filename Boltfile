@@ -156,7 +156,7 @@ def update():
     """
     
     with cd(here):
-        local('python2.5 `which appcfg.py` update .')
+        local('appcfg.py update .')
         
     
     

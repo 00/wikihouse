@@ -54,7 +54,7 @@ def set_edge_cache_headers(request, response):
         response.headers['Cache-Control'] = 'public, max-age=61'
         response.headers['Pragma'] = 'Public'
 
-
+    
 class RequestHandler(BaseRequestHandler):
     """ Adds i18n and SketchUp awareness support to `weblayer.RequestHandler`:
       

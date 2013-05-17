@@ -18,7 +18,146 @@
     </div>
     <div id="fitvid-container"></div>
   </div>
-  <div class="quotes">
+  <div class="row black-bg white-border-bottom">
+    <div class="slot-12">
+      <div class="challenge-header">
+        <h2 class="challenge-heading">
+          WikiHouse Open Challenge
+        </h2>
+        <p>
+          WikiHouse is a non-profit project, developing hardware and software
+          which is open and shared in the commons, owned by everyone. Help us
+          build the project by co-funding
+          <a href="http://www.slideshare.net/architecture00/wiki-house-openchallenge">
+            the next development goals</a> &mdash;
+          which are split into the three categories below. These are each
+          individually fundable, so when you make a donation, your money will
+          go directly towards funding the specific goal you choose.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!--
+    
+    Hidden phone
+    
+  -->
+  <div class="hidden-phone">
+    <div class="row black-bg">
+      % for campaign in campaigns:
+        <div class="challenge-pillar">
+          <div class="challenge-pillar-inner">
+            <div class="challenge-icon">
+              <%
+                path = 'gfx/icons/{0}.png'.format(campaign['category'])
+                url = get_static_url(path)
+              %>
+              <img src="${url}" />
+            </div>
+            <h4 class="challenge-category">
+              ${campaign['category'].title()}
+            </h4>
+            <h3 class="challenge-title">
+              ${campaign['title']}
+            </h3>
+            <p class="challenge-description">
+              ${campaign['description']}
+            </p>
+          </div>
+        </div>
+      % endfor
+    </div>
+    <div class="row black-bg">
+      % for campaign in campaigns:
+        <div class="challenge-pillar">
+          <div class="challenge-pillar-inner">
+            <div class="challenge-funding">
+              <div class="challenge-indicator">
+                <div class="indicator">
+                  <div class="indicator-top-bar">
+                  </div>
+                  <%
+                    container_height = 360
+                    height = container_height * campaign['percentage_raised'] / 100
+                    margin_top = container_height - height
+                  %>
+                  <div class="indicator-level"
+                      data-percentage="${campaign['percentage_raised']}"
+                      style="height: ${height}px; margin-top: ${margin_top}px">
+                  </div>
+                </div>
+              </div>
+              <div class="challenge-stats">
+                <div class="challenge-stat">
+                  <div class="challenge-stat-value">
+                    ${campaign['num_backers']}
+                  </div>
+                  <div class="challenge-stat-label">
+                    % if campaign['num_backers'] == 1:
+                      Backer
+                    % else:
+                      Backers
+                    % endif
+                  </div>
+                </div>
+                <div class="challenge-stat">
+                  <div class="challenge-stat-value">
+                    &pound;${campaign['total_raised']}
+                  </div>
+                  <div class="challenge-stat-label">
+                    Funded
+                  </div>
+                </div>
+                <div class="challenge-stat">
+                  <div class="challenge-stat-value">
+                    &pound;${campaign['target']}
+                  </div>
+                  <div class="challenge-stat-label">
+                    Target
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          [ FUND THIS BUTTON ]
+        </div>
+      % endfor
+    </div>
+  </div>
+  <!--
+    
+    Visible phone
+    
+    
+  -->
+  <div class="visible-phone">
+    <div class="row black-bg">
+      % for campaign in campaigns:
+        <div class="challenge-pillar">
+          <div class="challenge-pillar-inner">
+            <div class="challenge-icon">
+              <%
+                path = 'gfx/icons/{0}.png'.format(campaign['category'])
+                url = get_static_url(path)
+              %>
+              <img src="${url}" />
+            </div>
+            <h4 class="challenge-category">
+              ${campaign['category'].title()}
+            </h4>
+            <h3 class="challenge-title">
+              ${campaign['title']}
+            </h3>
+            <p class="challenge-description">
+              ${campaign['description']}
+            </p>
+          </div>
+          [ FUND THIS BUTTON ]
+        </div>
+      % endfor
+    </div>
+  </div>
+  <div class="quotes border-bottom">
     <div class="quote-logos row border-bottom">
       <ul>
         <li class="as-featured-in">
@@ -46,23 +185,6 @@
         </div>
       % endfor
     </div>
-  </div>
-  <div class="row border-bottom" style="overflow: hidden; height: 130px !important">
-    <img src="${get_static_url('gfx/TEDprize.strap.png')}" width="966px" />
-  </div>
-  <div class="row border-bottom rio-image-container">
-    <a href="http://wikihouserio.cc">
-      <div class="text-content">
-        <div>
-          <h1>WikiHouse /RIO</h1>
-          <p>
-            An open-source maker lab in the heart of the favela &raquo;
-          </p>
-          <img src="${get_static_url('gfx/TEDprize.logos.png')}" />
-        </div>
-      </div>
-      <img src="${get_static_url('gfx/TEDprize.graphics.png')}" class="full-width" />
-    </a>
   </div>
   <div class="row overflow-hidden avatars">
     <div class="">

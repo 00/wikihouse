@@ -10,10 +10,46 @@ import logging
 import urllib
 import urllib2
 
+from cgi import escape
+
 from google.appengine.api import users
-from google.appengine.ext import blobstore, db
+from google.appengine.ext import blobstore
+from google.appengine.ext import db
 
 from weblayer.utils import json_decode
+
+from utils import get_exchange_rate_to_gbp
+from utils import render_number_with_commas
+
+CAMPAIGNS = [(
+        'software', 
+        10000, 
+        'Plugin', 
+        'Completing the WikiHouse plugin to allow full one-click automation;\
+        laying out parts onto sheets, naming them correctly and exporting a\
+        .dxf cutting file.'
+    ), (
+        'hardware', 
+        200000, 
+        'Full House', 
+        'The first full, low-cost, high-performance house, completed, tested\
+        and lived-in, with full files, instructions and costings shared openly\
+        online, so anyone can easily replicate it for themselves'
+    ), (
+        'wiki',
+        50000, 
+        'Platform',
+        'An easy-to-use open sharing platform with integrated full project\
+        documentation, collaboration and sharing . A construction wiki with\
+        community support.'
+    )
+]
+
+CAMPAIGN_KEYS = {}
+
+for _item in CAMPAIGNS:
+    CAMPAIGN_KEYS[_item[0]] = db.Key.from_path('Campaign', _item[0])
+del _item
 
 class User(db.Model):
     """ Encapsulate a `User`, wrap the `google.appengine.api.users.User` with
@@ -312,4 +348,109 @@ class Avatars(db.Model):
     twitter_followers = db.StringListProperty(indexed=False)
     disqus_commenters = db.StringListProperty(indexed=False)
     
+
+
+class Campaign(db.Model):
+    """Appengine model class encapsultating a fundable campaign.
+      
+      The key is the campaign id.
+    """
+    
+    v = db.IntegerProperty(default=0)             # version 
+    c = db.DateTimeProperty(auto_now_add=True)    # created
+    m = db.DateTimeProperty(auto_now=True)        # modified
+    
+    funder_count = db.IntegerProperty(default=0)
+    total_gbp = db.IntegerProperty(default=0)
+    total_eur = db.IntegerProperty(default=0)
+    total_usd = db.IntegerProperty(default=0)
+    
+    @classmethod
+    def get_campaign_items(cls):
+        """Return a list of campaign data where the dict keys are the campaign
+          instance key names and the data is:
+          
+              [
+                {
+                  'category': 'software',
+                  'title': 'Plugin',
+                  'description': '...',
+                  'num_backers': 32,
+                  'percentage_raised': 50, # always an int
+                  'total_raised': 5000,
+                  'target': 10000
+                },
+                ...
+              ]
+          
+        """
+        
+        # We build an items list as return value.
+        items = []
+        
+        # Get the campaigns from the db -- creating them if they
+        # don't exist.
+        entities = {}
+        for campaign_id in sorted(CAMPAIGN_KEYS):
+            campaign_key = CAMPAIGN_KEYS[campaign_id]
+            campaign = Campaign.get(campaign_key)
+            if campaign is None:
+                campaign = Campaign(key=campaign_key)
+                campaign.put()
+            entities[campaign.key().name()] = campaign
+        
+        # Iterate through the campaigns, building the data for the page.
+        for campaign in CAMPAIGNS:
+            campaign_id = campaign[0]
+            ent = entities[campaign_id]
+            target = campaign[1]
+            total = ent.total_gbp
+            if ent.total_eur:
+                total += (ent.total_eur * get_exchange_rate_to_gbp('EUR'))
+            if ent.total_usd:
+                total += (ent.total_usd * get_exchange_rate_to_gbp('USD'))
+            raised = int(total)
+            if raised >= target:
+                pct = 100
+            else:
+                pct = (raised * 100) / target
+            item = dict(
+                category=campaign_id,
+                title=escape(campaign[2]),
+                description=escape(campaign[3]),
+                num_backers=ent.funder_count,
+                percentage_raised=pct * 1,
+                total_raised=render_number_with_commas(raised),
+                target=render_number_with_commas(target)
+            )
+            items.append(item)
+        return items
+    
+
+
+class PayPalTransaction(db.Model):
+    """Appengine model class encapsultating a donation made to a campaign.
+      
+      The key is the paypal transaction id.
+    """
+    
+    v = db.IntegerProperty(default=0)
+    c = db.DateTimeProperty(auto_now_add=True)
+    m = db.DateTimeProperty(auto_now=True)
+    
+    campaign_id = db.StringProperty(default='', indexed=False)
+    payer_email = db.StringProperty(default='', indexed=False)
+    fee = db.StringProperty(default='', indexed=False)
+    gross = db.StringProperty(default='', indexed=False)
+    is_handled = db.BooleanProperty(default=False)
+    info_payload = db.TextProperty()
+    net = db.StringProperty(default='', indexed=False)
+    payer_name = db.StringProperty(default='', indexed=False)
+    currency = db.StringProperty(default='', indexed=False)
+
+class TransactionReceipt(db.Model):
+    """Stub entity to synchronise accounted transactions.
+      
+      The parent is the campaign_key, key is the txn_key.
+    """
 

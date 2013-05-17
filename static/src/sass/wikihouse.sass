@@ -23,6 +23,19 @@ $super-graphic-height-02: 309px
 .left
   float: left
 
+.group
+  display: table
+  *zoom: 1 // For IE 6/7 (trigger hasLayout)
+
+.group:after
+  visibility: hidden
+  clear: both
+  height: 0
+  font-size: 0
+  line-height: 0
+  content: ""
+  display: table
+
 
 //Layout-related Borders
 
@@ -181,9 +194,9 @@ $super-graphic-height-02: 309px
 //General Elements & Classes
 
 body
-  font-family: helvetica, "report", sans-serif
-  font-size: 0.7em
-  line-height: 1em
+  font-family: "Karla", helvetica, "report", sans-serif
+  font-size: 0.75em
+  line-height: 1.4em
   background-color: #FFF
   min-width: 320px
 
@@ -402,7 +415,7 @@ a.wh-logo-cc
 
 .top-nav li
   display: inline-block
-  padding: 6px $padding-02
+  padding: 5px $padding-02
 
 #main-menu
   position: relative
@@ -639,7 +652,10 @@ h1
   padding-top: 0.4em
   margin-right: 20px
   margin-bottom: 0.5em
+  text-transform: uppercase
 
+h2
+  font-size: 120%
 
 .call-to-action h1
   margin-bottom: 0.6em
@@ -850,6 +866,126 @@ a.how-it-works
 .vignette
   position: relative
   z-index: -1
+
+
+//Community Page Classes
+
+.community-feed
+  height: 100px
+  background: black
+
+.column-container
+  position: relative 
+  background: #fff
+  z-index: 1 
+  width: 100%
+  border-bottom: 1px solid #ddd
+
+.column-container .col
+  position: relative 
+  width: 28.9% 
+  padding: 2% 
+  float: left
+
+.column-container .col:nth-child(1)
+  left: 0%
+
+  &:hover
+    background: #ddd
+
+.column-container .col:nth-child(2)
+  left: 0%
+  border-left: 1px solid #ddd
+  border-right: 1px solid #ddd
+
+  &:hover
+    background: #ddd
+
+.column-container .col:nth-child(3)
+  left: 0%
+
+  &:hover
+    background: #ddd
+
+.column-container:before, .column-container:after
+  content: " "
+  position: absolute
+  z-index: -1
+  top: 0
+  left: 33.0%
+  width: 33.0%
+  height: 100%
+  background: #eee
+
+.column-container:after
+  left: 66.667%
+  background: #fff
+
+.group-item
+  position: relative
+  height: 120px
+
+.group-id
+  font-size: 1.3em
+  text-transform: uppercase
+  font-weight: bold
+  line-height: 1em
+
+.group-title
+  font-size: 2em
+  text-transform: uppercase
+  font-weight: bold
+  line-height: 1.8em
+
+.group-body
+  font-size: 1em
+  line-height: 1.2em
+
+.group-footer
+  font-size: 1.3em
+  text-transform: uppercase
+  font-weight: bold
+  text-align: right
+  line-height: 1em
+  position: absolute
+  bottom: 0
+  right: 0
+
+.links-pane
+  float: left
+  width: 50%
+
+.wh-teams_link
+  width: 45%
+  margin: 0 2.5%
+  float: left
+  border-bottom: 2px solid white
+  margin-bottom: 10px
+
+  &:hover
+    border-bottom: 2px solid black
+
+  img
+    width: 100%
+
+.wh-teams_title
+  margin-bottom: 5px
+
+.sister-proj_link
+  width: 45%
+  margin: 0 2.5%
+  float: left
+  border-bottom: 2px solid white
+  margin-bottom: 10px
+
+  &:hover
+    border-bottom: 2px solid black
+
+  img
+    width: 100%
+
+.sister-proj_title
+  margin-bottom: 5px
 
 
 //About Page Classes
@@ -1084,7 +1220,7 @@ a.how-it-works
 
 .text-block
   max-width: 500px
-  line-height: 1.1em
+  line-height: 1.3em
 
 @media screen and (min-width: 720px)
   .text-block

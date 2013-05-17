@@ -197,6 +197,11 @@ class Index(RequestHandler):
                 parts[-2] = u"%s_normal" % parts[-2]
                 items.append('.'.join(parts))
         
+        # Get the campaigns.
+        campaigns = model.Campaign.get_campaign_items()
+        
+        logging.info(campaigns)
+        
         # Do the cache fandango to keep Tav happy.
         set_edge_cache_headers(self.request, self.response)
         
@@ -204,7 +209,8 @@ class Index(RequestHandler):
         return self.render(
             'index.tmpl', 
             quotes=quotes, 
-            avatars=items
+            avatars=items,
+            campaigns=campaigns
         )
     
 

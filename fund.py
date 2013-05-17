@@ -17,21 +17,16 @@ from google.appengine.api import memcache
 from google.appengine.api.urlfetch import fetch as urlfetch, POST
 from google.appengine.ext import db
 
+from model import CAMPAIGNS
+from model import CAMPAIGN_KEYS
+from model import Campaign
+from model import PayPalTransaction
+from model import TransactionReceipt
 from view import RequestHandler
+from utils import get_exchange_rate_to_gbp
+from utils import render_number_with_commas
 
 create_key = db.Key.from_path
-
-CAMPAIGNS = [
-    ('sketchup', 500000, 'SketchUp Extension', 'Blah blah blah'),
-    ('hardware', 25000000, 'Hardware Designs', 'More blah blah'),
-    ('platform', 18000000, 'Platform Development', 'Even more blah'),
-]
-
-CAMPAIGN_KEYS = {}
-
-for _campaign in CAMPAIGNS:
-    CAMPAIGN_KEYS[_campaign[0]] = create_key('Campaign', _campaign[0])
-del _campaign
 
 CURRENCIES = frozenset(['GBP', 'EUR', 'USD'])
 ENDPOINT = 'https://www.sandbox.paypal.com/uk/cgi-bin/webscr'
@@ -39,48 +34,6 @@ PAYPAL_ACCOUNT = 'hello-facilitator@wikihouse.cc'
 PAYPAL_LOGO_IMAGE = 'https://s3-eu-west-1.amazonaws.com/thruflo-random-stuff/wikihouse_header.png'
 NOTIFY_URL = 'https://wikihouse-cc.appspot.com/ipn'
 THANK_YOU_URL = 'https://wikihouse-cc.appspot.com/thank-you'
-
-class Campaign(db.Model):
-    """Appengine model class encapsultating a fundable campaign.
-      
-      The key is the campaign id.
-    """
-    
-    v = db.IntegerProperty(default=0)             # version 
-    c = db.DateTimeProperty(auto_now_add=True)    # created
-    m = db.DateTimeProperty(auto_now=True)        # modified
-    
-    funder_count = db.IntegerProperty(default=0)
-    total_gbp = db.IntegerProperty(default=0)
-    total_eur = db.IntegerProperty(default=0)
-    total_usd = db.IntegerProperty(default=0)
-
-class PayPalTransaction(db.Model):
-    """Appengine model class encapsultating a donation made to a campaign.
-      
-      The key is the paypal transaction id.
-    """
-    
-    v = db.IntegerProperty(default=0)
-    c = db.DateTimeProperty(auto_now_add=True)
-    m = db.DateTimeProperty(auto_now=True)
-    
-    campaign_id = db.StringProperty(default='', indexed=False)
-    payer_email = db.StringProperty(default='', indexed=False)
-    fee = db.StringProperty(default='', indexed=False)
-    gross = db.StringProperty(default='', indexed=False)
-    is_handled = db.BooleanProperty(default=False)
-    info_payload = db.TextProperty()
-    net = db.StringProperty(default='', indexed=False)
-    payer_name = db.StringProperty(default='', indexed=False)
-    currency = db.StringProperty(default='', indexed=False)
-
-class TransactionReceipt(db.Model):
-    """Stub entity to synchronise accounted transactions.
-      
-      The parent is the campaign_key, key is the txn_key.
-    """
-
 
 class InstantPaymentNotificationHandler(RequestHandler):
     """Handle `Instant Payment Notifications`_ from PayPal.
@@ -197,30 +150,6 @@ def update_campaign_tallies(campaign, txn_id, currency, amount):
         campaign.total_usd += amount_in_pence
     db.put([campaign, receipt])
     return
-
-def render_number_with_commas(n):
-    result = ''
-    while n >= 1000:
-        n, r = divmod(n, 1000)
-        result = ",%03d%s" % (r, result)
-    return "%d%s" % (n, result)
-
-def get_exchange_rate_to_gbp(currency, cache={}):
-    if currency == 'GBP':
-        return 1
-    if currency in cache:
-        return cache[currency]
-    rate = memcache.get('exchange:%s' % currency)
-    if rate:
-        return cache.setdefault(currency, rate)
-    url = "http://rate-exchange.appspot.com/currency?from=%s&to=GBP" % currency
-    try:
-        rate = decode_json(urlfetch(url).content)['rate']
-    except Exception, err:
-        logging.error("currency conversion: %s" % err)
-        return 0
-    memcache.set('exchange:%s' % currency, rate)
-    return cache.setdefault(currency, rate)
 
 def gen_fund_form():
     html = []; out = html.append

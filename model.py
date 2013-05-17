@@ -192,7 +192,6 @@ class User(db.Model):
     
     
 
-
 class Series(db.Model):
     """ A WikiHouse standard design series.
     """
@@ -217,7 +216,6 @@ class Series(db.Model):
         
     
     
-
 
 class Design(db.Model):
     """ A design in the WikiHouse library.
@@ -320,7 +318,6 @@ class Design(db.Model):
     
     
 
-
 class Quote(db.Model):
     """ A press quote, uses `org` as key name.
     """
@@ -339,7 +336,6 @@ class Quote(db.Model):
         
     
     
-
 
 class Avatars(db.Model):
     """

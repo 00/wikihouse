@@ -1,4 +1,4 @@
-//Variables
+s//Variables
 
 $accentcolor: #DBD9C9
 $highlightcolor: #eee
@@ -341,7 +341,7 @@ h4
 
 #wh-logo
   width: 240px
-  height: 132px
+  height: 135px
   padding-bottom: 15px
 
 #wh-logo-text
@@ -413,13 +413,17 @@ a.wh-logo-cc
 .top-row
   height: 2em
 
+.page-desc
+  @media screen and (max-width: 719px)
+    display: none
+
 .top-nav li
   display: inline-block
-  padding: 5px $padding-02
+  padding: 4px $padding-02
 
 #main-menu
   position: relative
-  height: 147px
+  height: 150px
   margin-left: 235px
   font-weight: bold
 
@@ -883,56 +887,85 @@ a.how-it-works
 
 .column-container .col
   position: relative 
-  width: 28.9% 
-  padding: 2% 
-  float: left
+  //width: 28.9% 
+  //padding: 2%
+  @media screen and (min-width: 720px) 
+    float: left
 
 .column-container .col:nth-child(1)
   left: 0%
+  @media screen and (min-width: 720px)
+    width: 33.333%
+  @media screen and (max-width: 719px)
+    width: 100%
 
   &:hover
     background: #ddd
 
 .column-container .col:nth-child(2)
   left: 0%
-  border-left: 1px solid #ddd
-  border-right: 1px solid #ddd
+  @media screen and (min-width: 720px)
+    width: 33.333%
+  @media screen and (max-width: 719px)
+    width: 100%
+    border-top: 1px solid #ddd
+    border-bottom: 1px solid #ddd
 
   &:hover
     background: #ddd
 
 .column-container .col:nth-child(3)
   left: 0%
+  @media screen and (min-width: 986px)
+    width: 33.334%
+  @media screen and (min-width: 720px) and (max-width: 985px)
+    width: 33.334%
+  @media screen and (max-width: 719px)
+    width: 100%
 
   &:hover
     background: #ddd
 
-.column-container:before, .column-container:after
-  content: " "
-  position: absolute
-  z-index: -1
-  top: 0
-  left: 33.0%
-  width: 33.0%
-  height: 100%
-  background: #eee
+@media screen and (min-width: 720px)
+  .column-container:before, .column-container:after
+    content: " "
+    position: absolute
+    z-index: -1
+    top: 0
+    left: 33.333%
+    width: 33.1%
+    height: 100%
+    border-left: 1px solid #ddd
+    border-right: 1px solid #ddd
+    background: #eee
 
-.column-container:after
-  left: 66.667%
-  background: #fff
+  .column-container:after
+    left: 66.667%
+    background: #fff
 
 .group-item
   position: relative
-  height: 120px
+  @media screen and (min-width: 720px)
+    height: 120px
+    padding: 20px
+  @media screen and (max-width: 719px)
+    height: 100px
+    padding: 10px
 
 .group-id
-  font-size: 1.3em
+  @media screen and (min-width: 986px)
+    font-size: 1.3em
+  @media screen and (max-width: 985px)
+    font-size: 1.1em
   text-transform: uppercase
   font-weight: bold
   line-height: 1em
 
 .group-title
-  font-size: 2em
+  @media screen and (min-width: 986px)
+    font-size: 2em
+  @media screen and (max-width: 985px)
+    font-size: 1.75em
   text-transform: uppercase
   font-weight: bold
   line-height: 1.8em
@@ -942,18 +975,23 @@ a.how-it-works
   line-height: 1.2em
 
 .group-footer
-  font-size: 1.3em
+  @media screen and (min-width: 986px)
+    font-size: 1.3em
+  @media screen and (max-width: 985px)
+    font-size: 1.1em
   text-transform: uppercase
   font-weight: bold
   text-align: right
   line-height: 1em
   position: absolute
-  bottom: 0
-  right: 0
+  bottom: 15px
+  right: 15px
 
 .links-pane
   float: left
   width: 50%
+  @media screen and (max-width: 719px)
+    display: none
 
 .wh-teams_link
   width: 45%

@@ -10,209 +10,109 @@
   </li>
 </%def>
 
-<%def name="actions()">
-  <div class="slot-6 padding-top-bottom">
+<%def name="content()">
+    <div class="slot-12 padding-top-bottom content-pane">
+        <div class="row">
+            <div class="padding-all">
+                <h1>Join The Community</h1>
+                <p>WikiHouse is being developed collaboratively by a small – but growing – community of people all around the world.  There is no fixed design 'team' or 'studio', but a steadily growing community of designers from all disciplines who share in common the belief that developing freely available design solutions which are affordable, sustainable, and adaptive to differing needs is a worthwhile aim. Anyone who is interested in, or is already working on, problems around this area is invited to join.</p>
+            </div>
+        </div>    
+    </div>
+    <div class="slot-12 padding-top-bottom content-pane">
+        <div class="row">
+            <div class="community-feed">
+            </div>
+            <div class="group column-container">
+                <div class="col">
+                    <a title="WikiHouse General Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse">
+                    <div class="group-item">
+                        <div class="group-id">
+                            Google Group A
+                        </div>
+                        <div class="group-title">
+                            General Project
+                        </div>
+                        <div class="group-body">
+                            Project organisation, goals, licensing and the open charter.
+                        </div>
+                        <div class="group-footer">
+                            Join The Group >
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a title="WikiHouse Hardware Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse-hardware">
+                    <div class="group-item">
+                        <div class="group-id">
+                            Google Group B
+                        </div>
+                        <div class="group-title">
+                            Hardware
+                        </div>
+                        <div class="group-body">
+                            Open construction methods, materials, planning and processes.
+                        </div>
+                        <div class="group-footer">
+                            Join The Group >
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                <div class="col">
+                    <a title="WikiHouse Software Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse-software">
+                    <div class="group-item">
+                        <div class="group-id">
+                            Google Group C
+                        </div>
+                        <div class="group-title">
+                            Software
+                        </div>
+                        <div class="group-body">
+                            Open code, automated design and file sharing tools.
+                        </div>
+                        <div class="group-footer">
+                            Join The Group >
+                        </div>
+                    </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row padding-bottom">
-      <h4>${_(u'Elsewhere on the Web')}</h4>
+     <div class="slot-12 padding-top-bottom content-pane">
+            <div class="links-pane">
+                <div class="wh-teams">
+                    <div class="wh-teams_title padding-sides-large">
+                        <p>Links to WikiHouse Teams:</p>
+                    </div>
+                    <div class="group fullwidth">
+                        <div class="wh-teams_link">
+                            <a href="http://thinkradical.net/" title="Think Radical - WikiHouse NZ" target="blank"><img src="${get_static_url('gfx/wh.NZ.png')}"></a>
+                        </div>
+                        <div class="wh-teams_link">
+                            <a href="http://wikihouserio.cc/" title="WikiHouse RIO" target="blank"><img src="${get_static_url('gfx/wh.RIO.png')}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="links-pane">
+                <div class="sister-proj">
+                    <div class="sister-proj_title padding-sides-large">
+                        <p>Affiliated Projects:</p>
+                    </div>
+                    <div class="group fullwidth">
+                        <div class="sister-proj_link">
+                            <a href="http://opendesk.cc/" title="OpenDesk" target="blank"><img src="${get_static_url('gfx/opendesk.png')}"></a>
+                        </div>
+                        <div class="sister-proj_link">
+                            <a href="http://fabhub.io/" title="FabHub" target="blank"><img src="${get_static_url('gfx/fabhub.png')}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row padding-bottom padding-right">
-      <ul class="nav-list">
-        <li>
-          <a target="blank" href="http://twitter.com/wikihouse"
-              title="${_(u'@wikihouse on Twitter')}">
-            ${_(u'@wikihouse on Twitter')}
-          </a>
-        </li>
-        <li>
-          <a target="blank" href="http://blog.wikihouse.cc"
-              title="${_(u'WikiHouse Blog')}">
-            ${_(u'WikiHouse Blog')}
-          </a>
-        </li>
-        <li>
-          <a target="blank" href="http://github.com/thruflo/wikihouse"
-              title="${_(u'Website Repo on GitHub')}">
-            ${_(u'Website Repo on GitHub')}
-          </a>
-        </li>
-        <li>
-          <a target="blank" href="http://github.com/tav/wikihouse-plugin"
-              title="${_(u'Sketchup Plugin on GitHub')}">
-            ${_(u'Sketchup Plugin on GitHub')}
-          </a>
-        </li>
-        <!--li><a target="blank" href="http://flattr.com/thing/364964/Wiki-House" title="${_(u'Donate on Flattr')}">${_(u'Donate on Flattr')}</a></li-->
-      </ul>
-    </div>
-  </div>
-</%def>
-
-<%def name="main_content()">
-  <div class="slot-7-8-9 padding-top-bottom content-pane">
-    <div class="row">
-      <h4>${_(u'Join the Community')}</h4>
-    </div>
-    <div>
-      <div class="row padding-bottom-large text-block justify">
-        ${_(u"""WikiHouse is not a single, finished product, but an open community project, the aim of which is to make it possible for anyone to design for anyone else. There is no fixed design 'team' or 'studio', but a steadily growing community of designers from all disciplines who share in common the belief that developing freely available house design solutions which are affordable, sustainable, and adaptive to differing needs is a worthwhile aim.""")}
-      </div>
-      <div class="row padding-bottom-large text-block justify">
-        ${_(u"""Anyone who is interested in, or already working on, problems around this area is invited to become a collaborator on WikiHouse, regardless of what background they approach it from. There is already a growing community of followers, supporters, contributors, and developers who are working to improve on this early experiment.""")}
-      </div>
-      <div class="row padding-bottom-large text-block justify">
-        The WikiHouse community recently switched over to Google Groups.
-        The main group is for general discussions and usage, i.e.: to
-        share ideas and ask for advice about using WikiHouse and the
-        WikiHouse project in general.  Then there are two specialist groups:
-        one for designers and makers who are actively designing WikiHouses
-        and one for software / web developers working on the platform,
-        plugins and file format integration.
-      </div>
-      <div class="row padding-top padding-bottom-large text-block justify">
-        <ul class="nav-list" style="text-align: right">
-          <li>
-            <a href="https://groups.google.com/forum/#!forum/wikihouse">
-              Usage / General Discussions &raquo;
-            </a>
-          </li>
-          <li>
-            <a href="https://groups.google.com/forum/#!forum/wikihouse-hardware">
-              Hardware / Designers & Makers &raquo;
-            </a>
-          </li>
-          <li>
-            <a href="https://groups.google.com/forum/#!forum/wikihouse-software">
-              Software / Web Development &raquo;
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <h4>${_(u'Support the Project')}</h4>
-    <div class="row padding-bottom-large text-block justify">
-      We are seeking to raise $1 million to fund
-      <a href="http://blog.wikihouse.cc/post/44058322943/wiki-house-openchallenge-from-architecture00">
-        a global challenge to develop an open ecosystem around WikiHouse</a>.
-      If you're interested in helping with this challenge, or you work for a
-      foundation or fundraising organisation who can help, email us on
-      <a href="mailto:hello@wikihouse.cc">hello@wikihouse.cc</a>.
-    </div>
-    <div class="row padding-bottom-large text-block justify">
-      Alternatively, you can donate online to support the project here.
-      Donations are managed by
-      <a href="http://www.architecture00.net/">
-        Architecture 00</a>
-      and go directly to funding the WikiHouse project.
-    </div>
-    <div class="row padding-bottom-large text-block justify">
-      <br />
-      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" style="float: right">
-        <input type="hidden" name="cmd" value="_s-xclick">
-        <input type="hidden" name="hosted_button_id" value="4EJRKMTHWWG3W">
-        <input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
-        <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-      </form>
-    </div>
-    <h4>${_(u'Core Team')}</h4>
-    <div class="padding-bottom">
-      <div class="team-list padding-bottom">
-        <ul>
-          <li>
-            ${_(u"""James Arthur""")}
-            <a class="link" target="blank" href="http://twitter.com/thruflo">
-              @thruflo</a>
-          </li>
-          <li>
-            ${_(u"""Ruphina Choe""")}
-            <a class="link" target="blank" href="http://twitter.com/yeppiNZel">
-              @yeppiNZel</a>
-          </li>
-          <li>
-            ${_(u"""Austen Cook""")}
-          </li>
-          <li>
-            ${_(u"""Dinho""")}
-            <a class="link" target="blank" href="http://twitter.com/dinho_rio">
-              @dinho_rio</a>
-          </li>
-          <li>
-            ${_(u"""Steve Fisher""")}
-          </li>
-          <li>
-            ${_(u"""Beatrice Galilee""")}
-            <a class="link" target="blank" href="http://twitter.com/_Beatrice">
-              @_Beatrice</a>
-          </li>
-          <li>
-            ${_(u"""Jimmy Greer""")}
-            <a class="link" target="blank" href="http://twitter.com/jimmygreer">
-              @jimmygreer</a>
-          </li>
-          <li>
-            ${_(u"""Nick Ierodiaconou""")}
-            <a class="link" target="blank" href="http://twitter.com/nick_diaconou">
-              @nick_diaconou</a>
-          </li>
-          <li>
-            ${_(u"""Indy Johar""")}
-            <a class="link" target="blank" href="http://twitter.com/indy_johar">
-              @indy_johar</a>
-          </li>
-          <li>
-            ${_(u"""Martin Luff""")}
-            <a class="link" target="blank" href="http://twitter.com/martinluff">
-              @martinluff</a>
-          </li>
-          <li>
-            ${_(u"""Alastair Parvin""")}
-            <a class="link" target="blank" href="http://twitter.com/alastairparvin">
-              @alastairparvin</a>
-          </li>
-          <li>
-            ${_(u"""Adrian Price""")}
-            <a class="link" target="blank" href="http://twitter.com/ninefish">
-              @ninefish</a>
-          </li>
-          <li>
-            ${_(u"""Joni Steiner""")}
-            <a class="link" target="blank" href="http://twitter.com/jonisteiner">
-              @jonisteiner</a>
-          </li>
-          <li>
-            ${_(u"""Danny Squires""")}
-            <a class="link" target="blank" href="http://twitter.com/ecoarknz">
-              @ecoarknz</a>
-          </li>
-          <li>
-            ${_(u"""Tav""")}
-            <a class="link" target="blank" href="http://twitter.com/tav">
-              @tav</a>
-          </li>
-          <li>
-            ${_(u"""Paul Taylor""")}
-            <a class="link" target="blank" href="http://twitter.com/make4d">
-              @make4d</a>
-          </li>
-          <li>
-            ${_(u"""Yogesh Taylor""")}
-            <a class="link" target="blank" href="http://twitter.com/yogeshtaylor">
-              @yogeshtaylor</a>
-          </li>
-          <br />
-		      <li>
-		      <li>
-            ${_(u'___________* (*you)')}
-          </li>
-        </ul>
-      </div>
-    </div>
-    <h4>${_(u'Design Contributors')}</h4>
-    <ul class="contributor-list">
-      % for item in contributors:
-        ${self.user_listing(item)}
-      % endfor
-    </ul>
-    <div class="clear">
-    </div>
-  </div>
 </%def>

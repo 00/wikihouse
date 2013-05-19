@@ -1652,7 +1652,7 @@ button.dsq-button, button.dsq-button-small
   text-transform: uppercase
 
 .challenge-pillar
-  width: 33%
+  width: 33.333333%
   float: left
   &:nth-child(2n)
     border-left: 1px solid white
@@ -1729,6 +1729,78 @@ button.dsq-button, button.dsq-button-small
 .challenge-stat-label
   text-transform: lowercase
 
+.challenge-form
+  background: white
+  padding: 15px 15px 10px 15px
+
+.challenge-pillar:nth-child(2n)
+  .challenge-form,
+  .challenge-fund-link
+    border-left: 1px solid #ccc
+    margin-left: -1px
+    border-right: 1px solid #ccc
+    margin-right: -1px
+    position: relative
+
+.campaign-amount
+  float: left
+  font-size: 14px
+  padding: 6px 10px 7px !important
+  width: 50% !important
+  margin-right: 8px !important
+
+.campaign-currency
+  font-size: 13px
+  padding: 10px 5px
+  width: 37.5%
+  .moz &
+    margin-top: -2px
+    margin-left: -3px
+  .webkit &
+    margin-top: 6px
+  .msie &
+    padding: 6px 5px
+  
+
+@media(max-width: 985px) and (min-width: 720px)
+  .campaign-currency
+    margin-top: 10px
+    width: 55%
+    .moz &
+      margin-top: 10px
+    .webkit &
+      margin-top: 10px
+      width: 45%
+    
+
+.campaign-submit
+  visibility: hidden
+  position: absolute
+  width: 1px
+  height: 1px
+
+.challenge-fund-link
+  background: white
+  padding: 0px 15px 15px
+  a
+    background-color: rgb(125,166,44)
+    display: block
+    font-size: 22px
+    letter-spacing: 1px
+    line-height: 110%
+    padding: 15px 15px 12px
+    position: relative
+    text-align: center
+    text-transform: uppercase
+    &:hover
+      background-color: black
+
+
+.visible-desktop
+  display: block
+
+.hidden-desktop
+  display: none
 
 .visible-phone
   display: none
@@ -1736,15 +1808,27 @@ button.dsq-button, button.dsq-button-small
 .hidden-phone
   display: block
 
+@media(max-width: 979px)
+  .visible-desktop
+    display: none
+  .hidden-desktop
+    display: block
+
 @media(max-width: 719px)
   .visible-phone
     display: block
-  
   .hidden-phone
     display: none
-  
   .challenge-pillar
     width: 100%
     float: none
 
+.clearfix
+  &:before,
+  &:after
+    content: ""
+    display: table
+    line-height: 0
+  &:after
+    clear: both
 

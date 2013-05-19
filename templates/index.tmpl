@@ -2,8 +2,62 @@
 
 <%def name="sub_title()"></%def>
 
+<%def name="campaign_form(campaign)">
+  <div class="challenge-form clearfix">
+    <form id="challenge-${campaign['category']}-1"
+        action="${donate_form['action_url']}" method="post">
+      <input type="hidden" name="charset" value="utf-8" />
+      <input type="hidden" name="cmd" value="_donations" />
+      <input type="hidden" name="no_note" value="1" />
+      <input type="hidden" name="rm" value="1" />
+      <input type="hidden" name="business"
+          value="${donate_form['business_email']}"
+      />
+      <input type="hidden" name="cancel_return"
+          value="${donate_form['cancel_return_url']}"
+      />
+      <input type="hidden" name="custom"
+          value="wikihouse.${campaign['category']}"
+      />
+      <input type="hidden" name="image_url"
+          value="${donate_form['image_url']}"
+      />
+      <%
+        category_name = campaign['category'].title()
+      %>
+      <input type="hidden" name="item_name"
+          value="Fund WikiHouse ${category_name} ${campaign['title']}"
+      />
+      <input type="hidden" name="item_number"
+          value="wikihouse.${campaign['category']}"
+      />
+      <input type="hidden" name="notify_url"
+          value="${donate_form['notify_url']}"
+      />
+      <input type="hidden" name="return"
+          value="${donate_form['return_url']}"
+      />
+      <input class="campaign-amount" type="text" name="amount"
+          value="" placeholder="Amount, e.g. 30.00"
+      />
+      <select class="campaign-currency" name="currency_code">
+        <option value="GBP">GBP (£)</option>
+        <option value="EUR">EUR (€)</option>
+        <option value="USD">USD ($)</option>
+      </select>
+      <input class="campaign-submit" type="submit" name="submit"
+          value="Fund This Goal" />
+    </form>
+  </div>
+  <div class="challenge-fund-link">
+    <a href="#fund-${campaign['category']}"
+        data-target="#challenge-${campaign['category']}-1">
+      Fund This Goal</a>
+  </div>
+</%def>
+
 <%def name="content()">
-  <div class="super-graphic row">
+  <div class="super-graphic row" style="position: relative; height: 100px; overflow: hidden">
     <div id="splash-container">
       <a href="#play-video" id="play-video">
         <div class="splash-text-container">
@@ -42,7 +96,7 @@
     Hidden phone
     
   -->
-  <div class="hidden-phone">
+  <div class="hidden-phone border-bottom">
     <div class="row black-bg">
       % for campaign in campaigns:
         <div class="challenge-pillar">
@@ -119,7 +173,7 @@
               </div>
             </div>
           </div>
-          [ FUND THIS BUTTON ]
+          ${self.campaign_form(campaign)}
         </div>
       % endfor
     </div>
@@ -130,7 +184,7 @@
     
     
   -->
-  <div class="visible-phone">
+  <div class="visible-phone border-bottom">
     <div class="row black-bg">
       % for campaign in campaigns:
         <div class="challenge-pillar">
@@ -152,7 +206,7 @@
               ${campaign['description']}
             </p>
           </div>
-          [ FUND THIS BUTTON ]
+          ${self.campaign_form(campaign)}
         </div>
       % endfor
     </div>

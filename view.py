@@ -29,10 +29,20 @@ from weblayer.utils import encode_to_utf8, unicode_urlencode
 from weblayer.utils import json_decode, json_encode, xhtml_escape
 
 import auth
+import fund
 import model
 
 find_svg_viewbox = re.compile('viewBox="([^"]*)').findall
 replace_svg_height = re.compile('<svg height="[^"]*').sub
+
+donate_form_data = {
+    'action_url': fund.ENDPOINT,
+    'business_email': fund.PAYPAL_ACCOUNT,
+    'cancel_return_url': fund.CANCEL_URL,
+    'image_url': fund.PAYPAL_LOGO_IMAGE,
+    'notify_url': fund.NOTIFY_URL,
+    'return_url': fund.THANK_YOU_URL
+}
 
 def is_empty_file(value):
     try:
@@ -200,8 +210,6 @@ class Index(RequestHandler):
         # Get the campaigns.
         campaigns = model.Campaign.get_campaign_items()
         
-        logging.info(campaigns)
-        
         # Do the cache fandango to keep Tav happy.
         set_edge_cache_headers(self.request, self.response)
         
@@ -210,7 +218,8 @@ class Index(RequestHandler):
             'index.tmpl', 
             quotes=quotes, 
             avatars=items,
-            campaigns=campaigns
+            campaigns=campaigns,
+            donate_form=donate_form_data
         )
     
 

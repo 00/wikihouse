@@ -30,8 +30,8 @@ from utils import render_number_with_commas
 create_key = db.Key.from_path
 
 CURRENCIES = frozenset(['GBP', 'EUR', 'USD'])
-ENDPOINT = 'https://www.sandbox.paypal.com/uk/cgi-bin/webscr'
-PAYPAL_ACCOUNT = 'hello-facilitator@wikihouse.cc'
+ENDPOINT = 'https://www.paypal.com/uk/cgi-bin/webscr'
+PAYPAL_ACCOUNT = 'hello@wikihouse.cc'
 PAYPAL_LOGO_IMAGE = 'https://s3-eu-west-1.amazonaws.com/thruflo-random-stuff/wikihouse_header.png'
 NOTIFY_URL = 'https://wikihouse-cc.appspot.com/ipn'
 THANK_YOU_URL = 'https://wikihouse-cc.appspot.com/thank-you'

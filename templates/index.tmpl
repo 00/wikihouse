@@ -56,68 +56,8 @@
   </div>
 </%def>
 
-<%def name="links_row()">
-  <div class="row padding-bottom">
-    <div class="slot-12 padding-top-bottom content-pane">
-      <div class="links-pane">
-        <div class="wh-teams">
-          <div class="wh-teams_title padding-sides-large">
-            <p>Links to WikiHouse Teams:</p>
-          </div>
-          <div class="group fullwidth">
-            <div class="wh-teams_link">
-              <a href="http://thinkradical.net"
-                  title="Think Radical - WikiHouse NZ"><img src="${get_static_url('gfx/wh.NZ.png')}"></a>
-            </div>
-            <div class="wh-teams_link">
-              <a href="http://wikihouserio.cc" title="WikiHouse RIO"><img src="${get_static_url('gfx/wh.RIO.png')}"></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="links-pane">
-        <div class="sister-proj">
-          <div class="sister-proj_title padding-sides-large">
-            <p>Affiliated Projects:</p>
-          </div>
-          <div class="group fullwidth">
-            <div class="sister-proj_link">
-                <a href="https://www.opendesk.cc"
-                    title="OpenDesk - Open Source Furniture"><img src="${get_static_url('gfx/opendesk.png')}"></a>
-            </div>
-            <div class="sister-proj_link">
-                <a href="https://www.fabhub.co.uk"
-                    title="FabHub - Digital Fabrication Hub"><img src="${get_static_url('gfx/fabhub.png')}"></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</%def>
-
-<%def name="content()">
-  <div class="super-graphic row">
-    <div id="splash-container">
-      <div class="splash-text-container">
-        <a href="/community" title="Join the Community">
-          <div class="splash-text">
-            Open Source Construction<span class="splash-text-set"> Set</span>
-            <div class="splash-text-call-to-action">
-              Join the community &raquo;
-            </div>
-          </div>
-        </a>
-      </div>
-      <a href="#play-video" id="play-video" title="Play the Video">
-        <div class="splash-image-container">
-          <img src="${get_static_url('gfx/wikihouse-mac.jpg')}" />
-        </div>
-      </a>
-    </div>
-    <div id="fitvid-container"></div>
-  </div>
-  <div class="row black-bg white-border-bottom">
+<%def name="donate_rows(top_row_cls='black-bg')">
+  <div class="row ${top_row_cls} white-border-bottom">
     <div class="slot-12">
       <div class="challenge-header">
         <h2 class="challenge-heading">
@@ -255,6 +195,72 @@
         </div>
       % endfor
     </div>
+  </div>
+</%def>
+
+<%def name="links_row()">
+  <div class="row padding-bottom">
+    <div class="slot-12 padding-top-bottom content-pane">
+      <div class="links-pane">
+        <div class="wh-teams">
+          <div class="wh-teams_title padding-sides-large">
+            <p>Links to WikiHouse Teams:</p>
+          </div>
+          <div class="group fullwidth">
+            <div class="wh-teams_link">
+              <a href="http://thinkradical.net"
+                  title="Think Radical - WikiHouse NZ"><img src="${get_static_url('gfx/wh.NZ.png')}"></a>
+            </div>
+            <div class="wh-teams_link">
+              <a href="http://wikihouserio.cc" title="WikiHouse RIO"><img src="${get_static_url('gfx/wh.RIO.png')}"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="links-pane">
+        <div class="sister-proj">
+          <div class="sister-proj_title padding-sides-large">
+            <p>Affiliated Projects:</p>
+          </div>
+          <div class="group fullwidth">
+            <div class="sister-proj_link">
+                <a href="https://www.opendesk.cc"
+                    title="OpenDesk - Open Source Furniture"><img src="${get_static_url('gfx/opendesk.png')}"></a>
+            </div>
+            <div class="sister-proj_link">
+                <a href="https://www.fabhub.co.uk"
+                    title="FabHub - Digital Fabrication Hub"><img src="${get_static_url('gfx/fabhub.png')}"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</%def>
+
+<%def name="content()">
+  <div class="super-graphic row">
+    <div id="splash-container">
+      <div class="splash-text-container">
+        <a href="#support" title="Join the Community">
+          <div class="splash-text">
+            Open Source Construction<span class="splash-text-set"> Set</span>
+            <div class="splash-text-call-to-action">
+              Support the project &raquo;
+            </div>
+          </div>
+        </a>
+      </div>
+      <a href="#play-video" id="play-video" title="Play the Video">
+        <div class="splash-image-container">
+          <img src="${get_static_url('gfx/wikihouse-mac.jpg')}" />
+        </div>
+      </a>
+    </div>
+    <div id="fitvid-container"></div>
+  </div>
+  <div id="support">
+    ${self.donate_rows()}
   </div>
   <div class="quotes border-bottom">
     <div class="quote-logos row border-bottom">

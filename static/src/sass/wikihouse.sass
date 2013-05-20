@@ -446,7 +446,7 @@ a.wh-logo-cc
 .main-nav li
   display: inline-block
   #float: left
-  padding: 8px $padding-03
+  padding: 8px 18px
 
 .main-nav li:hover
   background-color: #F9F9F9
@@ -462,8 +462,9 @@ a.wh-logo-cc
   .main-nav li
     display: block
     padding: 6px 2.4em
-    #float: none
-    #width: 100%
+    // Hide the Home link when the page is small
+  .main-nav a:first-child
+    display: none
 
 .series
   padding-bottom: 1em

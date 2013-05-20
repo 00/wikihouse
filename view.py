@@ -308,6 +308,26 @@ class Community(RequestHandler):
                 espra_signups=espra_signups)
     
 
+class Support(RequestHandler):
+    """Render the support page."""
+    
+    def get(self):
+        """Set cache headers, get the contributors from the db and render
+          the template.
+        """
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        # Get the campaigns.
+        campaigns = model.Campaign.get_campaign_items()
+        
+        # Render the page.
+        return self.render('support.tmpl', campaigns=campaigns,
+                donate_form=donate_form_data)
+    
+
+
 class Contact(RequestHandler):
     """Render the contact page."""
     

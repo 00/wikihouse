@@ -145,13 +145,12 @@
                       selected = request.path == '/'
                   else:
                       selected = request.path.startswith(value)
-
                 %>
+                <a href="${value}" class="links">
                   <li class="${selected and 'selected' or 'unselected'}">
-                  <a href="${value}" class="links">
                     ${label}
-                  </a>
                   </li>
+                </a>
               % endfor
             </ul>
           </div>

@@ -36,9 +36,9 @@ CAMPAIGNS = [(
         'Hardware',
         'Full House', 
         'Hardware',
-        'The first full, low-cost, high-performance house, completed, tested\
-        and lived-in, with full files, instructions and costings shared openly\
-        online, so anyone can easily replicate it for themselves.'
+        'Design, construct and document the first full WikiHouse - completed, tested\
+        and lived-in, with designs, instructions and costings shared openly online,\
+        so anyone can build it for themselves.'
     ), (
         'platform',
         200000,

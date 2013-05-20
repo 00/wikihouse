@@ -1799,26 +1799,37 @@ button.dsq-button, button.dsq-button-small
 
 .splash-text-container
   .splash-text
-    font-size: 32px
+    font-size: 31px
     font-weight: normal
     letter-spacing: 2px
-    line-height: 1.3
+    line-height: 1.1
     @media screen and (max-width: 719px)
       text-align: center
       padding: 20px
     @media screen and (min-width: 720px)
-      background-color: rgba(0,0,0,0.8)
+      background-color: rgba(0,0,0,0.85)
+      &:hover
+        background-color: rgba(0,0,0,0.95)
       color: white
       float: right
-      margin-left: 351px
+      margin-left: 406px
       margin-top: 146px
-      padding: 20px 25px 20px 30px
+      padding: 13px 22px 17px 27px
       position: absolute
       text-shadow: 0 -2px 3px #000000
-      width: 295px
+      width: 245px
     @media screen and (min-width: 986px)
-      margin-left: 617px
-      margin-top: 220px
+      margin-left: 627px
+      margin-top: 210px
+      width: 285px
+  .splash-text-set
+    @media screen and (min-width: 720px) and (max-width: 985px)
+      display: none
+  
+  .splash-text-call-to-action
+    margin: 7px 0 5px
+    font-size: 20px
+    letter-spacing: 0.5px
 
 .splash-image-container
   img

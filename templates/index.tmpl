@@ -99,12 +99,17 @@
 <%def name="content()">
   <div class="super-graphic row">
     <div id="splash-container">
-      <a href="#play-video" id="play-video">
-        <div class="splash-text-container">
+      <div class="splash-text-container">
+        <a href="/community" title="Join the Community">
           <div class="splash-text">
-            An Open Source Construction Set.
+            Open Source Construction<span class="splash-text-set"> Set</span>
+            <div class="splash-text-call-to-action">
+              Join the community &raquo;
+            </div>
           </div>
-        </div>
+        </a>
+      </div>
+      <a href="#play-video" id="play-video" title="Play the Video">
         <div class="splash-image-container">
           <img src="${get_static_url('gfx/wikihouse-mac.jpg')}" />
         </div>

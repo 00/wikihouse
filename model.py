@@ -23,7 +23,7 @@ from utils import render_number_with_commas
 
 CAMPAIGNS = [(
         'sketchup',
-        10000,
+        12000,
         'SketchUp',
         'Plugin',
         'SketchUp Plugin',
@@ -32,7 +32,7 @@ CAMPAIGNS = [(
         .dxf cutting file.'
     ), (
         'hardware', 
-        200000, 
+        240000, 
         'Hardware',
         'Full House', 
         'Hardware',
@@ -41,7 +41,7 @@ CAMPAIGNS = [(
         so anyone can build it for themselves.'
     ), (
         'platform',
-        200000,
+        80000,
         'WikiHouse',
         'Platform',
         'Platform',

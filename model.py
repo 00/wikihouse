@@ -123,8 +123,7 @@ class User(db.Model):
         """
         
         hash_ = hashlib.md5(self.email.strip().lower()).hexdigest()
-        return 'http://www.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
-        
+        return 'https://secure.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
     
     def set_avatar(self, size=80):
         """ Try and scrape the profile image from Google+ using YQL, falling back

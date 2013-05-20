@@ -21,8 +21,29 @@
         </div>    
     </div>
     <div class="slot-12 padding-top-bottom content-pane">
-        <div class="row">
+        <div class="row border-top">
             <div class="community-feed">
+              <ul class="espra-signups-listing">
+                % for item in espra_signups:
+                  <%
+                    name = item[0]
+                    username = item[1]
+                    join_time = item[2]
+                    email_hash = item[3]
+                    endpoint = u'https://secure.gravatar.com/avatar'
+                    gravatar = u'{0}/{1}?s=80&d=mm'.format(endpoint, email_hash)
+                  %>
+                  <li class="espra-signup">
+                    <div class="espra-profile">
+                      <a href="https://proto.espra.com/+${username}">
+                        <img src="${gravatar}" />
+                        ${name}
+                      </a>
+                      <div class="timestamp">${join_time}</div>
+                    </div>
+                  </li>
+                % endfor
+              </ul>
             </div>
             <div class="group column-container">
                 <div class="col">

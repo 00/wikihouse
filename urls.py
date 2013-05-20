@@ -37,6 +37,9 @@ mapping = [(
         r'/contact\/?',
         Contact
     ), (
+        r'/press\/?',
+        Press
+    ), (
         r'/legal/terms',
         Terms
     ), (

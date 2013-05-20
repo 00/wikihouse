@@ -320,6 +320,18 @@ class Contact(RequestHandler):
         return self.render('contact.tmpl')
     
 
+class Press(RequestHandler):
+    """Render the press page."""
+    
+    def get(self):
+        """Set cache headers and render the template."""
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('press.tmpl')
+    
+
 class Terms(RequestHandler):
     """Render the terms page."""
     

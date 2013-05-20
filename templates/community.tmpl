@@ -1,4 +1,5 @@
 <%inherit file="base.tmpl"/>
+<%namespace name="index_tmpl" file="index.tmpl"/>
 
 <%def name="sub_title()">${_(u'Community')}</%def>
 
@@ -81,38 +82,5 @@
             </div>
         </div>
     </div>
-    <div class="row padding-bottom">
-     <div class="slot-12 padding-top-bottom content-pane">
-            <div class="links-pane">
-                <div class="wh-teams">
-                    <div class="wh-teams_title padding-sides-large">
-                        <p>Links to WikiHouse Teams:</p>
-                    </div>
-                    <div class="group fullwidth">
-                        <div class="wh-teams_link">
-                            <a href="http://thinkradical.net/" title="Think Radical - WikiHouse NZ" target="blank"><img src="${get_static_url('gfx/wh.NZ.png')}"></a>
-                        </div>
-                        <div class="wh-teams_link">
-                            <a href="http://wikihouserio.cc/" title="WikiHouse RIO" target="blank"><img src="${get_static_url('gfx/wh.RIO.png')}"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="links-pane">
-                <div class="sister-proj">
-                    <div class="sister-proj_title padding-sides-large">
-                        <p>Affiliated Projects:</p>
-                    </div>
-                    <div class="group fullwidth">
-                        <div class="sister-proj_link">
-                            <a href="http://opendesk.cc/" title="OpenDesk" target="blank"><img src="${get_static_url('gfx/opendesk.png')}"></a>
-                        </div>
-                        <div class="sister-proj_link">
-                            <a href="http://fabhub.io/" title="FabHub" target="blank"><img src="${get_static_url('gfx/fabhub.png')}"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    ${index_tmpl.links_row()}
 </%def>

@@ -26,7 +26,7 @@
         category_name = campaign['category'].title()
       %>
       <input type="hidden" name="item_name"
-          value="Fund WikiHouse ${category_name} ${campaign['title']}"
+          value="Fund the WikiHouse ${campaign['title3']}"
       />
       <input type="hidden" name="item_number"
           value="wikihouse.${campaign['category']}"
@@ -109,10 +109,10 @@
               <img src="${url}" />
             </div>
             <h4 class="challenge-category">
-              ${campaign['category'].title()}
+              ${campaign['title1'].title()}
             </h4>
             <h3 class="challenge-title">
-              ${campaign['title']}
+              ${campaign['title2']}
             </h3>
             <p class="challenge-description">
               ${campaign['description']}
@@ -197,10 +197,10 @@
               <img src="${url}" />
             </div>
             <h4 class="challenge-category">
-              ${campaign['category'].title()}
+              ${campaign['title1'].title()}
             </h4>
             <h3 class="challenge-title">
-              ${campaign['title']}
+              ${campaign['title2']}
             </h3>
             <p class="challenge-description">
               ${campaign['description']}

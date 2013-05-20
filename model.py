@@ -392,8 +392,23 @@ class Campaign(db.Model):
         # Get the campaigns from the db -- creating them if they
         # don't exist.
         entities = {}
+        
+        def get_or_insert(campaign_id):
+            """We do this manually rather than use Model.get_or_insert
+              because otherwise we get keys generated that DONT MATCH
+              THE ``CAMPAIGN_KEYS`` CREATED AT MODULE IMPORT TIME.
+            """
+            
+            campaign_key = CAMPAIGN_KEYS[campaign_id]
+            campaign = Campaign.get(campaign_key)
+            if campaign is None:
+                campaign = Campaign(key=campaign_key)
+                campaign.put()
+            return campaign
+        
         for campaign_id in CAMPAIGN_KEYS:
-            entities[campaign_id] = Campaign.get_or_insert(campaign_id)
+            campaign = db.run_in_transaction(get_or_insert, campaign_id)
+            entities[campaign_id] = campaign
         
         # Iterate through the campaigns, building the data for the page.
         for campaign in CAMPAIGNS:

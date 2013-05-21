@@ -22,26 +22,32 @@ from utils import get_exchange_rate_to_gbp
 from utils import render_number_with_commas
 
 CAMPAIGNS = [(
-        'software', 
-        10000, 
-        'Plugin', 
-        'Completing the WikiHouse plugin to allow full one-click automation;\
+        'sketchup',
+        12000,
+        'SketchUp',
+        'Plugin',
+        'SketchUp Plugin',
+        'Completing the WikiHouse SketchUp plugin to allow full one-click automation;\
         laying out parts onto sheets, naming them correctly and exporting a\
         .dxf cutting file.'
     ), (
         'hardware', 
-        200000, 
+        240000, 
+        'Hardware',
         'Full House', 
-        'The first full, low-cost, high-performance house, completed, tested\
-        and lived-in, with full files, instructions and costings shared openly\
-        online, so anyone can easily replicate it for themselves'
+        'Hardware',
+        'Design, construct and document the first full WikiHouse - completed, tested\
+        and lived-in, with designs, instructions and costings shared openly online,\
+        so anyone can build it for themselves.'
     ), (
-        'wiki',
-        50000, 
+        'platform',
+        80000,
+        'WikiHouse',
         'Platform',
-        'An easy-to-use open sharing platform with integrated full project\
-        documentation, collaboration and sharing . A construction wiki with\
-        community support.'
+        'Platform',
+        "Help create the Wikipedia of things. Use it to easily create and customize\
+        designs right within your browser, get them made to your liking, and\
+        be rewarded as part of the sharing economy!"
     )
 ]
 
@@ -117,8 +123,7 @@ class User(db.Model):
         """
         
         hash_ = hashlib.md5(self.email.strip().lower()).hexdigest()
-        return 'http://www.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
-        
+        return 'https://secure.gravatar.com/avatar/%s?s=%s&d=mm' % (hash_, size)
     
     def set_avatar(self, size=80):
         """ Try and scrape the profile image from Google+ using YQL, falling back
@@ -387,13 +392,23 @@ class Campaign(db.Model):
         # Get the campaigns from the db -- creating them if they
         # don't exist.
         entities = {}
-        for campaign_id in sorted(CAMPAIGN_KEYS):
+        
+        def get_or_insert(campaign_id):
+            """We do this manually rather than use Model.get_or_insert
+              because otherwise we get keys generated that DONT MATCH
+              THE ``CAMPAIGN_KEYS`` CREATED AT MODULE IMPORT TIME.
+            """
+            
             campaign_key = CAMPAIGN_KEYS[campaign_id]
             campaign = Campaign.get(campaign_key)
             if campaign is None:
                 campaign = Campaign(key=campaign_key)
                 campaign.put()
-            entities[campaign.key().name()] = campaign
+            return campaign
+        
+        for campaign_id in CAMPAIGN_KEYS:
+            campaign = db.run_in_transaction(get_or_insert, campaign_id)
+            entities[campaign_id] = campaign
         
         # Iterate through the campaigns, building the data for the page.
         for campaign in CAMPAIGNS:
@@ -405,15 +420,17 @@ class Campaign(db.Model):
                 total += (ent.total_eur * get_exchange_rate_to_gbp('EUR'))
             if ent.total_usd:
                 total += (ent.total_usd * get_exchange_rate_to_gbp('USD'))
-            raised = int(total)
+            raised = int(total/100)
             if raised >= target:
                 pct = 100
             else:
                 pct = (raised * 100) / target
             item = dict(
                 category=campaign_id,
-                title=escape(campaign[2]),
-                description=escape(campaign[3]),
+                title1=escape(campaign[2]),
+                title2=escape(campaign[3]),
+                title3=escape(campaign[4]),
+                description=escape(campaign[5]),
                 num_backers=ent.funder_count,
                 percentage_raised=pct * 1,
                 total_raised=render_number_with_commas(raised),

@@ -278,12 +278,55 @@ class Community(RequestHandler):
           the template.
         """
         
+        endpoint = "https://proto.espra.com/_api/joins.list/wikihouse"
+        default_espra_signups = [[
+            "Alice Fung", 
+            "alice00", 
+            1368806444, 
+            "4d82538cb98da96b7524810b8c641e5c"
+          ], [
+            "James Arthur", 
+            "thruflo", 
+            1368806590, 
+            "dbfaa69ec6b06acc923908ba2be549b3"
+          ]
+        ]
+        
         # Do the cache fandango to keep Tav happy.
         set_edge_cache_headers(self.request, self.response)
         
+        # Get the community signup activity from proto espra.
+        try:
+            espra_signups = decode_json(urlfetch(endpoint).content)
+        except Exception as err:
+            logging.error("Error fetching espra signups")
+            logging.error(err, exc_info=True)
+            espra_signups = default_espra_signups
+        
         contributors = model.User.get_all()
-        return self.render('community.tmpl', contributors=contributors)
+        return self.render('community.tmpl', contributors=contributors,
+                espra_signups=espra_signups)
     
+
+class Support(RequestHandler):
+    """Render the support page."""
+    
+    def get(self):
+        """Set cache headers, get the contributors from the db and render
+          the template.
+        """
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        # Get the campaigns.
+        campaigns = model.Campaign.get_campaign_items()
+        
+        # Render the page.
+        return self.render('support.tmpl', campaigns=campaigns,
+                donate_form=donate_form_data)
+    
+
 
 class Contact(RequestHandler):
     """Render the contact page."""
@@ -295,6 +338,18 @@ class Contact(RequestHandler):
         set_edge_cache_headers(self.request, self.response)
         
         return self.render('contact.tmpl')
+    
+
+class Press(RequestHandler):
+    """Render the press page."""
+    
+    def get(self):
+        """Set cache headers and render the template."""
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('press.tmpl')
     
 
 class Terms(RequestHandler):

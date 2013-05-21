@@ -4,13 +4,13 @@
 
 <%def name="actions()">
   <div class="slot-6 padding-top-bottom">
-    <div class="row padding-bottom">
+    <div class="row">
       <h4>${_(u'Contact')}</h4>
     </div>
     <div class="row padding-bottom padding-right">
       <ul class="nav-list">
-        <li><a href="mailto:hello@wikihouse.cc">hello@wikihouse.cc</a></li>
-        <li><a href="mailto:press@wikihouse.cc">press@wikihouse.cc</a></li>
+        <li><a href="/community">Community &raquo;</a></li>
+        <li><a href="/press">Press &raquo;</a></li>
       </ul>
     </div>
   </div>
@@ -18,12 +18,46 @@
 
 <%def name="main_content()">
   <div class="slot-7-8-9 padding-top-bottom content-pane">
-    <div class="row padding-bottom-large">
+    <div class="row">
       <h4>${_(u'Get in Touch')}</h4>
     </div>
     <div class="padding-bottom">
       <div class="row padding-bottom-large text-block justify">
-        ${_(u"""The core WikiHouse platform is brought to you by """)}<a class="strong" href="http://www.architecture00.net" title="Architecture 00 Ltd" target="blank">00:/</a>${_(u', ')}<a class="strong" href="http://www.espians.com" title="Espians" target="blank">Espians</a>${_(u', and ')}<a class="strong" href="http://www.momentumengineering.com" title="Momentum Engineering" target="blank">Momentum Engineering</a>. ${_(u"""We are now looking to support a community of WikiHouse developers around the world who wish to take WikiHouse on to the next level. If you'd like to get in touch directly to discuss the project or ways to collaborate, or if you'd like to help us tell the WikiHouse story, then please drop us a line on the emails provided on this page.""")}
+        <p class="row padding-bottom">
+          If you have a general question or comment, please
+          <a href="/community">
+            go to the WikiHouse community space</a>. It may well be that
+          members of the community can help you. Alternatively, if you're a
+          journalist, magazine or website, you might like to
+          <a href="/press">
+            see the press page</a>.
+        </p>
+        <p class="row padding-bottom">
+          Otherwise (if you definitely need to contact the core team) please
+          send us a message using the form below. We'll get back to you as
+          soon as we can.
+        </p>
+        <div id="wufoo-q7x2x3" class="row padding-top-bottom">
+          <a href="http://fabhub.wufoo.com/forms/q7x2x3">
+            WikiHouse Contact Form</a>.
+        </div>
+        <script type="text/javascript">var q7x2x3;(function(d, t) {
+          var s = d.createElement(t), 
+              options = {
+                'userName':'fabhub', 
+                'formHash':'q7x2x3', 
+                'autoResize':true,
+                'height':'639',
+                'async':true,
+                'header':'show'
+              };
+          s.src = ('https:' == d.location.protocol ? 'https://' : 'http://') + 'wufoo.com/scripts/embed/form.js';
+          s.onload = s.onreadystatechange = function() {
+          var rs = this.readyState; if (rs) if (rs != 'complete') if (rs != 'loaded') return;
+          try { q7x2x3 = new WufooForm();q7x2x3.initialize(options);q7x2x3.display(); } catch (e) {}};
+          var scr = d.getElementsByTagName(t)[0], par = scr.parentNode; par.insertBefore(s, scr);
+          })(document, 'script');
+        </script>
       </div>
     </div>
   </div>

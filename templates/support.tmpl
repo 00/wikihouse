@@ -1,0 +1,12 @@
+<%inherit file="base.tmpl"/>
+<%namespace name="index_tmpl" file="index.tmpl"/>
+
+<%def name="sub_title()">${_(u'Support WikiHouse')}</%def>
+
+<%def name="content()">
+  ${index_tmpl.donate_rows(top_row_cls='')}
+  <br />
+  <br />
+  <br />
+  <br />
+</%def>

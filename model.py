@@ -45,9 +45,9 @@ CAMPAIGNS = [(
         'WikiHouse',
         'Platform',
         'Platform',
-        "Help create the Wikipedia of things. Use it to easily create and customize\
-        designs right within your browser, get them made to your liking, and\
-        be rewarded as part of the sharing economy!"
+        "Help create the Wikipedia of things. An open library of digital designs\
+        for products and hardware solutions hosted on a online platform where\
+        they can be easily shared, customised and made."
     )
 ]
 

@@ -298,6 +298,17 @@ h4
       background-color: #EEEEEE
       padding: 0.5em
 
+.button
+  padding: 10px 20px
+  background: black
+  color: white
+  font-size: 18px
+  line-height: 24px
+  margin-top: 10px
+
+  &:hover
+    background: #bbb
+    color: white
 
 //Primary Elements
 
@@ -956,8 +967,11 @@ a.how-it-works
 
 .group-item
   position: relative
-  @media screen and (min-width: 720px)
+  @media screen and (min-width: 986px)
     height: 120px
+    padding: 20px 30px
+  @media screen and (min-width: 720px) and (max-width: 985px)
+    height: 110px
     padding: 20px
   @media screen and (max-width: 719px)
     height: 100px
@@ -975,8 +989,8 @@ a.how-it-works
 .group-title
   @media screen and (min-width: 986px)
     font-size: 2em
-  @media screen and (max-width: 985px)
-    font-size: 1.75em
+  @media screen and (max-width: 986px)
+    font-size: 1.6em
   text-transform: uppercase
   font-weight: bold
   line-height: 1.8em
@@ -996,7 +1010,7 @@ a.how-it-works
   line-height: 1em
   position: absolute
   bottom: 15px
-  right: 15px
+  right: 20px
 
 .links-pane
   float: left
@@ -1715,6 +1729,22 @@ a.logo-mom
   &:hover
     //background-position: 0 -48px 
 
+a.logo-fh
+  display: block
+  background: transparent embed("logo.fabhub.png") no-repeat 0 0
+  @media screen and (max-width: 720px)  
+    background-size: 100px 50px
+    height: 50px
+    width: 100px
+  @media screen and (min-width: 720px)
+    background-size: 150px 75px
+    height: 75px
+    width: 150px 
+  margin-left: 15px
+  padding: 0
+  text-indent: -9999px
+  float: right
+
 .st_fblike_hcount
   width: 90px !important
   position: relative
@@ -1911,21 +1941,28 @@ button.dsq-button, button.dsq-button-small
 
 
 .challenge-header
-  padding: 25px
+  @media screen and (max-width: 986px)
+    padding: 1em 20px 2em 20px
+  @media screen and (min-width: 986px)
+    padding: 1em 30px 2em 30px
   border-bottom: 1px solid #ddd
   p
     font-size: 12px
-    line-height: 1.25
-    margin: 5px 0
+    //line-height: 1.25
+    margin: 10px 0 0 0
     width: 90%
   
 
 .challenge-heading
-  font-size: 32px
   font-weight: bold
   letter-spacing: 1px
-  line-height: 48px
+  //line-height: 48px
   text-transform: uppercase
+
+  @media screen and (min-width: 720px)
+    font-size: 220%
+  @media screen and (min-width: 986px)
+    font-size: 260%
 
 .challenge-pillar
   @media screen and (max-width: 720px)
@@ -1948,7 +1985,10 @@ button.dsq-button, button.dsq-button-small
     border-right: 1px solid #ddd //white
   
 .challenge-pillar-inner
-  padding: 20px 25px
+  @media screen and (max-width: 986px)
+    padding: 20px
+  @media screen and (min-width: 986px)
+    padding: 20px 30px 25px 30px
 
 .challenge-icon
   float: right
@@ -1969,7 +2009,7 @@ button.dsq-button, button.dsq-button-small
 
 .challenge-description
   font-size: 14px
-  margin-top: 20px
+  margin-top: 15px
   min-height: 3.5em
   line-height: 1.25
   
@@ -2006,7 +2046,10 @@ button.dsq-button, button.dsq-button-small
   float: left
   width: 80%
   position: relative
-  padding: 0 25px
+  @media screen and (min-width: 986px)
+    padding: 0 30px
+  @media screen and (min-width: 720px) and (max-width: 985px)
+    padding: 0 20px
 
 .challenge-stat
   margin-top: 20px
@@ -2062,7 +2105,7 @@ button.dsq-button, button.dsq-button-small
       margin-top: 10px
     .webkit &
       margin-top: 10px
-      width: 45%
+      width: 34%
     
 
 .campaign-submit

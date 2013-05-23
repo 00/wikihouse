@@ -291,6 +291,17 @@ class Community(RequestHandler):
             "dbfaa69ec6b06acc923908ba2be549b3"
           ]
         ]
+        # Get the avatars.
+        KEY_NAME = 'v1'
+        items = []
+        avatars = model.Avatars.get_by_key_name(KEY_NAME)
+        if avatars is not None:
+            urls = avatars.twitter_followers[:]
+            random.shuffle(urls)
+            for item in urls[:66]:
+                parts = item.split('.')
+                parts[-2] = u"%s_normal" % parts[-2]
+                items.append('.'.join(parts))
         
         # Do the cache fandango to keep Tav happy.
         set_edge_cache_headers(self.request, self.response)
@@ -304,7 +315,7 @@ class Community(RequestHandler):
             espra_signups = default_espra_signups
         
         contributors = model.User.get_all()
-        return self.render('community.tmpl', contributors=contributors,
+        return self.render('community.tmpl', contributors=contributors, avatars=items,
                 espra_signups=espra_signups)
     
 

@@ -1,4 +1,4 @@
-s//Variables
+//Variables
 
 $accentcolor: #DBD9C9
 $highlightcolor: #eee
@@ -422,31 +422,28 @@ a.wh-logo-cc
   padding: 4px $padding-02
 
 #main-menu
-  position: relative
-  height: 150px
-  margin-left: 235px
+  position: absolute //relative
+  //height: 150px
+  //margin-left: 235px
   font-weight: bold
+  //float: right
+  right: 0
+  bottom: 0
 
 @media screen and (max-width: 450px)
   #main-menu
-    margin-left: 160px
+    //margin-left: 160px
   .top-nav
     font-size: 95%
 
 .main-nav
-  text-align: center
-  position: absolute
+  //position: absolute
   bottom: 0
   right: 0
+  //display: inline-block
 
-@media screen and (max-width: 986px)
-  .main-nav
-    text-align: left
-
-.main-nav li
-  display: inline-block
-  #float: left
-  padding: 8px 18px
+  li
+    display: inline-block
 
 .main-nav li:hover
   background-color: #F9F9F9
@@ -454,14 +451,27 @@ a.wh-logo-cc
 .main-nav li.selected:hover
   background-color: #EEE
 
-@media screen and (max-width: 450px)
-  .main-nav li
-    font-size: 82%
+@media screen and (max-width: 986px)
+  .main-nav
+    text-align: left
+@media screen and (min-width: 986px)
+  .main-nav
+    text-align: center
+    display: table
+
+@media screen and (min-width: 986px)
+  .main-nav a li
+    padding: 8px 18px
+    float: left
+
+//@media screen and (max-width: 450px)
+  //.main-nav li
+    //font-size: 82%
 
 @media screen and (max-width: 986px)
   .main-nav li
     display: block
-    padding: 6px 2.4em
+    padding: 7px 4em 7px 2.4em
     // Hide the Home link when the page is small
   .main-nav a:first-child
     display: none
@@ -800,7 +810,7 @@ a.how-it-works
   margin: 0px auto
   width: 70%
   padding: 40px 15%
-  min-height: 200px !important
+  min-height: 70px !important
   @media screen and (max-width: 967px)
     width: 90%
     padding: 40px 5%
@@ -895,7 +905,7 @@ a.how-it-works
 .column-container .col:nth-child(1)
   left: 0%
   @media screen and (min-width: 720px)
-    width: 33.333%
+    width: 33% //33.333%
   @media screen and (max-width: 719px)
     width: 100%
 
@@ -905,7 +915,7 @@ a.how-it-works
 .column-container .col:nth-child(2)
   left: 0%
   @media screen and (min-width: 720px)
-    width: 33.333%
+    width: 34% //33.333%
   @media screen and (max-width: 719px)
     width: 100%
     border-top: 1px solid #ddd
@@ -914,14 +924,15 @@ a.how-it-works
   &:hover
     background: #ddd
 
-.column-container .col:nth-child(3)
+.column-container .col:last-child
   left: 0%
   @media screen and (min-width: 986px)
-    width: 33.334%
+    width: 33% //33.334%
   @media screen and (min-width: 720px) and (max-width: 985px)
-    width: 33.334%
+    width: 33% //33.334%
   @media screen and (max-width: 719px)
     width: 100%
+  float: right
 
   &:hover
     background: #ddd
@@ -932,15 +943,15 @@ a.how-it-works
     position: absolute
     z-index: -1
     top: 0
-    left: 33.333%
-    width: 33.1%
+    left: 33% //33.333%
+    width: 33.955% //33.1%
     height: 100%
     border-left: 1px solid #ddd
     border-right: 1px solid #ddd
     background: #eee
 
   .column-container:after
-    left: 66.667%
+    left: 67% //66.667%
     background: #fff
 
 .group-item
@@ -1024,7 +1035,10 @@ a.how-it-works
   img
     width: 100%
 
-
+.mobile-padding
+  @media screen and (max-width: 720px)
+    padding-left: 10px
+    padding-right: 10px
 
 //About Page Classes
 
@@ -1475,9 +1489,14 @@ input[type=image]
   margin-left: 55px
 
 .nav-list li
-  padding-bottom: 0.8em
+  padding-bottom: 0.3em
   font-weight: bold
   text-transform: uppercase
+  margin-bottom: 6px
+
+  &:hover
+    border-bottom: 1px solid grey
+    margin-bottom: 5px
 
 .nav-list li ul li
   padding-bottom: 0.8em
@@ -1565,8 +1584,14 @@ a.download-button-rb
 a.logo-00
   display: block
   background: transparent embed("logo.00.png") no-repeat 0 0
-  height: 75px
-  width: 75px
+  @media screen and (max-width: 720px)  
+    background-size: 50px 50px
+    height: 50px
+    width: 50px
+  @media screen and (min-width: 720px)
+    background-size: 75px 75px
+    height: 75px
+    width: 75px  
   margin: 0
   margin-left: 15px
   padding: 0
@@ -1579,8 +1604,14 @@ a.logo-00
 a.logo-esp
   display: block
   background: transparent embed("logo.esp.png") no-repeat 0 0
-  height: 75px
-  width: 75px
+  @media screen and (max-width: 720px)  
+    background-size: 50px 50px
+    height: 50px
+    width: 50px
+  @media screen and (min-width: 720px)
+    background-size: 75px 75px
+    height: 75px
+    width: 75px 
   margin: 0
   margin-left: 15px
   padding: 0
@@ -1630,8 +1661,33 @@ a.logo-gw
 a.logo-skp
   display: block
   background: transparent embed("logo.sketchup.png") no-repeat 0 0
-  height: 75px
-  width: 75px
+  @media screen and (max-width: 720px)  
+    background-size: 50px 50px
+    height: 50px
+    width: 50px
+  @media screen and (min-width: 720px)
+    background-size: 75px 75px
+    height: 75px
+    width: 75px 
+  margin: 0px
+  padding: 0
+  text-indent: -9999px
+  float: right
+
+  &:hover
+    //background-position: 0 -48px 
+
+a.logo-ted
+  display: block
+  background: transparent embed("logo.ted.png") no-repeat 0 0
+  @media screen and (max-width: 720px)  
+    background-size: 100px 50px
+    height: 50px
+    width: 100px
+  @media screen and (min-width: 720px)
+    background-size: 150px 75px
+    height: 75px
+    width: 150px 
   margin: 0px
   padding: 0
   text-indent: -9999px
@@ -1643,8 +1699,14 @@ a.logo-skp
 a.logo-mom
   display: block
   background: transparent embed("logo.momentum.png") no-repeat 0 0
-  height: 75px
-  width: 75px
+  @media screen and (max-width: 720px)  
+    background-size: 50px 50px
+    height: 50px
+    width: 50px
+  @media screen and (min-width: 720px)
+    background-size: 75px 75px
+    height: 75px
+    width: 75px 
   margin-left: 15px
   padding: 0
   text-indent: -9999px
@@ -1838,7 +1900,7 @@ button.dsq-button, button.dsq-button-small
 
 
 .black-bg
-  background-color: black
+  background-color: #222
   color: white
   a
     color: white
@@ -1850,6 +1912,7 @@ button.dsq-button, button.dsq-button-small
 
 .challenge-header
   padding: 25px
+  border-bottom: 1px solid #ddd
   p
     font-size: 12px
     line-height: 1.25
@@ -1865,17 +1928,27 @@ button.dsq-button, button.dsq-button-small
   text-transform: uppercase
 
 .challenge-pillar
-  width: 33.333333%
+  @media screen and (max-width: 720px)
+    border-bottom: 1px solid #ddd
+    &:nth-child(3n)
+      border-bottom: none
+  @media screen and (min-width: 986px)
+    width: 322px //33.333333%
+  @media screen and (max-width: 986px)
+    width: 233px
   float: left
   &:nth-child(2n)
-    border-left: 1px solid white
-    margin-left: -1px
-    border-right: 1px solid white
-    margin-right: -1px
+    @media screen and (min-width: 986px)
+      width: 320px //33.333333%    
+    @media screen and (min-width: 720px) and (max-width: 986px)
+      width: 232px
+      //margin-left: -1px
+      //margin-right: -1px
+    border-left: 1px solid #ddd //white  
+    border-right: 1px solid #ddd //white
   
-
 .challenge-pillar-inner
-  padding: 25px 25px 0 25px
+  padding: 20px 25px
 
 .challenge-icon
   float: right
@@ -1897,19 +1970,20 @@ button.dsq-button, button.dsq-button-small
 .challenge-description
   font-size: 14px
   margin-top: 20px
-  min-height: 6.5em
+  min-height: 3.5em
   line-height: 1.25
   
 .challenge-funding
   display: block
   position: relative
   height: 264px
-  margin-top: 10px
+  //margin-top: 10px
 
 .challenge-indicator
   float: right
-  width: 20%
+  width: 100% //20%
   height: 264px
+  position: absolute
 
 .indicator
   background-color: rgba(255, 255, 255, 0.075)
@@ -1920,15 +1994,19 @@ button.dsq-button, button.dsq-button-small
   .indicator-top-bar
     width: 100%
     height: 4px
-    background-color: white
-    margin-bottom: 4px
+    background-color: rgb(125,166,44) //black //white
+    //margin-bottom: 4px
   .indicator-level
-    background-color: white
-
+    background-color: #bdd68c //white
+    position: relative
+    opacity: 0.5
+    border-top: 1px solid #7da62c
 
 .challenge-stats
   float: left
-  width: 60%
+  width: 80%
+  position: relative
+  padding: 0 25px
 
 .challenge-stat
   margin-top: 20px
@@ -1938,6 +2016,7 @@ button.dsq-button, button.dsq-button-small
 .challenge-stat-value
   font-size: 38px
   line-height: 100%
+  font-weight: bold
 
 .challenge-stat-label
   text-transform: lowercase
@@ -1978,7 +2057,7 @@ button.dsq-button, button.dsq-button-small
 @media(max-width: 985px) and (min-width: 720px)
   .campaign-currency
     margin-top: 10px
-    width: 55%
+    width: 34%
     .moz &
       margin-top: 10px
     .webkit &
@@ -1994,9 +2073,16 @@ button.dsq-button, button.dsq-button-small
 
 .challenge-fund-link
   background: white
-  padding: 0px 15px 15px
+  @media screen and (min-width: 720px)
+    padding: 0px
+  @media screen and (max-width: 720px)
+    padding: 15px
   a
-    background-color: rgb(125,166,44)
+    @media screen and (min-width: 720px)
+      background-color: black
+    @media screen and (max-width: 720px)
+      background-color: rgb(125,166,44)
+    color: white
     display: block
     font-size: 22px
     letter-spacing: 1px
@@ -2006,7 +2092,10 @@ button.dsq-button, button.dsq-button-small
     text-align: center
     text-transform: uppercase
     &:hover
-      background-color: black
+      @media screen and (min-width: 720px)
+        background-color: rgb(125,166,44)
+      @media screen and (max-width: 720px)
+        background-color: black
 
 
 .visible-desktop

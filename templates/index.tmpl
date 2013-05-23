@@ -56,7 +56,7 @@
   </div>
 </%def>
 
-<%def name="donate_rows(top_row_cls='black-bg')">
+<%def name="donate_rows(top_row_cls='')">
   <div class="row ${top_row_cls} white-border-bottom">
     <div class="slot-12">
       <div class="challenge-header">
@@ -82,7 +82,7 @@
     
   -->
   <div class="hidden-phone border-bottom">
-    <div class="row black-bg">
+    <div class="row">
       % for campaign in campaigns:
         <div class="challenge-pillar">
           <div class="challenge-pillar-inner">
@@ -106,10 +106,10 @@
         </div>
       % endfor
     </div>
-    <div class="row black-bg">
+    <div class="row">
       % for campaign in campaigns:
-        <div class="challenge-pillar">
-          <div class="challenge-pillar-inner">
+         <div class="challenge-pillar">
+          <div style="border-bottom: 1px solid #ddd;">
             <div class="challenge-funding">
               <div class="challenge-indicator">
                 <div class="indicator">
@@ -169,8 +169,8 @@
     
     
   -->
-  <div class="visible-phone border-bottom">
-    <div class="row black-bg">
+  <div class="visible-phone">
+    <div class="row">
       % for campaign in campaigns:
         <div class="challenge-pillar">
           <div class="challenge-pillar-inner">
@@ -262,7 +262,7 @@
   <div id="support">
     ${self.donate_rows()}
   </div>
-  <div class="quotes border-bottom">
+  <div class="quotes">
     <div class="quote-logos row border-bottom">
       <ul>
         <li class="as-featured-in">
@@ -291,7 +291,7 @@
       % endfor
     </div>
   </div>
-  <div class="row border-bottom" style="overflow: hidden; height: 130px !important">
+  <!--<div class="row border-bottom" style="overflow: hidden; height: 130px !important">
     <img src="${get_static_url('gfx/TEDprize.strap.png')}" width="966px" />
   </div>
   ${self.links_row()}
@@ -309,5 +309,5 @@
       <div class="clear">
       </div>
     </div>
-  </div>
+  </div>-->
 </%def>

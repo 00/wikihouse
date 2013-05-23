@@ -22,7 +22,7 @@
 <%def name="overview_description()">
 </%def>
 
-<%def name="install_panel()">
+<%def name="download_panel()">
   <div class="row">
     <div class="slide">
       <a href="about#step-download"><img src="${get_static_url('gfx/slides/slide.02.png')}" /></a>
@@ -30,27 +30,27 @@
   </div>
 </%def>
 
-<%def name="install_nav_pre()">
+<%def name="download_nav_pre()">
   <div class="left">
     <a href="about#step-overview">&lt;</a>
   </div>
 </%def>
 
-<%def name="install_nav_next()">
+<%def name="download_nav_next()">
   <div class="right">
     <a href="about#step-download">&gt;</a>
   </div>
 </%def>
 
-<%def name="install_description()">
+<%def name="download_description()">
   <div>
     <div class="padding-all about-texts">
-      ${_(u"""Download houses and components which are created and shared by an open community of designers from around the world. """)}
+      ${_(u"""Download houses which are created and shared in an open library by a community of designers and makers from around the world. """)}
     </div>
   </div>
 </%def>
 
-<%def name="download_panel()">
+<%def name="make_panel()">
   <div class="row">
     <div class="slide">
       <a href="about#step-print"><img src="${get_static_url('gfx/slides/slide.03.png')}" /></a>
@@ -58,22 +58,22 @@
   </div>
 </%def>
 
-<%def name="download_nav_pre()">
+<%def name="make_nav_pre()">
   <div class="left">
     <a href="about#step-install">&lt;</a>
   </div>
 </%def>
 
-<%def name="download_nav_next()">
+<%def name="make_nav_next()">
   <div class="right">
     <a href="about#step-print">&gt;</a>
   </div>
 </%def>
 
-<%def name="download_description()">
+<%def name="make_description()">
   <div>
     <div class="padding-all about-texts">
-      ${_(u"""Click 'Make this House' from within Google Sketchup and WikiHouse will generate a complete set of milling drawings from your model, which can be used by a CNC cutter to fabricate the house parts.""")}
+      ${_(u"""Using the WikiHouse plugin for SketchUp, click 'make this house' to generate a set of cutting files for your house parts.""")}
     </div>
   </div>
 </%def>
@@ -101,12 +101,12 @@
 <%def name="print_description()">
   <div>
     <div class="padding-all about-texts">
-      ${_(u"""The parts are cut by a CNC mill using locally-sourced material. This is 18mm plywood, in the standard sheet size of 2440mm x 1220mm (8' x 4').""")}
+      ${_(u"""The parts can be 'printed' from a standard sheet material like plywood, using a CNC machine.""")}
     </div>
   </div>
 </%def>
 
-<%def name="assemble_panel()">
+<%def name="layout_panel()">
   <div class="row">
     <div class="slide">
       <a href="about#step-bolt"><img src="${get_static_url('gfx/slides/slide.05.png')}" /></a>
@@ -114,27 +114,27 @@
   </div>
 </%def>
 
-<%def name="assemble_nav_pre()">
+<%def name="layout_nav_pre()">
   <div class="left">
     <a href="about#step-print">&lt;</a>
   </div>
 </%def>
 
-<%def name="assemble_nav_next()">
+<%def name="layout_nav_next()">
   <div class="right">
     <a href="about#step-bolt">&gt;</a>
   </div>
 </%def>
 
-<%def name="assemble_description()">
+<%def name="layout_description()">
   <div>
     <div class="padding-all about-texts">
-      ${_(u"""Set out the parts for each section onto the ground, assembling it like a double-layered jigsaw. You won't need any power tools.""")}
+      ${_(u"""Set out the numbered parts on the ground like a double-layered jigsaw to assemble a house frame.""")}
     </div>
   </div>
 </%def>
 
-<%def name="bolt_panel()">
+<%def name="assemble_panel()">
   <div class="row">
     <div class="slide">
       <a href="about#step-raise"><img src="${get_static_url('gfx/slides/slide.06.png')}" /></a>
@@ -142,22 +142,22 @@
   </div>
 </%def>
 
-<%def name="bolt_nav_pre()">
+<%def name="assemble_nav_pre()">
   <div class="left">
     <a href="about#step-assemble">&lt;</a>
   </div>
 </%def>
 
-<%def name="bolt_nav_next()">
+<%def name="assemble_nav_next()">
   <div class="right">
     <a href="about#step-raise">&gt;</a>
   </div>
 </%def>
 
-<%def name="bolt_description()">
+<%def name="assemble_description()">
   <div>
     <div class="padding-all about-texts">
-    ${_(u"""Bolt together the two layers to form a single section.""")}
+    ${_(u"""The system does not need bolts. Parts are joined using wedges and pegs. Even the mallets are cut with the house.""")}
     </div>
   </div>
 </%def>
@@ -185,12 +185,12 @@
 <%def name="raise_description()">
   <div>
     <div class="padding-all about-texts">
-    ${_(u"""Invite friends and family to help with the 'barn-raising'. Stand the sections up vertically, positioning them approximately at 550mm intervals. """)}
+    ${_(u"""Invite friends and family for the 'barn-raising'. The lightweight frames can be raised by hand, and connected into a house structure. """)}
     </div>
   </div>
 </%def>
 
-<%def name="primary_panel()">
+<%def name="panels_panel()">
   <div class="row">
     <div class="slide">
       <a href="about#step-secondary"><img src="${get_static_url('gfx/slides/slide.08.png')}" /></a>
@@ -198,78 +198,22 @@
   </div>
 </%def>
 
-<%def name="primary_nav_pre()">
+<%def name="panels_nav_pre()">
   <div class="left">
     <a href="about#step-raise">&lt;</a>
   </div>
 </%def>
 
-<%def name="primary_nav_next()">
+<%def name="panels_nav_next()">
   <div class="right">
     <a href="about#step-secondary">&gt;</a>
   </div>
 </%def>
 
-<%def name="primary_description()">
+<%def name="panels_description()">
   <div>
     <div class="padding-all about-texts">
-    ${_(u"""Insert the primary connectors to stabilise the structure. Use the mallet provided on the milling sheets to hammer the pegs into place.""")}
-    </div>
-  </div>
-</%def>
-
-<%def name="secondary_panel()">
-  <div class="row">
-    <div class="slide">
-      <a href="about#step-facings"><img src="${get_static_url('gfx/slides/slide.09.png')}" /></a>
-    </div>
-  </div>
-</%def>
-
-<%def name="secondary_nav_pre()">
-  <div class="left">
-    <a href="about#step-primary">&lt;</a>
-  </div>
-</%def>
-
-<%def name="secondary_nav_next()">
-  <div class="right">
-    <a href="about#step-facings">&gt;</a>
-  </div>
-</%def>
-
-<%def name="secondary_description()">
-  <div>
-    <div class="padding-all about-texts">
-    ${_(u"""Fit the secondary connectors into the slots in the section.""")}
-    </div>
-  </div>
-</%def>
-
-<%def name="facings_panel()">
-  <div class="row">
-    <div class="slide">
-      <a href="about#step-services"><img src="${get_static_url('gfx/slides/slide.10.png')}" /></a>
-    </div>
-  </div>
-</%def>
-
-<%def name="facings_nav_pre()">
-  <div class="left">
-    <a href="about#step-secondary">&lt;</a>
-  </div>
-</%def>
-
-<%def name="facings_nav_next()">
-  <div class="right">
-    <a href="about#step-services">&gt;</a>
-  </div>
-</%def>
-
-<%def name="facings_description()">
-  <div>
-    <div class="padding-all about-texts">
-    ${_(u"""Fit the internal and external cladding panels onto the structure. Internally these usually need to be screwed into place.""")}
+    ${_(u"""Panels are then screwed into place. A small team can assemble a single-storey house in about a day.""")}
     </div>
   </div>
 </%def>
@@ -277,27 +221,55 @@
 <%def name="services_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-start"><img src="${get_static_url('gfx/slides/slide.11.png')}" /></a>
+      <a href="about#step-facings"><img src="${get_static_url('gfx/slides/slide.09.png')}" /></a>
     </div>
   </div>
 </%def>
 
 <%def name="services_nav_pre()">
   <div class="left">
-    <a href="about#step-facings">&lt;</a>
+    <a href="about#step-primary">&lt;</a>
   </div>
 </%def>
 
 <%def name="services_nav_next()">
   <div class="right">
-    <a href="about#step-start">&gt;</a>
+    <a href="about#step-facings">&gt;</a>
   </div>
 </%def>
 
 <%def name="services_description()">
   <div>
     <div class="padding-all about-texts">
-    ${_(u"""The structure is ready for insulation, cladding, sealing, and services.""")}
+    ${_(u"""The chassis is then ready to receive other parts like cladding, services, insulation, and windows. """)}
+    </div>
+  </div>
+</%def>
+
+<%def name="commons_panel()">
+  <div class="row">
+    <div class="slide">
+      <a href="about#step-services"><img src="${get_static_url('gfx/slides/slide.10.png')}" /></a>
+    </div>
+  </div>
+</%def>
+
+<%def name="commons_nav_pre()">
+  <div class="left">
+    <a href="about#step-secondary">&lt;</a>
+  </div>
+</%def>
+
+<%def name="commons_nav_next()">
+  <div class="right">
+    <a href="about#step-services">&gt;</a>
+  </div>
+</%def>
+
+<%def name="commons_description()">
+  <div>
+    <div class="padding-all about-texts">
+    ${_(u"""Together, we can develop open solutions to all of these parts - a global commons of low-cost, high-performance products; a 'wikipedia of stuff'.""")}
     </div>
   </div>
 </%def>
@@ -416,38 +388,35 @@
             'slug': 'overview',
             'title': _(u'0')
         }, {
-            'slug': 'install',
+            'slug': 'download',
             'title': _(u'1')
         }, {
-            'slug': 'download',
+            'slug': 'make',
             'title': _(u'2')
         }, {
             'slug': 'print',
             'title': _(u'3')
         }, {
-            'slug': 'assemble',
+            'slug': 'layout',
             'title': _(u'4')
         }, {
-            'slug': 'bolt',
+            'slug': 'assemble',
             'title': _(u'5')
         }, {
             'slug': 'raise',
             'title': _(u'6')
         }, {
-            'slug': 'primary',
+            'slug': 'panels',
             'title': _(u'7')
         }, {
-            'slug': 'secondary',
+            'slug': 'services',
             'title': _(u'8')
         }, {
-            'slug': 'facings',
+            'slug': 'commons',
             'title': _(u'9')
         }, {
-            'slug': 'services',
-            'title': _(u'10')
-        }, {
             'slug': 'start',
-            'title': _(u'11')
+            'title': _(u'10')
         }
     ]
   %>

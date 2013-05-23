@@ -4,7 +4,7 @@
 
 <%def name="overview_panel()">
   <div class="row">
-    <a href="about#step-install"><div class="slide padding-all">
+    <a href="about#step-download"><div class="slide padding-all">
       <div class="super-text"><p>${_(u"""WikiHouse is an open source construction set. It's aim is to allow anyone to design, download, and 'print' CNC-milled houses and components, which can be assembled with minimal formal skill or training.""")}</p></div>
     </div></a>
   </div>
@@ -15,7 +15,7 @@
 
 <%def name="overview_nav_next()">
   <div class="right">
-    <a href="about#step-install">&gt;</a>
+    <a href="about#step-download">&gt;</a>
   </div>
 </%def>
 
@@ -25,7 +25,7 @@
 <%def name="download_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-download"><img src="${get_static_url('gfx/slides/slide.02.png')}" /></a>
+      <a href="about#step-make"><img src="${get_static_url('gfx/slides/slide.02.png')}" /></a>
     </div>
   </div>
 </%def>
@@ -38,7 +38,7 @@
 
 <%def name="download_nav_next()">
   <div class="right">
-    <a href="about#step-download">&gt;</a>
+    <a href="about#step-make">&gt;</a>
   </div>
 </%def>
 
@@ -60,7 +60,7 @@
 
 <%def name="make_nav_pre()">
   <div class="left">
-    <a href="about#step-install">&lt;</a>
+    <a href="about#step-download">&lt;</a>
   </div>
 </%def>
 
@@ -81,20 +81,20 @@
 <%def name="print_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-assemble"><img src="${get_static_url('gfx/slides/slide.04.png')}" /></a>
+      <a href="about#step-layout"><img src="${get_static_url('gfx/slides/slide.04.png')}" /></a>
     </div>
   </div>
 </%def>
 
 <%def name="print_nav_pre()">
   <div class="left">
-    <a href="about#step-download">&lt;</a>
+    <a href="about#step-make">&lt;</a>
   </div>
 </%def>
 
 <%def name="print_nav_next()">
   <div class="right">
-    <a href="about#step-assemble">&gt;</a>
+    <a href="about#step-layout">&gt;</a>
   </div>
 </%def>
 
@@ -109,7 +109,7 @@
 <%def name="layout_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-bolt"><img src="${get_static_url('gfx/slides/slide.05.png')}" /></a>
+      <a href="about#step-assemble"><img src="${get_static_url('gfx/slides/slide.05.png')}" /></a>
     </div>
   </div>
 </%def>
@@ -122,7 +122,7 @@
 
 <%def name="layout_nav_next()">
   <div class="right">
-    <a href="about#step-bolt">&gt;</a>
+    <a href="about#step-assemble">&gt;</a>
   </div>
 </%def>
 
@@ -144,7 +144,7 @@
 
 <%def name="assemble_nav_pre()">
   <div class="left">
-    <a href="about#step-assemble">&lt;</a>
+    <a href="about#step-layout">&lt;</a>
   </div>
 </%def>
 
@@ -165,20 +165,20 @@
 <%def name="raise_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-primary"><img src="${get_static_url('gfx/slides/slide.07.png')}" /></a>
+      <a href="about#step-panels"><img src="${get_static_url('gfx/slides/slide.07.png')}" /></a>
     </div>
   </div>
 </%def>
 
 <%def name="raise_nav_pre()">
   <div class="left">
-    <a href="about#step-bolt">&lt;</a>
+    <a href="about#step-assemble">&lt;</a>
   </div>
 </%def>
 
 <%def name="raise_nav_next()">
   <div class="right">
-    <a href="about#step-primary">&gt;</a>
+    <a href="about#step-panels">&gt;</a>
   </div>
 </%def>
 
@@ -193,7 +193,7 @@
 <%def name="panels_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-secondary"><img src="${get_static_url('gfx/slides/slide.08.png')}" /></a>
+      <a href="about#step-services"><img src="${get_static_url('gfx/slides/slide.08.png')}" /></a>
     </div>
   </div>
 </%def>
@@ -206,7 +206,7 @@
 
 <%def name="panels_nav_next()">
   <div class="right">
-    <a href="about#step-secondary">&gt;</a>
+    <a href="about#step-services">&gt;</a>
   </div>
 </%def>
 
@@ -221,20 +221,20 @@
 <%def name="services_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-facings"><img src="${get_static_url('gfx/slides/slide.09.png')}" /></a>
+      <a href="about#step-commons"><img src="${get_static_url('gfx/slides/slide.09.png')}" /></a>
     </div>
   </div>
 </%def>
 
 <%def name="services_nav_pre()">
   <div class="left">
-    <a href="about#step-primary">&lt;</a>
+    <a href="about#step-panels">&lt;</a>
   </div>
 </%def>
 
 <%def name="services_nav_next()">
   <div class="right">
-    <a href="about#step-facings">&gt;</a>
+    <a href="about#step-commons">&gt;</a>
   </div>
 </%def>
 
@@ -249,20 +249,20 @@
 <%def name="commons_panel()">
   <div class="row">
     <div class="slide">
-      <a href="about#step-services"><img src="${get_static_url('gfx/slides/slide.10.png')}" /></a>
+      <a href="about#step-start"><img src="${get_static_url('gfx/slides/slide.10.png')}" /></a>
     </div>
   </div>
 </%def>
 
 <%def name="commons_nav_pre()">
   <div class="left">
-    <a href="about#step-secondary">&lt;</a>
+    <a href="about#step-services">&lt;</a>
   </div>
 </%def>
 
 <%def name="commons_nav_next()">
   <div class="right">
-    <a href="about#step-services">&gt;</a>
+    <a href="about#step-start">&gt;</a>
   </div>
 </%def>
 
@@ -317,7 +317,7 @@
 
 <%def name="start_nav_pre()">
   <div class="left">
-    <a href="about#step-services">&lt;</a>
+    <a href="about#step-commons">&lt;</a>
   </div>
 </%def>
 

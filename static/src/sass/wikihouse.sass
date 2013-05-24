@@ -482,10 +482,18 @@ a.wh-logo-cc
 @media screen and (max-width: 986px)
   .main-nav li
     display: block
-    padding: 7px 4em 7px 2.4em
-    // Hide the Home link when the page is small
+  // Hide the Home link when the page is small
   .main-nav a:first-child
     display: none
+
+@media screen and (min-width: 450px) and (max-width: 986px)
+  .main-nav li
+    padding: 7px 4em 7px 2.4em
+    
+
+@media screen and (max-width: 450px)
+  .main-nav li
+    padding: 7px 1em 7px 1.5em
 
 .series
   padding-bottom: 1em
@@ -781,7 +789,7 @@ a.how-it-works
       width: 150px
       img
         width: 100%
-      @media screen and (max-width: 967px)
+      @media screen and (max-width: 986px)
         width: 129px
       &.as-featured-in
         padding-top: 35px
@@ -789,7 +797,7 @@ a.how-it-works
         margin-left: 10px
         font-size: 19px
         letter-spacing: 0.25px
-        @media screen and (max-width: 967px)
+        @media screen and (max-width: 986px)
           display: none
       &.active
         border-bottom: 1px solid black
@@ -1730,7 +1738,10 @@ a.logo-mom
     //background-position: 0 -48px 
 
 a.logo-fh
-  display: block
+  @media screen and (max-width: 500px)
+    display: none
+  @media screen and (min-wdith: 500px)
+    display: block
   background: transparent embed("logo.fabhub.png") no-repeat 0 0
   @media screen and (max-width: 720px)  
     background-size: 100px 50px

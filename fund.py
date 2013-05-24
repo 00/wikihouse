@@ -56,6 +56,7 @@ class InstantPaymentNotificationHandler(RequestHandler):
         response = do_actual_ipn_handling(request.body, request.POST)
         if response != "OK":
             logging.info("IPN RETCODE: %s" % response)
+            logging.info("PAYLOAD: %r" % request.POST)
         return response
     
 

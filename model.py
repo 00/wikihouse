@@ -32,7 +32,7 @@ CAMPAIGNS = [(
         .dxf cutting file.'
     ), (
         'hardware', 
-        240000, 
+        140000, 
         'Hardware',
         'Full House', 
         'Hardware',
@@ -41,7 +41,7 @@ CAMPAIGNS = [(
         so anyone can build it for themselves.'
     ), (
         'platform',
-        240000,
+        80000,
         'WikiHouse',
         'Platform',
         'Platform',

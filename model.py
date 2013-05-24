@@ -41,7 +41,7 @@ CAMPAIGNS = [(
         so anyone can build it for themselves.'
     ), (
         'platform',
-        80000,
+        240000,
         'WikiHouse',
         'Platform',
         'Platform',

@@ -23,7 +23,7 @@ from utils import render_number_with_commas
 
 CAMPAIGNS = [(
         'sketchup',
-        12000,
+        5000,
         'SketchUp',
         'Plugin',
         'SketchUp Plugin',
@@ -32,22 +32,22 @@ CAMPAIGNS = [(
         .dxf cutting file.'
     ), (
         'hardware', 
-        140000, 
+        20000, 
         'Hardware',
         'Full House', 
         'Hardware',
-        'Design, construct and document the first full WikiHouse - completed, tested\
-        and lived-in, with designs, instructions and costings shared openly online,\
-        so anyone can build it for themselves.'
+        'A complete test module tiny-house prototype, with footings, skin and\
+        insulation. Sensors to monitor performance. Documented and shared so\
+        anyone can build it for themselves.'
     ), (
         'platform',
-        80000,
+        20000,
         'WikiHouse',
         'Platform',
         'Platform',
-        "Help create the Wikipedia of things. Use it to easily create and customize\
-        designs right within your browser, get them made to your liking, and\
-        be rewarded as part of the sharing economy!"
+        'Help create the Wikipedia of things by funding an improved community\
+        sharing site, with collaboration and easy to use documentation tools\
+        making it easy to download and document designs.'
     )
 ]
 

@@ -94,6 +94,9 @@ mapping = [(
         r'/activity',
         ActivityScreen
     ), (
+        r'/txns',
+        TxnList
+    ), (
         r'/blob64/([^/]+)/([^/]+)\/?',
         Base64Blob
     ), (

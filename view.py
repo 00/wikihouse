@@ -310,8 +310,8 @@ class Community(RequestHandler):
         try:
             espra_signups = decode_json(urlfetch(endpoint).content)
         except Exception as err:
-            logging.error("Error fetching espra signups")
-            logging.error(err, exc_info=True)
+            logging.info("Error fetching espra signups")
+            logging.info(err, exc_info=True)
             espra_signups = default_espra_signups
         
         contributors = model.User.get_all()
@@ -1045,7 +1045,7 @@ class Base64Blob(RequestHandler):
         response = self.response
         key = str(urllib.unquote(key))
         blob_info = blobstore.BlobInfo.get(key)
-        response.headers['Content-Type'] = blob_info.content_type
+        response.headers['Content-Type'] = str(blob_info.content_type)
         blob_reader = blob_info.open(buffer_size=921600)
         while 1:
             chunk = blob_reader.read(921600)
@@ -1059,6 +1059,19 @@ class Base64Blob(RequestHandler):
         
     
     
+
+class TxnList(RequestHandler):
+    """
+    """
+
+    def get(self, *args):
+        listing = []; out = listing.append
+        for p in model.PayPalTransaction.all().order('c').fetch(1000):
+            out(p.info_payload)
+        return '\n'.join(listing)
+
+
+
 
 class MessageStrings(RequestHandler):
     """ Return a translated dictionary of message strings using the keys

@@ -258,24 +258,20 @@
 
 <%def name="content()">
   <div class="super-graphic row">
-    <div id="splash-container">
-      <div class="splash-text-container">
-        <a href="#support" title="Join the Community">
-          <div class="splash-text">
-            Open Source Construction<span class="splash-text-set"> Set</span>
-            <div class="splash-text-call-to-action">
-              Support the project &raquo;
-            </div>
-          </div>
-        </a>
+    <a href="#play-video" id="play-video" title="Play the Video">
+      <div id="splash-image-container">
+        <img src="${get_static_url('gfx/wikihouse-mac.jpg')}" />
+        <div id="fitvid-container"></div>
       </div>
-      <a href="#play-video" id="play-video" title="Play the Video">
-        <div class="splash-image-container">
-          <img src="${get_static_url('gfx/wikihouse-mac.jpg')}" />
-        </div>
-      </a>
+    </a>
+    <div id="subscribe-container">
+      <h1>Keep Updated on Progress!</h1>
+      <a id="subscribe-twitter" href="https://twitter.com/intent/follow?screen_name=wikihouse"><img src="${get_static_url('gfx/twitter.bg.png')}" width="50px" height="50px">Follow @wikihouse</a>
+      <form action="http://wikihouse.us7.list-manage.com/subscribe/post?u=9cb36cd54ce215d9c35120b4e&amp;id=a9aeb9bd90" method="post">
+        <input id="subscribe-email" type="email" value="" name="EMAIL" placeholder="Email address" required>
+        <input id="subscribe-submit" type="submit" value=" Subscribe! " name="subscribe">
+      </form>
     </div>
-    <div id="fitvid-container"></div>
   </div>
   <div id="support">
     ${self.donate_rows()}

@@ -10,12 +10,17 @@ $(document).ready ->
   
   $play_video = $ '#play-video'
   $play_video.click ->
-      $splash_container = $ '#splash-container'
-      $splash_container.hide()
+      $container = $('#splash-image-container img')
+      width = $container.width()
+      height = $container.height()
+      $container.hide()
       $vid_container = $ '#fitvid-container'
+      $vid_container.show()
+      $vid_container.width(width)
+      $vid_container.height(height)
       $vid_container.html """
         <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1"
-            width="968" height="544" 
+            width="968" height="514"
             frameborder="0" 
             webkitAllowFullScreen 
             mozallowfullscreen 

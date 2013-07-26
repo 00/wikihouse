@@ -14,13 +14,15 @@ $(document).ready ->
       width = $container.width()
       height = $container.height()
       $container.hide()
+      $splash_container = $ '#splash-container'
+      $splash_container.hide()
       $vid_container = $ '#fitvid-container'
       $vid_container.show()
       $vid_container.width(width)
       $vid_container.height(height)
       $vid_container.html """
-        <iframe src="//player.vimeo.com/video/52383144?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff&amp;autoplay=1"
-            width="968" height="514"
+        <iframe src="//www.youtube.com/embed/Mlt6kaNjoeI?autoplay=1&showinfo=0&theme=light&color=white&start=12"
+            width="968" height="545"
             frameborder="0" 
             webkitAllowFullScreen 
             mozallowfullscreen 

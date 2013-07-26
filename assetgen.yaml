@@ -9,7 +9,7 @@ generate:
       - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.cycle.lite.js
       - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.parsequery.js
       - %(AMPIFY_ROOT)s/third_party/jslibs/jquery/plugins/jquery.url.js
-      - https://raw.github.com/davatron5000/FitVids.js/master/jquery.fitvids.js
+      - %(AMPIFY_ROOT)s/third_party/jslibs/jquery.fitvids.js
       - %(AMPIFY_ROOT)s/third_party/jslibs/css3-mediaqueries.js
       - static/src/coffee/*.coffee
       - raw: |

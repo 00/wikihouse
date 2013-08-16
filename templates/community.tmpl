@@ -12,155 +12,161 @@
 </%def>
 
 <%def name="content()">
-    <div class="slot-7-8-9 padding-top-bottom content-pane mobile-padding">
-      <div class="row">
-        <div class="padding-right">
-          <h1>Join The Community</h1>
-          <p>
-            WikiHouse is being developed collaboratively by a small – but growing
-            – community of people all around the world.  There is no fixed design
-            'team' or 'studio', but a steadily growing community of designers
-            from all disciplines who share in common the belief that developing
-            freely available design solutions which are affordable, sustainable,
-            and adaptive to differing needs is a worthwhile aim.
-          </p>
-          <p>
-            Anyone who is interested in, or is already working on, problems around
-            this area is invited to join the groups below. You can also
-            <a href="${get_static_url('doc/Constitution_draft_v4.pdf')}">
-              <strong style="font-weight: bold">
-                download the WikiHouse constitution</strong></a>,
-            which explains how WikiHouse is licensed and organised, and how to
-            start a WikiHouse Chapter.
-          </p>
-        </div>
-      </div>    
-    </div>
-    <div class="slot-6 padding-top-bottom mobile-padding">
-      <div class="row padding-bottom">
-        <h4>${_(u'Elsewhere on the Web')}</h4>
-      </div>
-      <div class="row padding-bottom padding-right">
-        <ul class="nav-list">
-          <li>
-            <a target="blank" href="http://twitter.com/wikihouse"
-                title="${_(u'@wikihouse on Twitter')}">
-              ${_(u'@wikihouse on Twitter')}
-            </a>
-          </li>
-          <li>
-            <a target="blank" href="http://github.com/thruflo/wikihouse"
-                title="${_(u'Website Repo on GitHub')}">
-              ${_(u'Website Repo on GitHub')}
-            </a>
-          </li>
-          <li>
-            <a target="blank" href="http://github.com/tav/wikihouse-plugin"
-                title="${_(u'Sketchup Plugin on GitHub')}">
-              ${_(u'Sketchup Plugin on GitHub')}
-            </a>
-          </li>
-          <!--li><a target="blank" href="http://flattr.com/thing/364964/Wiki-House" title="${_(u'Donate on Flattr')}">${_(u'Donate on Flattr')}</a></li-->
+  <div class="row overflow-hidden avatars">
+    <div class="">
+      <a href="/community" title="${_(u'WikiHouse Community')}">
+        <ul class="right avatars-widget inner-shadow">
+          % for item in avatars:
+            <li class="right home-avatar">
+              <img src="${item}" />
+            </li>
+          % endfor
         </ul>
+      </a>
+      <div class="clear">
       </div>
     </div>
-    <div class="slot-12 padding-top content-pane">
-        <div class="row border-top">
-            <div class="community-feed">
-              <ul class="espra-signups-listing">
-                % for item in espra_signups:
-                  <%
-                    name = item[0]
-                    username = item[1]
-                    join_time = item[2]
-                    email_hash = item[3]
-                    endpoint = u'https://secure.gravatar.com/avatar'
-                    gravatar = u'{0}/{1}?s=80&d=mm'.format(endpoint, email_hash)
-                  %>
-                  <li class="espra-signup">
-                    <div class="espra-profile">
-                      <a href="https://proto.espra.com/+${username}">
-                        <img src="${gravatar}" />
-                        ${name}
-                      </a>
-                      <div class="timestamp">${join_time}</div>
-                    </div>
-                  </li>
-                % endfor
-              </ul>
-            </div>
-            <div class="group column-container">
-                <div class="col">
-                    <a title="WikiHouse General Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse">
-                    <div class="group-item">
-                        <div class="group-id">
-                            Google Group A
-                        </div>
-                        <div class="group-title">
-                            General Project
-                        </div>
-                        <div class="group-body">
-                            Project organisation, goals, licensing and the open charter.
-                        </div>
-                        <div class="group-footer">
-                            Join The Group >
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a title="WikiHouse Hardware Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse-hardware">
-                    <div class="group-item">
-                        <div class="group-id">
-                            Google Group B
-                        </div>
-                        <div class="group-title">
-                            Hardware
-                        </div>
-                        <div class="group-body">
-                            Open construction methods, materials, planning and processes.
-                        </div>
-                        <div class="group-footer">
-                            Join The Group >
-                        </div>
-                    </div>
-                    </a>
-                </div>
-                <div class="col">
-                    <a title="WikiHouse Software Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse-software">
-                    <div class="group-item">
-                        <div class="group-id">
-                            Google Group C
-                        </div>
-                        <div class="group-title">
-                            Software
-                        </div>
-                        <div class="group-body">
-                            Open code, automated design and file sharing tools.
-                        </div>
-                        <div class="group-footer">
-                            Join The Group >
-                        </div>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row overflow-hidden avatars">
-      <div class="">
-        <a href="/community" title="${_(u'WikiHouse Community')}">
-          <ul class="right avatars-widget inner-shadow">
-            % for item in avatars:
-              <li class="right home-avatar">
-                <img src="${item}" />
-              </li>
-            % endfor
-          </ul>
-        </a>
-        <div class="clear">
-        </div>
+  </div>
+  <div class="slot-7-8-9 padding-top-bottom content-pane mobile-padding">
+    <div class="row">
+      <div class="padding-right">
+        <h1>Join The Community</h1>
+        <p>
+          WikiHouse is being developed collaboratively by a small – but growing
+          – community of people all around the world.  There is no fixed design
+          'team' or 'studio', but a steadily growing community of designers
+          from all disciplines who share in common the belief that developing
+          freely available design solutions which are affordable, sustainable,
+          and adaptive to differing needs is a worthwhile aim.
+        </p>
+        <p>
+          Anyone who is interested in, or is already working on, problems around
+          this area is invited to join the groups below. You can also
+          <a href="${get_static_url('doc/Constitution_draft_v4.pdf')}">
+            <strong style="font-weight: bold">
+              download the WikiHouse constitution</strong></a>,
+          which explains how WikiHouse is licensed and organised, and how to
+          start a WikiHouse Chapter.
+        </p>
       </div>
+    </div>    
+  </div>
+  <div class="slot-6 padding-top-bottom mobile-padding">
+    <div class="row padding-bottom">
+      <h4>${_(u'Elsewhere on the Web')}</h4>
     </div>
-    ${index_tmpl.links_row()}
+    <div class="row padding-bottom padding-right">
+      <ul class="nav-list">
+        <li>
+          <a target="blank" href="http://twitter.com/wikihouse"
+              title="${_(u'@wikihouse on Twitter')}">
+            ${_(u'@wikihouse on Twitter')}
+          </a>
+        </li>
+        <li>
+          <a target="blank" href="http://github.com/thruflo/wikihouse"
+              title="${_(u'Website Repo on GitHub')}">
+            ${_(u'Website Repo on GitHub')}
+          </a>
+        </li>
+        <li>
+          <a target="blank" href="http://github.com/tav/wikihouse-plugin"
+              title="${_(u'Sketchup Plugin on GitHub')}">
+            ${_(u'Sketchup Plugin on GitHub')}
+          </a>
+        </li>
+        <!--li><a target="blank" href="http://flattr.com/thing/364964/Wiki-House" title="${_(u'Donate on Flattr')}">${_(u'Donate on Flattr')}</a></li-->
+      </ul>
+    </div>
+  </div>
+  <div class="slot-12 padding-top content-pane">
+      <div class="row border-top">
+          <div class="community-feed">
+            <ul class="espra-signups-listing">
+              % for item in espra_signups:
+                <%
+                  name = item[0]
+                  username = item[1]
+                  join_time = item[2]
+                  email_hash = item[3]
+                  endpoint = u'https://secure.gravatar.com/avatar'
+                  gravatar = u'{0}/{1}?s=80&d=mm'.format(endpoint, email_hash)
+                %>
+                <li class="espra-signup">
+                  <div class="espra-profile">
+                    <a href="https://proto.espra.com/+${username}">
+                      <img src="${gravatar}" />
+                      ${name}
+                    </a>
+                    <div class="timestamp">${join_time}</div>
+                  </div>
+                </li>
+              % endfor
+            </ul>
+          </div>
+          <div class="group column-container">
+              <div class="col">
+                  <a title="WikiHouse General Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse">
+                  <div class="group-item">
+                      <div class="group-id">
+                          Google Group A
+                      </div>
+                      <div class="group-title">
+                          General Project
+                      </div>
+                      <div class="group-body">
+                          Project organisation, goals, licensing and the open charter.
+                      </div>
+                      <div class="group-footer">
+                          Join The Group >
+                      </div>
+                  </div>
+                  </a>
+              </div>
+              <div class="col">
+                  <a title="WikiHouse Hardware Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse-hardware">
+                  <div class="group-item">
+                      <div class="group-id">
+                          Google Group B
+                      </div>
+                      <div class="group-title">
+                          Hardware
+                      </div>
+                      <div class="group-body">
+                          Open construction methods, materials, planning and processes.
+                      </div>
+                      <div class="group-footer">
+                          Join The Group >
+                      </div>
+                  </div>
+                  </a>
+              </div>
+              <div class="col">
+                  <a title="WikiHouse Software Google Group" target="blank" href="https://groups.google.com/forum/?fromgroups#!forum/wikihouse-software">
+                  <div class="group-item">
+                      <div class="group-id">
+                          Google Group C
+                      </div>
+                      <div class="group-title">
+                          Software
+                      </div>
+                      <div class="group-body">
+                          Open code, automated design and file sharing tools.
+                      </div>
+                      <div class="group-footer">
+                          Join The Group >
+                      </div>
+                  </div>
+                  </a>
+              </div>
+          </div>
+          <iframe src="https://groups.google.com/forum/embed/?place=forum/wikihouse&hideforumtitle=true&parenturl=http%3A%2F%2Fwww.wikihouse.cc%2Fcommunity"
+             scrolling="no"
+             frameborder="0"
+             width="100%"
+             height="2100">
+          </iframe>
+      </div>
+  </div>
+  ${index_tmpl.links_row()}
 </%def>

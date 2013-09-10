@@ -129,7 +129,7 @@
               ${_(u'structurally checked, tested &amp; built.')}
             % endif
           </div>
-          % if is_admin or is_user:
+          % if True: # is_admin or is_user:
             % if target.notes:
               <div class="notes padding-top-large">
                 <span class="section-heading">${_(u'Notes:')}</span> ${target.notes}

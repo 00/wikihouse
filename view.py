@@ -319,6 +319,19 @@ class Community(RequestHandler):
                 espra_signups=espra_signups)
     
 
+class News(RequestHandler):
+    """Render the news page."""
+    
+    def get(self):
+        """Set cache headers and render the template."""
+        
+        # Do the cache fandango to keep Tav happy.
+        set_edge_cache_headers(self.request, self.response)
+        
+        return self.render('news.tmpl')
+    
+
+
 class Support(RequestHandler):
     """Render the support page."""
     

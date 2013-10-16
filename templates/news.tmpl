@@ -1,0 +1,21 @@
+<%inherit file="base.tmpl"/>
+<%namespace name="index_tmpl" file="index.tmpl"/>
+
+<%def name="sub_title()">${_(u'Community')}</%def>
+
+<%def name="user_listing(item)">
+  <li>
+    <a href="/library/users/${item.id}" title="${item.nickname}">
+      <img src="${item.avatar and item.avatar or item.get_gravatar()}" />
+    </a>
+  </li>
+</%def>
+
+<%def name="content()">
+  <div class="padding-top-bottom content-pane">
+    <script type="text/javascript" class="rebelmouse-embed-script"
+        src="https://www.rebelmouse.com/static/js-build/embed/embed.js?site=WikiHouse&height=1500&flexible=1&show_rebelnav=1">
+    </script>
+  </div>
+  ${index_tmpl.links_row()}
+</%def>

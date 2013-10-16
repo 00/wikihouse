@@ -34,6 +34,9 @@ mapping = [(
         r'/community\/?',
         Community
     ), (
+        r'/news\/?',
+        News
+    ), (
         r'/support\/?',
         Support
     ), (

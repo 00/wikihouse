@@ -27,7 +27,7 @@ def get_exchange_rate_to_gbp(currency, cache={}):
         return cache.setdefault(currency, rate)
     url = "https://rate-exchange.appspot.com/currency?from=%s&to=GBP" % currency
     try:
-        rate = decode_json(urlfetch(url).content)['rate']
+        rate = float(decode_json(urlfetch(url).content)['rate'])
     except Exception, err:
         logging.error("currency conversion: %s" % err)
         return 0

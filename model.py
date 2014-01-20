@@ -22,14 +22,13 @@ from utils import get_exchange_rate_to_gbp
 from utils import render_number_with_commas
 
 CAMPAIGNS = [(
-        'sketchup',
-        5000,
+        'sketchup2',
+        10000,
         'SketchUp',
         'Plugin',
         'SketchUp Plugin',
-        'Completing the WikiHouse SketchUp plugin to allow full one-click automation;\
-        laying out parts onto sheets, naming them correctly and exporting a\
-        .dxf cutting file.'
+        'Thanks for funding the most recent version of the WikiHouse SketchUp plugin! Your continued\
+        support will help us make it easy for you to customise designs to your needs.'
     ), (
         'hardware', 
         20000, 
@@ -409,7 +408,7 @@ class Campaign(db.Model):
         for campaign_id in CAMPAIGN_KEYS:
             campaign = db.run_in_transaction(get_or_insert, campaign_id)
             entities[campaign_id] = campaign
-        
+
         # Iterate through the campaigns, building the data for the page.
         for campaign in CAMPAIGNS:
             campaign_id = campaign[0]

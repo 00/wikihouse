@@ -15,5 +15,5 @@ You are welcome to use it however you wish.
 
 [WikiHouse]: http://wikihouse.cc
 [Google App Engine]: http://code.google.com/appengine/
-[wikihouse-resources]: http://github.com/thruflo/wikihouse-resources
+[wikihouse-resources]: http://github.com/00/wikihouse-resources
 [weblayer-dependencies]: http://github.com/thruflo/weblayer-dependencies

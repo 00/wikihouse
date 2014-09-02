@@ -1,5 +1,5 @@
 application: wikihouse-cc
-version: 3
+version: timelapse
 runtime: python27
 api_version: 1
 threadsafe: true
